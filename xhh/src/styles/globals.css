@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+
+    .nav-link-background::after {
+ 
+        clip-path: polygon(100% 0, 100% 100%, 0 calc(100% - 15px), 0 0);;
+ 
+    }
+ 
+ }

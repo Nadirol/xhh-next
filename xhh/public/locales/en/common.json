@@ -1,0 +1,56 @@
+{
+    "home": "HOME",
+    "about": "ABOUT",
+    "countries": "Countries",
+    "services": "Services",
+    "contact": "CONTACT US",
+
+    "welcomeTo": "WELCOME TO",
+    "dolceHanoi": "DOLCEHANOI",
+    "innovate": "Innovate",
+    "and": "and",
+    "expand": "expand",
+    "yourBusinessReach": "your business reach.",
+    "readMore": "Read more",
+
+    "italy": "Italy",
+    "italyBullet1": "Rich cultural heritage and reputation for premium luxury goods.",
+    "italyBullet2": "World-renowned craftsmanship and design excellence.",
+    "italyBullet3": "High-quality food and beverage products, including wines and olive oil.",
+    "italyBullet4": "Established industries in fashion, automotive, and machinery.",
+
+    "vietnam": "Vietnam",
+    "vietnamBullet1": "Rapidly growing economy with a favorable investment climate.",
+    "vietnamBullet2": "Abundant and cost-effective labor force, attracting manufacturing opportunities.",
+    "vietnamBullet3": "Leading exporter of textiles, garments, and footwear.",
+    "vietnamBullet4": "Increasingly diverse agricultural products and seafood exports.",
+
+    "countriesParagraph1": "Italy's advanced technology and design expertise complement Vietnam's manufacturing capabilities.",
+    "countriesParagraph2": "Vietnam's sourcing opportunities offer cost-effective solutions for Italian businesses.",
+    "countriesParagraph3": "Italy's premium products find a growing market in Vietnam's emerging middle class.",
+
+    "servicesHeading": "Sourcing and procurement assistance to find the right partners and products",
+    "mining": "Mining",
+    "miningParagraph": "Sales of commodities such as: coal, marble, and many others.",
+    "trading": "Trading",
+    "tradingParagraph": "Sales of raw materials (coffee, rice, iron, steel, chemical sector) and finished products",
+    "production": "Production",
+    "productionParagraph": "Support in finding the right vendor for any kind of products even requiring high temperature to produce or high precision to make.",
+
+    "servicesHeading2": "Support in opening a company or branch in Vietnam",
+    "hanoi": "Mining",
+    "hanoiParagraph": "Sales of commodities such as: coal, marble, and many others.",
+    "northVietnam": "Trading",
+    "northVietnamParagraph": "Sales of raw materials (coffee, rice, iron, steel, chemical sector) and finished products",
+
+    "ctaParagraph": "Ready to unlock global opportunities and elevate your trading ventures? Partner with us today! Discover seamless solutions, unparalleled expertise, and a world of possibilities for your business. Contact us now to embark on a journey of growth and success in the international market. Let's connect and build a thriving future together!",
+    "contactUs": "Contact Us",
+
+    "aboutUs": "About us",
+    "aboutParagraph1": "",
+    "aboutParagraph2": "",
+    "aboutParagraph3": "",
+    
+    "inItaly": "In Italy",
+    "inVietnam": "In Vietnam"
+}
