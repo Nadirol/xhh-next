@@ -12,12 +12,14 @@ const interiorImages = [{ image: interiorImage1, title: "Holz" }, { image: inter
 const Curtains = ({ t }: { t: TFunction}) => {
 
     return (
-        <FadeInOnScroll>
-            <div className="flex gap-10 flex-col py-12 w-container-large mx-auto">
+            <div className="flex gap-10 flex-col py-6 md:py-12 w-container-large mx-auto">
+                <FadeInOnScroll>
                 <div className="pb-8 border-b border-neutral-200">
                     <h2 className="text-red-900 font-bold text-2xl md:text-[4rem] w-2/3 tracking-[0.2rem]">Curtains</h2>
                 </div>
-                <div className="grid grid-cols-4 w-full">
+                </FadeInOnScroll>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 w-full">
                     {interiorImages.map((i, index) => (
                         <div key={index} className="relative aspect-square cursor-pointer flex items-end 
                         [&:hover>.absolute>img]:scale-[1.05] [&:hover>.relative]:py-4">
@@ -33,8 +35,6 @@ const Curtains = ({ t }: { t: TFunction}) => {
                     ))}
                 </div>
             </div>
-        </FadeInOnScroll>
-
     )
 };
 

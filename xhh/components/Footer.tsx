@@ -12,8 +12,8 @@ const Footer = ({ t }: { t: TFunction}) => {
                     <h2 className="text-neutral-800 font-bold text-4xl text-center">LOGO</h2>
                 </div>
 
-                <div className="w-container-large mx-auto py-8 flex justify-between items-end">
-                    <div className="flex gap-4 flex-col w-1/3">
+                <div className="w-container-large mx-auto py-8 flex justify-between md:items-end -md:flex-col -md:gap-8">
+                    <div className="flex gap-4 flex-col md:w-1/3">
                         <h3 className="text-neutral-800 font-semibold text-3xl">Lets design together</h3>
                         <span className="w-20 h-1 bg-red-800 rounded-2xl"></span>
                         <p>
@@ -24,7 +24,7 @@ const Footer = ({ t }: { t: TFunction}) => {
                         </p>
                     </div>
 
-                    <div className="flex gap-4 flex-col w-1/3">
+                    <div className="flex gap-4 flex-col md:w-1/3">
                         <h3 className="text-neutral-800 font-semibold text-3xl">Contact</h3>
                         <span className="w-20 h-1 bg-red-600 rounded-2xl"></span>
                         <div className="flex gap-2.5 flex-col">

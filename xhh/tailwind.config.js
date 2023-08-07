@@ -11,11 +11,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'filter-dark': 'rgba(0, 0, 0, 0.4)'
+        'filter-dark': 'rgba(0, 0, 0, 0.4)',
+        'filter-extra-dark': 'rgba(0, 0, 0, 0.7)'
       },
       width: {
         'container': 'min(1120px, 100% - 2rem)',
         'container-large': 'min(1240px, 100% - 2rem)',
+        'sidenav': 'min(24rem, 100% - 4rem)',
       },
       height: {
         'plus-15': 'calc(100% + 15px)'

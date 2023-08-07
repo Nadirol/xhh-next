@@ -5,7 +5,7 @@ import { bagIcon, locationIcon, officeImage, phoneIcon, planeIcon } from "../../
 const Contact = ({ t }: { t: TFunction}) => {
 
     return (
-        <div className="grid grid-cols-2 pt-16">
+        <div className="grid md:grid-cols-2 pt-16">
               <iframe 
               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7183.454728012203!2d105.89936137403186!3d21.04217083353362!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135a99767260733%3A0xae3333b685a10ece!2sJOYA%20TRAVEL!5e0!3m2!1sen!2sus!4v1690964884442!5m2!1sen!2sus" 
               allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade"
@@ -17,7 +17,7 @@ const Contact = ({ t }: { t: TFunction}) => {
                     <div className="flex gap-3 flex-col">
                         <h2 className="text-[2rem] leading-tight font-medium">Contact us</h2>
                         <span className="w-20 h-1 bg-red-800 rounded-2xl"></span>
-                        <p className="text-sm w-1/2">
+                        <p className="text-sm md:w-1/2">
                             Feel free to contact us with a project proposal, quote or estimation, 
                             or simply to say hello. Here’s our contact info.
                         </p>

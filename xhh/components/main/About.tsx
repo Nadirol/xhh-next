@@ -8,11 +8,11 @@ const About = ({ t }: { t: TFunction}) => {
         <div className="">
             <div className="bg-red-600 py-12 text-neutral-50">
                 <FadeInOnScroll>
-                    <div className="w-container-large mx-auto flex justify-between items-center">
-                        <div className="flex gap-4 flex-col flex-1">
+                    <div className="w-container-large mx-auto flex gap-4 justify-between items-center -md:flex-col">
+                        <div className="flex gap-2 md:gap-4 flex-col flex-1">
                             <h4 className="text-xl">XUÂN HOÀ HOME</h4>
-                            <span className="bg-white h-[2px] w-8 mb-4"></span>
-                            <h2 className="text-[4rem] leading-tight tracking-[0.075rem] font-bold">About Us</h2>
+                            <span className="bg-white h-[2px] w-8 md:mb-4"></span>
+                            <h2 className="text-4xl md:text-[4rem] md:leading-tight tracking-[0.075rem] font-bold">About Us</h2>
                         </div>
                         <p className="flex-1 text-neutral-100 leading-loose tracking-wide">
                             Xuan Hoa Home is a renowned manufacturer and retailer known for its high-quality and 
@@ -22,12 +22,12 @@ const About = ({ t }: { t: TFunction}) => {
                     </div>
                 </FadeInOnScroll>
             </div>
-            <div className="relative h-[200px] md:h-[400px] flex items-center">
+            <div className="relative h-[400px] flex items-center -md:flex-col -md:py-4">
                 <div className="bg-about-background bg-center bg-cover h-full brightness-50 absolute inset-0 z-1">
                 </div>
                 <FadeInOnScroll>
                     <div className="w-container-large mx-auto relative z-10 flex gap-10 flex-col">
-                        <p className="flex-1 text-neutral-100 leading-loose tracking-wide w-1/2">
+                        <p className="flex-1 text-neutral-100 leading-loose tracking-wide md:w-1/2">
                             The company offers a wide range of products options for various living spaces, 
                             including living rooms, bedrooms, dining rooms, and outdoor areas. Our collection 
                             includes windows blinds, windows and doors, tables and chairs, wooden tiles, and more. 

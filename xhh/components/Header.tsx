@@ -73,20 +73,18 @@ const Header = ({ t }: { t: TFunction }) => {
       setScrollPosition(position);
     };
 
-    console.log(scrollPosition)
-
     return (
         <div className="relative z-20 min-h-screen bg-black">
             <header className="relative z-10 backdrop-blur-[2px] backdrop-brightness-90">
                 {/* top nav */}
                 <nav className="w-container-large mx-auto flex items-center justify-between -xl:px-4 relative z-20 
                 border-b border-slate-300 border-opacity-50">
-                    <Link href="/" className="p-4 border-r border-opacity-50 border-slate-300 h-full">
+                    <Link href="/" className="p-4 h-full">
                         <Image src={logoDark} alt="" className="w-[3rem] xl:w-[4rem]" loading="lazy"/>
                     </Link>
 
                     <div className="flex">
-                        <div className="flex gap-12 items-center text-neutral-50 pr-8 border-r border-opacity-50 border-slate-300">
+                        <div className="flex gap-12 items-center text-neutral-50 xl:pr-8 xl:border-r border-opacity-50 border-slate-300">
                             <ul className="hidden xl:flex font-medium">
                                 <li className="inline-block relative py-6 px-2 after:absolute after:inset-0 
                                 after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
@@ -101,7 +99,7 @@ const Header = ({ t }: { t: TFunction }) => {
                                 <li className="inline-block relative py-6 px-2 after:absolute after:inset-0 
                                 after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                 [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
-                                    <Link href="#about" className="relative z-10">{t('about').toUpperCase()}</Link>
+                                    <Link href="#about" className="relative z-10">{t('about')}</Link>
                                 </li>
                                 <li className="inline-block relative py-6 px-2 after:absolute after:inset-0 
                                 after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
@@ -152,9 +150,9 @@ const Header = ({ t }: { t: TFunction }) => {
                     </div>
 
                 </nav>
+            </header>
 
-
-                <div className={`w-sidenav h-screen min-h-full shadow-card-bold fixed right-0 top-0 bg-accent-regular z-20 
+            <div className={`w-sidenav h-screen min-h-full fixed right-0 top-0 bg-filter-extra-dark z-40 
                 ${sidenavOpened ? 'translate-x-0' : 'translate-x-[100%]'} transition-all duration-300
                 flex flex-col items-center justify-between py-8 md:py-[3.75rem] mx-auto xl:hidden`} ref={sideNavRef}>
                     <button onClick={() => setSidenavOpened(false)} 
@@ -174,11 +172,11 @@ const Header = ({ t }: { t: TFunction }) => {
                             </Link>
                             <Link href="#services" className="text-neutral-100 font-medium text-base leading-5 flex gap-4" onClick={() => setSidenavOpened(false)}>
                             <Image src={mediaIcon} alt="about icon" loading="lazy" />
-                            {t('countries')}
+                            {t('products').toUpperCase()}
                             </Link>
                             <Link href="#about" className="text-neutral-100 font-medium text-base leading-5 flex gap-4" onClick={() => setSidenavOpened(false)}>
                             <Image src={aboutIcon} alt="airplane icon" loading="lazy" />
-                            {t('services')}
+                            {t('about')}
                             </Link>
                             <Link href="#contact" className="text-neutral-100 font-medium text-base leading-5 flex gap-4 " onClick={() => setSidenavOpened(false)}>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -225,8 +223,7 @@ const Header = ({ t }: { t: TFunction }) => {
                         </div>
                         </div>
                     </div>
-                </div>
-            </header>
+            </div>
 
             {/* sticky nav */}
             <div className={`fixed bg-white z-30 transition-[top] top-0 left-0 w-full shadow-lg
@@ -247,12 +244,12 @@ const Header = ({ t }: { t: TFunction }) => {
                                 <li className="relative py-6 px-2 after:absolute after:inset-0 
                                 after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                 [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
-                                    <Link href="#services" className="relative z-10">{t('countries').toUpperCase()}</Link>
+                                    <Link href="#services" className="relative z-10">{t('products').toUpperCase()}</Link>
                                 </li>
                                 <li className="relative py-6 px-2 after:absolute after:inset-0 
                                 after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                 [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
-                                    <Link href="#about" className="relative z-10">{t('services').toUpperCase()}</Link>
+                                    <Link href="#about" className="relative z-10">{t('about')}</Link>
                                 </li>
                                 <li className="relative py-6 px-2 after:absolute after:inset-0 
                                 after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
@@ -289,7 +286,9 @@ const Header = ({ t }: { t: TFunction }) => {
                                 </div>
                                 <button onClick={() => setSidenavOpened(prevState => !prevState)} 
                                 className="xl:hidden">
-                                    <Image src={menuIcon} alt="menu button icon" className="" loading="lazy"/>
+                                    <svg width="33" height="22" viewBox="0 0 33 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.83334 22C1.31389 22 0.878173 21.824 0.526173 21.472C0.174173 21.12 -0.00121588 20.6849 6.34372e-06 20.1667C6.34372e-06 19.6472 0.176006 19.2115 0.528006 18.8595C0.880006 18.5075 1.31512 18.3321 1.83334 18.3333H31.1667C31.6861 18.3333 32.1218 18.5093 32.4738 18.8613C32.8258 19.2133 33.0012 19.6484 33 20.1667C33 20.6861 32.824 21.1218 32.472 21.4738C32.12 21.8258 31.6849 22.0012 31.1667 22H1.83334ZM1.83334 12.8333C1.31389 12.8333 0.878173 12.6573 0.526173 12.3053C0.174173 11.9533 -0.00121588 11.5182 6.34372e-06 11C6.34372e-06 10.4806 0.176006 10.0448 0.528006 9.69283C0.880006 9.34083 1.31512 9.16545 1.83334 9.16667H31.1667C31.6861 9.16667 32.1218 9.34267 32.4738 9.69467C32.8258 10.0467 33.0012 10.4818 33 11C33 11.5194 32.824 11.9552 32.472 12.3072C32.12 12.6592 31.6849 12.8346 31.1667 12.8333H1.83334ZM1.83334 3.66667C1.31389 3.66667 0.878173 3.49067 0.526173 3.13867C0.174173 2.78667 -0.00121588 2.35156 6.34372e-06 1.83334C6.34372e-06 1.31389 0.176006 0.878173 0.528006 0.526173C0.880006 0.174173 1.31512 -0.00121588 1.83334 6.3437e-06H31.1667C31.6861 6.3437e-06 32.1218 0.176006 32.4738 0.528006C32.8258 0.880006 33.0012 1.31512 33 1.83334C33 2.35278 32.824 2.7885 32.472 3.1405C32.12 3.4925 31.6849 3.66789 31.1667 3.66667H1.83334Z" fill="#171717"/>
+                                    </svg>
                                 </button>
                             </div>
                         </div>
@@ -321,7 +320,7 @@ const Header = ({ t }: { t: TFunction }) => {
 
 
             {/* slider dots */}
-            <div className="absolute left-24 bottom-24 z-10 flex gap-4 flex-col">
+            <div className="absolute left-8 md:left-24 bottom-8 md:bottom-24 z-10 flex gap-4 flex-col">
                 {sliderImages.map((image, index) => {
                 return (
                     <button className="flex gap-3 items-center w-fit"  key={index} onClick={() => setActiveSlide(index)}>
@@ -344,7 +343,8 @@ const Header = ({ t }: { t: TFunction }) => {
                     className={`text-neutral-50 font-bold text-3xl md:text-[3rem] xl:text-[4rem] 
                     absolute bottom-1/2 translate-x-1/2 translate-y-1/2 z-10 text-center right-1/2
                     w-full md:w-3/4 xl:w-3/5 max-w-[900px] leading-snug tracking-[0.4rem]
-                    ${index === activeSlide ? "opacity-100 animate-slide-in-from-right" : "opacity-0 pointer-events-none"} transition-all duration-1000`}>
+                    ${index === activeSlide ? "opacity-100 animate-slide-in-from-right" : "opacity-0 pointer-events-none"} 
+                    transition-all duration-1000`}>
                         {text.toUpperCase()}
                     </h1>
                 ))}

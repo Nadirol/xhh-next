@@ -98,26 +98,26 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
 
 
     return (
-            <div className="flex gap-10 flex-col py-12 w-container-large mx-auto">
+            <div className="flex gap-10 flex-col py-6 md:py-12 w-container-large mx-auto">
                 <FadeInOnScroll>
-                    <div className="pb-8 border-b border-neutral-200">
-                        <h2 className="text-red-900 font-bold text-[2rem] md:text-[6rem] w-2/3 tracking-[0.2rem]">
+                    <div className="pb-4 md:pb-8 border-b border-neutral-200">
+                        <h2 className="text-red-900 font-bold text-[2rem] md:text-[3rem] xl:text-[6rem] md:w-2/3 tracking-[0.2rem]">
                             Our Most Innovative Items
                         </h2>
                     </div>
                 </FadeInOnScroll>
 
                 <FadeInOnScroll>
-                    <div className="grid xl:grid-cols-2 gap-x-12">
+                    <div className="grid xl:grid-cols-2 gap-x-12 gap-y-12">
                         <div className="flex items-start gap-8 flex-col">
-                            <div className="relative min-h-[1000px] xl:min-h-[600px] w-full">
+                            <div className="relative -xl:aspect-square xl:min-h-[600px] w-[90%] md:w-full">
                                 {itemsImage.map((image, index) => (
                                     <Image key={index} src={image} alt="window preview image" 
-                                    className={`object-cover w-[90%] aspect-square absolute transition-all duration-100
-                                    ${activeItem === index ? "z-10 bottom-0 right-0" 
+                                    className={`object-cover w-full md:w-[90%] aspect-square absolute transition-all duration-100
+                                    ${activeItem === index ? "z-10 top-4 md:bottom-0 left-4 md:right-0" 
                                     : getNextIndex(activeItem, itemsImage.length) === index 
-                                    ? "bottom-8 right-8" 
-                                    : "z-[-1] bttom-16 right-16"}`}/>
+                                    ? "top-2 md:bottom-8 left-2 md:right-8" 
+                                    : "z-[-1] top-0 md:bottom-16 left-0 md:right-16"}`}/>
                                 ))}
                             </div>
                             <div className="flex gap-4 pl-12">
@@ -132,30 +132,29 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                             </div>
                         </div>
 
-
                         <div className="">
                             {itemData.map((item, index) => (
                                 <div key={index} className={`${index === activeItem ? "block" : "hidden"} animate-fade-in-up`}>
-                                    <h2 className="text-neutral-800 font-medium text-[3rem] pb-4 border-b border-slate-300">
+                                    <h2 className="text-neutral-800 font-medium text-3xl md:text-[3rem] pb-4 border-b border-slate-300">
                                         {item.title}
                                     </h2>
                                     <div className="py-4 flex gap-6 flex-col">
                                         <div className="flex gap-3">
-                                            <button className={`relative px-2.5 py-1 text-neutral-900 text-2xl before:absolute overflow-hidden
+                                            <button className={`relative px-2.5 py-1 text-neutral-900 text-base md:text-2xl before:absolute overflow-hidden
                                             before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-neutral-900 
                                             before:transition-[transform] [&:hover]:before:translate-x-0
                                             ${activeItemTab === 0 ? "before:translate-x-0" : "before:translate-x-[-100%]"}`}
                                             onClick={() => setActiveItemTab(0)}>
                                                 Details
                                             </button>
-                                            <button className={`relative px-2.5 py-1 text-neutral-900 text-2xl before:absolute overflow-hidden
+                                            <button className={`relative px-2.5 py-1 text-neutral-900 text-base md:text-2xl before:absolute overflow-hidden
                                             before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-neutral-900 
                                             before:transition-[transform] [&:hover]:before:translate-x-0
                                             ${activeItemTab === 1 ? "before:translate-x-0" : "before:translate-x-[-110%]"}`}
                                             onClick={() => setActiveItemTab(1)}>
                                                 Description
                                             </button>
-                                            <button className={`relative px-2.5 py-1 text-neutral-900 text-2xl before:absolute overflow-hidden
+                                            <button className={`relative px-2.5 py-1 text-neutral-900 text-base md:text-2xl before:absolute overflow-hidden
                                             before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-neutral-900 
                                             before:transition-[transform] [&:hover]:before:translate-x-0
                                             ${activeItemTab === 2 ? "before:translate-x-0" : "before:translate-x-[-100%]"}`}
@@ -166,18 +165,18 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                                         <ul className={`flex gap-3 flex-col list-disc list-inside`}>
                                             {activeItemTab === 0
                                             ? item.details.map((d, index) => (
-                                                <li key={index} className="text-neutral-600 font-normal leading-relaxed">
+                                                <li key={index} className="text-neutral-600 font-normal -md:text-xs leading-relaxed">
                                                     {d}
                                                 </li>
                                             )) 
                                             : activeItemTab === 1
                                             ? item.description.map((d, index) => (
-                                                <li key={index} className="text-neutral-600 font-normal leading-relaxed">
+                                                <li key={index} className="text-neutral-600 font-normal -md:text-xs leading-relaxed">
                                                     {d}
                                                 </li>
                                             )) 
                                             : item.benefits.map((d, index) => (
-                                                <li key={index} className="text-neutral-600 font-normal leading-relaxed">
+                                                <li key={index} className="text-neutral-600 font-normal -md:text-xs leading-relaxed">
                                                     {d}
                                                 </li>
                                             )) 
