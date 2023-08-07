@@ -11,3 +11,7 @@
     }
  
  }
+
+ .fade-in {
+    @apply opacity-100 translate-x-0 transition-all duration-1000
+ }

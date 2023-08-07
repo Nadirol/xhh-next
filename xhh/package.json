@@ -15,6 +15,7 @@
     "autoprefixer": "10.4.14",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
+    "intersection-observer": "^0.12.2",
     "next": "13.4.12",
     "next-i18next": "^14.0.0",
     "postcss": "8.4.27",

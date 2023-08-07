@@ -96,12 +96,12 @@ const Header = ({ t }: { t: TFunction }) => {
                                 <li className="inline-block relative py-6 px-2 after:absolute after:inset-0 
                                 after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                 [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
-                                    <Link href="#services" className="relative z-10">{t('countries').toUpperCase()}</Link>
+                                    <Link href="#services" className="relative z-10">{t('products').toUpperCase()}</Link>
                                 </li>
                                 <li className="inline-block relative py-6 px-2 after:absolute after:inset-0 
                                 after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                 [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
-                                    <Link href="#about" className="relative z-10">{t('services').toUpperCase()}</Link>
+                                    <Link href="#about" className="relative z-10">{t('about').toUpperCase()}</Link>
                                 </li>
                                 <li className="inline-block relative py-6 px-2 after:absolute after:inset-0 
                                 after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
@@ -309,6 +309,7 @@ const Header = ({ t }: { t: TFunction }) => {
                 </nav>
             </div>
 
+            {/* slider */}
             {sliderImages.map((image, index) => (
                 <SliderImage
                 key={index}
@@ -318,23 +319,21 @@ const Header = ({ t }: { t: TFunction }) => {
                 />
             ))}
 
-            {/* slider */}
-
 
             {/* slider dots */}
             <div className="absolute left-24 bottom-24 z-10 flex gap-4 flex-col">
                 {sliderImages.map((image, index) => {
                 return (
-                    <div className="flex gap-3 items-center"  key={index}>
-                        <button className={`${activeSlide === index ? 'h-8' : 'h-2 rounded-[50%]'} 
-                        bg-white w-2 rounded-2xl transition-all duration-300`} onClick={() => setActiveSlide(index)}>
-                        </button>
+                    <button className="flex gap-3 items-center w-fit"  key={index} onClick={() => setActiveSlide(index)}>
+                        <div className={`${activeSlide === index ? 'h-8' : 'h-2 rounded-[50%]'} 
+                        bg-white w-2 rounded-2xl transition-all duration-300`}>
+                        </div>
                         {activeSlide === index && (
                             <h5 className={`text-neutral-50 font-medium text-xl animate-slide-in-bl`}>
                                 0{index+1}
                             </h5>
                         )}
-                    </div>
+                    </button>
                 )
                 })}
             </div>

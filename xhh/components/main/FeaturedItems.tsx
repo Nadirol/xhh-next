@@ -2,6 +2,7 @@ import { TFunction } from "next-i18next"
 import { arrowUpIcon, tableChairImage, windowImage, woodenFloorImage } from "../../public/assets";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import FadeInOnScroll from "../animated/FadeInOnScroll";
 
 const itemsImage = [windowImage, woodenFloorImage, tableChairImage];
 
@@ -41,7 +42,7 @@ const itemData = [
         ]
     },
     {
-        title: "Nano Mesh Door",
+        title: "Anti-hunch tables and chairs",
         details: ["Mesh eye: 0.00005mm","3 nanofiber layer", 
         "Nanofiber thickness: 250nm", "UV resistant 90% - sunproof 50%", 
         "Anticorrosion", "Easy to clean"],
@@ -97,91 +98,99 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
 
 
     return (
-        <div className="flex gap-10 flex-col py-12 w-container-large mx-auto">
-            <div className="pb-8 border-b border-neutral-200">
-                <h2 className="text-red-900 font-bold text-[2rem] md:text-[6rem] w-2/3 tracking-[0.2rem]">Our Most Innovative Items</h2>
-            </div>
-            <div className="grid xl:grid-cols-2 gap-x-12">
-                <div className="flex items-start gap-8 flex-col">
-                    <div className="relative min-h-[1000px] xl:min-h-[600px] w-full">
-                        {itemsImage.map((image, index) => (
-                            <Image key={index} src={image} alt="window preview image" 
-                            className={`object-cover w-[90%] aspect-square absolute transition-all duration-100
-                            ${activeItem === index ? "z-10 bottom-0 right-0" 
-                            : getNextIndex(activeItem, itemsImage.length) === index 
-                            ? "bottom-8 right-8" 
-                            : "z-[-1] bttom-16 right-16"}`}/>
-                        ))}
+            <div className="flex gap-10 flex-col py-12 w-container-large mx-auto">
+                <FadeInOnScroll>
+                    <div className="pb-8 border-b border-neutral-200">
+                        <h2 className="text-red-900 font-bold text-[2rem] md:text-[6rem] w-2/3 tracking-[0.2rem]">
+                            Our Most Innovative Items
+                        </h2>
                     </div>
-                    <div className="flex gap-4 pl-12">
-                        <button className="hover:translate-x-[-40%] transition-all" 
-                        onClick={handlePrevItem}>
-                            <Image src={arrowUpIcon} alt="" className="rotate-[-90deg]" />
-                        </button>
-                        <button className="hover:translate-x-[40%] transition-all"
-                        onClick={handleNextItem}>
-                            <Image src={arrowUpIcon} alt="" className="rotate-90"/>
-                        </button>
-                    </div>
-                </div>
+                </FadeInOnScroll>
 
-
-                <div className="">
-                    {itemData.map((item, index) => (
-                        <div key={index} className={`${index === activeItem ? "block" : "hidden"} animate-fade-in-up`}>
-                            <h2 className="text-neutral-800 font-medium text-[3rem] pb-4 border-b border-slate-300">
-                                {item.title}
-                            </h2>
-                            <div className="py-4 flex gap-6 flex-col">
-                                <div className="flex gap-3">
-                                    <button className={`relative px-2.5 py-1 text-neutral-900 text-2xl before:absolute overflow-hidden
-                                    before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-neutral-900 
-                                    before:transition-[transform] [&:hover]:before:translate-x-0
-                                    ${activeItemTab === 0 ? "before:translate-x-0" : "before:translate-x-[-100%]"}`}
-                                    onClick={() => setActiveItemTab(0)}>
-                                        Details
-                                    </button>
-                                    <button className={`relative px-2.5 py-1 text-neutral-900 text-2xl before:absolute overflow-hidden
-                                    before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-neutral-900 
-                                    before:transition-[transform] [&:hover]:before:translate-x-0
-                                    ${activeItemTab === 1 ? "before:translate-x-0" : "before:translate-x-[-110%]"}`}
-                                    onClick={() => setActiveItemTab(1)}>
-                                        Description
-                                    </button>
-                                    <button className={`relative px-2.5 py-1 text-neutral-900 text-2xl before:absolute overflow-hidden
-                                    before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-neutral-900 
-                                    before:transition-[transform] [&:hover]:before:translate-x-0
-                                    ${activeItemTab === 2 ? "before:translate-x-0" : "before:translate-x-[-100%]"}`}
-                                    onClick={() => setActiveItemTab(2)}>
-                                        Benefits
-                                    </button>
-                                </div>
-                                <ul className={`flex gap-3 flex-col list-disc list-inside`}>
-                                    {activeItemTab === 0
-                                    ? item.details.map((d, index) => (
-                                        <li key={index} className="text-neutral-600 font-normal leading-relaxed">
-                                            {d}
-                                        </li>
-                                    )) 
-                                    : activeItemTab === 1
-                                    ? item.description.map((d, index) => (
-                                        <li key={index} className="text-neutral-600 font-normal leading-relaxed">
-                                            {d}
-                                        </li>
-                                    )) 
-                                    : item.benefits.map((d, index) => (
-                                        <li key={index} className="text-neutral-600 font-normal leading-relaxed">
-                                            {d}
-                                        </li>
-                                    )) 
-                                    }
-                                </ul>
+                <FadeInOnScroll>
+                    <div className="grid xl:grid-cols-2 gap-x-12">
+                        <div className="flex items-start gap-8 flex-col">
+                            <div className="relative min-h-[1000px] xl:min-h-[600px] w-full">
+                                {itemsImage.map((image, index) => (
+                                    <Image key={index} src={image} alt="window preview image" 
+                                    className={`object-cover w-[90%] aspect-square absolute transition-all duration-100
+                                    ${activeItem === index ? "z-10 bottom-0 right-0" 
+                                    : getNextIndex(activeItem, itemsImage.length) === index 
+                                    ? "bottom-8 right-8" 
+                                    : "z-[-1] bttom-16 right-16"}`}/>
+                                ))}
+                            </div>
+                            <div className="flex gap-4 pl-12">
+                                <button className="hover:translate-x-[-40%] transition-all" 
+                                onClick={handlePrevItem}>
+                                    <Image src={arrowUpIcon} alt="" className="rotate-[-90deg]" />
+                                </button>
+                                <button className="hover:translate-x-[40%] transition-all"
+                                onClick={handleNextItem}>
+                                    <Image src={arrowUpIcon} alt="" className="rotate-90"/>
+                                </button>
                             </div>
                         </div>
-                    ))}
-                </div>
+
+
+                        <div className="">
+                            {itemData.map((item, index) => (
+                                <div key={index} className={`${index === activeItem ? "block" : "hidden"} animate-fade-in-up`}>
+                                    <h2 className="text-neutral-800 font-medium text-[3rem] pb-4 border-b border-slate-300">
+                                        {item.title}
+                                    </h2>
+                                    <div className="py-4 flex gap-6 flex-col">
+                                        <div className="flex gap-3">
+                                            <button className={`relative px-2.5 py-1 text-neutral-900 text-2xl before:absolute overflow-hidden
+                                            before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-neutral-900 
+                                            before:transition-[transform] [&:hover]:before:translate-x-0
+                                            ${activeItemTab === 0 ? "before:translate-x-0" : "before:translate-x-[-100%]"}`}
+                                            onClick={() => setActiveItemTab(0)}>
+                                                Details
+                                            </button>
+                                            <button className={`relative px-2.5 py-1 text-neutral-900 text-2xl before:absolute overflow-hidden
+                                            before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-neutral-900 
+                                            before:transition-[transform] [&:hover]:before:translate-x-0
+                                            ${activeItemTab === 1 ? "before:translate-x-0" : "before:translate-x-[-110%]"}`}
+                                            onClick={() => setActiveItemTab(1)}>
+                                                Description
+                                            </button>
+                                            <button className={`relative px-2.5 py-1 text-neutral-900 text-2xl before:absolute overflow-hidden
+                                            before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-neutral-900 
+                                            before:transition-[transform] [&:hover]:before:translate-x-0
+                                            ${activeItemTab === 2 ? "before:translate-x-0" : "before:translate-x-[-100%]"}`}
+                                            onClick={() => setActiveItemTab(2)}>
+                                                Benefits
+                                            </button>
+                                        </div>
+                                        <ul className={`flex gap-3 flex-col list-disc list-inside`}>
+                                            {activeItemTab === 0
+                                            ? item.details.map((d, index) => (
+                                                <li key={index} className="text-neutral-600 font-normal leading-relaxed">
+                                                    {d}
+                                                </li>
+                                            )) 
+                                            : activeItemTab === 1
+                                            ? item.description.map((d, index) => (
+                                                <li key={index} className="text-neutral-600 font-normal leading-relaxed">
+                                                    {d}
+                                                </li>
+                                            )) 
+                                            : item.benefits.map((d, index) => (
+                                                <li key={index} className="text-neutral-600 font-normal leading-relaxed">
+                                                    {d}
+                                                </li>
+                                            )) 
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </FadeInOnScroll>
+
             </div>
-        </div>
     )
 };
 
