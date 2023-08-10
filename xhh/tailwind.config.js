@@ -74,7 +74,10 @@ module.exports = {
       backgroundImage: {
         'about-background': "url('../../public/assets/interior-3.jpg')",
         'footer-background': "url('../../public/assets/interior-5.jpg')",
-      }
+      },
+      gridTemplateColumns: {
+        'product-list': '1fr 4fr',
+      },
     },
   },
   plugins: [],

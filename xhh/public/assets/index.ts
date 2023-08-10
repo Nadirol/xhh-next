@@ -50,6 +50,7 @@ import locationSmall from "./location-small.svg"
 import phoneSmall from "./phone-small.svg"
 import mailSmall from "./mail-small.svg"
 import facebookSmall from "./facebook-small.svg"
+import filterIcon from "./filter.svg"
 
 export { phoneIcon, mailIcon, locationIcon, facebookIcon, logo, logoDark, logoLight, menuIcon,
 closeIcon, homeIcon, aboutIcon, planeIcon, arrowRightIcon, mediaIcon, facebookLogo,
@@ -57,4 +58,4 @@ ukFlag, vietnamFlag, italyVector, vietnamVector, countriesImage1, countriesImage
 miningImage, tradingImage, productionImage, hanoiImage, northVietnamImage, aboutImage, zaloLogo, italyFlag,
 whatsappIcon, sliderImage1, sliderImage2, sliderImage3, windowImage, woodenFloorImage, tableChairImage,
 arrowUpIcon, interiorImage1, interiorImage2, interiorImage3, interiorImage4, officeImage, bagIcon,
-locationSmall, phoneSmall, mailSmall, facebookSmall }
+locationSmall, phoneSmall, mailSmall, facebookSmall, filterIcon }

@@ -1,14 +1,11 @@
 import { useTranslation } from "next-i18next"
-import type { GetStaticProps, InferGetStaticPropsType } from 'next'
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { Fira_Sans } from 'next/font/google'
-import Header from '../../components/Header'
-import FeaturedItems from '../../components/main/FeaturedItems'
-import Curtains from '../../components/main/Curtains'
-import About from '../../components/main/About'
-import Contact from '../../components/main/Contact'
-import Footer from '../../components/Footer'
+
+import Header from "../../../../components/Header";
+import Footer from "../../../../components/Footer";
 
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
@@ -24,11 +21,10 @@ export default function Home() {
           t={t}
         />
 
-        <main>
-          <FeaturedItems t={t}/>
-          <Curtains t={t}/>
-          <About t={t}/>
-          <Contact t={t}/>
+        <main className="pt-20">
+            <div className="w-full h-[500px]">
+                <h1 className="text-[4rem] relative z-20">Test</h1>
+            </div>
         </main>
 
         <Footer
@@ -38,6 +34,17 @@ export default function Home() {
     </>
 
   )
+}
+
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+
+
+    const paths: any = [];
+
+    return {
+        paths: paths, //indicates that no page needs be created at build time
+        fallback: 'blocking' //indicates the type of fallback
+    }
 }
 
 export async function getStaticProps({ locale }: { locale: string}) {
