@@ -32,7 +32,7 @@ const ProductFilter = ({ t }: { t: TFunction}) => {
                         Wooden Tiles
                     </span>
                 </button>
-                <button className="py-2 relative before:absolute before:z-0 
+                <button className="py-2 relative before:absolute before:z-0 text-start
                 before:bg-red-500 before:w-full before:h-full flex items-center
                 [&:hover]:before:translate-x-0 before:translate-x-[-105%] overflow-hidden
                 before:transition-transform hover:text-neutral-50 transition-[color] duration-75">

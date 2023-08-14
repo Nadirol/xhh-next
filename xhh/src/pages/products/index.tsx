@@ -9,12 +9,33 @@ import { sliderImage1 } from "../../../public/assets";
 import Image from "next/image";
 import ProductList from "../../../components/products/ProductList";
 import ProductFilter from "../../../components/products/ProductFilter";
+import { useEffect, useState } from "react";
+import supabase from "../../../supabase";
+import { IProduct } from "../../../interface/interface";
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 
 export default function Home() {
   const { t } = useTranslation('common');
 
+  const [products, setProducts] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*');
+      
+      if (error) {
+        console.error('Error fetching data:', error);
+      } else {
+        setProducts(data);
+      }
+    }
+
+    fetchData();
+  }, []);
+    
   return (
     <>
 
@@ -29,7 +50,7 @@ export default function Home() {
             </div>
             <div className="py-16 grid grid-cols-product-list">
                 <ProductFilter t={t}/>
-                <ProductList t={t}/>
+                <ProductList t={t} products={products}/>
             </div>
         </main>
 

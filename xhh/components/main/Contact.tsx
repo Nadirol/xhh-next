@@ -12,11 +12,12 @@ const Contact = ({ t }: { t: TFunction}) => {
               className="border flex-1 border-neutral-500 aspect-square h-full w-full">
               </iframe>
               <div className="bg-red-600 px-12 py-8 relative">
-                <Image src={bagIcon} alt="office image" className="absolute z-[0] saturate-[0.2] opacity-10 pointer-events-none"/>
+                <Image src={bagIcon} alt="office image" 
+                className="absolute z-[0] translate-x-1/2 right-1/2 translate-y-1/2 bottom-1/2 
+                saturate-[0.2] opacity-10 pointer-events-none w-1/2 aspect-square"/>
                 <div className="relative z-10 text-neutral-50 flex gap-6 flex-col">
                     <div className="flex gap-3 flex-col">
                         <h2 className="text-[2rem] leading-tight font-medium">Contact us</h2>
-                        <span className="w-20 h-1 bg-red-800 rounded-2xl"></span>
                         <p className="text-sm md:w-1/2">
                             Feel free to contact us with a project proposal, quote or estimation, 
                             or simply to say hello. Here’s our contact info.

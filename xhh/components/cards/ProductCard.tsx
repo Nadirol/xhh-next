@@ -1,10 +1,12 @@
 import { i18n } from "next-i18next";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
-const ProductCard = ({ title, image, id }: { title: string, image: StaticImageData, id: string }) => {
+const ProductCard = ({ title, image, slug }: { title: string, image: string, slug: string }) => {
+    const slugify = require('slugify');
+
     return (
-        <Link href={`/${i18n?.language}/products/${id}`} className="w-fit">
+        <Link href={`/${i18n?.language}/products/${slug}`} className="w-fit">
             <div className="w-[181px] md:w-[282px] h-[98px] md:h-[192px] overflow-hidden flex items-center justify-center">
                 <Image src={image} 
                 alt="tour preview image" width={282} height={192} 
