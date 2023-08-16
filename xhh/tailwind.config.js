@@ -78,7 +78,13 @@ module.exports = {
       gridTemplateColumns: {
         'product-list': '1fr 4fr',
       },
+      boxShadow: {
+        'inner-right': "inset -2px 0 6px 2px rgb(0 0 0 / 0.1)"
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide'),
+    // ...
+  ]
 }

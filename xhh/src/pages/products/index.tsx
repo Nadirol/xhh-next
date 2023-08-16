@@ -19,6 +19,8 @@ export default function Home() {
   const { t } = useTranslation('common');
 
   const [products, setProducts] = useState<IProduct[]>([]);
+  
+  const [activeCategory, setActiveCategory] = useState("Polyester 100%")
 
   useEffect(() => {
     async function fetchData() {
@@ -35,6 +37,7 @@ export default function Home() {
 
     fetchData();
   }, []);
+
     
   return (
     <>

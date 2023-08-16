@@ -52,10 +52,19 @@ import mailSmall from "./mail-small.svg"
 import facebookSmall from "./facebook-small.svg"
 import filterIcon from "./filter.svg"
 
+import logoTextRed from "./logo-text-light.png"
+import logoTextWhite from "./logo-text-white.png"
+import logoRed from "./logo-red.png"
+import aboutImage1 from "./xuan-hoa-home-about-1.jpg"
+import aboutImage2 from "./xuan-hoa-home-about-2.png"
+import aboutImage3 from "./xuan-hoa-home-about-3.jpg"
+import aboutImage4 from "./xuan-hoa-home-about-4.jpg"
+
 export { phoneIcon, mailIcon, locationIcon, facebookIcon, logo, logoDark, logoLight, menuIcon,
 closeIcon, homeIcon, aboutIcon, planeIcon, arrowRightIcon, mediaIcon, facebookLogo,
 ukFlag, vietnamFlag, italyVector, vietnamVector, countriesImage1, countriesImage2, countriesImage3,
 miningImage, tradingImage, productionImage, hanoiImage, northVietnamImage, aboutImage, zaloLogo, italyFlag,
 whatsappIcon, sliderImage1, sliderImage2, sliderImage3, windowImage, woodenFloorImage, tableChairImage,
 arrowUpIcon, interiorImage1, interiorImage2, interiorImage3, interiorImage4, officeImage, bagIcon,
-locationSmall, phoneSmall, mailSmall, facebookSmall, filterIcon }
+locationSmall, phoneSmall, mailSmall, facebookSmall, filterIcon, logoTextRed, logoTextWhite, logoRed,
+aboutImage1, aboutImage2, aboutImage3, aboutImage4 }

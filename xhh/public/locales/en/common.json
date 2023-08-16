@@ -2,55 +2,33 @@
     "home": "HOME",
     "about": "ABOUT",
     "products": "Products",
-    "services": "Services",
     "contact": "CONTACT US",
-
-    "welcomeTo": "WELCOME TO",
-    "dolceHanoi": "DOLCEHANOI",
-    "innovate": "Innovate",
-    "and": "and",
-    "expand": "expand",
-    "yourBusinessReach": "your business reach.",
-    "readMore": "Read more",
-
-    "italy": "Italy",
-    "italyBullet1": "Rich cultural heritage and reputation for premium luxury goods.",
-    "italyBullet2": "World-renowned craftsmanship and design excellence.",
-    "italyBullet3": "High-quality food and beverage products, including wines and olive oil.",
-    "italyBullet4": "Established industries in fashion, automotive, and machinery.",
-
-    "vietnam": "Vietnam",
-    "vietnamBullet1": "Rapidly growing economy with a favorable investment climate.",
-    "vietnamBullet2": "Abundant and cost-effective labor force, attracting manufacturing opportunities.",
-    "vietnamBullet3": "Leading exporter of textiles, garments, and footwear.",
-    "vietnamBullet4": "Increasingly diverse agricultural products and seafood exports.",
-
-    "countriesParagraph1": "Italy's advanced technology and design expertise complement Vietnam's manufacturing capabilities.",
-    "countriesParagraph2": "Vietnam's sourcing opportunities offer cost-effective solutions for Italian businesses.",
-    "countriesParagraph3": "Italy's premium products find a growing market in Vietnam's emerging middle class.",
-
-    "servicesHeading": "Sourcing and procurement assistance to find the right partners and products",
-    "mining": "Mining",
-    "miningParagraph": "Sales of commodities such as: coal, marble, and many others.",
-    "trading": "Trading",
-    "tradingParagraph": "Sales of raw materials (coffee, rice, iron, steel, chemical sector) and finished products",
-    "production": "Production",
-    "productionParagraph": "Support in finding the right vendor for any kind of products even requiring high temperature to produce or high precision to make.",
-
-    "servicesHeading2": "Support in opening a company or branch in Vietnam",
-    "hanoi": "Mining",
-    "hanoiParagraph": "Sales of commodities such as: coal, marble, and many others.",
-    "northVietnam": "Trading",
-    "northVietnamParagraph": "Sales of raw materials (coffee, rice, iron, steel, chemical sector) and finished products",
-
-    "ctaParagraph": "Ready to unlock global opportunities and elevate your trading ventures? Partner with us today! Discover seamless solutions, unparalleled expertise, and a world of possibilities for your business. Contact us now to embark on a journey of growth and success in the international market. Let's connect and build a thriving future together!",
     "contactUs": "Contact Us",
-
     "aboutUs": "About us",
-    "aboutParagraph1": "",
-    "aboutParagraph2": "",
-    "aboutParagraph3": "",
+
+    "addressDetails": "7 Yen The, Dien Bien, Ba Dinh, Ha Noi",
+    "socials": "Socials",
+
+    "featuredItemsHeading": "Best Sellers",
+    "details": "Details",
+    "description": "Description",
+    "benefits": "Benefits",
+
+    "curtains": "Curtains",
+
+    "aboutParagraph1": "Xuan Hoa Home is a renowned manufacturer and retailer known for its high-quality and stylish home appliances and decor offerings. With a focus on craftsmanship and design, Xuan Hoa Home creates pieces that are both functional and aesthetically pleasing.",
+    "aboutParagraph2": "The company offers a wide range of products options for various living spaces, including living rooms, bedrooms, dining rooms, and outdoor areas. Our collection includes windows blinds, windows and doors, tables and chairs, wooden tiles, and more. Each piece is meticulously crafted using quality materials to ensure durability and longevity.",
+    "readMore": "Read more",
+    "aboutParagraph3": "Xuan Hoa Home takes pride in its attention to detail and commitment to delivering products that meets the needs and preferences of its customers. The designs are often a blend of modern and traditional elements, allowing customers to find products that suits our personal style.",
+    "aboutParagraph4": "In addition to our standard collection, Xuan Hoa Home also provides customization options, allowing customers to personalize our products to fit our specific requirements. This includes selecting different fabrics, finishes, and dimensions to create a truly unique piece.",
+    "aboutParagraph5": "The company maintains a strong focus on sustainability and environmental responsibility. We strive to use eco-friendly materials and manufacturing processes, minimizing our impact on the environment.",
+    "aboutParagraph6": "With a network of showrooms and retail partners, Xuan Hoa Home makes its products accessible to customers across various locations. Whether you're furnishing a new home or looking to upgrade your existing home, Xuan Hoa Home offers a wide selection of high-quality options to choose from.",
     
-    "inItaly": "In Italy",
-    "inVietnam": "In Vietnam"
+    "contactParagraph": "Feel free to contact us with a project proposal, quote or estimation, or simply to say hello. Here’s our contact info.",
+    "address": "Address",
+    "callUsNow": "Call us now",
+    "emailUs": "Email us",
+
+    "sloganFooter": "Elevate Your Home",
+    "paragraphFooter": "At our furniture brand, we believe that home is not just a place, but a reflection of who you are. That's why we strive to bring you exquisite furniture pieces that elevate your living spaces to new heights. With our commitment to quality craftsmanship and timeless designs, we invite you to discover the true essence of home and create a sanctuary that resonates with your unique style."
 }

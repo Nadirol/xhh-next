@@ -6,7 +6,7 @@ const ProductCard = ({ title, image, slug }: { title: string, image: string, slu
     const slugify = require('slugify');
 
     return (
-        <Link href={`/${i18n?.language}/products/${slug}`} className="w-fit">
+        <Link href={`/${i18n?.language}/products/${slug}`} className="w-fit snap-start">
             <div className="w-[181px] md:w-[282px] h-[98px] md:h-[192px] overflow-hidden flex items-center justify-center">
                 <Image src={image} 
                 alt="tour preview image" width={282} height={192} 

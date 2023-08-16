@@ -1,7 +1,7 @@
 import { TFunction, i18n } from "next-i18next";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { aboutIcon, closeIcon, homeIcon, logoDark, logoLight, mediaIcon, menuIcon, phoneIcon, sliderImage1, sliderImage2, sliderImage3, ukFlag, vietnamFlag } from "../public/assets";
+import { aboutIcon, closeIcon, homeIcon, logoTextWhite, logoTextRed, mediaIcon, menuIcon, phoneIcon, sliderImage1, sliderImage2, sliderImage3, ukFlag, vietnamFlag } from "../public/assets";
 import SliderImage from "./header/SliderImage";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -87,7 +87,7 @@ const Header = ({ t }: { t: TFunction }) => {
                         <nav className="w-container-large mx-auto flex items-center justify-between -xl:px-4 relative z-20 
                         border-b border-slate-300 border-opacity-50">
                             <Link href="/" className="p-4 h-full">
-                                <Image src={logoDark} alt="" className="w-[3rem] xl:w-[4rem]" loading="lazy"/>
+                                <Image src={logoTextWhite} alt="" className="w-[3rem] xl:w-[6rem]" loading="lazy"/>
                             </Link>
 
                             <div className="flex">
@@ -107,14 +107,14 @@ const Header = ({ t }: { t: TFunction }) => {
                                                 <h4 className="relative z-10">{t('products').toUpperCase()}</h4>
                                             </li>
                                         </Link>
-                                        <Link href="/" className="">
+                                        <Link href={`/${i18n?.language}/about`} className="">
                                             <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
                                             after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                             [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
                                                 <h4 className="relative z-10">{t('about')}</h4>
                                             </li>
                                         </Link>
-                                        <Link href="/" className="">
+                                        <Link href={`/${i18n?.language}/products`} className="">
                                             <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
                                             after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                             [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
@@ -169,7 +169,7 @@ const Header = ({ t }: { t: TFunction }) => {
                     ${scrollPosition > 100 ? "top-0" : "top-[-120px]"}`}>
                         <nav className={`w-container-large mx-auto flex items-center justify-between`}>
                             <Link href="/" className="p-4 h-full">
-                                <Image src={logoLight} alt="" className="w-[3rem] xl:w-[48px]" loading="lazy"/>
+                                <Image src={logoTextRed} alt="" className="w-[3rem] xl:w-[6rem]" loading="lazy"/>
                             </Link>
 
                             <div className="flex">
@@ -189,14 +189,14 @@ const Header = ({ t }: { t: TFunction }) => {
                                                 <h4 className="relative z-10 transition-colors duration-300">{t('products').toUpperCase()}</h4>
                                             </li>
                                         </Link>
-                                        <Link href="/" className="[&:hover>li>h4]:text-neutral-50">
+                                        <Link href={`/${i18n?.language}/about`} className="[&:hover>li>h4]:text-neutral-50">
                                             <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
                                             after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                             [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
                                                 <h4 className="relative z-10 transition-colors duration-300">{t('about')}</h4>
                                             </li>
                                         </Link>
-                                        <Link href="/" className="[&:hover>li>h4]:text-neutral-50">
+                                        <Link href={`/${i18n?.language}/products`} className="[&:hover>li>h4]:text-neutral-50">
                                             <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
                                             after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                             [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
@@ -209,9 +209,10 @@ const Header = ({ t }: { t: TFunction }) => {
                                         <div className="relative py-6 px-4 after:absolute after:inset-0
                                         after:z-0 after:w-full after:h-plus-15 after:bg-blue-500 after:translate-y-[-100%] 
                                         [&:hover]:after:translate-y-0 after:transition-all after:duration-75 nav-link-background 
-                                        [&:hover>.grid]:h-full">
+                                        [&:hover>.grid]:h-full [&:hover>.flex>h4]:text-neutral-100">
                                             <div className="flex gap-2 xl:gap-4 items-center cursor-pointer relative z-10">
-                                                <h4 className="text-neutral-800 font-medium text-xs md:text-base leading-5">
+                                                <h4 className="text-neutral-800 font-medium text-xs 
+                                                md:text-base leading-5 transition-colors duration-300">
                                                     {i18n?.language.toUpperCase()}
                                                 </h4>
                                                 <Image src={lngs.get(i18n?.language || "en")?.flag || ukFlag} 
@@ -302,7 +303,7 @@ const Header = ({ t }: { t: TFunction }) => {
                     <div className={`fixed bg-white z-30 transition-[top] top-0 left-0 w-full shadow-lg`}>
                         <nav className={`w-container-large mx-auto flex items-center justify-between`}>
                             <Link href="/" className="p-4 h-full">
-                                <Image src={logoLight} alt="" className="w-[3rem] xl:w-[48px]" loading="lazy"/>
+                                <Image src={logoTextRed} alt="" className="w-[3rem] xl:w-[6rem]" loading="lazy"/>
                             </Link>
 
                             <div className="flex">
@@ -322,14 +323,14 @@ const Header = ({ t }: { t: TFunction }) => {
                                                 <h4 className="relative z-10 transition-colors duration-300">{t('products').toUpperCase()}</h4>
                                             </li>
                                         </Link>
-                                        <Link href="/" className="[&:hover>li>h4]:text-neutral-50">
+                                        <Link href={`/${i18n?.language}/about`} className="[&:hover>li>h4]:text-neutral-50">
                                             <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
                                             after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                             [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
                                                 <h4 className="relative z-10 transition-colors duration-300">{t('about')}</h4>
                                             </li>
                                         </Link>
-                                        <Link href="/" className="[&:hover>li>h4]:text-neutral-50">
+                                        <Link href={`/${i18n?.language}/about`} className="[&:hover>li>h4]:text-neutral-50">
                                             <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
                                             after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                             [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
@@ -342,9 +343,9 @@ const Header = ({ t }: { t: TFunction }) => {
                                         <div className="relative py-6 px-4 after:absolute after:inset-0
                                         after:z-0 after:w-full after:h-plus-15 after:bg-blue-500 after:translate-y-[-100%] 
                                         [&:hover]:after:translate-y-0 after:transition-all after:duration-75 nav-link-background 
-                                        [&:hover>.grid]:h-full">
+                                        [&:hover>.grid]:h-full [&:hover>.flex>h4]:text-neutral-100">
                                             <div className="flex gap-2 xl:gap-4 items-center cursor-pointer relative z-10">
-                                                <h4 className="text-neutral-800 font-medium text-xs md:text-base leading-5">
+                                                <h4 className="text-neutral-800 font-medium text-xs md:text-base leading-5 transition-colors duration-300">
                                                     {i18n?.language.toUpperCase()}
                                                 </h4>
                                                 <Image src={lngs.get(i18n?.language || "en")?.flag || ukFlag} 
@@ -399,7 +400,7 @@ const Header = ({ t }: { t: TFunction }) => {
                     <div className="flex gap-[1.875rem] flex-col items-center">
 
                         <Link href="/">
-                            <Image src={logoDark} alt="" className="w-[10rem]" loading="lazy"/>
+                            <Image src={logoTextWhite} alt="" className="w-[10rem]" loading="lazy"/>
                         </Link>
                         
                         <nav className="flex gap-6 flex-col">
@@ -411,11 +412,11 @@ const Header = ({ t }: { t: TFunction }) => {
                             <Image src={mediaIcon} alt="about icon" loading="lazy" />
                             {t('products').toUpperCase()}
                             </Link>
-                            <Link href="/" className="text-neutral-100 font-medium text-base leading-5 flex gap-4" onClick={() => setSidenavOpened(false)}>
+                            <Link href={`/${i18n?.language}/about`} className="text-neutral-100 font-medium text-base leading-5 flex gap-4" onClick={() => setSidenavOpened(false)}>
                             <Image src={aboutIcon} alt="airplane icon" loading="lazy" />
                             {t('about')}
                             </Link>
-                            <Link href="/" className="text-neutral-100 font-medium text-base leading-5 flex gap-4 " onClick={() => setSidenavOpened(false)}>
+                            <Link href={`/${i18n?.language}/products`} className="text-neutral-100 font-medium text-base leading-5 flex gap-4 " onClick={() => setSidenavOpened(false)}>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M22.6 24C23 24 23.3333 23.8667 23.6 23.6C23.8667 23.3333 24 23 24 22.6V17.2C24 16.8889 23.9 16.6164 23.7 16.3827C23.5 16.1489 23.2444 15.9991 22.9333 15.9333L18.3333 15C18.0222 14.9556 17.7053 14.9836 17.3827 15.084C17.06 15.1844 16.7991 15.3342 16.6 15.5333L13.4667 18.6667C11.7778 17.6444 10.2333 16.4333 8.83333 15.0333C7.43333 13.6333 6.26667 12.1333 5.33333 10.5333L8.53333 7.26667C8.73333 7.06667 8.86133 6.83867 8.91733 6.58267C8.97333 6.32667 8.97867 6.04356 8.93333 5.73333L8.06667 1.06667C8.02222 0.755556 7.87778 0.5 7.63333 0.3C7.38889 0.0999999 7.11111 0 6.8 0H1.4C0.999998 0 0.666664 0.133333 0.399998 0.4C0.133331 0.666667 0 1 0 1.4C0 4.26667 0.639111 7.06133 1.91733 9.784C3.19555 12.5067 4.88444 14.9178 6.984 17.0173C9.08356 19.1169 11.4947 20.8058 14.2173 22.084C16.94 23.3622 19.7342 24.0009 22.6 24Z" 
                                 className="fill-neutral-100"/>
@@ -450,7 +451,7 @@ const Header = ({ t }: { t: TFunction }) => {
                         </div>
                         </div>
                         <div className="flex gap-[1.125rem] flex-col -xl:items-center">
-                        <h1 className="text-neutral-100 font-medium text-lg md:text-2xl">Socials</h1>
+                        <h1 className="text-neutral-100 font-medium text-lg md:text-2xl">{t('socials')}</h1>
                         <div className="flex gap-6">
                             <a href="https://www.facebook.com/boommedia.vn" target="_blank">
                             <svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">

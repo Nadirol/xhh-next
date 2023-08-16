@@ -12,12 +12,10 @@ const About = ({ t }: { t: TFunction}) => {
                         <div className="flex gap-2 md:gap-4 flex-col flex-1">
                             <h4 className="text-xl">XUÂN HOÀ HOME</h4>
                             <span className="bg-white h-[2px] w-8 md:mb-4"></span>
-                            <h2 className="text-4xl md:text-[4rem] md:leading-tight tracking-[0.075rem] font-bold">About Us</h2>
+                            <h2 className="text-4xl md:text-[4rem] md:leading-tight tracking-[0.075rem] font-bold">{t('aboutUs')}</h2>
                         </div>
                         <p className="flex-1 text-neutral-100 leading-loose tracking-wide">
-                            Xuan Hoa Home is a renowned manufacturer and retailer known for its high-quality and 
-                            stylish home appliances and decor offerings. With a focus on craftsmanship and design, 
-                            Xuan Hoa Home creates pieces that are both functional and aesthetically pleasing.
+                            {t('aboutParagraph1')}
                         </p>
                     </div>
                 </FadeInOnScroll>
@@ -28,13 +26,10 @@ const About = ({ t }: { t: TFunction}) => {
                 <FadeInOnScroll>
                     <div className="w-container-large mx-auto relative z-10 flex gap-10 flex-col">
                         <p className="flex-1 text-neutral-100 leading-loose tracking-wide md:w-1/2">
-                            The company offers a wide range of products options for various living spaces, 
-                            including living rooms, bedrooms, dining rooms, and outdoor areas. Our collection 
-                            includes windows blinds, windows and doors, tables and chairs, wooden tiles, and more. 
-                            Each piece is meticulously crafted using quality materials to ensure durability and longevity.
+                            {t('aboutParagraph2')}
                         </p>
                         <button className="text-neutral-100 w-fit font-light underline">
-                            Read More
+                            {t('readMore')}
                         </button>
                     </div>
                 </FadeInOnScroll>

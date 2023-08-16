@@ -13,10 +13,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Breadcrumb from "../../../../components/Breadcrumb";
-import supabase from "../../../../supabase";
-import ProductCard from "../../../../components/cards/ProductCard";
-import { arrowRightIcon } from "../../../../public/assets";
 import RelatedProducts from "../../../../components/products/RelatedProducts";
+import ProductDetailsSkeleton from "../../../../components/products/ProductDetailsSkeleton";
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 
@@ -25,15 +23,19 @@ export default function ProductDetails() {
 
   const router = useRouter();
   const { slug } = router.query;
+
+  const [isLoading, setIsLoading] = useState(true);
   
   const [product, setProduct] = useState<IProduct>();
 
   useEffect(() => {
+    setIsLoading(true)
     // Make the API request with the slug as part of the URL path
     const fetchData = async () => {
       const response = await fetch(`/api/product/${slug}`);
       const data = await response.json();
-      setProduct(data)
+      setProduct(data);
+      setIsLoading(false)
     };
 
     if (slug) {
@@ -47,32 +49,42 @@ export default function ProductDetails() {
     { name: 'Slug', path: `${i18n?.language}/products/${slug}` },
   ];
 
+  if (isLoading) {
+    return <ProductDetailsSkeleton t={t}/>
+  }
+
   if (!product) {
     return <div>Product not found</div>;
   }
 
   return (
     <>
-
       <div className={`${fira.className} flex flex-col overflow-hidden`}>
         <Header
           t={t}
         />
 
-        <main className="pt-[8rem] pb-[4rem] relative z-10">
+        <main className="pt-[8rem] pb-[4rem] relative z-10 flex gap-12 flex-col">
           <div className="w-container-large mx-auto flex gap-12">
             <div className="">
               <Image src={product.image_url} alt="product image" width={300} height={500} className="w-full object-cover"/>
             </div>
-            <div className="">
+            <div className="flex gap-4 flex-col">
               <Breadcrumb t={t} routes={routes}/>
-              <h1 className="text-[4rem]">{product.title_vi}</h1>
-              <h4>{product.category}</h4>
-              <div className="grid gap-x-8 gap-y-2 grid-cols-2">
-                {product.details_vi.map((d, index) => (
-                  <h3 key={index}>{d}</h3>
-                ))}
+              <div className="flex gap-1 flex-col">
+                <h1 className="text-neutral-800 font-semibold text-[4rem] leading-tight">{product.title_vi}</h1>
+                <h4 className="text-neutral-500 text-sm">{product.category}</h4>
               </div>
+
+              <ul className="grid gap-x-8 gap-y-2 grid-cols-2 list-disc list-inside">
+                {product.details_vi.map((d, index) => (
+                  <li key={index} className="text-neutral-700 text-xl">{d}</li>
+                ))}
+              </ul>
+              
+              <h3 className="text-neutral-500">
+                <Link href={`${i18n?.language}/contact`} className="text-red-600">Contact us</Link>&nbsp;if you are interested in this product
+              </h3>
             </div>
           </div>
           <RelatedProducts t={t} product={product}/>
@@ -83,7 +95,6 @@ export default function ProductDetails() {
         />
       </div>
     </>
-
   )
 }
 

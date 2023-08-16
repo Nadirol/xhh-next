@@ -15,7 +15,7 @@ const Curtains = ({ t }: { t: TFunction}) => {
             <div className="flex gap-10 flex-col py-6 md:py-12 w-container-large mx-auto">
                 <FadeInOnScroll>
                 <div className="pb-8 border-b border-neutral-200">
-                    <h2 className="text-red-900 font-bold text-2xl md:text-[4rem] w-2/3 tracking-[0.2rem]">Curtains</h2>
+                    <h2 className="text-red-700 font-bold text-2xl md:text-[4rem] w-2/3 tracking-[0.2rem]">{t("curtains")}</h2>
                 </div>
                 </FadeInOnScroll>
 
