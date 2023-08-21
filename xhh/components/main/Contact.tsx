@@ -23,7 +23,7 @@ const Contact = ({ t }: { t: TFunction}) => {
                         </p>
                     </div>
 
-                    <div className="flex gap-10 flex-col">
+                    <div className="flex gap-20 flex-col">
                         <div className="flex gap-8 items-center">
                             <Image src={locationIcon} alt="location icon" className=""/>
                             <div className="flex gap-2 items-start flex-col">
@@ -40,8 +40,7 @@ const Contact = ({ t }: { t: TFunction}) => {
                                 <h3 className="text-2xl font-medium">{t('callUsNow')}</h3>
                                 <span className="w-10 h-[2px] bg-red-600 rounded-2xl"></span>
                                 <div className="flex flex-col">
-                                    <h5>English: <a target="_blank" href="https://zalo.me/0379748073">037 9748 073</a></h5>
-                                    <h5>Tiếng Việt: <a target="_blank" href="https://zalo.me/0985080324">098 5080 324</a></h5>
+                                    <a target="_blank" href="https://zalo.me/0373522843">0373 522 843</a>
                                 </div>                        
                             </div>
                         </div>

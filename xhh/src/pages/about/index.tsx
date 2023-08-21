@@ -8,6 +8,8 @@ import Footer from "../../../components/Footer";
 import { aboutImage1, aboutImage2, aboutImage4, logoRed } from "../../../public/assets";
 import Image from "next/image";
 import { NextSeo } from "next-seo";
+import CallWidget from "../../../components/buttons/CallWidget";
+import ZaloWidget from "../../../components/buttons/ZaloWidget";
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 
@@ -69,6 +71,10 @@ export default function AboutPage() {
                   </div>
 
                 </div>
+            </div>
+            <div className="fixed right-6 bottom-12 md:bottom-16 z-30 flex gap-8 flex-col items-center">
+              <CallWidget t={t}/>
+              <ZaloWidget t={t}/>
             </div>
         </main>
 

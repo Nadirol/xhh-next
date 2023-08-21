@@ -155,8 +155,7 @@ const Header = ({ t }: { t: TFunction }) => {
                                 <div className="flex gap-4 items-center justify-center -xl:hidden px-4">
                                     <Image src={phoneIcon} alt="phone icon" />
                                     <div className="flex flex-col text-neutral-50 text-sm">
-                                        <h4>English: <a target="_blank" href="https://zalo.me/0379748073">037 9748 073</a></h4>
-                                        <h4>Tiếng Việt: <a target="_blank" href="https://zalo.me/0985080324">098 5080 324</a></h4>
+                                        <a target="_blank" href="https://zalo.me/0373522843">0373 522 843</a>
                                     </div>
                                 </div>
                             </div>
@@ -245,8 +244,7 @@ const Header = ({ t }: { t: TFunction }) => {
                                     className="stroke-neutral-800"/>
                                     </svg>
                                     <div className="flex flex-col text-neutral-80 text-sm">
-                                        <h4>English: <a target="_blank" href="https://zalo.me/0379748073">037 9748 073</a></h4>
-                                        <h4>Tiếng Việt: <a target="_blank" href="https://zalo.me/0985080324">098 5080 324</a></h4>
+                                        <a target="_blank" href="https://zalo.me/0373522843">0373 522 843</a>
                                     </div>
                                 </div>
                             </div>
@@ -378,8 +376,7 @@ const Header = ({ t }: { t: TFunction }) => {
                                     className="stroke-neutral-800"/>
                                     </svg>
                                     <div className="flex flex-col text-neutral-80 text-sm">
-                                        <h4>English: <a target="_blank" href="https://zalo.me/0379748073">037 9748 073</a></h4>
-                                        <h4>Tiếng Việt: <a target="_blank" href="https://zalo.me/0985080324">098 5080 324</a></h4>
+                                        <a target="_blank" href="https://zalo.me/0373522843">0373 522 843</a>
                                     </div>
                                 </div>
                             </div>
@@ -435,8 +432,7 @@ const Header = ({ t }: { t: TFunction }) => {
                             className="fill-neutral-100"/>
                             </svg>                
                             <div className="flex flex-col text-neutral-100 font-regular text-xs xl:text-lg">
-                                <h4>English: <a target="_blank" href="https://zalo.me/0379748073">037 9748 073</a></h4>
-                                <h4>Tiếng Việt: <a target="_blank" href="https://zalo.me/0985080324">098 5080 324</a></h4>
+                                <a target="_blank" href="https://zalo.me/0373522843">0373 522 843</a>
                             </div>
                         </div>
 

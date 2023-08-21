@@ -39,7 +39,7 @@ export default function Home() {
           <About t={t}/>
           <Contact t={t}/>
 
-          <div className="fixed right-6 bottom-24 md:bottom-28 z-30 flex gap-8 flex-col items-center">
+          <div className="fixed right-6 bottom-12 md:bottom-16 z-30 flex gap-8 flex-col items-center">
             <CallWidget t={t}/>
             <ZaloWidget t={t}/>
           </div>

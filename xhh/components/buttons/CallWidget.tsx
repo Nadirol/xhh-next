@@ -44,8 +44,8 @@ const CallWidget = ({ t }: { t: TFunction }) => {
                     <div className="absolute top-0 right-0 px-6 py-4 rounded-2xl translate-y-[-110%] bg-white shadow-card-extrasemibold
                     flex gap-4 flex-col cursor-default z-20 border border-neutral-400" ref={numbersRef}>
                         <h4 className="text-neutral-800 font-medium">{t('callUsNow')}</h4>
-                        <a href="tel:+84985041369" className="text-neutral-800 font-semibold text-2xl whitespace-nowrap	">
-                            0985 041 369
+                        <a href="tel:+84373522843" className="text-neutral-800 font-semibold text-2xl whitespace-nowrap	">
+                            0373 522 843
                         </a>
                     </div>
                 )}

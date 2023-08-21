@@ -7,6 +7,8 @@ import Breadcrumb from '../Breadcrumb';
 import { logoRed, logoTextWhite } from '../../public/assets';
 import { useState } from 'react';
 import BonusBanner from './BonusBanner';
+import CallWidget from '../buttons/CallWidget';
+import ZaloWidget from '../buttons/ZaloWidget';
 
 const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: IProduct, routes: { name: string | undefined, path: string }[]}) => {
     const [activeImage, setActiveImage] = useState(0);
@@ -126,6 +128,10 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
           )}
 
           <BonusBanner t={t}/>
+          <div className="fixed right-6 bottom-12 md:bottom-16 z-30 flex gap-8 flex-col items-center">
+              <CallWidget t={t}/>
+              <ZaloWidget t={t}/>
+          </div>
         </main>
     )
 };
