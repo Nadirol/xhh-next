@@ -12,21 +12,27 @@ import ProductFilter from "../../../components/products/ProductFilter";
 import { useEffect, useState } from "react";
 import supabase from "../../../supabase";
 import { IProduct } from "../../../interface/interface";
+import { useSearchParams } from 'next/navigation'
+import { NextSeo } from "next-seo";
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const category = searchParams.get('category')
+
   const { t } = useTranslation('common');
 
   const [products, setProducts] = useState<IProduct[]>([]);
   
-  const [activeCategory, setActiveCategory] = useState("Polyester 100%")
+  const [activeCategory, setActiveCategory] = useState(category)
 
   useEffect(() => {
     async function fetchData() {
       const { data, error } = await supabase
         .from('products')
-        .select('*');
+        .select('*')
+        .eq('category', activeCategory || category || "curtain");
       
       if (error) {
         console.error('Error fetching data:', error);
@@ -36,11 +42,15 @@ export default function Home() {
     }
 
     fetchData();
-  }, []);
+  }, [activeCategory, category ]);
 
     
   return (
     <>
+      <NextSeo
+        title="Sản phẩm - Xuân Hoà Home"
+        canonical="xhhome.vn/vi/products"
+      />
 
       <div className={`${fira.className} flex flex-col overflow-hidden`}>
         <Header
@@ -52,7 +62,7 @@ export default function Home() {
                 <Image src={sliderImage1} alt="banner image" className="object-cover h-full"/>
             </div>
             <div className="py-16 grid grid-cols-product-list">
-                <ProductFilter t={t}/>
+                <ProductFilter t={t} setActiveCategory={setActiveCategory}/>
                 <ProductList t={t} products={products}/>
             </div>
         </main>

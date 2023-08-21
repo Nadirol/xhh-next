@@ -16,8 +16,6 @@ import mediaIcon from "./media.svg"
 
 import facebookLogo from "./Facebook_Logo.webp"
 
-import zaloLogo from "./zalo.png"
-
 import ukFlag from "./uk-flag.jpg"
 import vietnamFlag from "./vietnam-flag.jpg"
 import italyVector from "./italy-vector.png"
@@ -59,6 +57,16 @@ import aboutImage1 from "./xuan-hoa-home-about-1.jpg"
 import aboutImage2 from "./xuan-hoa-home-about-2.png"
 import aboutImage3 from "./xuan-hoa-home-about-3.jpg"
 import aboutImage4 from "./xuan-hoa-home-about-4.jpg"
+import nanoWindowImage from "./cuanano.png"
+import woodenTileImage from "./vigo.png"
+import tableAndChairImage from "./ban-ghe-chong-gu-1.png"
+
+import curtainIcon from "./icons8-curtain-64.png"
+import woodenTileBg from "./vi-go-example-1.png"
+import tableBg from "./ban-ghe-chong-gu-1.png"
+import curtainBg from "./jasmine.png"
+import windowBg from "./window-image.jpg"
+import zaloLogo from "./zalo-logo.webp"
 
 export { phoneIcon, mailIcon, locationIcon, facebookIcon, logo, logoDark, logoLight, menuIcon,
 closeIcon, homeIcon, aboutIcon, planeIcon, arrowRightIcon, mediaIcon, facebookLogo,
@@ -67,4 +75,5 @@ miningImage, tradingImage, productionImage, hanoiImage, northVietnamImage, about
 whatsappIcon, sliderImage1, sliderImage2, sliderImage3, windowImage, woodenFloorImage, tableChairImage,
 arrowUpIcon, interiorImage1, interiorImage2, interiorImage3, interiorImage4, officeImage, bagIcon,
 locationSmall, phoneSmall, mailSmall, facebookSmall, filterIcon, logoTextRed, logoTextWhite, logoRed,
-aboutImage1, aboutImage2, aboutImage3, aboutImage4 }
+aboutImage1, aboutImage2, aboutImage3, aboutImage4, nanoWindowImage, woodenTileImage, tableAndChairImage,
+curtainIcon, woodenTileBg, tableBg, curtainBg, windowBg }

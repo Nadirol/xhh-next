@@ -29,7 +29,7 @@ const Contact = ({ t }: { t: TFunction}) => {
                             <div className="flex gap-2 items-start flex-col">
                                 <h3 className="text-2xl font-medium">{t('address')}</h3>
                                 <span className="w-10 h-[2px] bg-red-600 rounded-2xl"></span>
-                                <h5>7 Yen The, Dien Bien, Ba Dinh, Ha Noi</h5>
+                                <h5>{t('addressDetails')}</h5>
                             </div>
                         </div>
                         <div className="flex gap-8 items-center">
@@ -40,8 +40,8 @@ const Contact = ({ t }: { t: TFunction}) => {
                                 <h3 className="text-2xl font-medium">{t('callUsNow')}</h3>
                                 <span className="w-10 h-[2px] bg-red-600 rounded-2xl"></span>
                                 <div className="flex flex-col">
-                                    <h5>English: 037 9748 073</h5>
-                                    <h5>Tiếng Việt: 098 5080 324</h5>
+                                    <h5>English: <a target="_blank" href="https://zalo.me/0379748073">037 9748 073</a></h5>
+                                    <h5>Tiếng Việt: <a target="_blank" href="https://zalo.me/0985080324">098 5080 324</a></h5>
                                 </div>                        
                             </div>
                         </div>

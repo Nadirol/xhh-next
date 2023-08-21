@@ -9,7 +9,10 @@ import Curtains from '../../components/main/Curtains'
 import About from '../../components/main/About'
 import Contact from '../../components/main/Contact'
 import Footer from '../../components/Footer'
-
+import Category from "../../components/main/Category"
+import { NextSeo } from 'next-seo';
+import CallWidget from "../../components/buttons/CallWidget"
+import ZaloWidget from "../../components/buttons/ZaloWidget"
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 
@@ -18,6 +21,11 @@ export default function Home() {
 
   return (
     <>
+      <NextSeo
+        title="Xuân Hoà Home - Nội thất Xuân Hoà"
+        description="Xuân Hòa Home là một công ty chuyên cung cấp nội thất, hàng gia dụng dành cho giới trẻ với thiết kế thông minh, hiện đại, trẻ trung và tiện lợi."
+        canonical="xhhome.vn/vi"
+      />
 
       <div className={`${fira.className} flex flex-col overflow-hidden`}>
         <Header
@@ -25,10 +33,17 @@ export default function Home() {
         />
 
         <main>
+          <Category t={t}/>
           <FeaturedItems t={t}/>
           <Curtains t={t}/>
           <About t={t}/>
           <Contact t={t}/>
+
+          <div className="fixed right-6 bottom-24 md:bottom-28 z-30 flex gap-8 flex-col items-center">
+            <CallWidget t={t}/>
+            <ZaloWidget t={t}/>
+          </div>
+
         </main>
 
         <Footer

@@ -6,6 +6,10 @@
     "contactUs": "Liên Hệ",
     "aboutUs": "Về chúng tôi",
 
+    "slogan1": "Tạo nên sự hài hòa qua thiết kế",
+    "slogan2": "Thiết kế tạo nên sự hài hòa",
+    "slogan3": "Không gian độc đáo",
+
     "addressDetails": "Số 7 Yên Thế, Điện Biên, Ba Đình, Hà Nội",
     "socials": "Liên kết",
 
@@ -30,5 +34,43 @@
     "emailUs": "Gửi email đến chúng tôi",
 
     "sloganFooter": "Nâng tầm không gian sống",
-    "paragraphFooter": "Chào mừng bạn đến với một thế giới nơi mọi góc nhà kể một câu chuyện. Thương hiệu nội thất của chúng tôi tôn vinh vẻ đẹp của sự đơn giản và sức mạnh của thiết kế tỉ mỉ. Từ các vật liệu được lựa chọn cẩn thận đến sự chú trọng tận tâm đến chi tiết, nội thất của chúng tôi tạo nên bản sắc của sự sang trọng không chú ý. Hòa mình trong một không gian thanh bình, bao quanh bởi những món đồ mang lại cảm giác ấm áp, tinh tế và không thời gian. Khám phá lại niềm vui khi trở về nhà."
+    "paragraphFooter": "Chào mừng bạn đến với một thế giới nơi mọi góc nhà kể một câu chuyện. Thương hiệu nội thất của chúng tôi tôn vinh vẻ đẹp của sự đơn giản và sức mạnh của thiết kế tỉ mỉ. Từ các vật liệu được lựa chọn cẩn thận đến sự chú trọng tận tâm đến chi tiết, nội thất của chúng tôi tạo nên bản sắc của sự sang trọng không chú ý. Hòa mình trong một không gian thanh bình, bao quanh bởi những món đồ mang lại cảm giác ấm áp, tinh tế và không thời gian. Khám phá lại niềm vui khi trở về nhà.",
+    
+    "sendAMessage": "Gửi Tin Nhắn",
+    "firstName": "Họ",
+    "firstNamePlaceholder": "Nhập họ của bạn",
+    "lastName": "Tên",
+    "lastNamePlaceholder": "Nhập tên của bạn",
+    "phoneNumber": "Số Điện Thoại",
+    "phoneNumberPlaceholder": "Nhập số điện thoại của bạn",
+    "email": "Email",
+    "emailPlaceholder": "Nhập email của bạn",
+    "message": "Tin nhắn",
+    "messagePlaceholder": "Nhập tin nhắn ở đây",
+    "send": "Gửi",
+    "popUpText": "Chúng tôi chân thành cảm ơn!",
+
+    "viewMore": "Xem thêm",
+
+    "size": "Kích thước",
+    "specs": "Thông số kỹ thuật",
+    "colors": "Màu sắc",
+
+    "guarantee1": "Bảo hành chính hãng 100%",
+    "guarantee2": "Hỗ trợ hướng dẫn lắp đặt, tư vấn tận tình",
+    "guarantee3": "Đổi trả khi có lỗi sản phẩm",
+    "guarantee4": "Chính hãng Xuân Hoà",
+    
+    "bonusParagraph": "Xuân Hoà Home - thương hiệu nội thất uy tín tại Việt Nam với 50 năm kinh nghiệm, luôn cam kết mang đến cho khách hàng những sản phẩm chất lượng với mức giá tốt nhất.",
+    "bonusParagraph2": "Chọn ngay bộ bàn ghế học sinh chống gù lưng Xuân Hoà Home để bảo vệ sức khoẻ con yêu!",
+    "bonus1": "Ưu đãi tới 20% cho 20 khách hàng đầu tiên",
+    "bonus2": "Bảo hành chính hãng 100%",
+    "bonus3": "Đổi trả khi có lỗi sản phẩm",
+    "bonus4": "Hỗ trợ hướng dẫn lắp đặt, tư vấn tận tình",
+
+    "categories": "Sản phẩm chính",
+    "windowsAndDoors": "Cửa/cửa sổ",
+    "doorsAndWindows": "Cửa/cửa sổ",
+    "woodenTiles": "Vỉ gỗ",
+    "tablesAndChairs": "Bàn ghế"
 }

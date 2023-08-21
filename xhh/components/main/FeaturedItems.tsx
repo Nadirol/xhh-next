@@ -1,10 +1,10 @@
 import { TFunction, i18n } from "next-i18next"
-import { arrowUpIcon, tableChairImage, windowImage, woodenFloorImage } from "../../public/assets";
+import { arrowUpIcon, nanoWindowImage, tableAndChairImage, woodenTileImage } from "../../public/assets";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import FadeInOnScroll from "../animated/FadeInOnScroll";
 
-const itemsImage = [windowImage, woodenFloorImage, tableChairImage];
+const itemsImage = [nanoWindowImage, woodenTileImage, tableAndChairImage];
 
 const itemDataEn = [
     {
@@ -153,6 +153,7 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
         setActiveItem(nextItem);
     };
 
+    var slugify = require('slugify')
 
     return (
             <div className="flex gap-10 flex-col py-6 md:py-12 w-container-large mx-auto">
@@ -170,14 +171,15 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                             <div className="relative -xl:aspect-square xl:min-h-[600px] w-[90%] md:w-full">
                                 {itemsImage.map((image, index) => (
                                     <Image key={index} src={image} alt="window preview image" 
-                                    className={`object-cover w-full md:w-[90%] aspect-square absolute transition-all duration-100
+                                    className={`object-cover w-full md:w-[95%] aspect-square absolute transition-all duration-100
+                                    border border-neutral-300
                                     ${activeItem === index ? "z-10 top-4 md:bottom-0 left-4 md:right-0" 
                                     : getNextIndex(activeItem, itemsImage.length) === index 
                                     ? "top-2 md:bottom-8 left-2 md:right-8" 
                                     : "z-[-1] top-0 md:bottom-16 left-0 md:right-16"}`}/>
                                 ))}
                             </div>
-                            <div className="flex gap-4 pl-12">
+                            <div className="flex gap-4 xl:pl-12 -xl:mx-auto">
                                 <button className="hover:translate-x-[-40%] transition-all" 
                                 onClick={handlePrevItem}>
                                     <Image src={arrowUpIcon} alt="" className="rotate-[-90deg]" />
@@ -192,7 +194,7 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                         <div className="">
                             {itemData.map((item, index) => (
                                 <div key={index} className={`${index === activeItem ? "block" : "hidden"} animate-fade-in-up`}>
-                                    <h2 className="text-neutral-800 font-medium text-3xl md:text-[3rem] pb-4 border-b border-slate-300">
+                                    <h2 className="text-neutral-800 font-medium text-3xl md:text-[3rem] leading-tight pb-4 border-b border-slate-300">
                                         {item.title}
                                     </h2>
                                     <div className="py-4 flex gap-6 flex-col">
@@ -219,7 +221,7 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                                                 {t("benefits")}
                                             </button>
                                         </div>
-                                        <ul className={`flex gap-3 flex-col list-disc list-inside`}>
+                                        <ul className={`flex gap-3 flex-col list-disc list-inside items-start`}>
                                             {activeItemTab === 0
                                             ? item.details.map((d, index) => (
                                                 <li key={index} className="text-neutral-600 font-normal -md:text-xs leading-relaxed">
@@ -238,6 +240,10 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                                                 </li>
                                             )) 
                                             }
+                                            <a href={`${i18n?.language}/products/${slugify(itemDataVi[activeItem].title, {lower: true})}`}
+                                            className="text-neutral-50 font-medium text-sm px-8 py-2 bg-red-600">
+                                                {t('viewMore')}
+                                            </a>
                                         </ul>
                                     </div>
                                 </div>

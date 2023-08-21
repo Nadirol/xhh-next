@@ -1,5 +1,4 @@
 import { i18n, useTranslation } from "next-i18next"
-import { GetServerSideProps } from 'next';
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
@@ -15,6 +14,9 @@ import Link from "next/link";
 import Breadcrumb from "../../../../components/Breadcrumb";
 import RelatedProducts from "../../../../components/products/RelatedProducts";
 import ProductDetailsSkeleton from "../../../../components/products/ProductDetailsSkeleton";
+import ComplexProductDetails from "../../../../components/products/ComplexProductDetails";
+import BonusBanner from "../../../../components/products/BonusBanner";
+import { NextSeo } from "next-seo";
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 
@@ -44,9 +46,9 @@ export default function ProductDetails() {
   }, [slug]);
 
   const routes = [
-    { name: 'Home', path: `${i18n?.language}/` },
-    { name: 'Products', path: `${i18n?.language}/products` },
-    { name: 'Slug', path: `${i18n?.language}/products/${slug}` },
+    { name: t('home'), path: `${i18n?.language}/` },
+    { name: t('products').toUpperCase(), path: `${i18n?.language}/products` },
+    { name: i18n?.language === "vi" ? product?.title_vi : product?.title_en || t('product'), path: `${i18n?.language}/products/${product?.slug}` },
   ];
 
   if (isLoading) {
@@ -59,36 +61,73 @@ export default function ProductDetails() {
 
   return (
     <>
+      <NextSeo
+        title={`${i18n?.language === "vi" ? product.title_vi : product.title_en} - Xuân Hoà Home`}
+        canonical={`xhhome.vn/vi/products/${product.slug}`}
+      />
+      
       <div className={`${fira.className} flex flex-col overflow-hidden`}>
         <Header
           t={t}
         />
 
-        <main className="pt-[8rem] pb-[4rem] relative z-10 flex gap-12 flex-col">
-          <div className="w-container-large mx-auto flex gap-12">
-            <div className="">
-              <Image src={product.image_url} alt="product image" width={300} height={500} className="w-full object-cover"/>
-            </div>
-            <div className="flex gap-4 flex-col">
-              <Breadcrumb t={t} routes={routes}/>
-              <div className="flex gap-1 flex-col">
-                <h1 className="text-neutral-800 font-semibold text-[4rem] leading-tight">{product.title_vi}</h1>
-                <h4 className="text-neutral-500 text-sm">{product.category}</h4>
+        {product.category === "table and chair" 
+        ? <ComplexProductDetails t={t} product={product} routes={routes}/>
+        : (
+          <main className="pt-[8rem] relative z-10 flex gap-12 flex-col">
+            <div className="w-container-large mx-auto flex gap-12 -xl:flex-col">
+              <div className="">
+                <Image src={product.image_url} alt="product image" width={300} height={500} className="w-1/2 xl:w-full object-cover"/>
               </div>
+              <div className="flex gap-4 flex-col">
+                <Breadcrumb t={t} routes={routes}/>
+                <div className="flex gap-1 flex-col">
+                  <h1 className="text-neutral-800 font-semibold text-[2rem] xl:text-[4rem] leading-tight">{product.title_vi}</h1>
+                  {product.product_type && (
+                    <h4 className="text-neutral-500 text-sm">{product.product_type}</h4>
+                  )}
+                </div>
 
-              <ul className="grid gap-x-8 gap-y-2 grid-cols-2 list-disc list-inside">
-                {product.details_vi.map((d, index) => (
-                  <li key={index} className="text-neutral-700 text-xl">{d}</li>
-                ))}
-              </ul>
-              
-              <h3 className="text-neutral-500">
-                <Link href={`${i18n?.language}/contact`} className="text-red-600">Contact us</Link>&nbsp;if you are interested in this product
-              </h3>
+                <ul className="flex gap-x-8 gap-y-2 flex-col flex-wrap list-disc list-inside">
+                  {(i18n?.language === "vi" ? product.details_vi : product.details_en).map((d, index) => (
+                    <li key={index} className="text-neutral-700 text-xl">{d}</li>
+                  ))}
+                </ul>
+                
+                <h3 className="text-neutral-500">
+                  <Link href={`${i18n?.language}/contact`} className="text-red-600">Contact us</Link>&nbsp;if you are interested in this product
+                </h3>
+              </div>
             </div>
-          </div>
-          <RelatedProducts t={t} product={product}/>
-        </main>
+            {(product.description_vi && product.description_en) && (
+              <div className="w-container-large mx-auto flex gap-4 flex-col">
+                <h3 className="text-neutral-800 font-semibold text-2xl underline">{t('description')}</h3>
+                <ul className="flex gap-4 flex-col list-disc list-inside">
+                  {(i18n?.language === "vi" ? product.description_vi : product.description_en).map((d, index) => (
+                    <li key={index} className="text-neutral-700 text-xl">{d}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {(product.benefits_vi && product.benefits_en) && (
+              <div className="w-container-large mx-auto flex gap-4 flex-col">
+                <h3 className="text-neutral-800 font-semibold text-2xl underline">{t('benefits')}</h3>
+                <ul className="flex gap-4 flex-col list-disc list-inside">
+                  {(i18n?.language === "vi" ? product.benefits_vi : product.benefits_en).map((d, index) => (
+                    <li key={index} className="text-neutral-700 text-xl">{d}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {product.category === "curtain" && (
+              <RelatedProducts t={t} product={product}/>
+            )}
+            <BonusBanner t={t}/>
+
+          </main>
+        )}
+
+
 
         <Footer
           t={t}

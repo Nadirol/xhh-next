@@ -15,7 +15,7 @@ const RelatedProducts = ({ t, product }: { t: TFunction, product: IProduct }) =>
         const { data, error } = await supabase
           .from('products')
           .select('*')
-          .eq('category', product?.category)
+          .eq('product_type', product?.product_type)
           .range(totalFetchedItems, totalFetchedItems + itemsPerPage - 1);
     
         if (data) {

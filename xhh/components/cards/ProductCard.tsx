@@ -3,14 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ProductCard = ({ title, image, slug }: { title: string, image: string, slug: string }) => {
-    const slugify = require('slugify');
 
     return (
-        <Link href={`/${i18n?.language}/products/${slug}`} className="w-fit snap-start">
+        <Link href={`/${i18n?.language}/products/${slug}`} className="w-fit snap-start max-w-[181px] md:max-w-[282px]">
             <div className="w-[181px] md:w-[282px] h-[98px] md:h-[192px] overflow-hidden flex items-center justify-center">
                 <Image src={image} 
                 alt="tour preview image" width={282} height={192} 
-                className="hover:scale-[1.1] transition-all duration-300 object-cover h-[192px]"/>
+                className="hover:scale-[1.1] transition-all duration-300 object-cover w-full h-[192px]"/>
             </div>
             <div className="px-6 py-4 border border-t-0">
                 <h3 className="text-neutral-800 text-xl">{title}</h3>

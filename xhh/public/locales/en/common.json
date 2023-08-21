@@ -6,6 +6,10 @@
     "contactUs": "Contact Us",
     "aboutUs": "About us",
 
+    "slogan1": "Your Space, Your Signature Style",
+    "slogan2": "Creating Harmony Through Design",
+    "slogan3": "Where Style Meets Comfort",
+
     "addressDetails": "7 Yen The, Dien Bien, Ba Dinh, Ha Noi",
     "socials": "Socials",
 
@@ -30,5 +34,43 @@
     "emailUs": "Email us",
 
     "sloganFooter": "Elevate Your Home",
-    "paragraphFooter": "At our furniture brand, we believe that home is not just a place, but a reflection of who you are. That's why we strive to bring you exquisite furniture pieces that elevate your living spaces to new heights. With our commitment to quality craftsmanship and timeless designs, we invite you to discover the true essence of home and create a sanctuary that resonates with your unique style."
+    "paragraphFooter": "At our furniture brand, we believe that home is not just a place, but a reflection of who you are. That's why we strive to bring you exquisite furniture pieces that elevate your living spaces to new heights. With our commitment to quality craftsmanship and timeless designs, we invite you to discover the true essence of home and create a sanctuary that resonates with your unique style.",
+
+    "sendAMessage": "SEND A MESSAGE",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Enter your last name",
+    "phoneNumber": "Phone Number",
+    "phoneNumberPlaceholder": "Enter your phone number",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "message": "Message",
+    "messagePlaceholder": "Type your message here",
+    "send": "Send",
+    "popUpText": "Your Message is sent. Thanks For contacting us!",
+
+    "viewMore": "View more",
+
+    "size": "Size",
+    "specs": "Specs",
+    "colors": "Colors",
+
+    "guarantee1": "100% warranty",
+    "guarantee2": "Support installation instructions and dedicated advice",
+    "guarantee3": "Exchange when there is a product defect",
+    "guarantee4": "Xuan Hoa genuine",
+
+    "bonusParagraph": "Xuan Hoa Home - a prestigious furniture brand in Vietnam with 50 years of experience, is always committed to bringing customers quality products at the best price.",
+    "bonusParagraph2": "Choose a set of desks and chairs for students against hunchback Xuan Hoa Home to protect your baby's health!",
+    "bonus1": "Up to 20% off for the first 20 customers",
+    "bonus2": "100% genuine warranty",
+    "bonus3": "Exchange when there is a product defect",
+    "bonus4": "Support installation instructions, dedicated advice",
+
+    "categories": "Categories",
+    "windowsAndDoors": "Windows and Doors",
+    "doorsAndWindows": "Windows and Doors",
+    "woodenTiles": "Wooden tiles",
+    "tablesAndChairs": "Tables and chairs"
 }

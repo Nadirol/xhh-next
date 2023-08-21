@@ -7,15 +7,20 @@ import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import { aboutImage1, aboutImage2, aboutImage4, logoRed } from "../../../public/assets";
 import Image from "next/image";
+import { NextSeo } from "next-seo";
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 
-export default function Home() {
+export default function AboutPage() {
   const { t } = useTranslation('common');
     
   return (
     <>
-
+      <NextSeo
+        title="Về chúng tôi - Xuân Hoà Home"
+        canonical="xhhome.vn/vi/about"
+      />
+      
       <div className={`${fira.className} flex flex-col overflow-hidden`}>
         <Header
           t={t}

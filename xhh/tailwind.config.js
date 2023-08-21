@@ -12,7 +12,8 @@ module.exports = {
     extend: {
       colors: {
         'filter-dark': 'rgba(0, 0, 0, 0.4)',
-        'filter-extra-dark': 'rgba(0, 0, 0, 0.7)'
+        'filter-extra-dark': 'rgba(0, 0, 0, 0.7)',
+        'red-500': 'rgb(205, 20, 33)'
       },
       width: {
         'container': 'min(1120px, 100% - 2rem)',

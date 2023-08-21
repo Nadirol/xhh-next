@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 
 type route = ({
-    name: string
+    name: string | undefined
     path: string
 })
 
