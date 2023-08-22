@@ -80,7 +80,8 @@ module.exports = {
         'product-list': '1fr 4fr',
       },
       boxShadow: {
-        'inner-right': "inset -2px 0 6px 2px rgb(0 0 0 / 0.1)"
+        'inner-right': "inset -2px 0 6px 2px rgb(0 0 0 / 0.1)",
+        'bold': "2px 4px 7px rgb(0 0 0 / 0.5)"
       }
     },
   },

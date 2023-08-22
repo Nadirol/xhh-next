@@ -37,8 +37,14 @@ const Curtains = ({ t }: { t: TFunction}) => {
     return (
             <div className="flex gap-10 flex-col py-6 md:py-12 w-container-large mx-auto">
                 <FadeInOnScroll>
-                <div className="pb-8 border-b border-neutral-200">
+                <div className="pb-8 border-b border-neutral-200 flex items-center justify-between">
                     <h2 className="text-red-700 font-bold text-2xl md:text-[4rem] w-2/3 tracking-[0.2rem]">{t("curtains")}</h2>
+                    <div className="">
+                        <Link href={`${i18n?.language}/products?category=curtain`} className="text-neutral-800 text-xl">
+                            {t('viewMore')}
+                        </Link>
+                        <a href=""></a>
+                    </div>
                 </div>
                 </FadeInOnScroll>
 
@@ -52,7 +58,7 @@ const Curtains = ({ t }: { t: TFunction}) => {
                             </div>
                             <div className="w-full py-2 bg-filter-dark relative z-10 text-center items-center
                             transition-[padding] duration-700">
-                                <h5 className="text-neutral-100 text-xl tracking-wide">{i.title_vi}</h5>
+                                <h5 className="text-neutral-100 text-xs md:text-xl tracking-wide">{i.title_vi}</h5>
                             </div>
                         </Link>
                     ))}

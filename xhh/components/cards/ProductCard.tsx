@@ -1,8 +1,8 @@
-import { i18n } from "next-i18next";
+import { TFunction, i18n } from "next-i18next";
 import Image from "next/image";
 import Link from "next/link";
 
-const ProductCard = ({ title, image, slug }: { title: string, image: string, slug: string }) => {
+const ProductCard = ({ title, image, slug, category, t }: { title: string, image: string, slug: string, category: string, t: TFunction }) => {
 
     return (
         <Link href={`/${i18n?.language}/products/${slug}`} className="w-fit snap-start max-w-[181px] md:max-w-[282px]">
@@ -13,7 +13,7 @@ const ProductCard = ({ title, image, slug }: { title: string, image: string, slu
             </div>
             <div className="px-6 py-4 border border-t-0">
                 <h3 className="text-neutral-800 text-xl">{title}</h3>
-                <h5 className="text-neutral-600 font-light">Curtain</h5>
+                <h5 className="text-neutral-600 font-light">{t(category)}</h5>
             </div>
         </Link>
     )

@@ -8,7 +8,7 @@ const ProductList = ({ t, products }: { t: TFunction, products: IProduct[] }) =>
         <div className="w-container-large mx-auto ">
             <div className="grid gap-y-12 grid-cols-2 xl:grid-cols-3">
                 {products.map((item, index) => (
-                    <ProductCard key={index} title={item.title_vi} image={item.image_url} slug={item.slug}/>
+                    <ProductCard key={index} title={item.title_vi} image={item.image_url} slug={item.slug} category={item.category} t={t}/>
                 ))
                 }
             </div>

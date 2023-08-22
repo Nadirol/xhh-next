@@ -6,11 +6,10 @@ import SliderImage from "./header/SliderImage";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-// run function when clicking outside of ref
-const ClickDetector = (ref: React.MutableRefObject<HTMLDivElement | null>, func: () => void, secondRef: React.MutableRefObject<HTMLDivElement | null>) => {
+const useClickDetector = (refs: React.MutableRefObject<HTMLDivElement | null>[], func: () => void) => {
     useEffect(() => {
         const handleClickOutside = (event: any) => {
-            if (ref.current && !ref.current.contains(event.target) && !secondRef.current?.contains(event.target)) {
+            if (!refs.some(ref => ref.current?.contains(event.target))) {
                 func()
             }
         }
@@ -19,8 +18,8 @@ const ClickDetector = (ref: React.MutableRefObject<HTMLDivElement | null>, func:
         return () => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
-    },[ref])
-};
+    },[refs[0]])
+  };
 
 const lngs = new Map([
     ['en', { nativeLanguage: 'English', flag: ukFlag }],
@@ -45,7 +44,7 @@ const Header = ({ t }: { t: TFunction }) => {
         setSidenavOpened(false)
     };
 
-    ClickDetector(sideNavRef, hideSideNav, sideNavRef);
+    useClickDetector([sideNavRef], hideSideNav);
 
     const [activeSlide, setActiveSlide] = useState(1);
 
@@ -75,6 +74,19 @@ const Header = ({ t }: { t: TFunction }) => {
     };
 
     const router = useRouter();
+
+    const [lngDropdownOpened, setLngDropdownOpened] = useState(false);
+    const dropdownRef = useRef(null);
+    const languageButtonRef = useRef(null);
+
+    const hideDropdown = () => {
+      setLngDropdownOpened(false);
+    }
+
+    const dropdownStickyRef = useRef(null);
+    const languageButtonStickyRef = useRef(null);
+
+    useClickDetector([languageButtonRef, dropdownRef, languageButtonStickyRef, dropdownStickyRef], hideDropdown);
 
     return (
         <div className={`relative z-20 bg-black
@@ -125,21 +137,22 @@ const Header = ({ t }: { t: TFunction }) => {
 
                                     <div className="flex gap-8 items-center justify-end -xl:ml-auto">
                                         <div className="relative py-6 px-4 after:absolute after:inset-0 
-                                        after:z-0 after:w-full after:h-plus-15 after:bg-blue-500 after:translate-y-[-100%] 
+                                        after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-100%] 
                                         [&:hover]:after:translate-y-0 after:transition-all after:duration-75 nav-link-background [&:hover>.grid]:h-full">
-                                            <div className="flex gap-2 xl:gap-4 items-center cursor-pointer relative z-10">
+                                            <div className="flex gap-2 xl:gap-4 items-center cursor-pointer relative z-10" ref={languageButtonRef}
+                                            onClick={() => setLngDropdownOpened(true)}>
                                                 <h1 className="text-neutral-50 font-medium text-xs md:text-base leading-5">
                                                     {i18n?.language.toUpperCase()}
                                                 </h1>
                                                 <Image src={lngs.get(i18n?.language || "en")?.flag || ukFlag} 
                                                 alt="language image" width={38} height={21}/>
                                             </div>
-                                            <div className={`grid h-0 min-w-[10rem] transition-[height] duration-300 absolute 
-                                            z-30 bottom-0 right-0 translate-y-[100%] overflow-hidden`}>
+                                            <div className={`grid h-0 min-w-[10rem] transition-[height] duration-300 absolute ${lngDropdownOpened ? "-xl:h-full" : ""}
+                                            z-30 bottom-0 right-0 translate-y-[100%] overflow-hidden`} ref={dropdownRef}>
                                                 {Array.from(lngs.keys()).map((lng: string) => (
                                                 <button type="submit" key={lng} onClick={() => { i18n?.changeLanguage(lng) }} disabled={i18n?.resolvedLanguage === lng}
                                                     className={`${(i18n?.language === lng || i18n?.language.slice(0,2).toLowerCase() === lng) ? 'text-neutral-50' : 'text-neutral-300'} 
-                                                    font-normal hover:text-neutral-50 px-8 py-2 min-h-[2rem] bg-blue-500`}>
+                                                    font-normal hover:text-neutral-50 px-8 py-2 min-h-[2rem] bg-red-500`}>
                                                     {lngs.get(lng)?.nativeLanguage}
                                                 </button>
                                                 ))}
@@ -206,10 +219,11 @@ const Header = ({ t }: { t: TFunction }) => {
 
                                     <div className="flex gap-8 items-center justify-end -xl:ml-auto">
                                         <div className="relative py-6 px-4 after:absolute after:inset-0
-                                        after:z-0 after:w-full after:h-plus-15 after:bg-blue-500 after:translate-y-[-100%] 
+                                        after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-100%] 
                                         [&:hover]:after:translate-y-0 after:transition-all after:duration-75 nav-link-background 
                                         [&:hover>.grid]:h-full [&:hover>.flex>h4]:text-neutral-100">
-                                            <div className="flex gap-2 xl:gap-4 items-center cursor-pointer relative z-10">
+                                            <div className="flex gap-2 xl:gap-4 items-center cursor-pointer relative z-10" ref={languageButtonStickyRef}
+                                            onClick={() => setLngDropdownOpened(true)}>
                                                 <h4 className="text-neutral-800 font-medium text-xs 
                                                 md:text-base leading-5 transition-colors duration-300">
                                                     {i18n?.language.toUpperCase()}
@@ -217,13 +231,13 @@ const Header = ({ t }: { t: TFunction }) => {
                                                 <Image src={lngs.get(i18n?.language || "en")?.flag || ukFlag} 
                                                 alt="language image" width={38} height={21}/>
                                             </div>
-                                            <div className={`grid h-0 min-w-[10rem]
+                                            <div className={`grid h-0 min-w-[10rem] ${(lngDropdownOpened && scrollPosition > 100) ? "-xl:h-full" : ""}
                                             transition-[height] duration-300 absolute z-30 bottom-0 right-0 
-                                            translate-y-[100%] overflow-hidden`}>
+                                            translate-y-[100%] overflow-hidden`} ref={dropdownStickyRef}>
                                                 {Array.from(lngs.keys()).map((lng: string) => (
                                                 <button type="submit" key={lng} onClick={() => { i18n?.changeLanguage(lng) }} disabled={i18n?.resolvedLanguage === lng}
                                                     className={`${(i18n?.language === lng || i18n?.language.slice(0,2).toLowerCase() === lng) ? 'text-neutral-50' : 'text-neutral-300'} 
-                                                    font-normal hover:text-neutral-50 px-8 py-2 min-h-[2rem] bg-blue-500`}>
+                                                    font-normal hover:text-neutral-50 px-8 py-2 min-h-[2rem] bg-red-500`}>
                                                     {lngs.get(lng)?.nativeLanguage}
                                                 </button>
                                                 ))}
@@ -284,9 +298,9 @@ const Header = ({ t }: { t: TFunction }) => {
                     {/* banner text */}
                     {sliderText.map((text, index) => (
                         <h1 key={index} 
-                        className={`text-neutral-50 font-bold text-3xl md:text-[3rem] xl:text-[4rem] 
+                        className={`text-neutral-50 font-bold text-2xl md:text-[3rem] xl:text-[4rem] 
                         absolute bottom-1/2 translate-x-1/2 translate-y-1/2 z-10 text-center right-1/2
-                        w-full md:w-3/4 xl:w-3/5 max-w-[500px] xl:max-w-[700px] leading-snug tracking-[0.2rem] xl:tracking-[0.4rem]
+                        w-full md:w-3/4 xl:w-3/5 md:max-w-[500px] xl:max-w-[800px] leading-snug tracking-[0.2rem] xl:tracking-[0.4rem]
                         ${index === activeSlide ? "opacity-100 animate-slide-in-from-right" : "opacity-0 pointer-events-none"} 
                         transition-all duration-1000`}>
                             {text.toUpperCase()}
@@ -342,16 +356,16 @@ const Header = ({ t }: { t: TFunction }) => {
                                         after:z-0 after:w-full after:h-plus-15 after:bg-blue-500 after:translate-y-[-100%] 
                                         [&:hover]:after:translate-y-0 after:transition-all after:duration-75 nav-link-background 
                                         [&:hover>.grid]:h-full [&:hover>.flex>h4]:text-neutral-100">
-                                            <div className="flex gap-2 xl:gap-4 items-center cursor-pointer relative z-10">
+                                            <div className="flex gap-2 xl:gap-4 items-center cursor-pointer relative z-10" ref={languageButtonRef} onClick={() => setLngDropdownOpened(true)}>
                                                 <h4 className="text-neutral-800 font-medium text-xs md:text-base leading-5 transition-colors duration-300">
                                                     {i18n?.language.toUpperCase()}
                                                 </h4>
                                                 <Image src={lngs.get(i18n?.language || "en")?.flag || ukFlag} 
                                                 alt="language image" width={38} height={21}/>
                                             </div>
-                                            <div className={`grid h-0 min-w-[10rem]
+                                            <div className={`grid h-0 min-w-[10rem] ${lngDropdownOpened ? "-xl:h-full" : ""}
                                             transition-[height] duration-300 absolute z-30 bottom-0 right-0 
-                                            translate-y-[100%] overflow-hidden`}>
+                                            translate-y-[100%] overflow-hidden`} ref={dropdownRef}>
                                                 {Array.from(lngs.keys()).map((lng: string) => (
                                                 <button type="submit" key={lng} onClick={() => { i18n?.changeLanguage(lng) }} disabled={i18n?.resolvedLanguage === lng}
                                                     className={`${(i18n?.language === lng || i18n?.language.slice(0,2).toLowerCase() === lng) ? 'text-neutral-50' : 'text-neutral-300'} 

@@ -6,7 +6,7 @@ const About = ({ t }: { t: TFunction}) => {
 
     return (
         <div className="">
-            <div className="bg-red-600 py-12 text-neutral-50">
+            <div className="bg-red-500 py-12 text-neutral-50">
                 <FadeInOnScroll>
                     <div className="w-container-large mx-auto flex gap-4 justify-between items-center -md:flex-col">
                         <div className="flex gap-2 md:gap-4 flex-col flex-1">

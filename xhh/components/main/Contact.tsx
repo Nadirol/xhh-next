@@ -11,7 +11,7 @@ const Contact = ({ t }: { t: TFunction}) => {
               allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade"
               className="border flex-1 border-neutral-500 aspect-square h-full w-full">
               </iframe>
-              <div className="bg-red-600 px-12 py-8 relative">
+              <div className="bg-red-500 px-12 py-8 relative">
                 <Image src={bagIcon} alt="office image" 
                 className="absolute z-[0] translate-x-1/2 right-1/2 translate-y-1/2 bottom-1/2 
                 saturate-[0.2] opacity-10 pointer-events-none w-1/2 aspect-square"/>
@@ -28,7 +28,7 @@ const Contact = ({ t }: { t: TFunction}) => {
                             <Image src={locationIcon} alt="location icon" className=""/>
                             <div className="flex gap-2 items-start flex-col">
                                 <h3 className="text-2xl font-medium">{t('address')}</h3>
-                                <span className="w-10 h-[2px] bg-red-600 rounded-2xl"></span>
+                                <span className="w-10 h-[2px] bg-red-500 rounded-2xl"></span>
                                 <h5>{t('addressDetails')}</h5>
                             </div>
                         </div>
