@@ -25,7 +25,7 @@ const Contact = ({ t }: { t: TFunction}) => {
 
                     <div className="flex gap-20 flex-col">
                         <div className="flex gap-8 items-center">
-                            <Image src={locationIcon} alt="location icon" className=""/>
+                            <Image src={locationIcon} alt="location icon" className="w-[60px] h-[68px]"/>
                             <div className="flex gap-2 items-start flex-col">
                                 <h3 className="text-2xl font-medium">{t('address')}</h3>
                                 <span className="w-10 h-[2px] bg-red-500 rounded-2xl"></span>

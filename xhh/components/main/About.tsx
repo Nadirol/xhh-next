@@ -1,5 +1,4 @@
 import { TFunction } from "next-i18next"
-import Image from "next/image";
 import FadeInOnScroll from "../animated/FadeInOnScroll";
 
 const About = ({ t }: { t: TFunction}) => {

@@ -1,10 +1,10 @@
 import { TFunction, i18n } from "next-i18next"
-import { arrowUpIcon, nanoWindowImage, tableAndChairImage, woodenTileImage } from "../../public/assets";
+import { arrowUpIcon, nanoWindowImage, tableAndChairImage, woodenTileBg } from "../../public/assets";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import FadeInOnScroll from "../animated/FadeInOnScroll";
 
-const itemsImage = [nanoWindowImage, woodenTileImage, tableAndChairImage];
+const itemsImage = [nanoWindowImage, woodenTileBg, tableAndChairImage];
 
 const itemDataEn = [
     {
@@ -157,13 +157,6 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
 
     return (
             <div className="flex gap-10 flex-col py-6 md:py-12 w-container-large mx-auto">
-                <FadeInOnScroll>
-                    <div className="pb-4 md:pb-8 border-b border-neutral-200">
-                        <h2 className="text-red-500 font-bold text-[2rem] md:text-[3rem] xl:text-[6rem] md:w-2/3 tracking-[0.2rem]">
-                            {t('featuredItemsHeading')}
-                        </h2>
-                    </div>
-                </FadeInOnScroll>
 
                 <FadeInOnScroll>
                     <div className="grid xl:grid-cols-2 gap-x-12 gap-y-12">

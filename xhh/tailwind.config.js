@@ -18,6 +18,7 @@ module.exports = {
       width: {
         'container': 'min(1120px, 100% - 2rem)',
         'container-large': 'min(1240px, 100% - 2rem)',
+        'container-extra-large': 'min(1360px, 100% - 1rem)',
         'sidenav': 'min(24rem, 100% - 4rem)',
       },
       height: {
