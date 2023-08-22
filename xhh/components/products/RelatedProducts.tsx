@@ -91,7 +91,7 @@ const RelatedProducts = ({ t, product }: { t: TFunction, product: IProduct }) =>
 
             <div className="flex gap-12 items-center overflow-x-scroll scrollbar-hide snap-x pr-4" ref={sliderRef}>
                 {relatedProducts?.map((p, index) => (
-                <ProductCard key={index} title={p.title_vi} image={p.image_url} slug={p.slug}/>
+                  <ProductCard key={index} title={p.title_vi} image={p.image_url} slug={p.slug} category={p.category} t={t}/>
                 ))}
                 {fetchMoreVisible && (
                 <button className="hover:pl-2 transition-[padding]" onClick={handleLoadMore}>
