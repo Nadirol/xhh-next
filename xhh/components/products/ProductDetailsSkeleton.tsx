@@ -9,10 +9,6 @@ import { TFunction, i18n } from 'next-i18next';
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 const ProductDetailsSkeleton = ({ t }: { t: TFunction}) => {
-    const routes = [
-        { name: 'Home', path: `${i18n?.language}/` },
-        { name: 'Products', path: `${i18n?.language}/products` },
-    ];
 
     return (
         <>

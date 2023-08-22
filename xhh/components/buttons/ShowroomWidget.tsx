@@ -10,7 +10,7 @@ const ShowroomWidget = ({ t }: { t: TFunction }) => {
             <div className="rounded-[100%] overflow-hidden relative z-10 bg-red-500 p-3 aspect-square shadow-bold">
                 <Image src={locationIcon} alt="zalo logo" className="m-auto"/>                
             </div>
-            <h6 className="text-sm text-red-500">Showroom</h6>
+            <h6 className="text-sm text-red-500 font-semibold">Showroom</h6>
         </Link>
     )
 };
