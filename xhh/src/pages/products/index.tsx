@@ -64,7 +64,7 @@ export default function Home() {
                 <Image src={sliderImage1} alt="banner image" className="object-cover h-full"/>
             </div>
             <div className="py-16 grid grid-cols-product-list">
-                <ProductFilter t={t} setActiveCategory={setActiveCategory}/>
+                <ProductFilter t={t}/>
                 <ProductList t={t} products={products}/>
             </div>
             <div className="fixed right-6 bottom-12 md:bottom-16 z-30 flex gap-8 flex-col items-center">
