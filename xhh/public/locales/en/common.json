@@ -73,6 +73,12 @@
     "doorsAndWindows": "Windows and Doors",
     "woodenTiles": "Wooden tiles",
     "tablesAndChairs": "Tables and chairs",
+    "curtain": "Curtains",
+    "wooden-tile": "Wooden tiles",
+    "window": "Windows and Doors",
+    "table-and-chair": "Tables and chairs",
 
-    "downloadCatalogue": "Download catalogue"
+    "downloadCatalogue": "Download catalogue",
+
+    "youMayAlsoLike": "You may also like"
 }

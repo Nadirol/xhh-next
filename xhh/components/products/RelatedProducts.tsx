@@ -80,7 +80,7 @@ const RelatedProducts = ({ t, product }: { t: TFunction, product: IProduct }) =>
         <div className="w-container-large mx-auto flex gap-4 flex-col">
             <div className="flex items-center justify-between">
               <div className="flex flex-col items-start w-fit">
-                <h3 className="text-neutral-800 font-semibold text-3xl mb-2">You may also like</h3>
+                <h3 className="text-neutral-800 font-semibold text-3xl mb-2">{t('youMayAlsoLike')}</h3>
                 <span className="w-full h-1 bg-red-500"></span>
               </div>
               <div className="">
