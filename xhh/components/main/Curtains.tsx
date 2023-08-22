@@ -1,5 +1,5 @@
 import { TFunction, i18n } from "next-i18next"
-import { interiorImage1, interiorImage2, interiorImage3, interiorImage4 } from "../../public/assets";
+import { arrowRightIcon, interiorImage1, interiorImage2, interiorImage3, interiorImage4 } from "../../public/assets";
 import Image from "next/image";
 import FadeInOnScroll from "../animated/FadeInOnScroll";
 import { useEffect, useState } from "react";
@@ -39,11 +39,14 @@ const Curtains = ({ t }: { t: TFunction}) => {
                 <FadeInOnScroll>
                 <div className="pb-8 border-b border-neutral-200 flex items-center justify-between">
                     <h2 className="text-red-700 font-bold text-2xl md:text-[4rem] w-2/3 tracking-[0.2rem]">{t("curtains")}</h2>
-                    <div className="">
-                        <Link href={`${i18n?.language}/products?category=curtain`} className="text-neutral-800 text-xl">
+                    <div className="flex gap-4 flex-col items-end">
+                        <Link href={`${i18n?.language}/products?category=curtain`} className="text-neutral-800 text-xl underline hover:text-red-500">
                             {t('viewMore')}
                         </Link>
-                        <a href=""></a>
+                        <a href={i18n?.language === 'en' ? "/assets/XHH-Catalogue-en.pdf" : "/assets/XHH-Catalogue-vi.pdf" } target="_blank"
+                        className="text-neutral-50 bg-red-500 px-8 py-3 font-semibold">
+                            {t('downloadCatalogue')}
+                        </a>
                     </div>
                 </div>
                 </FadeInOnScroll>
