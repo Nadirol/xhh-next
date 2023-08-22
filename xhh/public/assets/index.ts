@@ -53,10 +53,11 @@ import tableBg from "./ban-ghe-chong-gu-1.png"
 import curtainBg from "./jasmine.png"
 import windowBg from "./window-image.jpg"
 import zaloLogo from "./zalo-logo.webp"
+import messengerLogo from "./facebook-messenger-2881.svg"
 
 export { phoneIcon, mailIcon, locationIcon, facebookIcon, menuIcon,
 closeIcon, homeIcon, aboutIcon, planeIcon, arrowRightIcon, mediaIcon, facebookLogo,
-ukFlag, vietnamFlag, zaloLogo,
+ukFlag, vietnamFlag, zaloLogo, messengerLogo,
 whatsappIcon, sliderImage1, sliderImage2, sliderImage3, windowImage, woodenFloorImage, tableChairImage,
 arrowUpIcon, interiorImage1, interiorImage2, interiorImage3, interiorImage4, officeImage, bagIcon,
 locationSmall, phoneSmall, mailSmall, facebookSmall, filterIcon, logoTextRed, logoTextWhite, logoRed,

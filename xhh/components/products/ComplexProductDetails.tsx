@@ -9,6 +9,7 @@ import { useState } from 'react';
 import BonusBanner from './BonusBanner';
 import CallWidget from '../buttons/CallWidget';
 import ZaloWidget from '../buttons/ZaloWidget';
+import Widgets from '../Widgets';
 
 const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: IProduct, routes: { name: string | undefined, path: string }[]}) => {
     const [activeImage, setActiveImage] = useState(0);
@@ -47,8 +48,6 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
                 <h1 className="text-neutral-800 font-semibold text-[2rem] xl:text-[4rem] leading-tight">{product.title_vi}</h1>
               </div>
 
-
-
               {(product.specific_description_vi && product.specific_description_en) && (
                 <div className="flex gap-4 flex-col">
                   <div className="flex">
@@ -63,7 +62,7 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
 
                   <ul className="flex gap-4 flex-col list-disc list-inside pb-4 border-b">
                     <li className='text-red-700 font-medium text-2xl'>
-                      <span className='relative left-[-16px]'>{t('size')}:</span>
+                      <span className='relative'>{t('size')}:</span>
                       <ul className="flex gap-2 flex-col text-neutral-800 font-normal text-sm ml-6 mt-1">
                         {(i18n?.language === "vi" ? product.specific_description_vi : product.specific_description_en)[activeType].size.map((s, index) => (
                           <li key={index}>- {s}</li>
@@ -72,7 +71,7 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
                     </li>
 
                     <li className='text-red-700 font-medium text-2xl'>
-                      <span className='relative left-[-16px]'>{t('specs')}:</span>
+                      <span className='relative'>{t('specs')}:</span>
                       <ul className="flex gap-2 flex-col text-neutral-800 font-normal text-sm ml-8 mt-1">
                         {(i18n?.language === "vi" ? product.specific_description_vi : product.specific_description_en)[activeType].specs.map((s, index) => (
                           <li key={index}>- {s}</li>
@@ -81,10 +80,10 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
                     </li>
 
                     <li className='text-red-700 font-medium text-2xl'>
-                      <span className='relative left-[-16px]'>
+                      <span className='relative'>
                         {t('colors') + ": "}
                       </span>  
-                      <span className='text-neutral-800 font-normal text-sm relative left-[-16px]'>
+                      <span className='text-neutral-800 font-normal text-sm relative'>
                         {(i18n?.language === "vi" 
                         ? product.specific_description_vi 
                         : product.specific_description_en)[activeType].colors}
@@ -118,20 +117,9 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
             </div>
           )}
 
-          {product.other_images && (
-            <div className="w-container-large mx-auto flex gap-4 flex-col">
-              {product.other_images.map((i, index) => (
-                <Image key={index} src={i} alt="examples" 
-                width={500} height={700} className='mx-auto'/>
-              ))}
-            </div>
-          )}
-
           <BonusBanner t={t}/>
-          <div className="fixed right-6 bottom-12 md:bottom-16 z-30 flex gap-8 flex-col items-center">
-              <CallWidget t={t}/>
-              <ZaloWidget t={t}/>
-          </div>
+          <Widgets t={t}/>
+
         </main>
     )
 };

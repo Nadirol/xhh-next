@@ -11,8 +11,7 @@ import Contact from '../../components/main/Contact'
 import Footer from '../../components/Footer'
 import Category from "../../components/main/Category"
 import { NextSeo } from 'next-seo';
-import CallWidget from "../../components/buttons/CallWidget"
-import ZaloWidget from "../../components/buttons/ZaloWidget"
+import Widgets from "../../components/Widgets"
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 
@@ -39,11 +38,7 @@ export default function Home() {
           <About t={t}/>
           <Contact t={t}/>
 
-          <div className="fixed right-6 bottom-12 md:bottom-16 z-30 flex gap-8 flex-col items-center">
-            <CallWidget t={t}/>
-            <ZaloWidget t={t}/>
-          </div>
-
+          <Widgets t={t}/>
         </main>
 
         <Footer

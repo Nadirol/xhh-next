@@ -159,7 +159,7 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
             <div className="flex gap-10 flex-col py-6 md:py-12 w-container-large mx-auto">
                 <FadeInOnScroll>
                     <div className="pb-4 md:pb-8 border-b border-neutral-200">
-                        <h2 className="text-red-700 font-bold text-[2rem] md:text-[3rem] xl:text-[6rem] md:w-2/3 tracking-[0.2rem]">
+                        <h2 className="text-red-500 font-bold text-[2rem] md:text-[3rem] xl:text-[6rem] md:w-2/3 tracking-[0.2rem]">
                             {t('featuredItemsHeading')}
                         </h2>
                     </div>
@@ -178,8 +178,25 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                                     ? "top-2 md:bottom-8 left-2 md:right-8" 
                                     : "z-[-1] top-0 md:bottom-16 left-0 md:right-16"}`}/>
                                 ))}
+                                <div className="relative w-full md:w-[95%] aspect-square">
+                                    <button className="bg-white hover:bg-red-500 rounded-[100%] absolute translate-y-1/2 translate-x--[100%]
+                                    left-0 bottom-1/2 p-3 z-30 border hover:border-0" 
+                                    onClick={handlePrevItem}>
+                                        <div className="aspect-square w-5">
+                                            <Image src={arrowUpIcon} alt="" className="rotate-[-90deg]" />
+                                        </div>
+                                    </button>
+                                    <button className="bg-white hover:bg-red-500 rounded-[100%] absolute translate-y-1/2 translate-x-[100%]
+                                    right-0 bottom-1/2 p-3 z-30 border hover:border-0" 
+                                    onClick={handlePrevItem}>
+                                        <div className="aspect-square w-5">
+                                            <Image src={arrowUpIcon} alt="" className="rotate-90" />
+                                        </div>                                
+                                    </button>
+                                </div>
+
                             </div>
-                            <div className="flex gap-4 xl:pl-12 -xl:mx-auto">
+                            {/* <div className="flex gap-4 xl:pl-12 -xl:mx-auto">
                                 <button className="hover:translate-x-[-40%] transition-all" 
                                 onClick={handlePrevItem}>
                                     <Image src={arrowUpIcon} alt="" className="rotate-[-90deg]" />
@@ -188,7 +205,7 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                                 onClick={handleNextItem}>
                                     <Image src={arrowUpIcon} alt="" className="rotate-90"/>
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
 
                         <div className="">
@@ -240,7 +257,7 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                                                 </li>
                                             )) 
                                             }
-                                            <a href={`${i18n?.language}/products/${slugify(itemDataVi[activeItem].title, {lower: true})}`}
+                                            <a href={`/${i18n?.language}/products/${slugify(itemDataVi[activeItem].title, {lower: true})}`}
                                             className="text-neutral-50 font-medium text-sm px-8 py-2 bg-red-600">
                                                 {t('viewMore')}
                                             </a>

@@ -10,7 +10,7 @@ const ProductFilter = ({ t }: { t: TFunction }) => {
                 <h3>{t('products')}</h3>
             </div>
             <div className="flex flex-col text-neutral-800 text-xl">
-                <Link href={`${i18n?.language}/products?category=curtain`} className="py-2 relative before:absolute before:z-0 
+                <Link href={`/${i18n?.language}/products?category=curtain`} className="py-2 relative before:absolute before:z-0 
                 before:bg-red-500 before:w-full before:h-full flex items-center
                 [&:hover]:before:translate-x-0 before:translate-x-[-105%] overflow-hidden
                 before:transition-transform hover:text-neutral-50 transition-[color] duration-75">
@@ -18,7 +18,7 @@ const ProductFilter = ({ t }: { t: TFunction }) => {
                         {t('curtains')}
                     </span>
                 </Link>
-                <Link href={`${i18n?.language}/products?category=window`} className="py-2 relative before:absolute before:z-0 
+                <Link href={`/${i18n?.language}/products?category=window`} className="py-2 relative before:absolute before:z-0 
                 before:bg-red-500 before:w-full before:h-full flex items-center
                 [&:hover]:before:translate-x-0 before:translate-x-[-105%] overflow-hidden
                 before:transition-transform hover:text-neutral-50 transition-[color] duration-75">
@@ -26,7 +26,7 @@ const ProductFilter = ({ t }: { t: TFunction }) => {
                         {t('windowsAndDoors')}
                     </span>
                 </Link>
-                <Link href={`${i18n?.language}/products?category=wooden-tile`} className="py-2 relative before:absolute before:z-0 
+                <Link href={`/${i18n?.language}/products?category=wooden-tile`} className="py-2 relative before:absolute before:z-0 
                 before:bg-red-500 before:w-full before:h-full flex items-center
                 [&:hover]:before:translate-x-0 before:translate-x-[-105%] overflow-hidden
                 before:transition-transform hover:text-neutral-50 transition-[color] duration-75">
@@ -34,7 +34,7 @@ const ProductFilter = ({ t }: { t: TFunction }) => {
                         {t('woodenTiles')}
                     </span>
                 </Link>
-                <Link href={`${i18n?.language}/products?category=table-and-chair`} className="py-2 relative before:absolute before:z-0 text-start
+                <Link href={`/${i18n?.language}/products?category=table-and-chair`} className="py-2 relative before:absolute before:z-0 text-start
                 before:bg-red-500 before:w-full before:h-full flex items-center
                 [&:hover]:before:translate-x-0 before:translate-x-[-105%] overflow-hidden
                 before:transition-transform hover:text-neutral-50 transition-[color] duration-75">

@@ -41,7 +41,7 @@ const CallWidget = ({ t }: { t: TFunction }) => {
                     </svg>                    
                 </div>
                 {callNumberVisible && (
-                    <div className="absolute top-0 right-0 px-4 md:px-6 py-2 md:py-4 rounded-2xl translate-y-[-110%] bg-white shadow-card-extrasemibold
+                    <div className="absolute bottom-0 right-0 px-4 md:px-6 py-2 md:py-4 rounded-2xl translate-y--1/2 translate-x-[-40%] bg-white shadow-card-extrasemibold
                     flex gap-2 md:gap-4 flex-col cursor-default z-20 border border-neutral-400" ref={numbersRef}>
                         <h4 className="text-neutral-800 font-medium -md:text-xs">{t('callUsNow')}</h4>
                         <a href="tel:+84373522843" className="text-neutral-800 font-semibold md:text-2xl whitespace-nowrap	">

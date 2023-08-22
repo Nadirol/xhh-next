@@ -1,6 +1,6 @@
 import { TFunction } from "next-i18next"
 import Image from "next/image";
-import { bagIcon, locationIcon, officeImage, phoneIcon, planeIcon } from "../../public/assets";
+import { bagIcon, locationIcon, planeIcon } from "../../public/assets";
 
 const Contact = ({ t }: { t: TFunction}) => {
 
