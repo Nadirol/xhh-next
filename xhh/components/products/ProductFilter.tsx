@@ -1,6 +1,5 @@
 import { TFunction, i18n } from "next-i18next"
 import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
 
 const ProductFilter = ({ t }: { t: TFunction }) => {
 

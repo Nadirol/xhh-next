@@ -1,5 +1,6 @@
-import { TFunction } from "next-i18next"
+import { TFunction, i18n } from "next-i18next"
 import FadeInOnScroll from "../animated/FadeInOnScroll";
+import Link from "next/link";
 
 const About = ({ t }: { t: TFunction}) => {
 
@@ -27,9 +28,9 @@ const About = ({ t }: { t: TFunction}) => {
                         <p className="flex-1 text-neutral-100 leading-loose tracking-wide md:w-1/2">
                             {t('aboutParagraph2')}
                         </p>
-                        <button className="text-neutral-100 w-fit font-light underline">
+                        <Link href={`/${i18n?.language}/about`} className="text-neutral-100 w-fit font-light underline">
                             {t('readMore')}
-                        </button>
+                        </Link>
                     </div>
                 </FadeInOnScroll>
             </div>

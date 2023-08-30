@@ -28,14 +28,14 @@ export default function Home() {
 
   const [products, setProducts] = useState<IProduct[]>([]);
   
-  const [activeCategory, setActiveCategory] = useState(category)
 
   useEffect(() => {
+    console.log('running')
     async function fetchData() {
       const { data, error } = await supabase
         .from('products')
         .select('*')
-        .eq('category', activeCategory || category || "curtain");
+        .eq('category', category || "curtain");
       
       if (error) {
         console.error('Error fetching data:', error);
@@ -45,7 +45,7 @@ export default function Home() {
     }
 
     fetchData();
-  }, [activeCategory, category ]);
+  }, [category]);
 
     
   return (

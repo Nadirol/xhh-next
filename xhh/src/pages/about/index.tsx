@@ -37,7 +37,7 @@ export default function AboutPage() {
                 <Image src={logoRed} alt="logo" className="w-[10rem] mx-auto"/>
                 <h1 className="text-center text-red-700 font-bold text-[3rem] mb-10">{t('aboutUs').toUpperCase()}</h1>
 
-                <div className="flex gap-16 flex-col mx-auto w-full bg-neutral-50 py-20">
+                <div className="flex gap-16 flex-col mx-auto w-full bg-slate-100 py-20">
                   <div className="relative w-container-large mx-auto">
                     <div className="relative z-10 bg-white px-12 py-8 w-[63%] flex gap-4 flex-col text-neutral-700 text-lg">
                       <p>
