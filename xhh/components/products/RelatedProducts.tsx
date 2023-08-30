@@ -30,13 +30,14 @@ const RelatedProducts = ({ t, product }: { t: TFunction, product: IProduct }) =>
       };
 
     const fetchRelatedProducts = async () => {
+
       async function fetchData() {
         const { data, error } = await supabase
           .from('products')
           .select('*')
           .eq('category', product?.category)
           .range(totalFetchedItems, totalFetchedItems + itemsPerPage - 1);
-
+        
         if (data) {
             setRelatedProducts((prevItems) => [...prevItems, ...data]);
             setTotalFetchedItems((prevTotal) => prevTotal + data.length);
@@ -61,12 +62,14 @@ const RelatedProducts = ({ t, product }: { t: TFunction, product: IProduct }) =>
 
     const sliderRef = useRef<HTMLDivElement>(null);
 
-    const prevSlide = () =>
-        sliderRef?.current?.scrollBy({
+    const prevSlide = () => {
+      sliderRef?.current?.scrollBy({
         top: 0,
-        left: -100,
+        left: -200,
         behavior: "smooth",
         });
+    }
+
 
     const nextSlide = () => {
         sliderRef?.current?.scrollBy({
@@ -89,12 +92,12 @@ const RelatedProducts = ({ t, product }: { t: TFunction, product: IProduct }) =>
               </div>
             </div>
 
-            <div className="flex gap-12 items-center overflow-x-scroll scrollbar-hide snap-x pr-4" ref={sliderRef}>
+            <div className="flex gap-12 items-center overflow-x-scroll scrollbar-hide overscroll-x-contain pr-4" ref={sliderRef}>
                 {relatedProducts?.map((p, index) => (
                   <ProductCard key={index} title={p.title_vi} image={p.image_url} slug={p.slug} category={p.category} t={t}/>
                 ))}
                 {fetchMoreVisible && (
-                <button className="hover:pl-2 transition-[padding]" onClick={handleLoadMore}>
+                <button className="hover:pl-2 transition-[padding] snap-start" onClick={handleLoadMore}>
                     <svg width="32" height="24" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M10 12L8.6 10.55L12.15 7H0V5H12.15L8.6 1.45L10 0L16 6L10 12Z" fill="#171717"/>
                     </svg>
