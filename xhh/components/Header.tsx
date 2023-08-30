@@ -185,38 +185,38 @@ const Header = ({ t }: { t: TFunction }) => {
                             </Link>
 
                             <div className="flex">
-                                <div className="flex gap-12 items-center text-neutral-800 pr-8">
-                                <ul className="hidden xl:flex font-medium h-full">
-                                        <Link href="/" className="[&:hover>li>h4]:text-neutral-50">
-                                            <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
-                                            after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
-                                            [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
-                                                <h4 className="relative z-10 transition-colors duration-300">{t('home')}</h4>
-                                            </li>
-                                        </Link>
-                                        <Link href={`/${i18n?.language}/products`} className="[&:hover>li>h4]:text-neutral-50">
-                                            <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
-                                            after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
-                                            [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
-                                                <h4 className="relative z-10 transition-colors duration-300">{t('products').toUpperCase()}</h4>
-                                            </li>
-                                        </Link>
-                                        <Link href={`/${i18n?.language}/about`} className="[&:hover>li>h4]:text-neutral-50">
-                                            <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
-                                            after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
-                                            [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
-                                                <h4 className="relative z-10 transition-colors duration-300">{t('about')}</h4>
-                                            </li>
-                                        </Link>
-                                        <Link href={`/${i18n?.language}/contact`} className="[&:hover>li>h4]:text-neutral-50">
-                                            <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
-                                            after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
-                                            [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
-                                                <h4 className="relative z-10 transition-colors duration-300">{t('contact')}</h4>
-                                            </li>
-                                        </Link>
-                                </ul>
+                                <div className="flex gap-12 items-center text-neutral-800 xl:pr-8">
 
+                                    <ul className="hidden xl:flex font-medium h-full">
+                                            <Link href="/" className="[&:hover>li>h4]:text-neutral-50">
+                                                <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
+                                                after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
+                                                [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
+                                                    <h4 className="relative z-10 transition-colors duration-300">{t('home')}</h4>
+                                                </li>
+                                            </Link>
+                                            <Link href={`/${i18n?.language}/products`} className="[&:hover>li>h4]:text-neutral-50">
+                                                <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
+                                                after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
+                                                [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
+                                                    <h4 className="relative z-10 transition-colors duration-300">{t('products').toUpperCase()}</h4>
+                                                </li>
+                                            </Link>
+                                            <Link href={`/${i18n?.language}/about`} className="[&:hover>li>h4]:text-neutral-50">
+                                                <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
+                                                after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
+                                                [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
+                                                    <h4 className="relative z-10 transition-colors duration-300">{t('about')}</h4>
+                                                </li>
+                                            </Link>
+                                            <Link href={`/${i18n?.language}/contact`} className="[&:hover>li>h4]:text-neutral-50">
+                                                <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
+                                                after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
+                                                [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
+                                                    <h4 className="relative z-10 transition-colors duration-300">{t('contact')}</h4>
+                                                </li>
+                                            </Link>
+                                    </ul>
                                     <div className="flex gap-8 items-center justify-end -xl:ml-auto">
                                         <div className="relative py-6 px-4 after:absolute after:inset-0
                                         after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-100%] 
@@ -319,7 +319,7 @@ const Header = ({ t }: { t: TFunction }) => {
                             </Link>
 
                             <div className="flex">
-                                <div className="flex gap-12 items-center text-neutral-800 pr-8">
+                                <div className="flex gap-12 items-center text-neutral-800 xl:pr-8">
                                     <ul className="hidden xl:flex font-medium h-full">
                                         <Link href="/" className="[&:hover>li>h4]:text-neutral-50">
                                             <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full

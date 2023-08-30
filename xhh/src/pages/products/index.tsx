@@ -64,7 +64,7 @@ export default function Home() {
             <div className="w-full h-[500px] ">
                 <Image src={sliderImage1} alt="banner image" className="object-cover h-full"/>
             </div>
-            <div className="py-16 grid grid-cols-product-list">
+            <div className="py-16 grid -md:gap-6 md:grid-cols-product-list">
                 <ProductFilter t={t}/>
                 <ProductList t={t} products={products}/>
             </div>
