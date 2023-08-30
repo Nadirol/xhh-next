@@ -26,13 +26,13 @@ const ScrollToTopButton = () => {
     }
 
     return (
-        <button className={`p-4 shadow-card-bold transition-all duration-1000 
+        <button className={`p-3 md:p-4 shadow-card-bold transition-all duration-1000 
         rounded-[50%] aspect-square bg-white shadow-bold
         ${scrollPosition < 50 ? "translate-y-[-30%] opacity-0" : "opacity-100 translate-y-0"}`} onClick={scrollToTop}>
           {/* <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 12L8.6 10.55L12.15 7H0V5H12.15L8.6 1.45L10 0L16 6L10 12Z" fill="white"/>
           </svg> */}
-                <Image src={arrowUpIcon} alt="arrow right icon" className="w-4 aspect-square m-auto"/>
+                <Image src={arrowUpIcon} alt="arrow right icon" className="w-3 md:w-4 aspect-square m-auto"/>
         </button>
     )
 };

@@ -96,10 +96,10 @@ const Header = ({ t }: { t: TFunction }) => {
                 <>
                     <header className="relative z-10 backdrop-blur-[2px] backdrop-brightness-90">
                         {/* top nav */}
-                        <nav className="w-container-large mx-auto flex items-center justify-between -xl:px-4 relative z-20 
+                        <nav className="w-container-large mx-auto flex items-center justify-between relative z-20 
                         border-b border-slate-300 border-opacity-50">
-                            <Link href="/" className="p-4 h-full">
-                                <Image src={logoTextWhite} alt="" className="w-[3rem] xl:w-[6rem]" loading="lazy"/>
+                            <Link href="/" className="md:p-4 h-full">
+                                <Image src={logoTextWhite} alt="" className="w-[4rem] xl:w-[6rem]" loading="lazy"/>
                             </Link>
 
                             <div className="flex">

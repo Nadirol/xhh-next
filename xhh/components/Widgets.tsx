@@ -8,7 +8,7 @@ import ShowroomWidget from "./buttons/ShowroomWidget";
 
 const Widgets = ({ t }: { t: TFunction }) => {
     return (
-        <div className="fixed right-6 bottom-12 md:bottom-16 z-30 flex gap-8 flex-col items-center">
+        <div className="fixed right-6 bottom-12 md:bottom-16 z-30 flex gap-4 md:gap-8 flex-col items-center">
             <ShowroomWidget t={t}/>
             <MessengerWidget/>
             <CallWidget t={t}/>

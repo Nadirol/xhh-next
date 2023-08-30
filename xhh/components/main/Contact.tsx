@@ -23,7 +23,7 @@ const Contact = ({ t }: { t: TFunction}) => {
                         </p>
                     </div>
 
-                    <div className="flex gap-20 flex-col">
+                    <div className="flex gap-6 md:gap-10 xl:gap-20 flex-col">
                         <div className="flex gap-8 items-center">
                             <Image src={locationIcon} alt="location icon" className="w-[60px] h-[68px]"/>
                             <div className="flex gap-2 items-start flex-col">
