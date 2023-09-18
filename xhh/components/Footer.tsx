@@ -36,8 +36,7 @@ const Footer = ({ t }: { t: TFunction}) => {
                                     <Image src={phoneSmall} alt="phone icon" />
                                 </div>                            
                                 <div className="flex flex-col">
-                                    <h5>English: 037 9748 073</h5>
-                                    <h5>Tiếng Việt: 098 5080 324</h5>
+                                    <a target="_blank" href="https://zalo.me/0373522843">0373 522 843</a>
                                 </div>                          
                             </div>
                             <div className="flex gap-2">

@@ -21,7 +21,7 @@ const ProductFilter = ({ t }: { t: TFunction }) => {
                 before:bg-red-500 before:w-full before:h-full flex items-center
                 [&:hover]:before:translate-x-0 before:translate-x-[-105%] overflow-hidden
                 before:transition-transform hover:text-neutral-50 transition-[color] duration-75">
-                    <span className="relative z-10 md:px-4">
+                    <span className="relative z-10 md:px-8">
                         {t('windowsAndDoors')}
                     </span>
                 </Link>
