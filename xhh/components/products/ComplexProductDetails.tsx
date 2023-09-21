@@ -4,11 +4,9 @@ import { TFunction, i18n } from 'next-i18next';
 import { IProduct } from '../../interface/interface';
 import Image from 'next/image';
 import Breadcrumb from '../Breadcrumb';
-import { logoRed, logoTextWhite } from '../../public/assets';
+import { logoRed } from '../../public/assets';
 import { useState } from 'react';
 import BonusBanner from './BonusBanner';
-import CallWidget from '../buttons/CallWidget';
-import ZaloWidget from '../buttons/ZaloWidget';
 import Widgets from '../Widgets';
 
 const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: IProduct, routes: { name: string | undefined, path: string }[]}) => {
@@ -17,7 +15,7 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
 
     const handleMouseEnterImage = (index: number) => {
       setActiveImage(index)
-    }
+    };
 
     return (
         <main className="pt-[8rem] relative z-10 flex gap-12 flex-col">
@@ -25,7 +23,7 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
 
             <div className="flex gap-12 flex-col">
               <div className="flex justify-center items-center md:min-w-[400px]">
-                <Image src={product.preview_images ? product.preview_images[activeImage] : logoRed} alt="product image" 
+                <Image src={product.preview_images ? product.preview_images[activeImage] : product.image_url} alt="product image" 
                 width={300} height={300} className="w-3/4 object-cover aspect-square"/>
               </div>
 
@@ -51,44 +49,47 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
               {(product.specific_description_vi && product.specific_description_en) && (
                 <div className="flex gap-4 flex-col">
                   <div className="flex">
-                    {(i18n?.language === "vi" ? product.specific_description_vi : product.specific_description_en).map((d, index) => (
-                      <button key={index} onClick={() => setActiveType(index)}
-                      className={`-md:text-sm xl:text-xl px-6 py-2  
-                      ${activeType === index ? "bg-red-500 text-neutral-50" : "text-neutral-700 border border-neutral-400"}`}>
+                    {(i18n?.language === "vi" ? product.specific_description_vi : product.specific_description_en)?.map((d, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setActiveType(index)}
+                        className={`-md:text-sm xl:text-xl px-6 py-2  
+                          ${activeType === index ? "bg-red-500 text-neutral-50" : "text-neutral-700 border border-neutral-400"}`}
+                      >
                         {d.product_type}
                       </button>
                     ))}
                   </div>
 
                   <ul className="flex gap-4 flex-col list-disc list-inside pb-4 border-b">
-                    <li className='text-red-700 font-medium text-2xl'>
-                      <span className='relative'>{t('size')}:</span>
-                      <ul className="flex gap-2 flex-col text-neutral-800 font-normal text-sm ml-6 mt-1">
-                        {(i18n?.language === "vi" ? product.specific_description_vi : product.specific_description_en)[activeType].size.map((s, index) => (
-                          <li key={index}>- {s}</li>
-                        ))}
-                      </ul>
-                    </li>
+                    {Object.keys((i18n?.language === "vi"
+                      ? product.specific_description_vi
+                      : product.specific_description_en)?.[activeType] ?? {}).map((key, index) => key !== "product_type" && (
+                        <li key={index} className="text-red-700 font-medium text-2xl">
+                          <span className="relative">{t(key)}:</span>
+                          {Array.isArray((i18n?.language === "vi"
+                              ? product.specific_description_vi
+                              : product.specific_description_en)?.[activeType]?.[key])
+                            ? (
+                              <ul className="flex gap-2 flex-col text-neutral-800 font-normal text-sm ml-6 mt-1">
+                              {(i18n?.language === "vi"
+                                ? product.specific_description_vi
+                                : product.specific_description_en)?.[activeType]?.[key]?.map((s: string, index: number) => (
+                                  <li key={index}>- {s}</li>
+                                ))}
+                            </ul>
+                            )
+                            : (
+                              <h3 className="text-neutral-800 font-normal text-sm ml-6 mt-1">
+                                {(i18n?.language === "vi"
+                                  ? product.specific_description_vi
+                                  : product.specific_description_en)?.[activeType]?.[key]}
+                              </h3>
+                            )
+                          }
 
-                    <li className='text-red-700 font-medium text-2xl'>
-                      <span className='relative'>{t('specs')}:</span>
-                      <ul className="flex gap-2 flex-col text-neutral-800 font-normal text-sm ml-8 mt-1">
-                        {(i18n?.language === "vi" ? product.specific_description_vi : product.specific_description_en)[activeType].specs.map((s, index) => (
-                          <li key={index}>- {s}</li>
-                        ))}
-                      </ul>
-                    </li>
-
-                    <li className='text-red-700 font-medium text-2xl'>
-                      <span className='relative'>
-                        {t('colors') + ": "}
-                      </span>  
-                      <span className='text-neutral-800 font-normal text-sm relative'>
-                        {(i18n?.language === "vi" 
-                        ? product.specific_description_vi 
-                        : product.specific_description_en)[activeType].colors}
-                      </span>
-                    </li>
+                        </li>
+                      ))}
                   </ul>
                 </div>
               )}
@@ -108,9 +109,20 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
 
           {(product.details_vi && product.details_en) && (
             <div className="w-container-large mx-auto flex gap-4 flex-col">
-              <h3 className="text-neutral-800 font-semibold text-2xl underline">{t('benefits')}</h3>
+              <h3 className="text-neutral-800 font-semibold text-2xl underline">{t('details')}</h3>
               <ul className="flex gap-4 flex-col list-disc list-inside">
                 {(i18n?.language === "vi" ? product.details_vi : product.details_en).map((d, index) => (
+                  <li key={index} className="text-neutral-700 text-xl">{d}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {(product.benefits_vi && product.benefits_en) && (
+            <div className="w-container-large mx-auto flex gap-4 flex-col">
+              <h3 className="text-neutral-800 font-semibold text-2xl underline">{t('benefits')}</h3>
+              <ul className="flex gap-4 flex-col list-disc list-inside">
+                {(i18n?.language === "vi" ? product.benefits_vi : product.benefits_en).map((d, index) => (
                   <li key={index} className="text-neutral-700 text-xl">{d}</li>
                 ))}
               </ul>

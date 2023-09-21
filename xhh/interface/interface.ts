@@ -20,7 +20,9 @@ export interface IProduct {
 
 interface ITableAndChairDescription {
     product_type: string,
-    size: string[],
-    specs: string[],
-    colors: string
+    size: string | string[],
+    specs: string[] | null,
+    colors: string,
+    materials: string | null,
+    [key: string]: any;
 }
