@@ -37,7 +37,6 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
                   ))}
                 </div>
               )}
-
             </div>
 
             <div className="flex gap-4 flex-col">

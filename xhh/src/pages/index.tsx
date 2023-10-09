@@ -12,8 +12,6 @@ import Footer from '../../components/Footer'
 import Category from "../../components/main/Category"
 import { NextSeo } from 'next-seo';
 import Widgets from "../../components/Widgets"
-import { banner1, banner2 } from "../../public/assets"
-import Image from "next/image"
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 

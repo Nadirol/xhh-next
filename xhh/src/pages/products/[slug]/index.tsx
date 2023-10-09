@@ -17,8 +17,7 @@ import ProductDetailsSkeleton from "../../../../components/products/ProductDetai
 import ComplexProductDetails from "../../../../components/products/ComplexProductDetails";
 import BonusBanner from "../../../../components/products/BonusBanner";
 import { NextSeo } from "next-seo";
-import CallWidget from "../../../../components/buttons/CallWidget";
-import ZaloWidget from "../../../../components/buttons/ZaloWidget";
+
 import Widgets from "../../../../components/Widgets";
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });

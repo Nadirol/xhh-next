@@ -5,13 +5,11 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Fira_Sans } from 'next/font/google'
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import { aboutImage1, aboutImage2, aboutImage4, logoRed } from "../../../public/assets";
-import Image from "next/image";
+
 import Contact from "../../../components/main/Contact";
 import ContactForm from "../../../components/contact/ContactForm";
 import { NextSeo } from "next-seo";
-import CallWidget from "../../../components/buttons/CallWidget";
-import ZaloWidget from "../../../components/buttons/ZaloWidget";
+
 import Widgets from "../../../components/Widgets";
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
