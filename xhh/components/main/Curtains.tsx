@@ -1,17 +1,11 @@
 import { TFunction, i18n } from "next-i18next"
-import { arrowRightIcon, interiorImage1, interiorImage2, interiorImage3, interiorImage4 } from "../../public/assets";
+import { interiorImage1, interiorImage2, interiorImage3, interiorImage4 } from "../../public/assets";
 import Image from "next/image";
 import FadeInOnScroll from "../animated/FadeInOnScroll";
 import { useEffect, useState } from "react";
 import { IProduct } from "../../interface/interface";
 import supabase from "../../supabase";
 import Link from "next/link";
-
-const interiorImages = [{ image: interiorImage1, title: "Holz" }, { image: interiorImage2, title: "Bonita" }, 
-{ image: interiorImage3, title: "Belling" }, { image: interiorImage4, title: "Leo" }, 
-{ image: interiorImage4, title: "Orion" }, { image: interiorImage1, title: "Fetra" }, 
-{ image: interiorImage2, title: "Jasmine" }, { image: interiorImage3, title: "Alice" }];
-
 
 const Curtains = ({ t }: { t: TFunction}) => {
     const [products, setProducts] = useState<IProduct[]>([]);
