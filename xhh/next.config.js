@@ -5,7 +5,7 @@ const nextConfig = {
   reactStrictMode: true,
   i18n,
   images: {
-    domains: ['lsiuhexcrnfmbzynigtt.supabase.co'],
+    domains: ['lsiuhexcrnfmbzynigtt.supabase.co','cdn.sanity.io'],
   },
 }
 

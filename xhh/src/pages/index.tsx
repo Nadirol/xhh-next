@@ -13,9 +13,22 @@ import Category from "../../components/main/Category"
 import { NextSeo } from 'next-seo';
 import Widgets from "../../components/Widgets"
 
+import Image from "next/image"
+import News from "../../components/main/News"
+import { IPost } from "../../interface/interface"
+import { client } from "../../lib/sanity"
+
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 
-export default function Home() {
+async function getData() {
+  const query = `*[_type == "postXHH"]`;
+
+  const data = await client.fetch(query);
+
+  return data;
+}
+
+export default function Home({ data }: { data: IPost[]}) {
   const { t } = useTranslation('common');
 
   return (
@@ -39,6 +52,8 @@ export default function Home() {
           <About t={t}/>
           <Contact t={t}/>
 
+          <News t={t} data={data}/>
+
           <Widgets t={t}/>
         </main>
 
@@ -51,13 +66,15 @@ export default function Home() {
   )
 }
 
-export async function getStaticProps({ locale }: { locale: string}) {
+export async function getServerSideProps({ locale }: { locale: string }) {
+  const data = await getData() as IPost[];
+
   return {
     props: {
+      data: data,
       ...(await serverSideTranslations(locale, [
-        'common',
-      ])),
-      // Will be passed to the page component as props
-    },    
-  }
+          'common',
+      ]))
+    }, // will be passed to the page component as props
+  };
 }
