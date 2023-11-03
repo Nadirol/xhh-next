@@ -26,3 +26,16 @@ interface ITableAndChairDescription {
     materials: string | null,
     [key: string]: any;
 }
+
+export interface IPost {
+    title: string,
+    overview: string,
+    content: any,
+    _id: string,
+    slug: {
+        current: string
+    },
+    _createdAt: string,
+    image: any,
+    published: boolean
+}

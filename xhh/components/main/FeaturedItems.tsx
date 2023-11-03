@@ -181,24 +181,13 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                                     </button>
                                     <button className="bg-white hover:bg-red-500 rounded-[100%] absolute translate-y-1/2 translate-x-[100%]
                                     right-0 bottom-1/2 p-3 z-30 border hover:border-0" 
-                                    onClick={handlePrevItem}>
+                                    onClick={handleNextItem}>
                                         <div className="aspect-square w-5">
                                             <Image src={arrowUpIcon} alt="" className="rotate-90" />
                                         </div>                                
                                     </button>
                                 </div>
-
                             </div>
-                            {/* <div className="flex gap-4 xl:pl-12 -xl:mx-auto">
-                                <button className="hover:translate-x-[-40%] transition-all" 
-                                onClick={handlePrevItem}>
-                                    <Image src={arrowUpIcon} alt="" className="rotate-[-90deg]" />
-                                </button>
-                                <button className="hover:translate-x-[40%] transition-all"
-                                onClick={handleNextItem}>
-                                    <Image src={arrowUpIcon} alt="" className="rotate-90"/>
-                                </button>
-                            </div> */}
                         </div>
 
                         <div className="">
@@ -211,7 +200,7 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                                         <div className="flex gap-3">
                                             <button className={`relative px-2.5 py-1 text-neutral-900 text-base md:text-2xl before:absolute overflow-hidden
                                             before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-neutral-900 
-                                            before:transition-[transform] [&:hover]:before:translate-x-0
+                                            before:transition-[transform] [&:hover]:before:translate-x-0 
                                             ${activeItemTab === 0 ? "before:translate-x-0" : "before:translate-x-[-100%]"}`}
                                             onClick={() => setActiveItemTab(0)}>
                                                 {t("details")}
