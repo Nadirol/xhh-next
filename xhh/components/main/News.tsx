@@ -64,14 +64,13 @@ const News = ({ t, data }: { t: TFunction, data: IPost[] }) => {
             </h1>
           </div>
     
-          <div className="flex gap-16 items-center overflow-x-scroll snap-x scrollbar-hide
+          <div className="flex gap-16 items-start overflow-x-scroll snap-x scrollbar-hide
             snap-mandatory overscroll-x-contain overflow-y-visible pr-[3rem] pt-4" ref={sliderRef}> 
             {data.map((post) => (
               <div key={post._id} className="w-post min-w-[300px] snap-start">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0">
                   <Link
                     href={`/news/${post.slug.current}`}
-                    prefetch
                     className="space-y-3 xl:col-span-4"
                   >
                     <IdealImage image={post.image}/>
