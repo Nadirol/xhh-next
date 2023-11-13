@@ -17,6 +17,7 @@ import Image from "next/image"
 import News from "../../components/main/News"
 import { IPost } from "../../interface/interface"
 import { client } from "../../lib/sanity"
+import TableandChair from "../../components/main/TableandChair"
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 
@@ -45,6 +46,7 @@ export default function Home({ data }: { data: IPost[]}) {
         />
 
         <main>
+          <TableandChair t={t}/>
           <Category t={t}/>
           <FeaturedItems t={t}/>
 

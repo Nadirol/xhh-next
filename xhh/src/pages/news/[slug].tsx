@@ -43,9 +43,9 @@ export default function PostPage({ data }: { data: IPost }) {
   return (
     <>
       <NextSeo
-        title={`${data.title} | Monte Carlo`}
+        title={`${data.title} | Xuân Hoà Home`}
         description={data.overview}
-        canonical={`https://www.montecarlo.com.vn/vi/news/${data.slug}`}    
+        canonical={`https://www.xhhome.vn/vi/news/${data.slug}`}    
       />
       <Header
         t={t}

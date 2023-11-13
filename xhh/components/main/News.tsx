@@ -57,7 +57,7 @@ const News = ({ t, data }: { t: TFunction, data: IPost[] }) => {
   }, []);
 
     return (
-        <div className="w-container mx-auto divide-y divide-gray-200 relative [&:hover>button]:opacity-100 mb-10">
+        <div className="w-container mx-auto relative [&:hover>button]:opacity-100 mb-10">
           <div className="space-y-2 pt-6 pb-8 md:space-y-5">
             <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-primary-dark sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               {t('news')}
@@ -84,7 +84,7 @@ const News = ({ t, data }: { t: TFunction, data: IPost[] }) => {
                       {new Date(post._createdAt).toISOString().split("T")[0]}
                     </p>
 
-                    <p className="prose max-w-none text-gray-500 line-clamp-4">
+                    <p className="max-w-none text-gray-500 line-clamp-4">
                       {post.overview}
                     </p>
                   </Link>
@@ -93,15 +93,21 @@ const News = ({ t, data }: { t: TFunction, data: IPost[] }) => {
             ))}
           </div>
 
-          <button className={`p-3 absolute bg-primary-dark rounded-[100%] left-0 md:opacity-20 transition-opacity duration-500
+          <button className={`p-3 absolute left-0 md:opacity-20 transition-opacity duration-500
           bottom-1/2 translate-x-[-30%] xl:translate-x-[-110%] translate-y-1/2 z-10 ${scrollPosition === 0 && "hidden"}`} 
           onClick={prevSlide}>
-              <Image src={arrowRightIcon} alt="arrow icon" className="rotate-180 w-2 md:w-4"/>
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="rotate-180">
+            <path d="M10 12L8.6 10.55L12.15 7H0V5H12.15L8.6 1.45L10 0L16 6L10 12Z"
+            className="fill-red-500"/>
+            </svg>          
           </button>
-          <button className={`p-3 absolute bg-primary-dark rounded-[100%] right-0 md:opacity-20 transition-opacity 
+          <button className={`p-3 absolute right-0 md:opacity-20 transition-opacity 
           duration-500 bottom-1/2 translate-x-[30%] xl:translate-x-[110%] translate-y-1/2 z-10 ${isScrollEnd && "hidden"}`} 
           onClick={nextSlide}>
-              <Image src={arrowRightIcon} alt="arrow icon" className="w-2 md:w-4"/>
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="">
+            <path d="M10 12L8.6 10.55L12.15 7H0V5H12.15L8.6 1.45L10 0L16 6L10 12Z"
+            className="fill-red-500"/>
+            </svg>           
           </button>
         </div>
       );
