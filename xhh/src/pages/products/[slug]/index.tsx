@@ -73,7 +73,7 @@ export default function ProductDetails() {
           t={t}
         />
 
-        {product.category === "table-and-chair" 
+        {product.category === "table-and-chair" || product.category === "shelf"
         ? <ComplexProductDetails t={t} product={product} routes={routes}/>
         : (
           <main className="pt-[8rem] relative z-10 flex gap-12 flex-col">

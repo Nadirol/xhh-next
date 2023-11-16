@@ -24,6 +24,7 @@ import sliderImage3 from "./slider-image-3.jpg"
 import windowImage from "./window-image.jpg"
 import woodenFloorImage from "./wooden-image.jpg"
 import tableChairImage from "./table-chair-image.jpg"
+import shelfImage from "./NPNA0036 (1).jpg"
 import arrowUpIcon from "./arrow-up.svg"
 import interiorImage1 from "./interior-1.jpg"
 import interiorImage2 from "./interior-2.jpg"
@@ -65,4 +66,4 @@ whatsappIcon, sliderImage1, sliderImage2, sliderImage3, windowImage, woodenFloor
 arrowUpIcon, interiorImage1, interiorImage2, interiorImage3, interiorImage4, officeImage, bagIcon,
 locationSmall, phoneSmall, mailSmall, facebookSmall, filterIcon, logoTextRed, logoTextWhite, logoRed,
 aboutImage1, aboutImage2, aboutImage3, aboutImage4, nanoWindowImage, woodenTileImage, tableAndChairImage,
-woodenTileBg, tableBg, curtainBg, windowBg }
+woodenTileBg, tableBg, curtainBg, windowBg, shelfImage }

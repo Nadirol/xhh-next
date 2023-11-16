@@ -15,7 +15,11 @@ export interface IProduct {
     preview_images: string[] | null,
     other_images: string[] | null,
     specific_description_vi: ITableAndChairDescription[] | null,
-    specific_description_en: ITableAndChairDescription[] | null
+    specific_description_en: ITableAndChairDescription[] | null,
+    features_vi: { icon: string, feature: string }[] | null,
+    features_en: ITableAndChairDescription[] | null,
+    isNew: boolean | null,
+    price: number | null
 }
 
 interface ITableAndChairDescription {

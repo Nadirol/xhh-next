@@ -15,7 +15,7 @@ const TableandChair = ({ t }: { t: TFunction}) => {
           const { data, error } = await supabase
             .from('products')
             .select('*')
-            .eq('category', "table-and-chair")
+            .eq('isNew', true)
             .range(0, 11);
           
           if (error) {
@@ -98,7 +98,7 @@ const TableandChair = ({ t }: { t: TFunction}) => {
                             [&:hover>.absolute>img]:scale-[1.05]">
                                 <div className="overflow-hidden">
                                     <Image src={i.image_url} alt="curtain image" width={400} height={400} className="object-cover
-                                    transition-[transform] duration-700 brightness-90"/>
+                                    transition-[transform] duration-700 min-h-[300px]"/>
                                 </div>
                                 <div className="w-full relative z-10 text-center items-center
                                 transition-[padding] duration-700">
