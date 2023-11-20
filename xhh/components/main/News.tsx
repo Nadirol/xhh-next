@@ -57,7 +57,7 @@ const News = ({ t, data }: { t: TFunction, data: IPost[] }) => {
   }, []);
 
     return (
-        <div className="w-container mx-auto relative [&:hover>button]:opacity-100 mb-10">
+        <div className="w-container-large mx-auto relative [&:hover>button]:opacity-100 mb-10">
           <div className="space-y-2 pt-6 pb-8 md:space-y-5">
             <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-primary-dark sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               {t('news')}
