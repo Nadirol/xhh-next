@@ -13,22 +13,22 @@ const Category = ({ t }: { t: TFunction}) => {
             </FadeInOnScroll>
 
             <FadeInOnScroll>
-                <div className="w-container-extra-large mx-auto grid md:gap-2 xl:gap-10 grid-cols-2 xl:grid-cols-4">
+                <div className="w-container-extra-large mx-auto flex md:gap-2 xl:gap-10">
                     <Link href={`/${i18n?.language}/products?category=table-and-chair`} 
-                    className="flex gap-5 py-20 justify-center items-center border 
+                    className="flex gap-5 py-20 justify-center items-center border w-[30%]
                     relative [&:hover>img]:brightness-[.5] [&:hover>img]:scale-[1.05]">
                         <Image src={tableBg} alt="category icon" className="absolute z-0 inset-0 h-full w-full object-cover brightness-75 transition-transform duration-500"/>
                         <h3 className="relative text-neutral-50 font-medium text-xs md:text-xl transition-colors">{t('tablesAndChairs')}</h3>
                     </Link>
                     <Link href={`/${i18n?.language}/products?category=shelf`} 
                     className="flex gap-5 py-20 justify-center items-center border 
-                    relative  [&:hover>img]:brightness-[.5] [&:hover>img]:scale-[1.05]">
+                    relative  [&:hover>img]:brightness-[.5] [&:hover>img]:scale-[1.05] w-[30%]">
                         <Image src={shelfImage} alt="category icon" className="absolute z-0 inset-0 h-full object-cover brightness-75 transition-transform duration-500"/>
                         <h3 className="relative text-neutral-50 font-medium text-xs md:text-xl transition-colors">{t('shelf')}</h3>
                     </Link>
                     <Link href={`/${i18n?.language}/products?category=wooden-tile`} 
                     className="flex gap-5 py-20 justify-center items-center border 
-                    relative [&:hover>img]:brightness-[.5] [&:hover>img]:scale-[1.05]">
+                    relative [&:hover>img]:brightness-[.5] [&:hover>img]:scale-[1.05] w-[30%]">
                         <Image src={woodenTileBg} alt="category icon" className="absolute z-0 inset-0 h-full object-cover brightness-75 transition-transform duration-500"/>
                         <h3 className="relative text-neutral-50 font-medium text-xs md:text-xl transition-colors">{t('woodenTiles')}</h3>
                     </Link>

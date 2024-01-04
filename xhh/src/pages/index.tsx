@@ -4,8 +4,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { Fira_Sans } from 'next/font/google'
 import Header from '../../components/Header'
-import FeaturedItems from '../../components/main/FeaturedItems'
-import Curtains from '../../components/main/Curtains'
 import About from '../../components/main/About'
 import Contact from '../../components/main/Contact'
 import Footer from '../../components/Footer'
@@ -13,7 +11,6 @@ import Category from "../../components/main/Category"
 import { NextSeo } from 'next-seo';
 import Widgets from "../../components/Widgets"
 
-import Image from "next/image"
 import News from "../../components/main/News"
 import { IPost } from "../../interface/interface"
 import { client } from "../../lib/sanity"

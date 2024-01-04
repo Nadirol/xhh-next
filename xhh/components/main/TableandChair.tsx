@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { IProduct } from "../../interface/interface";
 import supabase from "../../supabase";
 import Link from "next/link";
-import { arrowRightIcon } from "../../public/assets";
 
 const TableandChair = ({ t }: { t: TFunction}) => {
     const [products, setProducts] = useState<IProduct[]>([]);
@@ -21,7 +20,7 @@ const TableandChair = ({ t }: { t: TFunction}) => {
           if (error) {
             console.error('Error fetching data:', error);
           } else {
-            setProducts(data);
+            setProducts(data.reverse());
           }
         }
     
