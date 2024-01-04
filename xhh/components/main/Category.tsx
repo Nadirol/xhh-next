@@ -26,12 +26,6 @@ const Category = ({ t }: { t: TFunction}) => {
                         <Image src={shelfImage} alt="category icon" className="absolute z-0 inset-0 h-full object-cover brightness-75 transition-transform duration-500"/>
                         <h3 className="relative text-neutral-50 font-medium text-xs md:text-xl transition-colors">{t('shelf')}</h3>
                     </Link>
-                    <Link href={`/${i18n?.language}/products?category=curtain`} 
-                    className="flex gap-5 py-20 justify-center items-center border flex-col
-                    relative [&:hover>img]:brightness-[.5] [&:hover>img]:scale-[1.05]">
-                        <Image src={curtainBg} alt="category icon" className="absolute z-0 inset-0 h-full object-cover brightness-75 transition-transform duration-500"/>
-                        <h3 className="relative text-neutral-50 font-medium text-xs md:text-xl transition-colors">{t('curtains')}</h3>
-                    </Link>
                     <Link href={`/${i18n?.language}/products?category=wooden-tile`} 
                     className="flex gap-5 py-20 justify-center items-center border 
                     relative [&:hover>img]:brightness-[.5] [&:hover>img]:scale-[1.05]">
