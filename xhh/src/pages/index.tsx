@@ -50,7 +50,6 @@ export default function Home({ data }: { data: IPost[]}) {
           <Category t={t}/>
           {/* <FeaturedItems t={t}/> */}
 
-          <Curtains t={t}/>
           <About t={t}/>
           <Contact t={t}/>
 
