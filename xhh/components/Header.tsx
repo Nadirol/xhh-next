@@ -1,7 +1,7 @@
 import { TFunction, i18n } from "next-i18next";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { aboutIcon, closeIcon, homeIcon, logoTextWhite, logoTextRed, mediaIcon, menuIcon, phoneIcon, sliderImage1, sliderImage2, sliderImage3, ukFlag, vietnamFlag } from "../public/assets";
+import { aboutIcon, closeIcon, homeIcon, logoTextWhite, logoTextRed, mediaIcon, menuIcon, phoneIcon, sliderImage1, sliderImage2, sliderImage3, ukFlag, vietnamFlag, arrowRightIcon } from "../public/assets";
 import SliderImage from "./header/SliderImage";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -27,6 +27,8 @@ const lngs = new Map([
 ]);
 
 const sliderImages = [sliderImage1, sliderImage2, sliderImage3];
+
+const categories = ["table-and-chair","shelf","wooden-tile"]
 
 const Header = ({ t }: { t: TFunction }) => {
 
@@ -112,13 +114,27 @@ const Header = ({ t }: { t: TFunction }) => {
                                                 <h4 className="relative z-10">{t('home')}</h4>
                                             </li>
                                         </Link>
+
                                         <Link href={`/${i18n?.language}/products`} className="">
-                                            <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
+                                            <li className="relative py-6 px-3 after:absolute after:inset-0 h-full [&:hover>.grid]:h-[12rem]
                                             after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                             [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
                                                 <h4 className="relative z-10">{t('products').toUpperCase()}</h4>
+
+                                                <div className={`grid h-0 min-w-[12rem] transition-[height] duration-300 absolute
+                                                z-30 bottom-0 left-0 translate-y-[100%] overflow-hidden`}>
+                                                    {categories.map((ctg: string) => (
+                                                    <Link href={`/${i18n?.language}/products?category=${ctg}`} key={ctg} 
+                                                    className={`text-neutral-50 font-normal hover:text-neutral-50 pl-4 pr-8 py-3 bg-red-500
+                                                    hover:bg-red-800 flex justify-between items-center`}>
+                                                        {t(ctg)}
+                                                        <Image src={arrowRightIcon} alt="arrow right icon" />
+                                                    </Link>
+                                                    ))}
+                                                </div>                                            
                                             </li>
                                         </Link>
+
                                         <Link href={`/${i18n?.language}/about`} className="">
                                             <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
                                             after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
@@ -196,10 +212,22 @@ const Header = ({ t }: { t: TFunction }) => {
                                                 </li>
                                             </Link>
                                             <Link href={`/${i18n?.language}/products`} className="[&:hover>li>h4]:text-neutral-50">
-                                                <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
+                                                <li className="relative py-6 px-3 after:absolute after:inset-0 h-full [&:hover>.grid]:h-[12rem]
                                                 after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
                                                 [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
-                                                    <h4 className="relative z-10 transition-colors duration-300">{t('products').toUpperCase()}</h4>
+                                                    <h4 className="relative z-10 transition-colors">{t('products').toUpperCase()}</h4>
+
+                                                    <div className={`grid h-0 min-w-[12rem] transition-[height] duration-300 absolute
+                                                    z-30 bottom-0 left-0 translate-y-[100%] overflow-hidden`}>
+                                                        {categories.map((ctg: string) => (
+                                                        <Link href={`/${i18n?.language}/products?category=${ctg}`} key={ctg} 
+                                                        className={`text-neutral-50 font-normal hover:text-neutral-50 pl-4 pr-8 py-3 bg-red-500
+                                                        hover:bg-red-800 flex justify-between items-center`}>
+                                                            {t(ctg)}
+                                                            <Image src={arrowRightIcon} alt="arrow right icon" />
+                                                        </Link>
+                                                        ))}
+                                                    </div>                                            
                                                 </li>
                                             </Link>
                                             <Link href={`/${i18n?.language}/about`} className="[&:hover>li>h4]:text-neutral-50">
@@ -329,12 +357,24 @@ const Header = ({ t }: { t: TFunction }) => {
                                             </li>
                                         </Link>
                                         <Link href={`/${i18n?.language}/products`} className="[&:hover>li>h4]:text-neutral-50">
-                                            <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
-                                            after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
-                                            [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
-                                                <h4 className="relative z-10 transition-colors duration-300">{t('products').toUpperCase()}</h4>
-                                            </li>
-                                        </Link>
+                                                <li className="relative py-6 px-3 after:absolute after:inset-0 h-full [&:hover>.grid]:h-[12rem]
+                                                after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
+                                                [&:hover]:after:translate-y-0 after:transition-all nav-link-background">
+                                                    <h4 className="relative z-10 transition-colors">{t('products').toUpperCase()}</h4>
+
+                                                    <div className={`grid h-0 min-w-[12rem] transition-[height] duration-300 absolute
+                                                    z-30 bottom-0 left-0 translate-y-[100%] overflow-hidden`}>
+                                                        {categories.map((ctg: string) => (
+                                                        <Link href={`/${i18n?.language}/products?category=${ctg}`} key={ctg} 
+                                                        className={`text-neutral-50 font-normal hover:text-neutral-50 pl-4 pr-8 py-3 bg-red-500
+                                                        hover:bg-red-800 flex justify-between items-center`}>
+                                                            {t(ctg)}
+                                                            <Image src={arrowRightIcon} alt="arrow right icon" />
+                                                        </Link>
+                                                        ))}
+                                                    </div>                                            
+                                                </li>
+                                            </Link>
                                         <Link href={`/${i18n?.language}/about`} className="[&:hover>li>h4]:text-neutral-50">
                                             <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
                                             after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-110%] 
@@ -353,7 +393,7 @@ const Header = ({ t }: { t: TFunction }) => {
 
                                     <div className="flex gap-8 items-center justify-end -xl:ml-auto">
                                         <div className="relative py-6 px-4 after:absolute after:inset-0
-                                        after:z-0 after:w-full after:h-plus-15 after:bg-blue-500 after:translate-y-[-100%] 
+                                        after:z-0 after:w-full after:h-plus-15 after:bg-red-500 after:translate-y-[-100%] 
                                         [&:hover]:after:translate-y-0 after:transition-all after:duration-75 nav-link-background 
                                         [&:hover>.grid]:h-full [&:hover>.flex>h4]:text-neutral-100">
                                             <div className="flex gap-2 xl:gap-4 items-center cursor-pointer relative z-10" ref={languageButtonRef} onClick={() => setLngDropdownOpened(true)}>
@@ -369,7 +409,7 @@ const Header = ({ t }: { t: TFunction }) => {
                                                 {Array.from(lngs.keys()).map((lng: string) => (
                                                 <button type="submit" key={lng} onClick={() => { i18n?.changeLanguage(lng) }} disabled={i18n?.resolvedLanguage === lng}
                                                     className={`${(i18n?.language === lng || i18n?.language.slice(0,2).toLowerCase() === lng) ? 'text-neutral-50' : 'text-neutral-300'} 
-                                                    font-normal hover:text-neutral-50 px-8 py-2 min-h-[2rem] bg-blue-500`}>
+                                                    font-normal hover:text-neutral-50 px-8 py-2 min-h-[2rem] bg-red-500`}>
                                                     {lngs.get(lng)?.nativeLanguage}
                                                 </button>
                                                 ))}

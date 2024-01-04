@@ -15,6 +15,7 @@ import News from "../../components/main/News"
 import { IPost } from "../../interface/interface"
 import { client } from "../../lib/sanity"
 import TableandChair from "../../components/main/TableandChair"
+import NewProducts from "../../components/main/NewProducts"
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
 
@@ -43,8 +44,10 @@ export default function Home({ data }: { data: IPost[]}) {
         />
 
         <main>
+          <NewProducts t={t}/>
           <TableandChair t={t}/>
           <Category t={t}/>
+
           {/* <FeaturedItems t={t}/> */}
 
           <About t={t}/>

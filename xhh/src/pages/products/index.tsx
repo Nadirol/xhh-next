@@ -35,7 +35,7 @@ export default function Home() {
       const { data, error } = await supabase
         .from('products')
         .select('*')
-        .eq('category', category || "curtain");
+        .eq('category', category || "table-and-chair");
       
       if (error) {
         console.error('Error fetching data:', error);

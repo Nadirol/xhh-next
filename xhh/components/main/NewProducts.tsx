@@ -6,7 +6,7 @@ import { IProduct } from "../../interface/interface";
 import supabase from "../../supabase";
 import Link from "next/link";
 
-const TableandChair = ({ t }: { t: TFunction}) => {
+const NewProducts = ({ t }: { t: TFunction}) => {
     const [products, setProducts] = useState<IProduct[]>([]);
 
     useEffect(() => {
@@ -14,7 +14,8 @@ const TableandChair = ({ t }: { t: TFunction}) => {
           const { data, error } = await supabase
             .from('products')
             .select('*')
-            .eq('category', "table-and-chair");
+            .eq('isNew', true)
+            .range(0, 11);
           
           if (error) {
             console.error('Error fetching data:', error);
@@ -78,9 +79,9 @@ const TableandChair = ({ t }: { t: TFunction}) => {
             <div className="flex gap-10 flex-col py-6 md:py-12 w-container-large mx-auto relative">
                 <FadeInOnScroll>
                 <div className="pb-8 border-b border-neutral-200 flex items-start md:items-center justify-between -md:flex-col">
-                    <h2 className="text-red-500 font-bold text-2xl md:text-[4rem] w-2/3 md:tracking-[0.2rem]">{t("table-and-chair")}</h2>
+                    <h2 className="text-red-500 font-bold text-2xl md:text-[4rem] w-2/3 md:tracking-[0.2rem]">{t("newProducts")}</h2>
                     <div className="flex gap-4 flex-col md:items-end">
-                        <Link href={`/${i18n?.language}/products?category=table-and-chair`} className="text-neutral-800 md:text-xl underline hover:text-red-500">
+                        <Link href={`/${i18n?.language}/products`} className="text-neutral-800 md:text-xl underline hover:text-red-500">
                             {t('viewMore')}
                         </Link>
                     </div>
@@ -127,4 +128,4 @@ const TableandChair = ({ t }: { t: TFunction}) => {
     )
 };
 
-export default TableandChair;
+export default NewProducts;
