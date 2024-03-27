@@ -2,7 +2,7 @@ import { useTranslation } from "next-i18next"
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-import { Fira_Sans } from 'next/font/google'
+import { Fira_Sans, Lato } from 'next/font/google'
 import Header from '../../components/Header'
 import About from '../../components/main/About'
 import Contact from '../../components/main/Contact'
@@ -16,8 +16,11 @@ import { IPost } from "../../interface/interface"
 import { client } from "../../lib/sanity"
 import TableandChair from "../../components/main/TableandChair"
 import NewProducts from "../../components/main/NewProducts"
+import Banners from "../../components/main/Banners"
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
+
+const lato = Lato({ subsets: ['latin'], weight: ["300","400","700"] })
 
 async function getData() {
   const query = `*[_type == "postXHH"]`;
@@ -38,12 +41,13 @@ export default function Home({ data }: { data: IPost[]}) {
         canonical="xhhome.vn/vi"
       />
 
-      <div className={`${fira.className} flex flex-col overflow-hidden`}>
+      <div className={`${lato.className} flex flex-col overflow-hidden`}>
         <Header
           t={t}
         />
 
         <main>
+          <Banners t={t}/>
           <NewProducts t={t}/>
           <TableandChair t={t}/>
           <Category t={t}/>

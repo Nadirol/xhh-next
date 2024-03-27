@@ -59,6 +59,10 @@ import messengerLogo from "./facebook-messenger-2881.svg"
 import banner1 from "./Daily Banner.png"
 import banner2 from "./XUAN200.png"
 
+import newProduct1 from "./1.png"
+import newProduct2 from "./2.png"
+import chairImage from "./chair.png"
+
 export { phoneIcon, mailIcon, locationIcon, facebookIcon, menuIcon,
 closeIcon, homeIcon, aboutIcon, planeIcon, arrowRightIcon, mediaIcon, facebookLogo,
 ukFlag, vietnamFlag, zaloLogo, messengerLogo, banner1, banner2,
@@ -66,4 +70,4 @@ whatsappIcon, sliderImage1, sliderImage2, sliderImage3, windowImage, woodenFloor
 arrowUpIcon, interiorImage1, interiorImage2, interiorImage3, interiorImage4, officeImage, bagIcon,
 locationSmall, phoneSmall, mailSmall, facebookSmall, filterIcon, logoTextRed, logoTextWhite, logoRed,
 aboutImage1, aboutImage2, aboutImage3, aboutImage4, nanoWindowImage, woodenTileImage, tableAndChairImage,
-woodenTileBg, tableBg, curtainBg, windowBg, shelfImage }
+woodenTileBg, tableBg, curtainBg, windowBg, shelfImage, newProduct1, newProduct2, chairImage }
