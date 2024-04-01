@@ -22,8 +22,8 @@ const useClickDetector = (refs: React.MutableRefObject<HTMLDivElement | null>[],
   };
 
 const lngs = new Map([
-    ['en', { nativeLanguage: 'English', flag: ukFlag }],
     ['vi', { nativeLanguage: 'Tiếng Việt', flag: vietnamFlag }],
+    ['en', { nativeLanguage: 'English', flag: ukFlag }],
 ]);
 
 const sliderImages = [sliderImage1, sliderImage2, sliderImage3];
@@ -45,11 +45,8 @@ const Header = ({ t }: { t: TFunction }) => {
     const closeButtonRef = useRef(null);
 
     const openSideNav = () => {
-        console.log('working')
         setSidenavOpened(true)
     };
-
-    console.log(sidenavOpened)
     
     const hideSideNav = () => {
         setSidenavOpened(false)
@@ -119,7 +116,7 @@ const Header = ({ t }: { t: TFunction }) => {
 
                         <div className="flex gap-4 items-center justify-center -xl:hidden ml-auto pr-[15px]">
                             <Image src={phoneIcon} alt="phone icon" />
-                            <div className="flex flex-col text-neutral-900 font-medium text-xl">
+                            <div className="flex flex-col text-neutral-900 font-bold text-xl">
                                 <a target="_blank" href="https://zalo.me/0373522843">0373-522-843</a>
                             </div>
                         </div>
@@ -155,7 +152,6 @@ const Header = ({ t }: { t: TFunction }) => {
 
                             <div className="flex">
                                 <div className="flex gap-12 items-center text-neutral-800 xl:pr-8">
-
                                     <ul className="hidden xl:flex font-medium h-full">
                                             <Link href="/" className="[&:hover>li>h4]:text-neutral-50">
                                                 <li className="inline-block relative py-6 px-3 after:absolute after:inset-0 h-full
@@ -355,43 +351,91 @@ const Header = ({ t }: { t: TFunction }) => {
                 ${sidenavOpened ? 'translate-x-0' : 'translate-x-[-100%]'} transition-all duration-300
                 flex flex-col pt-[162px]`} ref={sideNavRef}>
                     <div className="flex flex-col">
-                        <nav className="flex flex-col">
-                            <Link href="/" className="text-[#666] font-bold text-[14px] leading-[45px] relative z-10 w-full pl-[70px] transition-all duration-300
-                            before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-0
-                            hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300" 
-                            onClick={() => setSidenavOpened(false)}>
-                                <span className="relative z-10">
+                        <ul className="">
+                            <li className="w-full">
+                                <Link href="/" className="text-[#666] text-[14px] leading-[45px] font-bold relative z-10 w-full pl-[70px]
+                                before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-[-1] block transition-all
+                                hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300" 
+                                onClick={() => setSidenavOpened(false)}>
                                     {t('home')}
-                                </span>
-                            </Link>
+                                </Link>
+                            </li>
 
-                            <Link href={`/${i18n?.language}/products`} className="text-[#666] font-bold text-[14px] leading-[45px] relative z-10 w-full pl-[70px]
-                            before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-0  transition-all duration-300
-                            hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300" 
-                            onClick={() => setSidenavOpened(false)}>
-                                <span className="relative z-10">
+                            <li className="">
+                                <Link href={`/${i18n?.language}/products`} className="text-[#666] w-full font-bold text-[14px] leading-[45px] relative z-10 w-full pl-[70px]
+                                before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-[-1] block
+                                hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300
+                                transition-all [&:hover~.categories]:pointer-events-auto
+                                [&:hover~.categories]:flex" 
+                                onClick={() => setSidenavOpened(false)}>
                                     {t('products').toUpperCase()}
-                                </span>
-                            </Link>
+                                </Link>
 
-                            <Link href={`/${i18n?.language}/about`} className="text-[#666] font-bold text-[14px] leading-[45px] relative z-10 w-full pl-[70px]
-                            before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-0  transition-all duration-300
-                            hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300" 
-                            onClick={() => setSidenavOpened(false)}>
-                                <span className="relative z-10">
-                                    {t('about').toUpperCase()}
-                                </span>
-                            </Link>
+                                <div className={`absolute right-0 top-0 h-full w-[300px] bg-white translate-x-[100%] pt-[172px] gap-4 flex-col pl-10
+                                border-l border-red-500 ${sidenavOpened ? '' : ''} hidden categories`}>
+                                    <Link href="/" className="text-[#666] font-bold hover:text-red-500 transition-all">
+                                        {t('table-and-chair').toUpperCase()}                                    
+                                    </Link>
+                                    <Link href="/" className="text-[#666] font-bold hover:text-red-500 transition-all">
+                                        {t('shelf')}                                    
+                                    </Link>
+                                </div>
+                            </li>
 
-                            <Link href={`/${i18n?.language}/contact`} className="text-[#666] font-bold text-[14px] leading-[45px] relative z-10 w-full pl-[70px]
-                            before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-0  transition-all duration-300 
-                            hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300" 
-                            onClick={() => setSidenavOpened(false)}>
-                                <span className="relative z-10">
-                                    {t('contact').toUpperCase()}
-                                </span>
-                            </Link>
-                        </nav>
+
+                            
+                            <li className="w-full">
+                                <Link href={`/${i18n?.language}/about`} className="text-[#666] font-bold text-[14px] leading-[45px] relative z-10 w-full h-full pl-[70px]
+                                before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-[-1] block transition-all
+                                hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300" 
+                                onClick={() => setSidenavOpened(false)}>
+                                    <span className="relative z-10">
+                                        {t('about').toUpperCase()}
+                                    </span>
+                                </Link>
+                            </li>
+
+                            <li className="w-full">
+                                <Link href={`/${i18n?.language}/contact`} className="text-[#666] font-bold text-[14px] leading-[45px] relative z-10 w-full pl-[70px]
+                                before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-[-1] block transition-all
+                                hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300" 
+                                onClick={() => setSidenavOpened(false)}>
+                                    <span className="relative z-10">
+                                        {t('contact').toUpperCase()}
+                                    </span>
+                                </Link>
+                            </li>
+
+                            <li className="w-full">
+                                <Link href={`/${i18n?.language}/news`} className="text-[#666] font-bold text-[14px] leading-[45px] relative z-10 w-full pl-[70px]
+                                before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-[-1] block transition-all
+                                hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300" 
+                                onClick={() => setSidenavOpened(false)}>
+                                    <span className="relative z-10">
+                                        {t('news').toUpperCase()}
+                                    </span>
+                                </Link>
+                            </li>
+
+                            <li>
+                                <div className="text-[#666] font-bold text-[14px] relative z-10 w-full pl-[70px]
+                                block transition-all mb-2.5" 
+                                onClick={() => setSidenavOpened(false)}>
+                                    <span className="relative z-10">
+                                        {t('language').toUpperCase()}
+                                    </span>
+                                </div>
+                                <div className="pl-[70px]" ref={dropdownStickyRef}>
+                                    {Array.from(lngs.keys()).map((lng: string) => (
+                                    <button type="submit" key={lng} onClick={() => { i18n?.changeLanguage(lng) }} disabled={i18n?.resolvedLanguage === lng}
+                                        className={`${(i18n?.language === lng || i18n?.language.slice(0,2).toLowerCase() === lng) ? 'text-red-500' : 'text-[#666]'} 
+                                        font-normal block text-xs leading-[25px] hover:text-red-500`}>
+                                        {lngs.get(lng)?.nativeLanguage}
+                                    </button>
+                                    ))}
+                                </div>
+                            </li>
+                        </ul>
                     </div>
             </div>
         </div>

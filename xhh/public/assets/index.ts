@@ -9,6 +9,7 @@ import homeIcon from "./home.svg"
 import aboutIcon from "./about.svg"
 import planeIcon from "./plane.svg"
 import arrowRightIcon from "./arrow-right.svg"
+import starIcon from "./iconmonstr-star-3.svg"
 
 import mediaIcon from "./media.svg"
 
@@ -63,9 +64,12 @@ import newProduct1 from "./1.png"
 import newProduct2 from "./2.png"
 import chairImage from "./chair.png"
 
-export { phoneIcon, mailIcon, locationIcon, facebookIcon, menuIcon,
+import slider1 from "./Screenshot 2024-04-01 092153.jpg"
+import slider2 from "./Screenshot 2024-04-01 092222.jpg"
+
+export { phoneIcon, mailIcon, locationIcon, facebookIcon, menuIcon, slider1, slider2,
 closeIcon, homeIcon, aboutIcon, planeIcon, arrowRightIcon, mediaIcon, facebookLogo,
-ukFlag, vietnamFlag, zaloLogo, messengerLogo, banner1, banner2,
+ukFlag, vietnamFlag, zaloLogo, messengerLogo, banner1, banner2, starIcon,
 whatsappIcon, sliderImage1, sliderImage2, sliderImage3, windowImage, woodenFloorImage, tableChairImage,
 arrowUpIcon, interiorImage1, interiorImage2, interiorImage3, interiorImage4, officeImage, bagIcon,
 locationSmall, phoneSmall, mailSmall, facebookSmall, filterIcon, logoTextRed, logoTextWhite, logoRed,

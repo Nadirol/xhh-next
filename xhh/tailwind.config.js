@@ -16,7 +16,7 @@ module.exports = {
         'red-500': 'rgb(205, 20, 33)'
       },
       width: {
-        'container': 'min(1120px, 100% - 2rem)',
+        'container': 'min(1200px, 100% - 2rem)',
         'container-large': 'min(1240px, 100% - 2rem)',
         'container-extra-large': 'min(1360px, 100% - 1rem)',
         'sidenav': 'min(24rem, 100% - 4rem)',
@@ -85,7 +85,8 @@ module.exports = {
       boxShadow: {
         'inner-right': "inset -2px 0 6px 2px rgb(0 0 0 / 0.1)",
         'bold': "2px 4px 7px rgb(0 0 0 / 0.5)",
-        'light': "0 0 10px rgb(0 0 0 / 0.1)"
+        'light': "0 0 10px rgb(0 0 0 / 0.1)",
+        'card': "0px 0px 5px 3px rgb(0 0 0 / 0.1)"
       }
     },
   },

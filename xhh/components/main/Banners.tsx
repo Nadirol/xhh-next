@@ -8,7 +8,7 @@ const Banners = ({ t }: { t: TFunction}) => {
 
     return (
         <div className="px-[100px] flex gap-10">
-            <div className="flex-[40%] flex flex-col justify-between">
+            <div className="flex-[40%] flex gap-8 flex-col justify-between">
                 <div className="bg-[#eee] relative">
                     <div className="">
                         <Image src={newProduct1} alt="" />
@@ -72,15 +72,22 @@ const Banners = ({ t }: { t: TFunction}) => {
                 </div>
 
                 <div className="absolute bottom-1/2 translate-y-1/2 right-0 w-[45%] pr-[40px]">
-                    <h2>
+                    <h2 className="text-[25px] leading-[30px] text-[#666666] mb-2.5">
                         WELCOME TO
                     </h2>
-                    <h2>
+                    <h2 className="text-[48px] leading-[1.1] font-bold text-[#434343] mb-4">
                         XUÂN HÒA HOME
                     </h2>
-                    <p>
+                    <p className="text-[13px] leading-[1.2] text-[#878686] mb-6">
                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable
                     </p>
+                    <div className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0 w-fit
+                    bg-[#eee]">
+                        {t('shopNow')}
+                        <div className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-110%] transition-all duration-300">
+                            {t('shopNow')}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -30,6 +30,7 @@
     "react-dom": "18.2.0",
     "react-facebook": "^9.0.12",
     "react-i18next": "^13.0.3",
+    "react-slideshow-image": "^4.3.1",
     "sharp": "^0.32.4",
     "slugify": "^1.6.6",
     "tailwind-scrollbar-hide": "^1.1.7",
