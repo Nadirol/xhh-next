@@ -45,12 +45,12 @@ const Footer = ({ t }: { t: TFunction}) => {
                                 </div>                            
                                 <h5>sales@xhhome.vn</h5>
                             </div>
-                            <div className="flex gap-2">
+                            <a href="https://www.facebook.com/XuanHoaHome" className="flex gap-2" target="_blank">
                                 <div className="w-6 aspect-square flex items-center justify-center">
                                     <Image src={facebookSmall} alt="facebook icon" />
                                 </div>                            
                                 <h5>Xuân Hoà Home</h5>
-                            </div>
+                            </a>
                         </div>
                     </div>            
                 </div>

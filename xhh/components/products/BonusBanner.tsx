@@ -11,7 +11,6 @@ const BonusBanner = ({ t }: { t: TFunction }) => {
                 {t('bonusParagraph')}
                 </p>
                 <ul className='text-xl font-semibold list-disc list-inside'>
-                <li>{t('bonus1')}</li>
                 <li>{t('bonus2')}</li>
                 <li>{t('bonus3')}</li>
                 <li>{t('bonus4')}</li>
