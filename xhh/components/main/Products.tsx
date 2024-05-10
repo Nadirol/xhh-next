@@ -52,10 +52,10 @@ const Products = ({ t }: { t: TFunction}) => {
                     </button>
                 </div>
 
-                <div className="relative w-full grid grid-cols-4">
+                <div className="relative w-full grid md:grid-cols-2 xl:grid-cols-4">
                     {newProducts.map((i, index) => (
                         <Link href={`/${i18n?.language}/products/${i.slug}`} key={index} 
-                        className="flex gap-2.5 flex-col justify-between w-product-card min-w-[300px] snap-start min-h-[422px]
+                        className="flex gap-2.5 flex-col justify-between w-product-card min-w-[300px] snap-start min-h-[422px] -md:mx-auto
                         [&:hover>.absolute>img]:scale-[1.05] p-[15px] pb-[20px] hover:shadow-card transition-all duration-500">
                         <div className="">
                             <div className="overflow-hidden">

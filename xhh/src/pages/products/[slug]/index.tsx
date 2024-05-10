@@ -2,7 +2,6 @@ import { i18n, useTranslation } from "next-i18next"
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-import { Fira_Sans } from 'next/font/google'
 
 import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
@@ -20,7 +19,9 @@ import { NextSeo } from "next-seo";
 
 import Widgets from "../../../../components/Widgets";
 
-const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
+import { Lato } from 'next/font/google'
+
+const lato = Lato({ subsets: ['latin'], weight: ["300","400","700"] })
 
 export default function ProductDetails() {
   const { t } = useTranslation('common');
@@ -68,7 +69,7 @@ export default function ProductDetails() {
         canonical={`xhhome.vn/vi/products/${product.slug}`}
       />
       
-      <div className={`${fira.className} flex flex-col overflow-hidden`}>
+      <div className={`${lato.className} flex flex-col overflow-hidden`}>
         <Header
           t={t}
         />

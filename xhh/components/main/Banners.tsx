@@ -1,14 +1,12 @@
-import { TFunction, i18n } from "next-i18next"
-import FadeInOnScroll from "../animated/FadeInOnScroll";
-import Link from "next/link";
+import { TFunction } from "next-i18next"
 import { chairImage, newProduct1, newProduct2 } from "../../public/assets";
 import Image from "next/image";
 
 const Banners = ({ t }: { t: TFunction}) => {
 
     return (
-        <div className="px-[100px] flex gap-10">
-            <div className="flex-[40%] flex gap-8 flex-col justify-between">
+        <div className="md:px-[100px] flex gap-10 -xl:flex-col-reverse">
+            <div className="md:flex-[40%] flex gap-8 -md:flex-col xl:flex-col justify-between">
                 <div className="bg-[#eee] relative">
                     <div className="">
                         <Image src={newProduct1} alt="" />
@@ -51,8 +49,8 @@ const Banners = ({ t }: { t: TFunction}) => {
                             New Product 2024
                         </span>
 
-                        <p className="text-[13px] mb-[30px] leading-[20px]">
-                            Lorem Ipsum is simply dummy text of the printing and types sate industry. Lorem Ipsum has been the industry.
+                        <p className="text-[13px] mb-[30px] leading-[20px] -md:hidden">
+                            Lorem Ipsum is simply dummy text of the printing and types sate industry.
                         </p>
 
                         <div className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0 w-fit
@@ -78,13 +76,13 @@ const Banners = ({ t }: { t: TFunction}) => {
                     <h2 className="text-[48px] leading-[1.1] font-bold text-[#434343] mb-4">
                         XUÂN HÒA HOME
                     </h2>
-                    <p className="text-[13px] leading-[1.2] text-[#878686] mb-6">
+                    <p className="text-[13px] leading-[1.2] text-[#878686] mb-6 -md:hidden">
                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable
                     </p>
                     <div className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0 w-fit
                     bg-[#eee]">
                         {t('shopNow')}
-                        <div className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-110%] transition-all duration-300">
+                        <div className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-110%] transition-all duration-300 text-center">
                             {t('shopNow')}
                         </div>
                     </div>

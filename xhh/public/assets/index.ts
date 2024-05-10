@@ -63,6 +63,7 @@ import banner2 from "./XUAN200.png"
 import newProduct1 from "./1.png"
 import newProduct2 from "./2.png"
 import chairImage from "./chair.png"
+import shopBackground from "./1 (1).webp"
 
 import slider1 from "./Screenshot 2024-04-01 092153.jpg"
 import slider2 from "./Screenshot 2024-04-01 092222.jpg"
@@ -74,4 +75,4 @@ whatsappIcon, sliderImage1, sliderImage2, sliderImage3, windowImage, woodenFloor
 arrowUpIcon, interiorImage1, interiorImage2, interiorImage3, interiorImage4, officeImage, bagIcon,
 locationSmall, phoneSmall, mailSmall, facebookSmall, filterIcon, logoTextRed, logoTextWhite, logoRed,
 aboutImage1, aboutImage2, aboutImage3, aboutImage4, nanoWindowImage, woodenTileImage, tableAndChairImage,
-woodenTileBg, tableBg, curtainBg, windowBg, shelfImage, newProduct1, newProduct2, chairImage }
+woodenTileBg, tableBg, curtainBg, windowBg, shelfImage, newProduct1, newProduct2, chairImage, shopBackground }

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { TFunction, i18n } from "next-i18next"
 import Link from "next/link";
 import Image from "next/image";
@@ -10,6 +12,23 @@ import 'react-slideshow-image/dist/styles.css';
 
 const FeaturedItems = ({ t }: { t: TFunction}) => {
     const [products, setProducts] = useState<IProduct[]>([]);
+
+    const responsiveSettings = [
+      {
+          breakpoint: 800,
+          settings: {
+              slidesToShow: 4,
+              slidesToScroll: 1
+          }
+      },
+      {
+          breakpoint: 500,
+          settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1
+          }
+      }
+  ];
 
     useEffect(() => {
         async function fetchData() {
@@ -41,21 +60,20 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
 
                 <div className="relative px-4">
                   {products.length > 0 && (
-                    <Slide indicators={false} transitionDuration={500} duration={1000} autoplay={false} ref={slideRef} slidesToShow={4}>
+                    <Slide indicators={false} transitionDuration={500} duration={1000} autoplay={false} ref={slideRef} slidesToScroll={1} slidesToShow={1} responsive={responsiveSettings}>
                       {products.map((i, index) => (
                         <div key={index} className="overflow-visible py-4">
-                          <div 
-                          className="flex gap-2.5 flex-col justify-between w-product-card min-w-[240px] snap-start min-h-[422px]
-                          [&:hover>.absolute>img]:scale-[1.05] p-[15px] pb-[20px] hover:shadow-card transition-all duration-500">
+                          <div className="flex gap-2.5 flex-col justify-between w-product-card min-w-[240px] snap-start min-h-[422px]
+                          [&:hover>.absolute>img]:scale-[1.05] p-[15px] pb-[20px] hover:shadow-card transition-all duration-500 -md:mx-auto">
                             <div className="">
                               <div className="overflow-hidden">
-                                    <Image src={i.image_url} alt="curtain image" width={400} height={400} className="object-cover
-                                    transition-[transform] duration-700 min-h-[300px] pointer-events-none"/>
-                                </div>
-                                <Link href={`/${i18n?.language}/products/${i.slug}`} 
-                                className="text-[#434343] mb-[5px] font-semibold hover:text-red-500 transition-all">
-                                  {i.title_vi.toUpperCase()}
-                                  </Link>
+                                  <Image src={i.image_url} alt="curtain image" width={400} height={400} className="object-cover
+                                  transition-[transform] duration-700 min-h-[300px] pointer-events-none"/>
+                              </div>
+                              <Link href={`/${i18n?.language}/products/${i.slug}`} 
+                              className="text-[#434343] mb-[5px] font-semibold hover:text-red-500 transition-all">
+                                {i.title_vi.toUpperCase()}
+                              </Link>
                             </div>
 
                             <div className="w-full relative z-10 items-center

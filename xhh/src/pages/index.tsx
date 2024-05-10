@@ -4,18 +4,14 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { Lato } from 'next/font/google'
 import Header from '../../components/Header'
-import About from '../../components/main/About'
-import Contact from '../../components/main/Contact'
 import Footer from '../../components/Footer'
-import Category from "../../components/main/Category"
 import { NextSeo } from 'next-seo';
 import Widgets from "../../components/Widgets"
 
 import News from "../../components/main/News"
 import { IPost } from "../../interface/interface"
 import { client } from "../../lib/sanity"
-import TableandChair from "../../components/main/TableandChair"
-import NewProducts from "../../components/main/NewProducts"
+
 import Banners from "../../components/main/Banners"
 import FeaturedItems from "../../components/main/FeaturedItems"
 import Slider from "../../components/main/Slider"
@@ -24,7 +20,7 @@ import Products from "../../components/main/Products"
 const lato = Lato({ subsets: ['latin'], weight: ["300","400","700"] })
 
 async function getData() {
-  const query = `*[_type == "postXHH"] | order(_createdAt desc) { _id,title,image,_createdAt,overview,slug }[0...2]`;
+  const query = `*[_type == "post"] | order(_createdAt desc) { _id,title,image,_createdAt,overview,slug }[0...2]`;
 
   const data = await client.fetch(query);
 
@@ -50,13 +46,8 @@ export default function Home({ data }: { data: IPost[]}) {
         <main>
           <Banners t={t}/>
           <FeaturedItems t={t}/>
-          <Slider t={t}/>
+          <Slider/>
           <Products t={t}/>
-
-          {/* <FeaturedItems t={t}/> */}
-
-          <About t={t}/>
-
           <News t={t} data={data}/>
 
           <Widgets t={t}/>

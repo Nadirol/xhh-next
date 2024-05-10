@@ -2,10 +2,9 @@ import { useTranslation } from "next-i18next"
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-import { Fira_Sans } from 'next/font/google'
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import { sliderImage1 } from "../../../public/assets";
+import { shopBackground } from "../../../public/assets";
 import Image from "next/image";
 import ProductList from "../../../components/products/ProductList";
 import ProductFilter from "../../../components/products/ProductFilter";
@@ -14,11 +13,12 @@ import supabase from "../../../supabase";
 import { IProduct } from "../../../interface/interface";
 import { useSearchParams } from 'next/navigation'
 import { NextSeo } from "next-seo";
-import CallWidget from "../../../components/buttons/CallWidget";
-import ZaloWidget from "../../../components/buttons/ZaloWidget";
+
 import Widgets from "../../../components/Widgets";
 
-const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });
+import { Lato } from 'next/font/google'
+
+const lato = Lato({ subsets: ['latin'], weight: ["300","400","700"] })
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -55,14 +55,17 @@ export default function Home() {
         canonical="xhhome.vn/vi/products"
       />
 
-      <div className={`${fira.className} flex flex-col overflow-hidden`}>
+      <div className={`${lato.className} flex flex-col overflow-hidden`}>
         <Header
           t={t}
         />
 
         <main>
-            <div className="w-full h-[500px] ">
-                <Image src={sliderImage1} alt="banner image" className="object-cover h-full"/>
+            <div className="w-full h-[300px] relative before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-filter-dark before:z-10">
+                <Image src={shopBackground} alt="banner image" className="z-0 absolute translate-x-1/2 translate-y-1/2 bottom-1/2 right-1/2"/>
+                <h2 className="text-white absolute z-20 translate-x-1/2 translate-y-1/2 bottom-1/2 right-1/2 text-[45px] font-bold">
+                  {t('shop').toUpperCase()}
+                </h2>
             </div>
             <div className="py-16 grid -md:gap-6 md:grid-cols-product-list">
                 <ProductFilter t={t}/>

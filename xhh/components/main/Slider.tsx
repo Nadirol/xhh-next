@@ -1,4 +1,5 @@
-import { TFunction } from "next-i18next"
+// @ts-nocheck
+
 import { Slide, SlideshowRef } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import { useRef } from "react";
@@ -11,7 +12,7 @@ const indicators = (index: number) =>
     </div>
     );
 
-const Slider = ({ t }: { t: TFunction}) => {
+const Slider = () => {
     const slideRef = useRef<SlideshowRef>(null)
 
     return (
