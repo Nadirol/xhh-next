@@ -77,7 +77,7 @@ const Banners = ({ t }: { t: TFunction}) => {
                         XUÂN HÒA HOME
                     </h2>
                     <p className="text-[13px] leading-[1.2] text-[#878686] mb-6 -md:hidden">
-                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable
+                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable
                     </p>
                     <div className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0 w-fit
                     bg-[#eee]">
