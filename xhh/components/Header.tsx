@@ -26,27 +26,12 @@ const lngs = new Map([
     ['en', { nativeLanguage: 'English', flag: ukFlag }],
 ]);
 
-const sliderImages = [sliderImage1, sliderImage2, sliderImage3];
-
-const categories = ["table-and-chair","shelf","wooden-tile"]
 
 const Header = ({ t }: { t: TFunction }) => {
-
-    const sliderText = [
-        t('slogan1'),
-        t('slogan2'),
-        t('slogan3'),
-
-    ]
-
     const [sidenavOpened, setSidenavOpened] = useState(false);
     const sideNavRef = useRef(null);
     const menuButtonRef = useRef(null);
     const closeButtonRef = useRef(null);
-
-    const openSideNav = () => {
-        setSidenavOpened(true)
-    };
     
     const hideSideNav = () => {
         setSidenavOpened(false)
@@ -54,17 +39,16 @@ const Header = ({ t }: { t: TFunction }) => {
 
     useClickDetector([sideNavRef, menuButtonRef, closeButtonRef], hideSideNav);
 
-    const [activeSlide, setActiveSlide] = useState(1);
+    const [mobileNavOpened, setMobileNavOpened] = useState(false);
+    const mobileNavRef = useRef(null);
+    const mobileMenuButtonRef = useRef(null);
+    const mobileCloseButtonRef = useRef(null);
+    
+    const hideMobileNav = () => {
+        setMobileNavOpened(false)
+    };
 
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setActiveSlide(prevSlide => {
-          return prevSlide + 1 > sliderImages.length - 1 ? 0 : prevSlide + 1
-        })
-      }, 10000);
-
-      return () => clearInterval(interval)
-    },[]);
+    useClickDetector([mobileNavRef, mobileMenuButtonRef, mobileCloseButtonRef], hideMobileNav);
 
     const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -81,39 +65,24 @@ const Header = ({ t }: { t: TFunction }) => {
       setScrollPosition(position);
     };
 
-    const router = useRouter();
-
-    const [lngDropdownOpened, setLngDropdownOpened] = useState(false);
-    const dropdownRef = useRef(null);
-    const languageButtonRef = useRef(null);
-
-    const hideDropdown = () => {
-      setLngDropdownOpened(false);
-    }
-
-    const dropdownStickyRef = useRef(null);
-    const languageButtonStickyRef = useRef(null);
-
-    useClickDetector([languageButtonRef, dropdownRef, languageButtonStickyRef, dropdownStickyRef], hideDropdown);
-
     return (
         <div className={`relative z-20 bg-black`}>
             <>
                 <header className={`z-[999] flex items-center bg-scroll bg-repeat px-8 transition-all duration-500
-                ${scrollPosition > 0 ? "fixed w-full bg-[#eee] shadow-light" : "bg-white relative"}`}>
+                ${scrollPosition > 0 ? "md:fixed md:w-full bg-[#eee] shadow-light" : "bg-white relative"}`}>
                     {/* top nav */}
-                    <nav className=" relative z-20 px-8 ml-[33%] w-1/3 flex justify-center">
+                    <nav className=" relative z-20 md:px-8 md:ml-[33%] md:w-1/3 flex justify-center">
                         <div className="flex items-center justify-between">
                             <Link href="/" className="h-full">
                                 <Image src={logoTextRed} alt="" 
-                                className={`w-[10rem] transtion-all duration-500 ${scrollPosition > 0 ? "py-2" : "py-[38px]"}`} 
+                                className={`w-[10rem] transtion-all duration-500 ${scrollPosition > 0 ? "py-2 -md:py-[12px]" : "-md:py-[12px] py-[38px]"}`} 
                                 loading="lazy"/>
                             </Link>
                         </div>
                     </nav>
 
                     <div className=" -xl:hidden ml-auto pr-[15px]">
-                        <div className="pl-[70px] flex gap-2" ref={dropdownStickyRef}>
+                        <div className="pl-[70px] flex gap-2">
                             {Array.from(lngs.keys()).map((lng: string) => (
                             <button type="submit" key={lng} onClick={() => { i18n?.changeLanguage(lng) }} disabled={i18n?.resolvedLanguage === lng}
                                 className={`${(i18n?.language === lng || i18n?.language.slice(0,2).toLowerCase() === lng) ? 'text-red-500' : 'text-[#666]'} 
@@ -132,7 +101,101 @@ const Header = ({ t }: { t: TFunction }) => {
                     </div>
                 </header>
 
-                <button className={`p-[15px] fixed left-[25px] z-[999999] transition-all duration-500 
+                <div className="md:hidden bg-red-500 w-full text-white relative">
+                    <div className="px-8 flex justify-between items-center">
+                        <h3>Menu</h3>
+
+                        <button className={`p-[15px] transition-all duration-500`} ref={mobileNavRef}
+                        onClick={() => setMobileNavOpened(prevState => !prevState)}>
+                            <div className="inline-block h-[15px] w-[21px] relative">
+                                <div className={`w-full h-[3px] bg-white absolute block top-0 mt-[-2px] transition-all duration-200
+                                ${sidenavOpened ? 'translate-x-[-100%] opacity-0' : ''}`}></div>
+                                <div className={`w-full h-[3px] bg-white absolute block top-1/2 mt-[-2px] transition-all duration-200
+                                ${sidenavOpened ? 'opacity-0' : ''}`}></div>
+                                <div className={`w-full h-[3px] bg-white absolute block bottom-0 mt-[-2px] transition-all duration-200
+                                ${sidenavOpened ? 'translate-x-[100%] opacity-0' : ''}`}></div>
+
+                                <div className={`w-full h-[3px] bg-white absolute block transition-all 
+                                duration-[500ms] right-1/2 bottom-1/2
+                                ${sidenavOpened ? 'translate-x-1/2 translate-y-1/2' : 'translate-x-[100%] translate-y-[400%] opacity-0'} rotate-45`}></div>
+                                <div className={`w-full h-[3px] bg-white absolute block transition-all 
+                                duration-[500ms] right-1/2 bottom-1/2
+                                ${sidenavOpened ? 'translate-x-1/2 translate-y-1/2' : 'translate-x--1/2 translate-y-[400%] opacity-0'} rotate-[315deg]`}></div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div className={`${mobileNavOpened ? 'max-h-[900px] animate-hide-scroll ' : 'max-h-0 overflow-hidden'} transition-all duration-500
+                        flex flex-col w-full absolute left-0 bottom-0 translate-y-[100%] z-[1] overflow-y-auto scrollbar-hide bg-red-700`} ref={sideNavRef}>
+                        <div className="flex flex-col relative z-10">
+                            <ul className="">
+                                <li className="w-full">
+                                    <Link href="/" className="text-white text-[14px] leading-[45px] font-bold relative z-10 w-full pl-[32px]
+                                    before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-[-1] block transition-all
+                                    hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300" 
+                                    onClick={() => setSidenavOpened(false)}>
+                                        {t('home')}
+                                    </Link>
+                                </li>
+
+                                <li className="[&:hover>.categories]:flex">
+                                    <Link href={`/${i18n?.language}/products`} className="text-white w-full font-bold text-[14px] leading-[45px] relative z-10 w-full pl-[32px]
+                                    before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-[-1] block
+                                    hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300
+                                    transition-all [&:hover~.categories]:pointer-events-auto" 
+                                    onClick={() => setSidenavOpened(false)}>
+                                        {t('products').toUpperCase()}
+                                    </Link>
+
+                                    <div className={`absolute right-0 top-0 h-full w-[300px] bg-white translate-x-[100%] pt-[172px] gap-4 flex-col pl-10
+                                    border-l border-red-500 ${sidenavOpened ? '' : ''} hidden categories`}>
+                                        <Link href="/" className="text-white font-bold hover:text-red-500 transition-all">
+                                            {t('table-and-chair').toUpperCase()}                                    
+                                        </Link>
+                                        <Link href="/" className="text-white font-bold hover:text-red-500 transition-all">
+                                            {t('shelf')}                                    
+                                        </Link>
+                                    </div>
+                                </li>
+                                
+                                <li className="w-full">
+                                    <Link href={`/${i18n?.language}/about`} className="text-white font-bold text-[14px] leading-[45px] relative z-10 w-full h-full pl-[32px]
+                                    before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-[-1] block transition-all
+                                    hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300" 
+                                    onClick={() => setSidenavOpened(false)}>
+                                        <span className="relative z-10">
+                                            {t('about').toUpperCase()}
+                                        </span>
+                                    </Link>
+                                </li>
+
+                                <li className="w-full">
+                                    <Link href={`/${i18n?.language}/contact`} className="text-white font-bold text-[14px] leading-[45px] relative z-10 w-full pl-[32px]
+                                    before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-[-1] block transition-all
+                                    hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300" 
+                                    onClick={() => setSidenavOpened(false)}>
+                                        <span className="relative z-10">
+                                            {t('contact').toUpperCase()}
+                                        </span>
+                                    </Link>
+                                </li>
+
+                                <li className="w-full">
+                                    <Link href={`/${i18n?.language}/news`} className="text-white font-bold text-[14px] leading-[45px] relative z-10 w-full pl-[32px]
+                                    before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-red-500 before:z-[-1] block transition-all
+                                    hover:text-white before:translate-x-[-100%] [&:hover:before]:translate-x-0 before:transition-all before:duration-300" 
+                                    onClick={() => setSidenavOpened(false)}>
+                                        <span className="relative z-10">
+                                            {t('news').toUpperCase()}
+                                        </span>
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <button className={`-md:hidden p-[15px] fixed left-[25px] z-[999999] transition-all duration-500 
                 ${scrollPosition > 0 ? 'top-[12px]' : 'top-[42px]'}`} ref={menuButtonRef}
                 onClick={() => setSidenavOpened(prevState => !prevState)}>
                     <div className="inline-block h-[15px] w-[21px] relative [&:hover>div]:bg-[#777]">

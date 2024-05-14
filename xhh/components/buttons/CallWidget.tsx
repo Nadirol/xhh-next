@@ -33,7 +33,7 @@ const CallWidget = ({ t }: { t: TFunction }) => {
         <div className="relative">
             <button className="p-3 md:p-5 bg-red-500 rounded-[100%] after:inline-block after:w-full after:h-full after:absolute 
             after:duration-[400] after:transition-all after:inset-0 after:z-[-1] transition-all duration-[400] shadow-bold
-            after:rounded-[100%] after:bg-red-500 [&:hover]:after:scale-[1.4] [&:hover]:after:opacity-0 relative z-10" 
+            after:rounded-[100%] after:bg-red-500 [&:hover]:after:scale-[1.4] [&:hover]:after:opacity-0 relative z-10 -md:hidden" 
             onMouseEnter={() => setCallNumberVisible(prevState => !prevState)} ref={buttonRef}>
                 <div className="aspect-square mx-auto">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

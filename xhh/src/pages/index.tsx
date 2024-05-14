@@ -43,7 +43,7 @@ export default function Home({ data }: { data: IPost[]}) {
           t={t}
         />
 
-        <main>
+        <main className="-md:mt-8">
           <Banners t={t}/>
           <FeaturedItems t={t}/>
           <Slider/>

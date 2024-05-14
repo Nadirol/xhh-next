@@ -102,6 +102,7 @@ export default function ProductDetails() {
                 </h3>
               </div>
             </div>
+
             {(product.description_vi && product.description_en) && (
               <div className="w-container-large mx-auto flex gap-4 flex-col">
                 <h3 className="text-neutral-800 font-semibold text-2xl underline">{t('description')}</h3>
@@ -112,6 +113,7 @@ export default function ProductDetails() {
                 </ul>
               </div>
             )}
+            
             {(product.benefits_vi && product.benefits_en) && (
               <div className="w-container-large mx-auto flex gap-4 flex-col">
                 <h3 className="text-neutral-800 font-semibold text-2xl underline">{t('benefits')}</h3>

@@ -88,19 +88,6 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
 
               {(product.specific_description_vi && product.specific_description_en) && (
                 <div className="flex gap-4 flex-col">
-                  <div className="flex">
-                    {(i18n?.language === "vi" ? product.specific_description_vi : product.specific_description_en)?.map((d, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setActiveType(index)}
-                        className={`-md:text-sm xl:text-xl px-6 py-2  
-                          ${activeType === index ? "bg-red-500 text-neutral-50" : "text-neutral-700 border border-neutral-400"}`}
-                      >
-                        {d.product_type}
-                      </button>
-                    ))}
-                  </div>
-
                   <ul className="flex gap-4 flex-col list-disc list-inside pb-4 border-b">
                     {Object.keys((i18n?.language === "vi"
                       ? product.specific_description_vi
