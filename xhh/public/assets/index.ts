@@ -60,15 +60,16 @@ import messengerLogo from "./facebook-messenger-2881.svg"
 import banner1 from "./Daily Banner.png"
 import banner2 from "./XUAN200.png"
 
-import newProduct1 from "./1.png"
-import newProduct2 from "./2.png"
-import chairImage from "./chair.png"
+import newProduct1 from "./BHS-95XH.png"
+import newProduct2 from "./Layer-1.png"
+import chairImage from "./XHH-GHS-02XH.png"
 import shopBackground from "./1 (1).webp"
 
-import slider1 from "./Screenshot 2024-04-01 092153.jpg"
-import slider2 from "./Screenshot 2024-04-01 092222.jpg"
+import slider1 from "./slideweb1.jpg"
+import slider2 from "./slideweb2.jpg"
+import slider3 from "./slideweb3.jpg"
 
-export { phoneIcon, mailIcon, locationIcon, facebookIcon, menuIcon, slider1, slider2,
+export { phoneIcon, mailIcon, locationIcon, facebookIcon, menuIcon, slider1, slider2, slider3,
 closeIcon, homeIcon, aboutIcon, planeIcon, arrowRightIcon, mediaIcon, facebookLogo,
 ukFlag, vietnamFlag, zaloLogo, messengerLogo, banner1, banner2, starIcon,
 whatsappIcon, sliderImage1, sliderImage2, sliderImage3, windowImage, woodenFloorImage, tableChairImage,

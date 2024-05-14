@@ -7,10 +7,11 @@ const Banners = ({ t }: { t: TFunction}) => {
     return (
         <div className="md:px-[100px] flex gap-10 -xl:flex-col-reverse">
             <div className="md:flex-[40%] flex gap-8 -md:flex-col xl:flex-col justify-between">
-                <div className="bg-[#eee] relative">
-                    <div className="">
+                <div className="bg-[#eee] relative flex-1 flex justify-between items-center">
+                    <div className="-md:w-1/2 w-[65%] aspect-square m-auto">
                         <Image src={newProduct1} alt="" />
                     </div>
+
                     <span className="absolute left-[30px] top-[20px] px-2.5 rounded-[5px] bg-red-500 text-white text-[13px] leading-[25px]">
                         {t('new')}
                     </span>
@@ -39,9 +40,9 @@ const Banners = ({ t }: { t: TFunction}) => {
                     </button>
                 </div>
 
-                <div className="bg-[#eee] relative">
-                    <div className="">
-                        <Image src={newProduct2} alt="" />
+                <div className="bg-[#eee] relative flex-1 flex items-center">
+                    <div className="-md:w-1/3 -md:py-4 w-1/2 pl-4 py-auto">
+                        <Image src={newProduct2} alt="" className="" />
                     </div>
 
                     <div className="absolute right-0 bottom-1/2 translate-y-1/2 w-[45%] pr-[30px]">
@@ -65,7 +66,7 @@ const Banners = ({ t }: { t: TFunction}) => {
             </div>
 
             <div className="w-full bg-[#eee] relative">
-                <div className="">
+                <div className="-md:w-1/2">
                     <Image src={chairImage} alt="" />
                 </div>
 

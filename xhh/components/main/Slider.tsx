@@ -3,7 +3,7 @@
 import { Slide, SlideshowRef } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import { useRef } from "react";
-import { slider1, slider2 } from "../../public/assets";
+import { slider1, slider2, slider3 } from "../../public/assets";
 import Image from "next/image";
 
 const indicators = (index: number) => 
@@ -25,10 +25,7 @@ const Slider = () => {
                     <Image src={slider2} alt="" className="object-cover w-full pointer-events-none"/>
                 </div>
                 <div>
-                    <Image src={slider1} alt="" className="object-cover w-full pointer-events-none"/>
-                </div>
-                <div>
-                    <Image src={slider2} alt="" className="object-cover w-full pointer-events-none"/>
+                    <Image src={slider3} alt="" className="object-cover w-full pointer-events-none"/>
                 </div>
             </Slide>
         </div>
