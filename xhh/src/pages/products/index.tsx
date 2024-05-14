@@ -31,12 +31,14 @@ export default function Home() {
   
 
   useEffect(() => {
-    console.log('running')
     async function fetchData() {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .eq('category', category || "table-and-chair");
+      let query = supabase
+      .from('products')
+      .select('*')
+
+      if (category) { query = query.eq('category', category)}
+
+      const { data, error } = await query;
       
       if (error) {
         console.error('Error fetching data:', error);
@@ -63,12 +65,12 @@ export default function Home() {
 
         <main>
             <div className="w-full h-[300px] relative before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-filter-dark before:z-10">
-                <Image src={shopBackground} alt="banner image" className="z-0 absolute translate-x-1/2 translate-y-1/2 bottom-1/2 right-1/2"/>
-                <h2 className="text-white absolute z-20 translate-x-1/2 translate-y-1/2 bottom-1/2 right-1/2 text-[45px] font-bold">
+                <Image src={shopBackground} alt="banner image" className="z-0 absolute translate-x-1/2 translate-y-1/2 bottom-1/2 right-1/2 object-cover h-full"/>
+                <h2 className="text-white absolute z-[11] translate-x-1/2 translate-y-1/2 bottom-1/2 right-1/2 text-[45px] font-bold">
                   {t('shop').toUpperCase()}
                 </h2>
 
-                <div className="relative z-10 w-container mx-auto mt-auto pb-4">
+                <div className="relative z-10 w-container mx-auto pb-4 h-full flex items-end">
                   <div className="flex gap-2 text-white">
                     <Link href="/" className="hover:text-red-500 transition-all">
                       {t('home').toUpperCase()}
@@ -80,8 +82,9 @@ export default function Home() {
                   </div>
                 </div>
             </div>
-            <div className="py-16 grid -md:gap-6 md:grid-cols-product-list">
-                <ProductFilter t={t}/>
+
+            <div className="bg-neutral-100 pt-20 flex gap-8 flex-col">
+                <ProductFilter t={t} productCount={products.length}/>
                 <ProductList t={t} products={products}/>
             </div>
             <Widgets t={t}/>
