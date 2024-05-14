@@ -17,6 +17,7 @@ import { NextSeo } from "next-seo";
 import Widgets from "../../../components/Widgets";
 
 import { Lato } from 'next/font/google'
+import Link from "next/link";
 
 const lato = Lato({ subsets: ['latin'], weight: ["300","400","700"] })
 
@@ -66,6 +67,18 @@ export default function Home() {
                 <h2 className="text-white absolute z-20 translate-x-1/2 translate-y-1/2 bottom-1/2 right-1/2 text-[45px] font-bold">
                   {t('shop').toUpperCase()}
                 </h2>
+
+                <div className="relative z-10 w-container mx-auto mt-auto pb-4">
+                  <div className="flex gap-2 text-white">
+                    <Link href="/" className="hover:text-red-500 transition-all">
+                      {t('home').toUpperCase()}
+                    </Link>
+                    <span className="pointer-events-none">/</span>
+                    <Link href="/" className="hover:text-red-500 transition-all">
+                      {t('shop').toUpperCase()}
+                    </Link>
+                  </div>
+                </div>
             </div>
             <div className="py-16 grid -md:gap-6 md:grid-cols-product-list">
                 <ProductFilter t={t}/>

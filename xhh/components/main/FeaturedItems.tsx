@@ -36,7 +36,8 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
             .from('products')
             .select('*')
             .eq('isNew', true)
-            .range(0, 11);
+            .range(0, 11)
+            .order('title_vi', { ascending: false });
           
           if (error) {
             console.error('Error fetching data:', error);

@@ -9,7 +9,7 @@ const Banners = ({ t }: { t: TFunction}) => {
             <div className="md:flex-[40%] flex gap-8 -md:flex-col xl:flex-col justify-between">
                 <div className="bg-[#eee] relative flex-1 flex justify-between items-center">
                     <div className="-md:w-1/2 w-[65%] aspect-square m-auto">
-                        <Image src={newProduct1} alt="" />
+                        <Image src={chairImage} alt="" />
                     </div>
 
                     <span className="absolute left-[30px] top-[20px] px-2.5 rounded-[5px] bg-red-500 text-white text-[13px] leading-[25px]">
@@ -65,16 +65,16 @@ const Banners = ({ t }: { t: TFunction}) => {
                 </div>
             </div>
 
-            <div className="w-full bg-[#eee] relative">
-                <div className="-md:w-1/2">
-                    <Image src={chairImage} alt="" />
+            <div className="w-full bg-[#eee] relative flex items-center">
+                <div className="-md:w-1/2 w-1/2">
+                    <Image src={newProduct1} alt="" />
                 </div>
 
                 <div className="absolute bottom-1/2 translate-y-1/2 right-0 w-[45%] pr-[40px]">
-                    <h2 className="text-[25px] leading-[30px] text-[#666666] mb-2.5">
+                    <h2 className="text-sm md:text-[25px] leading-[30px] text-[#666666] mb-2.5">
                         WELCOME TO
                     </h2>
-                    <h2 className="text-[48px] leading-[1.1] font-bold text-[#434343] mb-4">
+                    <h2 className="text-2xl md:text-[48px] leading-[1.1] font-bold text-[#434343] mb-4">
                         XUÂN HÒA HOME
                     </h2>
                     <p className="text-[13px] leading-[1.2] text-[#878686] mb-6 -md:hidden">
