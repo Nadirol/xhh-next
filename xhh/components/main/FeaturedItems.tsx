@@ -17,7 +17,7 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
       {
           breakpoint: 800,
           settings: {
-              slidesToShow: 3,
+              slidesToShow: 4,
               slidesToScroll: 1
           }
       },
