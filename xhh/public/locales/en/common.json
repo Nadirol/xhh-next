@@ -90,5 +90,18 @@
 
     "newProducts": "New products",
     "shelf": "Shelf",
-    "discount": "Contact for discount"
+    "discount": "Contact for discount",
+
+    "new": "New",
+    "buyNow": "Buy now",
+    "shopNow": "Shop now",
+
+    "single-table": "Table",
+    "single-chair": "Chair",
+
+    "featuredProducts": "Featured Products",
+    "xhhProducts": "Products",
+    "newArrival": "New Arrival",
+
+    "tableChairSet": "Table and Chair Set"
 }

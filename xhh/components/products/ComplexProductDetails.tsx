@@ -133,31 +133,6 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
 
             </div>
           </div>
-
-          {(product.details_vi && product.details_en) && (
-            <div className="w-container-large mx-auto flex gap-4 flex-col">
-              <h3 className="text-neutral-800 font-semibold text-2xl underline">{t('details')}</h3>
-              <ul className="flex gap-4 flex-col list-disc list-inside">
-                {(i18n?.language === "vi" ? product.details_vi : product.details_en).map((d, index) => (
-                  <li key={index} className="text-neutral-700 text-xl">{d}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-
-
-          {(product.benefits_vi && product.benefits_en) && (
-            <div className="w-container-large mx-auto flex gap-4 flex-col">
-              <h3 className="text-neutral-800 font-semibold text-2xl underline">{t('benefits')}</h3>
-              <ul className="flex gap-4 flex-col list-disc list-inside">
-                {(i18n?.language === "vi" ? product.benefits_vi : product.benefits_en).map((d, index) => (
-                  <li key={index} className="text-neutral-700 text-xl">{d}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-
           <BonusBanner t={t}/>
           <Widgets t={t}/>
 

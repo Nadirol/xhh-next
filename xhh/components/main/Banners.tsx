@@ -57,7 +57,7 @@ const Banners = ({ t }: { t: TFunction}) => {
                         <div className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0 w-fit
                         bg-[#eee]">
                             {t('buyNow')}
-                            <div className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-110%] transition-all duration-300">
+                            <div className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-110%] transition-all duration-300 text-center">
                                 {t('buyNow')}
                             </div>
                         </div>

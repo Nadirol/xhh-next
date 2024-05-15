@@ -92,5 +92,18 @@
 
     "newProducts": "Sản Phẩm Mới",
     "shelf": "Tủ",
-    "discount": "Giá khuyến mãi: Liên Hệ"
+    "discount": "Giá khuyến mãi: Liên Hệ",
+    
+    "new": "Mới",
+    "buyNow": "Mua ngay",
+    "shopNow": "Shop ngay",
+
+    "single-table": "Bàn lẻ",
+    "single-chair": "Ghế lẻ",
+
+    "featuredProducts": "Sản phẩm bán chạy",
+    "xhhProducts": "Sản phẩm",
+    "newArrival": "Mới",
+
+    "tableChairSet": "Bộ bàn ghế"
 }

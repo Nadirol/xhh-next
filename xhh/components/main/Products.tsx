@@ -7,15 +7,20 @@ import supabase from "../../supabase";
 import Image from "next/image";
 import { starIcon } from "../../public/assets";
 
+function numberWithCommas(x: number) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
 const Products = ({ t }: { t: TFunction}) => {
     const [newProducts, setNewProducts] = useState<IProduct[]>([]);
+
+    const [filter, setFilter] = useState('')
 
     useEffect(() => {
         async function fetchData() {
           const { data, error } = await supabase
             .from('products')
             .select('*')
-            .range(0, 7)
             .order('id', { ascending: false });
           if (error) {
             console.error('Error fetching data:', error);
@@ -35,25 +40,25 @@ const Products = ({ t }: { t: TFunction}) => {
                 </h2>
 
                 <div className="flex w-fit gap-[30px] mx-auto mb-[23px]">
-                    <button>
+                    <button onClick={() => setFilter('')}>
                         {t('newArrival')}
                     </button>
 
-                    <button>
+                    <button onClick={() => setFilter('table-and-chair')}>
                         {t('table-and-chair')}
                     </button>
 
-                    <button>
-                        {t('shelf')}
+                    <button onClick={() => setFilter('single-table')}>
+                        {t('single-table')}
                     </button>
 
-                    <button>
-                        {t('woodenTiles')}
+                    <button onClick={() => setFilter('single-chair')}>
+                        {t('single-chair')}
                     </button>
                 </div>
 
                 <div className="relative w-full grid md:grid-cols-2 xl:grid-cols-4">
-                    {newProducts.map((i, index) => (
+                    {newProducts.filter((p) => filter ? p.category === filter : p).slice(0, 8).map((i, index) => (
                         <Link href={`/${i18n?.language}/products/${i.slug}`} key={index} 
                         className="flex gap-2.5 flex-col justify-between w-product-card min-w-[300px] snap-start min-h-[422px] -md:mx-auto
                         [&:hover>.absolute>img]:scale-[1.05] p-[15px] pb-[20px] hover:shadow-card transition-all duration-500">
@@ -68,16 +73,24 @@ const Products = ({ t }: { t: TFunction}) => {
                         <div className="w-full relative z-10 items-center
                         transition-[padding] duration-700">
                             <div className="w-full flex justify-between items-center">
-                                <h5>
-                                {t(i.category)}
-                                </h5>
+                                {i.price && (
+                                    <h3 className="text-xl text-red-500 font-bold">
+                                        {numberWithCommas(i.price)} đ
+                                    </h3>
+                                )}
 
-                                <div className="flex gap-[1px]">
-                                <Image src={starIcon} alt="" />
-                                <Image src={starIcon} alt="" />
-                                <Image src={starIcon} alt="" />
-                                <Image src={starIcon} alt="" />
-                                <Image src={starIcon} alt="" /> 
+                                <div className={`${i.price ? "flex flex-col items-end" : "w-full flex justify-between items-center"}`}>
+                                    <h5>
+                                        {t(i.category)}
+                                    </h5>
+
+                                    {/* <div className="flex gap-[1px]">
+                                        <Image src={starIcon} alt="" />
+                                        <Image src={starIcon} alt="" />
+                                        <Image src={starIcon} alt="" />
+                                        <Image src={starIcon} alt="" />
+                                        <Image src={starIcon} alt="" /> 
+                                    </div> */}
                                 </div>
                             </div>
                         </div>

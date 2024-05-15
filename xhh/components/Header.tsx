@@ -150,7 +150,13 @@ const Header = ({ t }: { t: TFunction }) => {
                                     <div className={`absolute right-0 top-0 h-full w-[300px] bg-white translate-x-[100%] pt-[172px] gap-4 flex-col pl-10
                                     border-l border-red-500 ${sidenavOpened ? '' : ''} hidden categories`}>
                                         <Link href="/" className="text-white font-bold hover:text-red-500 transition-all">
-                                            {t('table-and-chair').toUpperCase()}                                    
+                                            {t('table-and-chair')}                                    
+                                        </Link>
+                                        <Link href="/" className="text-white font-semibold hover:text-red-500 transition-all">
+                                            {t('single-table')}                                    
+                                        </Link>
+                                        <Link href="/" className="text-white font-semibold hover:text-red-500 transition-all">
+                                            {t('single-chair')}                                    
                                         </Link>
                                         <Link href="/" className="text-white font-bold hover:text-red-500 transition-all">
                                             {t('shelf')}                                    
@@ -239,11 +245,26 @@ const Header = ({ t }: { t: TFunction }) => {
                                 {t('products').toUpperCase()}
                             </Link>
 
-                            <div className={`absolute right-0 top-0 h-full w-[300px] bg-white translate-x-[100%] pt-[172px] gap-4 flex-col pl-10
+                            <div className={`absolute right-0 top-0 h-full w-[300px] bg-white translate-x-[100%] pt-[172px] flex-col pl-10
                             border-l border-red-500 ${sidenavOpened ? '' : ''} hidden categories`}>
-                                <Link href="/" className="text-[#666] font-bold hover:text-red-500 transition-all">
-                                    {t('table-and-chair').toUpperCase()}                                    
+                                <Link href="/" className="text-[#666] font-bold hover:text-red-500 transition-all mb-2 text-xl">
+                                    {t('table-and-chair')}                                    
                                 </Link>
+
+                                <div className="flex flex-col gap-2 mb-4">
+                                    <Link href="/" className="text-neutral-700 hover:text-red-500 transition-all">
+                                        {t('tableChairSet')}                                    
+                                    </Link>
+
+                                    <Link href="/" className="text-neutral-700 hover:text-red-500 transition-all">
+                                        {t('single-table')}                                    
+                                    </Link>
+
+                                    <Link href="/" className="text-neutral-700 hover:text-red-500 transition-all">
+                                        {t('single-chair')}                                    
+                                    </Link>
+                                </div>
+
                                 <Link href="/" className="text-[#666] font-bold hover:text-red-500 transition-all">
                                     {t('shelf')}                                    
                                 </Link>

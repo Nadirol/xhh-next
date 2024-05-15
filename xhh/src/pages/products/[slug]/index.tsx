@@ -74,65 +74,7 @@ export default function ProductDetails() {
           t={t}
         />
 
-        {product.category === "table-and-chair" || product.category === "shelf"
-        ? <ComplexProductDetails t={t} product={product} routes={routes}/>
-        : (
-          <main className="pt-[8rem] relative z-10 flex gap-12 flex-col">
-            <div className="w-container-large mx-auto flex gap-12 -xl:flex-col">
-              <div className="">
-                <Image src={product.image_url} alt="product image" width={300} height={500} className="w-1/2 xl:w-full object-cover"/>
-              </div>
-              <div className="flex gap-4 flex-col">
-                <Breadcrumb t={t} routes={routes}/>
-                <div className="flex gap-1 flex-col">
-                  <h1 className="text-neutral-800 font-semibold text-[2rem] xl:text-[4rem] leading-tight">{product.title_vi}</h1>
-                  {product.product_type && (
-                    <h4 className="text-neutral-500 text-sm">{product.product_type}</h4>
-                  )}
-                </div>
-
-                <ul className="flex gap-x-8 gap-y-2 flex-col flex-wrap list-disc list-inside">
-                  {(i18n?.language === "vi" ? product.details_vi : product.details_en).map((d, index) => (
-                    <li key={index} className="text-neutral-700 text-xl">{d}</li>
-                  ))}
-                </ul>
-                
-                <h3 className="text-neutral-500">
-                  <Link href={`/${i18n?.language}/contact`} className="text-red-600">{t('contactUs')}</Link>&nbsp;{t('ifInterested')}
-                </h3>
-              </div>
-            </div>
-
-            {(product.description_vi && product.description_en) && (
-              <div className="w-container-large mx-auto flex gap-4 flex-col">
-                <h3 className="text-neutral-800 font-semibold text-2xl underline">{t('description')}</h3>
-                <ul className="flex gap-4 flex-col list-disc list-inside">
-                  {(i18n?.language === "vi" ? product.description_vi : product.description_en).map((d, index) => (
-                    <li key={index} className="text-neutral-700 text-xl">{d}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            
-            {(product.benefits_vi && product.benefits_en) && (
-              <div className="w-container-large mx-auto flex gap-4 flex-col">
-                <h3 className="text-neutral-800 font-semibold text-2xl underline">{t('benefits')}</h3>
-                <ul className="flex gap-4 flex-col list-disc list-inside">
-                  {(i18n?.language === "vi" ? product.benefits_vi : product.benefits_en).map((d, index) => (
-                    <li key={index} className="text-neutral-700 text-xl">{d}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {product.category === "curtain" && (
-              <RelatedProducts t={t} product={product}/>
-            )}
-            <BonusBanner t={t}/>
-            <Widgets t={t}/>
-          </main>
-        )}
-
-
+        <ComplexProductDetails t={t} product={product} routes={routes}/>
 
         <Footer
           t={t}
