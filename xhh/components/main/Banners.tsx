@@ -2,15 +2,20 @@ import { TFunction, i18n } from "next-i18next"
 import { chairImage, newProduct1, newProduct2 } from "../../public/assets";
 import Image from "next/image";
 import Link from "next/link";
+import { IBanner } from "../../interface/interface";
+import { urlFor } from "../../lib/sanity";
 
-const Banners = ({ t }: { t: TFunction}) => {
-
+const Banners = ({ t, banner }: { t: TFunction, banner: IBanner }) => {
     return (
         <div className="md:px-[100px] flex gap-10 -xl:flex-col-reverse">
             <div className="md:flex-[40%] flex gap-8 -md:flex-col xl:flex-col justify-between">
                 <div className="bg-[#eee] relative flex-1 flex justify-between items-center">
                     <div className="-md:w-1/2 w-[65%] aspect-square m-auto">
-                        <Image src={chairImage} alt="" />
+                        {
+                            (banner?.banner1?.image && banner?.banner1?.link)
+                            ? <Image width={280} height={280} src={urlFor(banner?.banner1?.image).url()} alt="" />
+                            : <Image src={chairImage} alt="" />
+                        }
                     </div>
 
                     <span className="absolute left-[30px] top-[20px] px-2.5 rounded-[5px] bg-red-500 text-white text-[13px] leading-[25px]">
@@ -34,7 +39,7 @@ const Banners = ({ t }: { t: TFunction}) => {
                         <div
                         className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0 overflow-hidden">
                             {t('buyNow')}
-                            <Link href={`/${i18n?.language}/products/ghe-hoc-sinh-ghs-02xh`} className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-100%] transition-all duration-300 text-center">
+                            <Link href={banner?.banner1?.link ? banner?.banner1?.link : `/${i18n?.language}/products/ghe-hoc-sinh-ghs-02xh`} className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-100%] transition-all duration-300 text-center">
                                 {t('buyNow')}
                             </Link>
                         </div>
@@ -43,7 +48,11 @@ const Banners = ({ t }: { t: TFunction}) => {
 
                 <div className="bg-[#eee] relative flex-1 flex items-center">
                     <div className="-md:w-1/3 -md:py-4 w-1/2 pl-4 py-auto">
-                        <Image src={newProduct2} alt="" className="" />
+                        {
+                            (banner?.banner2?.image && banner?.banner2?.link)
+                            ? <Image width={280} height={280} src={urlFor(banner?.banner2?.image).url()} alt="" />
+                            : <Image src={newProduct2} alt="" />
+                        }                    
                     </div>
 
                     <div className="absolute right-0 bottom-1/2 translate-y-1/2 w-[45%] pr-[30px]">
@@ -58,7 +67,7 @@ const Banners = ({ t }: { t: TFunction}) => {
                         <div className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0 w-fit
                         bg-[#eee]">
                             {t('buyNow')}
-                            <Link href={`/${i18n?.language}/products`} className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-110%] transition-all duration-300 text-center">
+                            <Link href={banner?.banner2?.link ? banner?.banner2?.link : `/${i18n?.language}/products`} className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-110%] transition-all duration-300 text-center">
                                 {t('buyNow')}
                             </Link>
                         </div>
@@ -68,7 +77,11 @@ const Banners = ({ t }: { t: TFunction}) => {
 
             <div className="w-full bg-[#eee] relative flex items-center">
                 <div className="-md:w-1/2 w-1/2">
-                    <Image src={newProduct1} alt="" />
+                    {
+                        (banner?.banner3?.image && banner?.banner3?.link)
+                        ? <Image width={280} height={280} src={urlFor(banner?.banner3?.image).url()} alt="" />
+                        : <Image src={newProduct1} alt="" />
+                    }                
                 </div>
 
                 <div className="absolute bottom-1/2 translate-y-1/2 right-0 w-[45%] pr-[40px]">

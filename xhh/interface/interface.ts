@@ -43,3 +43,20 @@ export interface IPost {
     image: any,
     published: boolean
 }
+
+export interface IBanner {
+    title: string,
+    image: any,
+    banner1: {
+        image: any | null,
+        link: string | null
+    },
+    banner2: {
+        image: any | null,
+        link: string | null
+    },
+    banner3: {
+        image: any | null,
+        link: string | null
+    }
+}

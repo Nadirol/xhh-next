@@ -9,7 +9,7 @@ import { NextSeo } from 'next-seo';
 import Widgets from "../../components/Widgets"
 
 import News from "../../components/main/News"
-import { IPost } from "../../interface/interface"
+import { IBanner, IPost } from "../../interface/interface"
 import { client } from "../../lib/sanity"
 
 import Banners from "../../components/main/Banners"
@@ -27,8 +27,18 @@ async function getData() {
   return data;
 }
 
-export default function Home({ data }: { data: IPost[]}) {
+async function getBannerData() {
+  const query = `*[_type == "bannersXHH"]`;
+
+  const data = await client.fetch(query);
+
+  return data;
+}
+
+export default function Home({ data, bannerData }: { data: IPost[], bannerData: IBanner[] }) {
   const { t } = useTranslation('common');
+
+  console.log(bannerData)
 
   return (
     <>
@@ -44,7 +54,7 @@ export default function Home({ data }: { data: IPost[]}) {
         />
 
         <main className="-md:mt-8">
-          <Banners t={t}/>
+          <Banners t={t} banner={bannerData[0]}/>
           <FeaturedItems t={t}/>
           <Slider/>
           <Products t={t}/>
@@ -65,9 +75,12 @@ export default function Home({ data }: { data: IPost[]}) {
 export async function getServerSideProps({ locale }: { locale: string }) {
   const data = await getData() as IPost[];
 
+  const bannerData = await getBannerData() as IBanner[];
+
   return {
     props: {
       data: data,
+      bannerData: bannerData,
       ...(await serverSideTranslations(locale, [
           'common',
       ]))
