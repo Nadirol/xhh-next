@@ -18,7 +18,7 @@ import slugify from "slugify";
 import { SmallIdealImage } from "../../../components/SmallSanityImage";
 
 async function getData(slug: string) {
-  const query = `*[_type == "post" && slug.current == "${slug}"][0]`;
+  const query = `*[_type == "postXHH" && slug.current == "${slug}"][0]`;
 
   const data = await client.fetch(query);
 
@@ -26,7 +26,7 @@ async function getData(slug: string) {
 }
 
 async function getRecentData() {
-const query = `*[_type == "post"] | order(_createdAt desc)[0...5]`;
+const query = `*[_type == "postXHH"] | order(_createdAt desc)[0...5]`;
 
 const data = await client.fetch(query);
 
@@ -69,9 +69,9 @@ const assignHeadingIds = (content: object[]) => {
 return (
   <>
     <NextSeo
-      title={`${data.title || ""} | Xuân Hòa Home`}
-      description={data.overview}
-      canonical={`https://www.xhhome.vn/news/${data.slug.current}`}    
+      title={`${data?.title || ""} | Xuân Hòa Home`}
+      description={data?.overview}
+      canonical={`https://www.xhhome.vn/news/${data?.slug?.current}`}    
     />
     <div className="overflow-hidden">
       <Header
