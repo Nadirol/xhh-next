@@ -20,6 +20,7 @@ import { NextSeo } from "next-seo";
 import Widgets from "../../../../components/Widgets";
 
 import { Lato } from 'next/font/google'
+import supabase from "../../../../supabase";
 
 const lato = Lato({ subsets: ['latin'], weight: ["300","400","700"] })
 
@@ -32,21 +33,43 @@ export default function ProductDetails() {
   const [isLoading, setIsLoading] = useState(true);
   
   const [product, setProduct] = useState<IProduct>();
+  const [relevantProducts, setRelevantProducts] = useState<IProduct[]>([]);
+
+  async function fetchRelevantData(slug: string | string[], category: string) {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .order('id', { ascending: false })
+      .eq('category', category)
+      .neq('slug', slug)
+      .range(0, 3);
+    if (error) {
+      console.error('Error fetching data:', error);
+    } else {
+      setRelevantProducts(data);
+    }
+  }
 
   useEffect(() => {
     setIsLoading(true)
+
     // Make the API request with the slug as part of the URL path
     const fetchData = async () => {
       const response = await fetch(`/api/product/${slug}`);
       const data = await response.json();
       setProduct(data);
       setIsLoading(false)
+
+      return data
     };
 
     if (slug) {
-      fetchData();
+      fetchData().then((data: IProduct) => fetchRelevantData(slug, data.category));
+      
     }
   }, [slug]);
+
+  console.log(relevantProducts)
 
   const routes = [
     { name: t('home'), path: `${i18n?.language}/` },
@@ -74,7 +97,7 @@ export default function ProductDetails() {
           t={t}
         />
 
-        <ComplexProductDetails t={t} product={product} routes={routes}/>
+        <ComplexProductDetails t={t} product={product} routes={routes} relevantProducts={relevantProducts}/>
 
         <Footer
           t={t}

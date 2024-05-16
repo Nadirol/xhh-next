@@ -20,7 +20,7 @@ import Products from "../../components/main/Products"
 const lato = Lato({ subsets: ['latin'], weight: ["300","400","700"] })
 
 async function getData() {
-  const query = `*[_type == "post"] | order(_createdAt desc) { _id,title,image,_createdAt,overview,slug }[0...2]`;
+  const query = `*[_type == "postXHH"] | order(_createdAt desc) { _id,title,image,_createdAt,overview,slug }[0...2]`;
 
   const data = await client.fetch(query);
 

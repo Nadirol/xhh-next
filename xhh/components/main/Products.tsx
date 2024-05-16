@@ -1,11 +1,9 @@
 import { TFunction, i18n } from "next-i18next"
-import FadeInOnScroll from "../animated/FadeInOnScroll";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IProduct } from "../../interface/interface";
 import supabase from "../../supabase";
 import Image from "next/image";
-import { starIcon } from "../../public/assets";
 
 function numberWithCommas(x: number) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -58,7 +56,7 @@ const Products = ({ t }: { t: TFunction}) => {
                 </div>
 
                 <div className="relative w-full grid md:grid-cols-2 xl:grid-cols-4">
-                    {newProducts.filter((p) => filter ? p.category === filter : p).slice(0, 8).map((i, index) => (
+                    {newProducts.filter((p) => filter ? p.category === filter : p).slice(0, 4).map((i, index) => (
                         <Link href={`/${i18n?.language}/products/${i.slug}`} key={index} 
                         className="flex gap-2.5 flex-col justify-between w-product-card min-w-[300px] snap-start min-h-[422px] -md:mx-auto
                         [&:hover>.absolute>img]:scale-[1.05] p-[15px] pb-[20px] hover:shadow-card transition-all duration-500">

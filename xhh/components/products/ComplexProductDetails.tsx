@@ -7,12 +7,13 @@ import Breadcrumb from '../Breadcrumb';
 import { useState } from 'react';
 import BonusBanner from './BonusBanner';
 import Widgets from '../Widgets';
+import Link from 'next/link';
 
 function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: IProduct, routes: { name: string | undefined, path: string }[]}) => {
+const ComplexProductDetails = ({ t, product, routes, relevantProducts }: { t: TFunction, product: IProduct, routes: { name: string | undefined, path: string }[], relevantProducts: IProduct[]}) => {
     const [activeImage, setActiveImage] = useState(0);
     const [activeType, setActiveType] = useState(0);
 
@@ -27,7 +28,7 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
             <div className="flex gap-12 flex-col">
               <div className="flex justify-center items-center md:min-w-[400px]">
                 <Image src={product.preview_images ? product.preview_images[activeImage] : product.image_url} alt="product image" 
-                width={300} height={300} className="w-3/4 object-cover aspect-square"/>
+                width={400} height={400} className="w-full object-cover aspect-square"/>
               </div>
 
               {product.preview_images && (
@@ -133,6 +134,39 @@ const ComplexProductDetails = ({ t, product, routes }: { t: TFunction, product: 
 
             </div>
           </div>
+
+          <div className="relative w-container mx-auto grid md:grid-cols-2 xl:grid-cols-4">
+                {relevantProducts.map((i, index) => (
+                    <Link href={`/${i18n?.language}/products/${i.slug}`} key={index} 
+                    className="flex gap-2.5 flex-col justify-between w-product-card min-w-[300px] snap-start min-h-[422px] -md:mx-auto
+                    [&:hover>.absolute>img]:scale-[1.05] p-[15px] pb-[20px] hover:shadow-card transition-all duration-500">
+                    <div className="">
+                        <div className="overflow-hidden">
+                            <Image src={i.image_url} alt="curtain image" width={400} height={400} className="object-cover
+                            transition-[transform] duration-700 min-h-[300px]"/>
+                        </div>
+                        <h3 className="text-[#434343] mb-[5px] font-semibold">{i.title_vi.toUpperCase()}</h3>
+                    </div>
+
+                    <div className="w-full relative z-10 items-center
+                    transition-[padding] duration-700">
+                        <div className="w-full flex justify-between items-center">
+                            {i.price && (
+                                <h3 className="text-xl text-red-500 font-bold">
+                                    {numberWithCommas(i.price)} đ
+                                </h3>
+                            )}
+
+                            <div className={`${i.price ? "flex flex-col items-end" : "w-full flex justify-between items-center"}`}>
+                                <h5>
+                                    {t(i.category)}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    </Link>
+                ))}
+            </div>
           <BonusBanner t={t}/>
           <Widgets t={t}/>
 
