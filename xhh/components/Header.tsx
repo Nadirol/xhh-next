@@ -247,20 +247,20 @@ const Header = ({ t }: { t: TFunction }) => {
 
                             <div className={`absolute right-0 top-0 h-full w-[300px] bg-white translate-x-[100%] pt-[172px] flex-col pl-10
                             border-l border-red-500 ${sidenavOpened ? '' : ''} hidden categories`}>
-                                <Link href="/" className="text-[#666] font-bold hover:text-red-500 transition-all mb-2 text-xl">
+                                <Link href={`/${i18n?.language}/products?category=table-and-chair`} className="text-[#666] font-bold hover:text-red-500 transition-all mb-2 text-xl">
                                     {t('table-and-chair')}                                    
                                 </Link>
 
                                 <div className="flex flex-col gap-2 mb-4">
-                                    <Link href="/" className="text-neutral-700 hover:text-red-500 transition-all">
+                                    <Link href={`/${i18n?.language}/products?category=table-and-chair`} className="text-neutral-700 hover:text-red-500 transition-all">
                                         {t('tableChairSet')}                                    
                                     </Link>
 
-                                    <Link href="/" className="text-neutral-700 hover:text-red-500 transition-all">
+                                    <Link href={`/${i18n?.language}/products?category=single-table`} className="text-neutral-700 hover:text-red-500 transition-all">
                                         {t('single-table')}                                    
                                     </Link>
 
-                                    <Link href="/" className="text-neutral-700 hover:text-red-500 transition-all">
+                                    <Link href={`/${i18n?.language}/products?category=single-chair`} className="text-neutral-700 hover:text-red-500 transition-all">
                                         {t('single-chair')}                                    
                                     </Link>
                                 </div>

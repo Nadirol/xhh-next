@@ -22,7 +22,7 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts }: { t: TF
     };
 
     return (
-        <main className="pt-[8rem] relative z-10 flex gap-12 flex-col">
+        <main className="pt-[2rem] relative z-10 flex gap-12 flex-col">
           <div className="w-container-large mx-auto flex gap-12 -md:flex-col">
 
             <div className="flex gap-12 flex-col">

@@ -83,7 +83,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="bg-neutral-100 pt-20 flex gap-8 flex-col">
+            <div className="bg-neutral-100 pt-8 flex gap-8 flex-col">
                 <ProductFilter t={t} productCount={products.length}/>
                 <ProductList t={t} products={products}/>
             </div>

@@ -1,6 +1,7 @@
-import { TFunction } from "next-i18next"
+import { TFunction, i18n } from "next-i18next"
 import { chairImage, newProduct1, newProduct2 } from "../../public/assets";
 import Image from "next/image";
+import Link from "next/link";
 
 const Banners = ({ t }: { t: TFunction}) => {
 
@@ -16,28 +17,28 @@ const Banners = ({ t }: { t: TFunction}) => {
                         {t('new')}
                     </span>
 
-                    <span className="absolute right-[30px] top-[20px] leading-[25px]">
-                        250.000đ
+                    <span className="absolute right-[30px] top-[20px] leading-[25px] font-semibold text-red-500 text-lg">
+                        1.280.000đ
                     </span>
 
                     <div className="absolute left-[30px] bottom-[20px] leading-[15px]">
                         <h2 className="font-bold mb-[5px]">
-                            Product Name
+                            Ghế học sinh - GHS-02XH
                         </h2>
                         <p className="text-[13px]">
-                            Furniture
+                            Ghế
                         </p>
                     </div>
 
-                    <button className="absolute right-[30px] bottom-[20px] ">
-                        <div className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0">
+                    <div className="absolute right-[30px] bottom-[20px]">
+                        <div
+                        className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0 overflow-hidden">
                             {t('buyNow')}
-                            <div className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-100%] transition-all duration-300">
+                            <Link href={`/${i18n?.language}/products/ghe-hoc-sinh-ghs-02xh`} className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-100%] transition-all duration-300 text-center">
                                 {t('buyNow')}
-                            </div>
+                            </Link>
                         </div>
-
-                    </button>
+                    </div>
                 </div>
 
                 <div className="bg-[#eee] relative flex-1 flex items-center">
@@ -47,19 +48,19 @@ const Banners = ({ t }: { t: TFunction}) => {
 
                     <div className="absolute right-0 bottom-1/2 translate-y-1/2 w-[45%] pr-[30px]">
                         <span className="text-xl leading-[15px] font-bold mb-[15px]">
-                            New Product 2024
+                            Sản phẩm mới 2024
                         </span>
 
-                        <p className="text-[13px] mb-[30px] leading-[20px] -md:hidden">
+                        {/* <p className="text-[13px] mb-[30px] leading-[20px] -md:hidden">
                             Lorem Ipsum is simply dummy text of the printing and types sate industry.
-                        </p>
+                        </p> */}
 
                         <div className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0 w-fit
                         bg-[#eee]">
                             {t('buyNow')}
-                            <div className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-110%] transition-all duration-300 text-center">
+                            <Link href={`/${i18n?.language}/products`} className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-110%] transition-all duration-300 text-center">
                                 {t('buyNow')}
-                            </div>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -77,9 +78,9 @@ const Banners = ({ t }: { t: TFunction}) => {
                     <h2 className="text-2xl md:text-[48px] leading-[1.1] font-bold text-[#434343] mb-4">
                         XUÂN HÒA HOME
                     </h2>
-                    <p className="text-[13px] leading-[1.2] text-[#878686] mb-6 -md:hidden">
+                    {/* <p className="text-[13px] leading-[1.2] text-[#878686] mb-6 -md:hidden">
                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable
-                    </p>
+                    </p> */}
                     <div className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0 w-fit
                     bg-[#eee]">
                         {t('shopNow')}
