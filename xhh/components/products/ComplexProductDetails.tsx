@@ -1,5 +1,3 @@
-
-
 import { TFunction, i18n } from 'next-i18next';
 import { IProduct } from '../../interface/interface';
 import Image from 'next/image';
@@ -8,17 +6,37 @@ import { useState } from 'react';
 import BonusBanner from './BonusBanner';
 import Widgets from '../Widgets';
 import Link from 'next/link';
+import { PortableText } from "@portabletext/react";
+import { urlFor } from '../../lib/sanity';
+import { arrowUpIcon } from '../../public/assets';
 
 function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-const ComplexProductDetails = ({ t, product, routes, relevantProducts }: { t: TFunction, product: IProduct, routes: { name: string | undefined, path: string }[], relevantProducts: IProduct[]}) => {
+const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentData }: 
+  { t: TFunction, product: IProduct, routes: { name: string | undefined, path: string }[], relevantProducts: IProduct[], contentData: any}) => {
     const [activeImage, setActiveImage] = useState(0);
     const [activeType, setActiveType] = useState(0);
 
     const handleMouseEnterImage = (index: number) => {
       setActiveImage(index)
+    };
+
+    const [descriptionExpanded, setDescriptionExpanded] = useState(true)
+    
+    const PortableTextComponent = {
+      types: {
+        image: ({ value }: { value: any }) => (
+          <Image
+            src={urlFor(value).url()}
+            alt="Image"
+            className="rounded-lg"
+            width={800}
+            height={800}
+          />
+        ),
+      },
     };
 
     return (
@@ -77,8 +95,7 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts }: { t: TF
               )}
 
               {(product.description_vi && product.description_en) && (
-                <div className="w-container-large mx-auto flex gap-4 flex-col">
-                  <h3 className="text-neutral-800 font-semibold text-2xl underline">{t('details')}</h3>
+                <div className="flex gap-4 flex-col">
                   <ul className="flex gap-4 flex-col list-disc list-inside">
                     {(i18n?.language === "vi" ? product.description_vi : product.description_en).map((d, index) => (
                       <li key={index} className="text-neutral-700 text-xl">{d}</li>
@@ -93,13 +110,12 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts }: { t: TF
                     {Object.keys((i18n?.language === "vi"
                       ? product.specific_description_vi
                       : product.specific_description_en)?.[activeType] ?? {}).map((key, index) => key !== "product_type" && (
-                        <li key={index} className="text-red-700 font-medium text-2xl">
-                          <span className="relative">{t(key)}:</span>
+                        <li key={index} className="text-neutral-800 font-medium text-xl">
                           {Array.isArray((i18n?.language === "vi"
                               ? product.specific_description_vi
                               : product.specific_description_en)?.[activeType]?.[key])
                             ? (
-                              <ul className="flex gap-2 flex-col text-neutral-800 font-normal text-sm ml-6 mt-1">
+                              <ul className="flex gap-2 flex-col text-neutral-800 font-normal text-sm">
                               {(i18n?.language === "vi"
                                 ? product.specific_description_vi
                                 : product.specific_description_en)?.[activeType]?.[key]?.map((s: string, index: number) => (
@@ -108,11 +124,12 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts }: { t: TF
                             </ul>
                             )
                             : (
-                              <h3 className="text-neutral-800 font-normal text-sm ml-6 mt-1">
+                              <span className="text-neutral-800 font-normal text-xl">
+                                {t(key)}:&nbsp;
                                 {(i18n?.language === "vi"
                                   ? product.specific_description_vi
                                   : product.specific_description_en)?.[activeType]?.[key]}
-                              </h3>
+                              </span>
                             )
                           }
 
@@ -123,50 +140,81 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts }: { t: TF
               )}
 
               <div className="flex gap-2 flex-col">
-                <h3 className='text-red-700 font-medium'>{t('guarantee')}:</h3>
-                <ul className='list-disc ml-8 text-neutral-800 text-sm'>
+                <h3 className='text-red-700 text-xl font-medium'>{t('guarantee')}:</h3>
+                <ul className='list-disc ml-8 text-neutral-800 text-xl flex gap-4 flex-col'>
                   <li>{t('guarantee1')}</li>
                   <li>{t('guarantee2')}</li>
                   <li>{t('guarantee3')}</li>
                   <li>{t('guarantee4')}</li>
                 </ul>
               </div>
-
             </div>
           </div>
 
-          <div className="relative w-container mx-auto grid md:grid-cols-2 xl:grid-cols-4">
-                {relevantProducts.map((i, index) => (
-                    <Link href={`/${i18n?.language}/products/${i.slug}`} key={index} 
-                    className="flex gap-2.5 flex-col justify-between w-product-card min-w-[300px] snap-start min-h-[422px] -md:mx-auto
-                    [&:hover>.absolute>img]:scale-[1.05] p-[15px] pb-[20px] hover:shadow-card transition-all duration-500">
-                    <div className="">
-                        <div className="overflow-hidden">
-                            <Image src={i.image_url} alt="curtain image" width={400} height={400} className="object-cover
-                            transition-[transform] duration-700 min-h-[300px]"/>
-                        </div>
-                        <h3 className="text-[#434343] mb-[5px] font-semibold">{i.title_vi.toUpperCase()}</h3>
-                    </div>
+          {(contentData) && (
+            <div className={`w-container-large mx-auto flex gap-3 flex-col bg-white p-12 mb-4
+            ${descriptionExpanded ? '' : 'max-h-[600px] after:from-white after:to-transparent after:bg-gradient-to-t' } overflow-hidden relative
+            after:absolute after:z-[10] after:left-0 after:bottom-0 after:h-[300px] after:w-full`}>
+              <h3 className='text-center text-[#444] text-[30px] font-bold pb-[22px] mb-[25px] relative
+                before:absolute before:right-1/2 before:bottom-0 before:h-[1px] before:w-8 before:bg-red-500 before:translate-x-1/2'>{t('details')}</h3>
 
-                    <div className="w-full relative z-10 items-center
-                    transition-[padding] duration-700">
-                        <div className="w-full flex justify-between items-center">
-                            {i.price && (
-                                <h3 className="text-xl text-red-500 font-bold">
-                                    {numberWithCommas(i.price)} đ
-                                </h3>
-                            )}
+              <div className={`text-zinc-600 text-xl
+                flex gap-4 flex-col mb-8 [&>ul]:list-disc [&>ul]:list-inside [&>ol]:list-decimal [&>ol]:list-inside
+                [&>h1]:font-bold [&>h2]:font-bold [&>h3]:font-bold [&>h4]:font-bold [&>h5]:font-bold [&>h6]:font-bold
+                [&>h1]:text-4xl [&>h2]:text-3xl [&>h3]:text-2xl [&>h4]:text-xl [&>h5]:text-lg
+                [&>img]:h-1/2 [&>img]:w-1/2 [&>img]:mx-auto text-justify`}>
+                  <PortableText
+                      value={contentData.content}
+                      components={PortableTextComponent}
+                  />
+              </div>
 
-                            <div className={`${i.price ? "flex flex-col items-end" : "w-full flex justify-between items-center"}`}>
-                                <h5>
-                                    {t(i.category)}
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                    </Link>
-                ))}
+              <button className="absolute z-[20] bottom-4 right-1/2 translate-x-1/2 p-2" onClick={() => setDescriptionExpanded(prevState => !prevState)}>
+                <Image src={arrowUpIcon} alt="arrow down icon" className={`${descriptionExpanded ? '' : 'rotate-180'}`}/>
+              </button>
             </div>
+          )}
+
+          <div className="">
+            <h2 className="text-center text-[#444] text-[30px] font-bold pb-[22px] mb-[25px] relative
+                before:absolute before:right-1/2 before:bottom-0 before:h-[1px] before:w-8 before:bg-red-500 before:translate-x-1/2">
+              {t('similarProducts')}
+            </h2>
+
+            <div className="relative w-container mx-auto grid md:grid-cols-2 xl:grid-cols-4">          
+              {relevantProducts.map((i, index) => (
+                      <Link href={`/${i18n?.language}/products/${i.slug}`} key={index} 
+                      className="flex gap-2.5 flex-col justify-between w-product-card min-w-[300px] snap-start min-h-[422px] -md:mx-auto
+                      [&:hover>.absolute>img]:scale-[1.05] p-[15px] pb-[20px] hover:shadow-card transition-all duration-500">
+                      <div className="">
+                          <div className="overflow-hidden">
+                              <Image src={i.image_url} alt="curtain image" width={400} height={400} className="object-cover
+                              transition-[transform] duration-700 min-h-[300px]"/>
+                          </div>
+                          <h3 className="text-[#434343] mb-[5px] font-semibold">{i.title_vi.toUpperCase()}</h3>
+                      </div>
+
+                      <div className="w-full relative z-10 items-center
+                      transition-[padding] duration-700">
+                          <div className="w-full flex justify-between items-center">
+                              {i.price && (
+                                  <h3 className="text-xl text-red-500 font-bold">
+                                      {numberWithCommas(i.price)} đ
+                                  </h3>
+                              )}
+
+                              <div className={`${i.price ? "flex flex-col items-end" : "w-full flex justify-between items-center"}`}>
+                                  <h5>
+                                      {t(i.category)}
+                                  </h5>
+                              </div>
+                          </div>
+                      </div>
+                      </Link>
+                  ))}
+            </div>
+          </div>
+
           <BonusBanner t={t}/>
           <Widgets t={t}/>
 

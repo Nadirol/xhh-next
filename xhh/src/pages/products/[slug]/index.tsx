@@ -8,23 +8,24 @@ import Footer from "../../../../components/Footer";
 import { IProduct } from "../../../../interface/interface";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import Breadcrumb from "../../../../components/Breadcrumb";
-import RelatedProducts from "../../../../components/products/RelatedProducts";
 import ProductDetailsSkeleton from "../../../../components/products/ProductDetailsSkeleton";
 import ComplexProductDetails from "../../../../components/products/ComplexProductDetails";
-import BonusBanner from "../../../../components/products/BonusBanner";
 import { NextSeo } from "next-seo";
-
-import Widgets from "../../../../components/Widgets";
-
 import { Lato } from 'next/font/google'
 import supabase from "../../../../supabase";
+import { client } from "../../../../lib/sanity";
 
 const lato = Lato({ subsets: ['latin'], weight: ["300","400","700"] })
 
-export default function ProductDetails() {
+async function getData() {
+  const query = `*[_type == "productXHH" && slug.current == "test"][0]`;
+
+  const data = await client.fetch(query);
+
+  return data;
+}
+
+export default function ProductDetails({contentData} : {contentData: any}) {
   const { t } = useTranslation('common');
 
   const router = useRouter();
@@ -69,7 +70,6 @@ export default function ProductDetails() {
     }
   }, [slug]);
 
-  console.log(relevantProducts)
 
   const routes = [
     { name: t('home'), path: `${i18n?.language}/` },
@@ -97,7 +97,7 @@ export default function ProductDetails() {
           t={t}
         />
 
-        <ComplexProductDetails t={t} product={product} routes={routes} relevantProducts={relevantProducts}/>
+        <ComplexProductDetails t={t} product={product} routes={routes} relevantProducts={relevantProducts} contentData={contentData}/>
 
         <Footer
           t={t}
@@ -107,24 +107,15 @@ export default function ProductDetails() {
   )
 }
 
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-
-
-    const paths: any = [];
-
-    return {
-        paths: paths, //indicates that no page needs be created at build time
-        fallback: 'blocking' //indicates the type of fallback
-    }
-}
-
-export async function getStaticProps({ locale }: { locale: string}) {
+export async function getServerSideProps({ locale }: { locale: string }) {
+  const contentData = await getData() as {title: string, slug: any, content: any};
+  
   return {
     props: {
+      contentData: contentData,
       ...(await serverSideTranslations(locale, [
         'common',
-      ])),
-      // Will be passed to the page component as props
-    },    
-  }
+    ]))
+  }, // will be passed to the page component as props
 };
+}

@@ -5,10 +5,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { NextSeo } from "next-seo";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
-import { getImageDimensions } from '@sanity/asset-utils';
 import { client, urlFor } from "../../../lib/sanity";
 import { IPost } from "../../../interface/interface";
 import Header from "../../../components/Header";
