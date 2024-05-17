@@ -19,7 +19,14 @@ export interface IProduct {
     features_vi: { icon: string, feature: string }[] | null,
     features_en: ITableAndChairDescription[] | null,
     isNew: boolean | null,
-    price: number | null
+    price: number | null,
+    bonus: string[] | null,
+    price_set: {
+        size: string,
+        fullPrice: number,
+        price: number,
+        discount: number
+    }[] | null
 }
 
 interface ITableAndChairDescription {

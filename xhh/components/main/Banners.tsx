@@ -47,7 +47,7 @@ const Banners = ({ t, banner }: { t: TFunction, banner: IBanner }) => {
                 </div>
 
                 <div className="bg-[#eee] relative flex-1 flex items-center">
-                    <div className="-md:w-1/3 -md:py-4 w-1/2 pl-4 py-auto">
+                    <div className="-md:w-1/3 -md:py-4 w-1/2 pl-4 py-auto py-2">
                         {
                             (banner?.banner2?.image && banner?.banner2?.link)
                             ? <Image width={280} height={280} src={urlFor(banner?.banner2?.image).url()} alt="" />

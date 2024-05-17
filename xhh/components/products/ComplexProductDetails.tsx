@@ -39,6 +39,8 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
       },
     };
 
+    const [selectedSize, setSelectedSize] = useState(0)
+
     return (
         <main className="pt-[2rem] relative z-10 flex gap-12 flex-col">
           <div className="w-container-large mx-auto flex gap-12 -md:flex-col">
@@ -73,6 +75,34 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
                   <span className='text-base text-neutral-800 font-normal'>vnđ</span> <br />
                   <span className='text-base text-neutral-800 font-normal'>&#40;{t('discount')} &#41;</span>
                   </h3>
+                </div>
+              )}
+
+              {product.price_set && (
+                <div className="flex gap-4 flex-col">
+                  <div className="flex gap-2 items-center">
+                    <h4 className='text-neutral-500 line-through'>
+                      đ{numberWithCommas(product.price_set[selectedSize].fullPrice)}
+                    </h4>
+                    <h4 className='text-3xl font-semibold text-red-500'>{numberWithCommas(product.price_set[selectedSize].price)}
+                      <span className='text-base font-normal'>đ</span> <br />
+                    </h4>
+
+                    <div className="bg-red-500 rounded-2xl text-white px-4 py-1 ml-4">
+                      {product.price_set[selectedSize].discount + "% " + t('sale')}
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2.5 items-center">
+                    {product.price_set.map((p, index) => (
+                      <button key={index} onClick={() => setSelectedSize(index)} 
+                      className='px-4 py-2 border-2 border-neutral-800 hover:border-red-500 transition-all
+                      text-lg hover:text-red-500'>
+                        {p.size}
+                      </button>
+                    ))}
+                  </div>
+
                 </div>
               )}
 
@@ -137,6 +167,12 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
                       ))}
                   </ul>
                 </div>
+              )}
+
+              {product.bonus && (
+                <ul className="text-neutral-700 text-xl flex gap-2 list-disc list-inside">
+                  <li>{t('bonus')}: {product.bonus?.join(', ')}</li>
+                </ul>
               )}
 
               <div className="flex gap-2 flex-col">
