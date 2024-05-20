@@ -114,8 +114,8 @@ const ProductFilter = ({ t, productCount, setSizes, tableSizes, sortOption, setS
                             <span className="whitespace-nowrap py-1 min-w-[80px]">{t('single-table')}:</span>
 
                             <div className="flex gap-1 w-[400px] flex-wrap">
-                                {tableSizes.map(s => (
-                                    <Link className="border border-[#999] pl-4 pr-2 py-1 rounded whitespace-nowrap hover:bg-red-500 hover:text-white" 
+                                {tableSizes.map((s, index) => (
+                                    <Link key={index} className="border border-[#999] pl-4 pr-2 py-1 rounded whitespace-nowrap hover:bg-red-500 hover:text-white" 
                                     href={`/${i18n?.language}/products?category=single-table&size=${slugify(s)}`}>
                                         {s}
                                     </Link>
@@ -140,8 +140,8 @@ const ProductFilter = ({ t, productCount, setSizes, tableSizes, sortOption, setS
                     <div ref={optionsRef} 
                     className={`absolute z-30 left-0 top-0 translate-y-[25%] bg-white flex gap-2 flex-col border border-neutral-400 rounded
                     ${sortOptionsVisible ? "" : "hidden"} p-4`}>
-                        {sortOptions.map(s => (
-                            <button onClick={() => setSortOption(s)}>
+                        {sortOptions.map((s,index) => (
+                            <button key={index} onClick={() => setSortOption(s)}>
                                 {s}
                             </button>
                         ))}
