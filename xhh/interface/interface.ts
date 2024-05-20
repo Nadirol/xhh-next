@@ -14,8 +14,8 @@ export interface IProduct {
     benefits_en: string[] | null,
     preview_images: string[] | null,
     other_images: string[] | null,
-    specific_description_vi: ITableAndChairDescription[] | null,
-    specific_description_en: ITableAndChairDescription[] | null,
+    specific_description_vi: ITableAndChairDescription | null,
+    specific_description_en: ITableAndChairDescription | null,
     features_vi: { icon: string, feature: string }[] | null,
     features_en: ITableAndChairDescription[] | null,
     isNew: boolean | null,
@@ -31,7 +31,7 @@ export interface IProduct {
 
 interface ITableAndChairDescription {
     product_type: string,
-    size: string | string[],
+    size: string,
     specs: string[] | null,
     colors: string,
     materials: string | null,

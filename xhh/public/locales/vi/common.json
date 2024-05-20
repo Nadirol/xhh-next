@@ -70,7 +70,7 @@
     "bonus3": "Đổi trả khi có lỗi sản phẩm",
     "bonus4": "Hỗ trợ hướng dẫn lắp đặt, tư vấn tận tình",
 
-    "categories": "Sản phẩm chính",
+    "categories": "Phân loại",
     "windowsAndDoors": "Cửa/cửa sổ",
     "doorsAndWindows": "Cửa/cửa sổ",
     "woodenTiles": "Vỉ gỗ",
@@ -98,8 +98,8 @@
     "buyNow": "Mua ngay",
     "shopNow": "Shop ngay",
 
-    "single-table": "Bàn lẻ",
-    "single-chair": "Ghế lẻ",
+    "single-table": "Bàn",
+    "single-chair": "Ghế",
     "office-tool": "Đồ dùng học sinh",
 
     "featuredProducts": "Sản phẩm bán chạy",

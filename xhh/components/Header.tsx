@@ -1,10 +1,8 @@
 import { TFunction, i18n } from "next-i18next";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { aboutIcon, closeIcon, homeIcon, logoTextWhite, logoTextRed, mediaIcon, menuIcon, phoneIcon, sliderImage1, sliderImage2, sliderImage3, ukFlag, vietnamFlag, arrowRightIcon } from "../public/assets";
-import SliderImage from "./header/SliderImage";
+import { logoTextRed, phoneIcon, ukFlag, vietnamFlag } from "../public/assets";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 const useClickDetector = (refs: React.MutableRefObject<HTMLDivElement | null>[], func: () => void) => {
     useEffect(() => {

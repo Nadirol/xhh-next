@@ -39,7 +39,9 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
       },
     };
 
-    const [selectedSize, setSelectedSize] = useState(0)
+    const [selectedSize, setSelectedSize] = useState(0);
+
+    console.log(product.specific_description_vi)
 
     return (
         <main className="pt-[2rem] relative z-10 flex gap-12 flex-col">
@@ -136,33 +138,17 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
 
               {(product.specific_description_vi && product.specific_description_en) && (
                 <div className="flex gap-4 flex-col">
-                  <ul className="flex gap-4 flex-col list-disc list-inside pb-4 border-b">
+                  <ul className="flex gap-4 flex-col list-disc list-inside">
                     {Object.keys((i18n?.language === "vi"
                       ? product.specific_description_vi
-                      : product.specific_description_en)?.[activeType] ?? {}).map((key, index) => key !== "product_type" && (
+                      : product.specific_description_en) ?? {}).map((key, index) => key !== "product_type" && (
                         <li key={index} className="text-neutral-800 font-medium text-xl">
-                          {Array.isArray((i18n?.language === "vi"
+                          <span className="text-neutral-800 font-normal text-xl">
+                            {t(key)}:&nbsp;
+                            {(i18n?.language === "vi"
                               ? product.specific_description_vi
-                              : product.specific_description_en)?.[activeType]?.[key])
-                            ? (
-                              <ul className="flex gap-2 flex-col text-neutral-800 font-normal text-sm">
-                              {(i18n?.language === "vi"
-                                ? product.specific_description_vi
-                                : product.specific_description_en)?.[activeType]?.[key]?.map((s: string, index: number) => (
-                                  <li key={index}>- {s}</li>
-                                ))}
-                            </ul>
-                            )
-                            : (
-                              <span className="text-neutral-800 font-normal text-xl">
-                                {t(key)}:&nbsp;
-                                {(i18n?.language === "vi"
-                                  ? product.specific_description_vi
-                                  : product.specific_description_en)?.[activeType]?.[key]}
-                              </span>
-                            )
-                          }
-
+                              : product.specific_description_en)?.[key]}
+                          </span>
                         </li>
                       ))}
                   </ul>

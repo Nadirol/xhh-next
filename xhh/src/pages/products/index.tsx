@@ -8,7 +8,7 @@ import { shopBackground } from "../../../public/assets";
 import Image from "next/image";
 import ProductList from "../../../components/products/ProductList";
 import ProductFilter from "../../../components/products/ProductFilter";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import supabase from "../../../supabase";
 import { IProduct } from "../../../interface/interface";
 import { useSearchParams } from 'next/navigation'
@@ -21,22 +21,75 @@ import Link from "next/link";
 
 const lato = Lato({ subsets: ['latin'], weight: ["300","400","700"] })
 
+function onlyUnique(value:any, index: number, array: any[]) {
+  return array.indexOf(value) === index;
+};
+
+const useClickDetector = (refs: React.MutableRefObject<HTMLDivElement | null>[], func: () => void) => {
+  useEffect(() => {
+      const handleClickOutside = (event: any) => {
+          if (!refs.some(ref => ref.current?.contains(event.target))) {
+              func()
+          }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+  },[refs[0]])
+};
+
 export default function Home() {
   const searchParams = useSearchParams();
   const category = searchParams.get('category')
+  const size = searchParams.get('size');
 
   const { t } = useTranslation('common');
 
   const [products, setProducts] = useState<IProduct[]>([]);
+  const [setSizes, setSetSizes] = useState<string[]>([]);
+  const [tableSizes, setTableSizes] = useState<string[]>([]);
   
 
   useEffect(() => {
+    async function fetchSizeData() {
+      let query = supabase
+      .from('products')
+      .select('specific_description_vi')
+      .eq('category', 'table-and-chair')
+
+      const { data, error } = await query;
+      
+      if (error) {
+        console.error('Error fetching data:', error);
+      } else {
+        setSetSizes(data.map(d => d.specific_description_vi.size));
+      }
+    }
+
+    async function fetchTableSizeData() {
+      let query = supabase
+      .from('products')
+      .select('specific_description_vi')
+      .eq('category', 'single-table')
+
+      const { data, error } = await query;
+      
+      if (error) {
+        console.error('Error fetching data:', error);
+      } else {
+        setTableSizes(data.map(d => d.specific_description_vi.size));
+      }
+    }
+
     async function fetchData() {
       let query = supabase
       .from('products')
       .select('*')
 
       if (category) { query = query.eq('category', category)}
+      if (size) { query = query.contains('specific_description_vi', {size: size.replaceAll("-"," ")})}
 
       const { data, error } = await query;
       
@@ -47,10 +100,34 @@ export default function Home() {
       }
     }
 
+    fetchSizeData();
+    fetchTableSizeData();
     fetchData();
-  }, [category]);
+  }, [searchParams]);
 
-    
+  const sortItems = (sortType: string, array: IProduct[]) => {
+      if (sortType === 'priceLowToHigh') {
+        array =  array.sort((a,b) => (a.price_set ? a.price_set[0].price : (a.price ? a.price : 0)) - (b.price_set ? b.price_set[0].price : (b.price ? b.price : 0)))
+      } else if (sortType === 'priceHighToLow') {
+        array =  array.sort((a,b) => (b.price_set ? b.price_set[0].price : (b.price ? b.price : 0)) - (a.price_set ? a.price_set[0].price : (a.price ? a.price : 0)))
+      }
+
+      return array
+    }
+
+    const sortOptions = ["newest","priceLowToHigh","priceHighToLow"]
+
+    const [sortOption, setSortOption] = useState('newest');
+    const [sortOptionsVisible, setSortOptionsVisible] = useState(false);
+    const optionsRef = useRef(null);
+    const buttonRef = useRef(null);
+
+    const hideOptions = () => {
+      setSortOptionsVisible(false);
+    }
+
+    useClickDetector([optionsRef, buttonRef], hideOptions);   
+     
   return (
     <>
       <NextSeo
@@ -84,7 +161,19 @@ export default function Home() {
             </div>
 
             <div className="bg-neutral-100 pt-8 flex gap-8 flex-col">
-                <ProductFilter t={t} productCount={products.length}/>
+                <ProductFilter 
+                t={t} 
+                productCount={products.length} 
+                setSizes={setSizes.filter(onlyUnique)}
+                tableSizes={tableSizes.filter(onlyUnique)}
+                sortOption={sortOption}
+                setSortOption={setSortOption}
+                sortOptionsVisible={sortOptionsVisible}
+                setSortOptionsVisible={setSortOptionsVisible}
+                optionsRef={optionsRef}
+                buttonRef={buttonRef}
+                sortOptions={sortOptions}
+                />
                 <ProductList t={t} products={products}/>
             </div>
             <Widgets t={t}/>
