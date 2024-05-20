@@ -200,8 +200,8 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
                 [&>h1]:text-4xl [&>h2]:text-3xl [&>h3]:text-2xl [&>h4]:text-xl [&>h5]:text-lg
                 [&>img]:h-1/2 [&>img]:w-1/2 [&>img]:mx-auto text-justify`}>
                   <PortableText
-                      value={contentData.content}
-                      components={PortableTextComponent}
+                    value={contentData.content}
+                    components={PortableTextComponent}
                   />
               </div>
 

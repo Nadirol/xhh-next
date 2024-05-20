@@ -17,8 +17,8 @@ import { client } from "../../../../lib/sanity";
 
 const lato = Lato({ subsets: ['latin'], weight: ["300","400","700"] })
 
-async function getData() {
-  const query = `*[_type == "productXHH" && slug.current == "test"][0]`;
+async function getData(slug: string) {
+  const query = `*[_type == "productXHH" && slug.current == "${slug}"][0]`;
 
   const data = await client.fetch(query);
 
@@ -107,8 +107,8 @@ export default function ProductDetails({contentData} : {contentData: any}) {
   )
 }
 
-export async function getServerSideProps({ locale }: { locale: string }) {
-  const contentData = await getData() as {title: string, slug: any, content: any};
+export async function getServerSideProps({ locale, params }: { locale: string, params : {slug: string} })  {
+  const contentData = await getData(params.slug) as {title: string, slug: any, content: any};
   
   return {
     props: {

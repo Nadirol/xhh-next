@@ -38,8 +38,6 @@ async function getBannerData() {
 export default function Home({ data, bannerData }: { data: IPost[], bannerData: IBanner[] }) {
   const { t } = useTranslation('common');
 
-  console.log(bannerData)
-
   return (
     <>
       <NextSeo

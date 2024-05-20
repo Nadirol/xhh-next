@@ -6,9 +6,12 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import supabase from "../../supabase";
 import { IProduct } from "../../interface/interface";
-import { starIcon } from "../../public/assets";
 import { Slide, SlideshowRef } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
+
+function numberWithCommas(x: number) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 const FeaturedItems = ({ t }: { t: TFunction}) => {
     const [products, setProducts] = useState<IProduct[]>([]);
@@ -80,17 +83,23 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                             <div className="w-full relative z-10 items-center
                             transition-[padding] duration-700">
                                 <div className="w-full flex justify-between items-center">
-                                  <h5>
-                                    {t(i.category)}
-                                  </h5>
+                                    {i.price && (
+                                        <h3 className="text-xl text-red-500 font-bold">
+                                            {numberWithCommas(i.price)} đ
+                                        </h3>
+                                    )}
 
-                                  <div className="flex gap-[1px]">
-                                    <Image src={starIcon} alt="" />
-                                    <Image src={starIcon} alt="" />
-                                    <Image src={starIcon} alt="" />
-                                    <Image src={starIcon} alt="" />
-                                    <Image src={starIcon} alt="" /> 
-                                  </div>
+                                    {i.price_set && (
+                                        <h3 className="text-xl text-red-500 font-bold">
+                                            {numberWithCommas(i.price_set[0].price)} đ
+                                        </h3>
+                                    )}
+
+                                    <div className={`${(i.price || i.price_set) ? "flex flex-col items-end" : "w-full flex justify-between items-center"}`}>
+                                        <h5>
+                                            {t(i.category)}
+                                        </h5>
+                                    </div>
                                 </div>
                             </div>
                           </div>

@@ -77,18 +77,16 @@ const Products = ({ t }: { t: TFunction}) => {
                                     </h3>
                                 )}
 
-                                <div className={`${i.price ? "flex flex-col items-end" : "w-full flex justify-between items-center"}`}>
+                                {i.price_set && (
+                                    <h3 className="text-xl text-red-500 font-bold">
+                                        {numberWithCommas(i.price_set[0].price)} đ
+                                    </h3>
+                                )}
+
+                                <div className={`${(i.price || i.price_set) ? "flex flex-col items-end" : "w-full flex justify-between items-center"}`}>
                                     <h5>
                                         {t(i.category)}
                                     </h5>
-
-                                    {/* <div className="flex gap-[1px]">
-                                        <Image src={starIcon} alt="" />
-                                        <Image src={starIcon} alt="" />
-                                        <Image src={starIcon} alt="" />
-                                        <Image src={starIcon} alt="" />
-                                        <Image src={starIcon} alt="" /> 
-                                    </div> */}
                                 </div>
                             </div>
                         </div>
