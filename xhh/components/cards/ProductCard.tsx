@@ -7,7 +7,8 @@ function numberWithCommas(x: number) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-const ProductCard = ({ title, image, slug, price_set, price, t, category }: { title: string, image: string, slug: string, price_set: IPriceSet[] | null, price:number | null, t: TFunction, category: string }) => {
+const ProductCard = ({ title, image, slug, price_set, price, t, category }
+    : { title: string, image: string, slug: string, price_set: IPriceSet[] | null, price:number | null, t: TFunction, category: string }) => {
 
     return (
         <Link href={`/${i18n?.language}/products/${slug}`} 
