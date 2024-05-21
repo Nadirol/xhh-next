@@ -128,8 +128,8 @@ const ProductFilter = ({ t, productCount, setSizes, tableSizes, sortOption, setS
 
             <div className="flex gap-2 text-[#999] items-center">
                 <span>{t('order')}:</span>
-                <button className="border border-[#999] pl-4 pr-2 py-1 rounded flex gap-2 items-center relative" ref={buttonRef} onClick={() => setSortOptionsVisible(true)}>
-                    {sortOption}
+                <button className="border border-[#999] pl-4 pr-2 py-1 rounded flex gap-2 items-center justify-between relative min-w-[160px]" ref={buttonRef} onClick={() => setSortOptionsVisible(true)}>
+                    <span>{t(sortOption)}</span>
                     <svg className="rotate-90" fill="#999" height="12" width="12" version="1.1" 
                         viewBox="0 0 330 330">
                         <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001
@@ -138,11 +138,11 @@ const ProductFilter = ({ t, productCount, setSizes, tableSizes, sortOption, setS
                         C255,161.018,253.42,157.202,250.606,154.389z"/>
                     </svg>
                     <div ref={optionsRef} 
-                    className={`absolute z-30 left-0 top-0 translate-y-[25%] bg-white flex gap-2 flex-col border border-neutral-400 rounded
+                    className={`absolute z-30 right-0 top-0 translate-y-[40%] bg-white flex gap-2 flex-col border border-neutral-400 rounded
                     ${sortOptionsVisible ? "" : "hidden"} p-4`}>
                         {sortOptions.map((s,index) => (
-                            <button key={index} onClick={() => setSortOption(s)}>
-                                {s}
+                            <button key={index} onClick={() => setSortOption(s)} className="hover:text-red-500">
+                                {t(s)}
                             </button>
                         ))}
                     </div>

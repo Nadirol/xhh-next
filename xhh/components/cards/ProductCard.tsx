@@ -1,9 +1,13 @@
 import { TFunction, i18n } from "next-i18next";
 import Image from "next/image";
 import Link from "next/link";
-import { starIcon } from "../../public/assets";
+import { IPriceSet } from "../../interface/interface";
 
-const ProductCard = ({ title, image, slug, category, t }: { title: string, image: string, slug: string, category: string, t: TFunction }) => {
+function numberWithCommas(x: number) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+const ProductCard = ({ title, image, slug, price_set, price, t, category }: { title: string, image: string, slug: string, price_set: IPriceSet[] | null, price:number | null, t: TFunction, category: string }) => {
 
     return (
         <Link href={`/${i18n?.language}/products/${slug}`} 
@@ -20,16 +24,22 @@ const ProductCard = ({ title, image, slug, category, t }: { title: string, image
             <div className="w-full relative z-10 items-center
             transition-[padding] duration-700">
                 <div className="w-full flex justify-between items-center">
-                    <h5>
-                    {t(category)}
-                    </h5>
+                    {price && (
+                        <h3 className="text-xl text-red-500 font-bold">
+                            {numberWithCommas(price)} đ
+                        </h3>
+                    )}
 
-                    <div className="flex gap-[1px]">
-                    <Image src={starIcon} alt="" />
-                    <Image src={starIcon} alt="" />
-                    <Image src={starIcon} alt="" />
-                    <Image src={starIcon} alt="" />
-                    <Image src={starIcon} alt="" /> 
+                    {price_set && (
+                        <h3 className="text-xl text-red-500 font-bold">
+                            {numberWithCommas(price_set[0].price)} đ
+                        </h3>
+                    )}
+
+                    <div className={`${(price || price_set) ? "flex flex-col items-end" : "w-full flex justify-between items-center"}`}>
+                        <h5>
+                            {t(category)}
+                        </h5>
                     </div>
                 </div>
             </div>

@@ -29,6 +29,13 @@ export interface IProduct {
     }[] | null
 }
 
+export interface IPriceSet {
+    size: string,
+    fullPrice: number,
+    price: number,
+    discount: number
+}
+
 interface ITableAndChairDescription {
     product_type: string,
     size: string,

@@ -105,11 +105,13 @@ export default function Home() {
     fetchData();
   }, [searchParams]);
 
-  const sortItems = (sortType: string, array: IProduct[]) => {
+    const sortItems = (sortType: string, array: IProduct[]) => {
       if (sortType === 'priceLowToHigh') {
         array =  array.sort((a,b) => (a.price_set ? a.price_set[0].price : (a.price ? a.price : 0)) - (b.price_set ? b.price_set[0].price : (b.price ? b.price : 0)))
       } else if (sortType === 'priceHighToLow') {
         array =  array.sort((a,b) => (b.price_set ? b.price_set[0].price : (b.price ? b.price : 0)) - (a.price_set ? a.price_set[0].price : (a.price ? a.price : 0)))
+      } else {
+        array = array.sort((a,b) => b.id - a.id)
       }
 
       return array
@@ -174,7 +176,8 @@ export default function Home() {
                 buttonRef={buttonRef}
                 sortOptions={sortOptions}
                 />
-                <ProductList t={t} products={products}/>
+                
+                <ProductList t={t} products={products} sortItems={sortItems} sortOption={sortOption}/>
             </div>
             <Widgets t={t}/>
         </main>

@@ -10,7 +10,7 @@
     "slogan2": "Creating Harmony Through Design",
     "slogan3": "Where Style Meets Comfort",
 
-    "addressDetails": "7 Yen The, Dien Bien, Ba Dinh, Ha Noi",
+    "addressDetails": "Nguyet Que Villa 25-05, Vinhomes Riveside 2, Phuc Dong Ward, Long Bien District, Hanoi",
     "socials": "Socials",
 
     "featuredItemsHeading": "Best Sellers",
@@ -113,5 +113,14 @@
     "similarProducts": "Similar products",
     "bonus": "Bonus",
 
-    "sale": "Sale"
+    "sale": "Sale",
+
+    "order": "Order",
+    "priceLowToHigh": "Price Low to High",
+    "priceHighToLow": "Price High to Low",
+    "newest": "Newest",
+
+    "productMenu": "Product Menu",
+
+    "info": "Info"
 }

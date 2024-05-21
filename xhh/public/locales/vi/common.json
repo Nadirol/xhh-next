@@ -10,7 +10,7 @@
     "slogan2": "Thiết kế tạo nên sự hài hòa",
     "slogan3": "Không gian độc đáo",
 
-    "addressDetails": "Số 7 Yên Thế, Điện Biên, Ba Đình, Hà Nội",
+    "addressDetails": "Nguyệt Quế 25-05, Vinhomes Riveside 2, Phường Phúc Đồng, Quận Long Biên, Thành phố Hà Nội",
     "socials": "Liên kết",
 
     "featuredItemsHeading": "Sản phẩm nổi bật",
@@ -115,5 +115,14 @@
 
     "similarProducts": "Được quan tâm nhiều",
     "bonus": "Tặng kèm",
-    "sale": "Giảm"
+    "sale": "Giảm",
+
+    "order": "Sắp xếp",
+    "priceLowToHigh": "Giá tăng dần",
+    "priceHighToLow": "Giá giảm dần",
+    "newest": "Mới nhất",
+
+    "productMenu": "Danh mục sản phẩm",
+
+    "info": "Thông tin"
 }
