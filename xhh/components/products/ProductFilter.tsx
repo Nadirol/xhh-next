@@ -60,7 +60,7 @@ const ProductFilter = ({ t, productCount, setSizes, tableSizes, sortOption, setS
                     <div ref={categoryDropdownRef} 
                     className={`absolute z-30 left-0 top-0 translate-y-[20%] bg-white flex gap-2 flex-col border border-neutral-400 rounded
                     ${categoryDropdownVisible ? "" : "hidden"}`}>
-                        <Link href={`/${i18n?.language}/products`} className="py-2 px-8 hover:bg-red-500 hover:text-white">
+                        <Link href={`/${i18n?.language}/products`} className="py-2 px-8 hover:bg-red-500 hover:text-white whitespace-nowrap">
                             {t('all')}
                         </Link>
 
