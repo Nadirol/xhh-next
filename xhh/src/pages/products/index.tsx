@@ -40,6 +40,17 @@ const useClickDetector = (refs: React.MutableRefObject<HTMLDivElement | null>[],
   },[refs[0]])
 };
 
+function paginate(array: IProduct[], page_size: number) {
+  // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
+  const page_number = Math.ceil(array.length / page_size) ;
+  let result = []
+  for (let i = 1; i <= page_number; i++) {
+    result.push(array.slice((i - 1) * page_size, i * page_size));
+  };
+
+  return result;
+};
+
 export default function Home() {
   const searchParams = useSearchParams();
   const category = searchParams.get('category')
@@ -129,6 +140,13 @@ export default function Home() {
     }
 
     useClickDetector([optionsRef, buttonRef], hideOptions);   
+
+    const [activeProductPage, setActiveProductPage] = useState(0);
+
+    const handlePageChange = (index: number) => {
+      setActiveProductPage(index)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
      
   return (
     <>
@@ -177,8 +195,20 @@ export default function Home() {
                 sortOptions={sortOptions}
                 />
                 
-                <ProductList t={t} products={products} sortItems={sortItems} sortOption={sortOption}/>
+                <ProductList t={t} products={paginate(sortItems(sortOption ,products), 12)[activeProductPage]} sortItems={sortItems} sortOption={sortOption}/>
             </div>
+
+            <div className="w-full bg-neutral-100">
+              <div className="flex gap-8 mx-auto w-min">
+                {paginate(products, 12) && paginate(products, 12).map((array, index) => (
+                  <button key={index} onClick={() => handlePageChange(index)} 
+                  className={`aspect-square ${activeProductPage === index ? 'border-neutral-800' : 'border-transparent'} border-b text-xl`}>
+                    {index + 1}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <Widgets t={t}/>
         </main>
 
