@@ -61,7 +61,7 @@ import banner1 from "./Daily Banner.png"
 import banner2 from "./XUAN200.png"
 
 import newProduct1 from "./BHS-95XH.png"
-import newProduct2 from "./Layer-1.png"
+import newProduct2 from "./bangxanhthan.png"
 import chairImage from "./XHH-GHS-02XH.png"
 import shopBackground from "./1 (1).webp"
 

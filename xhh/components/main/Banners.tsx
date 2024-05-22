@@ -10,10 +10,10 @@ const Banners = ({ t, banner }: { t: TFunction, banner: IBanner }) => {
         <div className="md:px-[100px] flex gap-10 -xl:flex-col-reverse">
             <div className="md:flex-[40%] flex gap-8 -md:flex-col xl:flex-col justify-between">
                 <div className="bg-[#eee] relative flex-1 flex justify-between items-center">
-                    <div className="-md:w-1/2 w-[65%] aspect-square m-auto">
+                    <div className="-md:w-1/2 w-[60%] aspect-square mx-auto p-10">
                         {
                             (banner?.banner1?.image && banner?.banner1?.link)
-                            ? <Image width={280} height={280} src={urlFor(banner?.banner1?.image).url()} alt="" />
+                            ? <Image width={280} height={160} src={urlFor(banner?.banner1?.image).url()} className="m-auto" alt="" />
                             : <Image src={chairImage} alt="" />
                         }
                     </div>
@@ -27,7 +27,7 @@ const Banners = ({ t, banner }: { t: TFunction, banner: IBanner }) => {
                     </span>
 
                     <div className="absolute left-[30px] bottom-[20px] leading-[15px]">
-                        <h2 className="font-bold mb-[5px]">
+                        <h2 className="font-bold mb-[5px] max-w-[10rem]">
                             Ghế học sinh - GHS-02XH
                         </h2>
                         <p className="text-[13px]">

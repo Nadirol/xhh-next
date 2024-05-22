@@ -56,6 +56,10 @@ const Footer = ({ t }: { t: TFunction}) => {
                         <Link href={`/${i18n?.language}/products?category=single-chair`} className="text-neutral-700 hover:text-red-500 transition-all">
                             {t('single-chair')}                                    
                         </Link>
+
+                        <Link href={`/${i18n?.language}/products?category=office-tool`} className="text-neutral-700 hover:text-red-500 transition-all">
+                            {t('office-tool')}                                    
+                        </Link>
                     </div>
 
                     <div className="flex gap-4 flex-col">
