@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { slider1, slider2, slider3 } from "../../public/assets";
 import Image from "next/image";
 import Link from 'next/link';
+import { i18n } from 'next-i18next';
 
 const indicators = (index: number) => 
     (
