@@ -5,6 +5,7 @@ import 'react-slideshow-image/dist/styles.css';
 import { useRef } from "react";
 import { slider1, slider2, slider3 } from "../../public/assets";
 import Image from "next/image";
+import Link from 'next/link';
 
 const indicators = (index: number) => 
     (
@@ -18,15 +19,15 @@ const Slider = () => {
     return (
         <div className="w-container mx-auto relative">
             <Slide indicators={indicators} transitionDuration={500} duration={1000} autoplay={false} arrows={false} ref={slideRef}>
-                <div>
+                <Link href={`/${i18n?.language}/products?category=table-and-chair`}>
                     <Image src={slider1} alt="" className="object-cover w-full pointer-events-none"/>
-                </div>
-                <div>
+                </Link>
+                <a href="https://www.facebook.com/XuanHoaHome/posts/pfbid0SABxHtDUNSPfPvaXVGydyDn6Qok3jChcbTy9wkXJYWFEkiGwQNSXkTM3VwwFhYxrl">
                     <Image src={slider2} alt="" className="object-cover w-full pointer-events-none"/>
-                </div>
-                <div>
+                </a>
+                <Link href={`/${i18n?.language}/products/bang-tu-dan-tuong-xuan-hoa-home`}>
                     <Image src={slider3} alt="" className="object-cover w-full pointer-events-none"/>
-                </div>
+                </Link>
             </Slide>
         </div>
 

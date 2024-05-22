@@ -23,7 +23,7 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
       setActiveImage(index)
     };
 
-    const [descriptionExpanded, setDescriptionExpanded] = useState(true)
+    const [descriptionExpanded, setDescriptionExpanded] = useState(false)
     
     const PortableTextComponent = {
       types: {
@@ -40,8 +40,6 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
     };
 
     const [selectedSize, setSelectedSize] = useState(0);
-
-    console.log(product.specific_description_vi)
 
     return (
         <main className="pt-[2rem] relative z-10 flex gap-12 flex-col">
