@@ -193,6 +193,7 @@ export default function Home() {
                 optionsRef={optionsRef}
                 buttonRef={buttonRef}
                 sortOptions={sortOptions}
+                size={size}
                 />
                 
                 <ProductList t={t} products={paginate(sortItems(sortOption ,products), 12)[activeProductPage]} sortItems={sortItems} sortOption={sortOption}/>

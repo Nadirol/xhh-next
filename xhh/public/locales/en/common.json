@@ -122,5 +122,9 @@
 
     "productMenu": "Product Menu",
 
-    "info": "Info"
+    "info": "Info",
+
+    "all": "All",
+
+    "cancel": "Cancel"
 }

@@ -18,9 +18,9 @@ const useClickDetector = (refs: React.MutableRefObject<HTMLDivElement | null>[],
     },[refs[0]])
 };
 
-const ProductFilter = ({ t, productCount, setSizes, tableSizes, sortOption, setSortOption, sortOptionsVisible, optionsRef, buttonRef, sortOptions, setSortOptionsVisible }
+const ProductFilter = ({ t, productCount, setSizes, tableSizes, sortOption, setSortOption, sortOptionsVisible, optionsRef, buttonRef, sortOptions, setSortOptionsVisible, size }
     : { t: TFunction, productCount: number, setSizes: string[], tableSizes: string[], sortOption: string, setSortOption: any, sortOptionsVisible: boolean,
-        optionsRef: any, buttonRef: any, sortOptions: string[], setSortOptionsVisible: any
+        optionsRef: any, buttonRef: any, sortOptions: string[], setSortOptionsVisible: any, size:string | null
      }) => {
     const [categoryDropdownVisible, setCategoryDropdownVisible] = useState(false);
     const categoryDropdownRef = useRef(null);
@@ -102,11 +102,19 @@ const ProductFilter = ({ t, productCount, setSizes, tableSizes, sortOption, setS
 
                             <div className="flex gap-1 w-[400px] flex-wrap">
                                 {setSizes.map(s => (
-                                    <Link key={s} className="border border-[#999] pl-4 pr-2 py-1 rounded whitespace-nowrap hover:bg-red-500 hover:text-white" 
+                                    <Link key={s} className={`border border-[#999] px-4 py-1 rounded whitespace-nowrap hover:bg-red-500 hover:text-white
+                                    ${size === slugify(s) ? 'bg-red-500 text-white' : ''}`} 
                                     href={`/${i18n?.language}/products?category=table-and-chair&size=${slugify(s)}`}>
                                         {s}
                                     </Link>
                                 ))}
+
+                                {size && setSizes.includes(size) && (
+                                    <Link className={`border border-[#999] px-2 py-1 rounded whitespace-nowrap hover:bg-red-500 hover:text-white}`} 
+                                    href={`/${i18n?.language}/products?category=table-and-chair`}>
+                                        {t('cancel')}
+                                    </Link>
+                                )}
                             </div>
                         </div>
 
@@ -115,11 +123,19 @@ const ProductFilter = ({ t, productCount, setSizes, tableSizes, sortOption, setS
 
                             <div className="flex gap-1 w-[400px] flex-wrap">
                                 {tableSizes.map((s, index) => (
-                                    <Link key={index} className="border border-[#999] pl-4 pr-2 py-1 rounded whitespace-nowrap hover:bg-red-500 hover:text-white" 
+                                    <Link key={index} className={`border border-[#999] px-4 py-1 rounded whitespace-nowrap hover:bg-red-500 hover:text-white
+                                    ${size === slugify(s) ? 'bg-red-500 text-white' : ''}`}
                                     href={`/${i18n?.language}/products?category=single-table&size=${slugify(s)}`}>
                                         {s}
                                     </Link>
                                 ))}
+
+                                {(size && tableSizes.includes(size.replaceAll("-"," "))) && (
+                                    <Link className={`border border-[#999] px-2 py-1 rounded whitespace-nowrap hover:bg-red-500 hover:text-white}`} 
+                                    href={`/${i18n?.language}/products?category=single-table`}>
+                                        {t('cancel')}
+                                    </Link>
+                                )}
                             </div>
                         </div>
                     </div>
