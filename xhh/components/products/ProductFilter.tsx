@@ -147,10 +147,6 @@ const ProductFilter = ({ t, productCount, setSizes, tableSizes, sortOption, setS
                         ))}
                     </div>
                 </button>
-
-                {/* <h4>
-                    {`${t('showing')} ${productCount} ${t('results')}`}
-                </h4> */}
             </div>
         </div>
     )
