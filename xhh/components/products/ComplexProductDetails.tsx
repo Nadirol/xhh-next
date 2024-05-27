@@ -78,6 +78,11 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
                 </div>
               )}
 
+              <a href="https://shopee.vn/xuanhoahome?categoryId=100638&entryPoint=ShopByPDP&itemId=22990125483" target='_blank'
+              className='px-10 py-2 rounded bg-red-500 w-fit text-white hover:bg-red-700 text-xl font-semibold'>
+                {t('buy')}
+              </a>
+
               {product.price_set && (
                 <div className="flex gap-4 flex-col">
                   <div className="flex gap-2 items-center">
