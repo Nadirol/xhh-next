@@ -130,5 +130,36 @@
 
     "cancel": "Bỏ chọn",
 
-    "buy": "Mua"
+    "buy": "Mua",
+
+    "bag": "Cặp sách",
+    "age": "Độ tuổi",
+
+    "cart": "Giỏ hàng",
+    "fullName": "Tên đầy đủ",
+    "addressDetailsLabel": "Chi tiết địa chỉ",
+    "addressDetailsPlaceholder": "Tên đường, số nhà, ..",
+    "orderCart": "Đặt hàng",
+    "amount": "Số lượng",
+
+    "addedToCart": "Sản phẩm đã được thêm vào giỏ hàng",
+
+    "fullNamePlaceholder": "Tên đầy đủ",
+    "useCoupon": "Sử dụng mã giảm giá",
+    "couponPlaceholder": "Nhập mã giảm giá",
+    "apply": "Áp dụng",
+    "itemsTotal": "Tiền hàng",
+    "discountCheckout": "Giảm giá",
+    "shippingFee": "Phí vận chuyển",
+    "finalTotal" : "Tổng tiền cần thanh toán",
+    "free": "Miễn phí",
+    "off": "Giảm",
+
+    "orderThroughPhoneCall": "Đặt hàng qua điện thoại",
+    "paymentAfter": "Thanh toán sau khi nhận hàng",
+
+    "noItemsInCart": "Bạn chưa chọn sản phẩm cho giỏ hàng",
+    "pleaseAddAnItem": "Vui lòng chọn sản phẩm để tiếp tục mua hàng!",
+    "viewProducts": "Xem sản phẩm",
+    "backToHomepage": "Quay về trang chủ"
 }

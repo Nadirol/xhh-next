@@ -1,7 +1,7 @@
 import { TFunction, i18n } from "next-i18next";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { logoTextRed, phoneIcon, ukFlag, vietnamFlag } from "../public/assets";
+import { bagIcon2, logoTextRed, phoneIcon, ukFlag, vietnamFlag } from "../public/assets";
 import Link from "next/link";
 
 const useClickDetector = (refs: React.MutableRefObject<HTMLDivElement | null>[], func: () => void) => {
@@ -66,7 +66,7 @@ const Header = ({ t }: { t: TFunction }) => {
     return (
         <div className={`relative z-20 bg-black`}>
             <>
-                <header className={`z-[999] flex items-center bg-scroll bg-repeat px-8 transition-all duration-500
+                <header className={`z-[40] flex items-center bg-scroll bg-repeat px-8 transition-all duration-500
                 ${scrollPosition > 0 ? "md:fixed md:w-full bg-[#eee] shadow-light" : "bg-white relative"}`}>
                     {/* top nav */}
                     <nav className=" relative z-20 md:px-8 md:ml-[33%] md:w-1/3 flex justify-center">
@@ -79,21 +79,28 @@ const Header = ({ t }: { t: TFunction }) => {
                         </div>
                     </nav>
 
-                    <div className=" -xl:hidden ml-auto pr-[15px]">
-                        <div className="pl-[70px] flex gap-2">
-                            {Array.from(lngs.keys()).map((lng: string) => (
-                            <button type="submit" key={lng} onClick={() => { i18n?.changeLanguage(lng) }} disabled={i18n?.resolvedLanguage === lng}
-                                className={`${(i18n?.language === lng || i18n?.language.slice(0,2).toLowerCase() === lng) ? 'text-red-500' : 'text-[#666]'} 
-                                font-normal block text-xs leading-[25px] hover:text-red-500`}>
-                                {lngs.get(lng)?.nativeLanguage}
-                            </button>
-                            ))}
-                        </div>
+                    <div className=" -xl:hidden ml-auto pr-[15px] flex gap-8 items-center">
+                        <Link href={`/${i18n?.language}/cart`} className="flex flex-col items-center">
+                            <Image src={bagIcon2} alt="" className="w-6 pt-2"/>
+                            <h6>{t('cart')}</h6>
+                        </Link>
 
-                        <div className="flex gap-4 items-center justify-center">
-                            <Image src={phoneIcon} alt="phone icon" />
-                            <div className="flex flex-col text-neutral-900 font-bold text-xl">
-                                <a target="_blank" href="https://zalo.me/0373522843">0373-522-843</a>
+                        <div className="">
+                            <div className="pl-[70px] flex gap-2">
+                                {Array.from(lngs.keys()).map((lng: string) => (
+                                <button type="submit" key={lng} onClick={() => { i18n?.changeLanguage(lng) }} disabled={i18n?.resolvedLanguage === lng}
+                                    className={`${(i18n?.language === lng || i18n?.language.slice(0,2).toLowerCase() === lng) ? 'text-red-500' : 'text-[#666]'} 
+                                    font-normal block text-xs leading-[25px] hover:text-red-500`}>
+                                    {lngs.get(lng)?.nativeLanguage}
+                                </button>
+                                ))}
+                            </div>
+
+                            <div className="flex gap-4 items-center justify-center">
+                                <Image src={phoneIcon} alt="phone icon" />
+                                <div className="flex flex-col text-neutral-900 font-bold text-xl">
+                                    <a target="_blank" href="https://zalo.me/0373522843">0373-522-843</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -268,8 +275,6 @@ const Header = ({ t }: { t: TFunction }) => {
                                 </Link>
                             </div>
                         </li>
-
-
                         
                         <li className="w-full">
                             <Link href={`/${i18n?.language}/about`} className="text-[#666] font-bold text-[14px] leading-[45px] relative z-10 w-full h-full pl-[70px]

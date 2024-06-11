@@ -1,18 +1,38 @@
 import { TFunction, i18n } from 'next-i18next';
-import { IProduct } from '../../interface/interface';
+import { ICartProduct, IProduct } from '../../interface/interface';
 import Image from 'next/image';
 import Breadcrumb from '../Breadcrumb';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BonusBanner from './BonusBanner';
 import Widgets from '../Widgets';
 import Link from 'next/link';
 import { PortableText } from "@portabletext/react";
 import { urlFor } from '../../lib/sanity';
 import { arrowUpIcon } from '../../public/assets';
+import { useSSR } from 'react-i18next';
+import { useRecoilState } from 'recoil';
+import { cartState } from '../../atoms/cartState';
+import { latestCartItemState } from '../../atoms/latestCartItemState';
+import CartItemToast from '../CartItemToast';
 
 function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
+const useClickDetector = (refs: React.MutableRefObject<HTMLDivElement | null>[], func: () => void) => {
+  useEffect(() => {
+      const handleClickOutside = (event: any) => {
+          if (!refs.some(ref => ref.current?.contains(event.target))) {
+              func()
+          }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+  },[refs[0]])
+};
 
 const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentData }: 
   { t: TFunction, product: IProduct, routes: { name: string | undefined, path: string }[], relevantProducts: IProduct[], contentData: any}) => {
@@ -41,10 +61,59 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
 
     const [selectedSize, setSelectedSize] = useState(0);
 
-    return (
-        <main className="pt-[2rem] relative z-10 flex gap-12 flex-col">
-          <div className="w-container-large mx-auto flex gap-12 -md:flex-col">
+    const [cartItems, setCartItems] = useRecoilState(cartState);
 
+    const [latestCartItem, setLatestCartItem] = useRecoilState(latestCartItemState);
+    const [toastVisible, setToastVisible] = useState(false);
+
+    console.log(toastVisible)
+
+    const toastRef = useRef(null);
+
+    const hideToast = () => {
+      setToastVisible(false)
+    }
+
+    useClickDetector([toastRef], hideToast)
+
+    const addItemToCart = () => {
+      if (!product.price && !product.price_set ) {
+        return 
+      }
+
+      const productMainData: ICartProduct = {
+        id: product.id,
+        title_vi: product.title_vi,
+        title_en: product.title_en,
+        category: product.category,
+        image_url: product.image_url,
+        slug: product.slug,
+        price: product.price_set ? product.price_set[selectedSize].price : product.price,
+        quantity: addCount
+      }
+
+      setLatestCartItem({...productMainData, quantity: addCount});
+
+      if (cartItems.findIndex((addedProduct) => addedProduct.slug === product.slug) === -1) {
+        setCartItems((prevState: ICartProduct[]) => [...prevState, {...productMainData, quantity: addCount}]);
+      } else {
+        setCartItems((prevState) => prevState.map(item => {
+          return item.slug === product.slug ? {...item, quantity: item.quantity + addCount} : {...item, quantity: addCount}
+        }));
+      };
+      
+      window.dispatchEvent(new Event("storage"));
+
+      setToastVisible(true);
+
+      // setTimeout(() => hideToast(), 5000);
+    };
+
+    const [addCount, setAddCount] = useState(1);
+
+    return (
+        <main className="pt-[2rem] relative flex gap-12 flex-col">
+          <div className="w-container-large mx-auto flex gap-12 -md:flex-col">
             <div className="flex gap-12 flex-col">
               <div className="flex justify-center items-center md:min-w-[400px]">
                 <Image src={product.preview_images ? product.preview_images[activeImage] : product.image_url} alt="product image" 
@@ -63,7 +132,7 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
               )}
             </div>
 
-            <div className="flex gap-4 flex-col">
+            <div className="flex gap-8 flex-col">
               <Breadcrumb t={t} routes={routes}/>
               <div className="flex gap-1 flex-col">
                 <h1 className="text-neutral-800 font-semibold text-[2rem] xl:text-[4rem] leading-tight">{product.title_vi}</h1>
@@ -72,16 +141,11 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
               {product.price && (
                 <div className="">
                   <h3 className='text-3xl font-semibold text-red-500'>{numberWithCommas(product.price)} &nbsp;
-                  <span className='text-base text-neutral-800 font-normal'>vnđ</span> <br />
-                  <span className='text-base text-neutral-800 font-normal'>&#40;{t('discount')} &#41;</span>
+                    <span className='text-base text-neutral-800 font-normal'>vnđ</span> <br />
+                    <span className='text-base text-neutral-800 font-normal'>&#40;{t('discount')} &#41;</span>
                   </h3>
                 </div>
               )}
-
-              <a href="https://shopee.vn/xuanhoahome?categoryId=100638&entryPoint=ShopByPDP&itemId=22990125483" target='_blank'
-              className='px-10 py-2 rounded bg-red-500 w-fit text-white hover:bg-red-700 text-xl font-semibold'>
-                {t('buy')}
-              </a>
 
               {product.price_set && (
                 <div className="flex gap-4 flex-col">
@@ -101,8 +165,8 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
                   <div className="flex gap-2.5 items-center">
                     {product.price_set.map((p, index) => (
                       <button key={index} onClick={() => setSelectedSize(index)} 
-                      className='px-4 py-2 border-2 border-neutral-800 hover:border-red-500 transition-all
-                      text-lg hover:text-red-500'>
+                      className={`px-4 py-2 border-2 border-neutral-800 hover:border-red-500 transition-all
+                      font-bold hover:text-red-500 ${selectedSize === index ? 'border-red-500 text-red-500' : ''}`}>
                         {p.size}
                       </button>
                     ))}
@@ -110,6 +174,19 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
 
                 </div>
               )}
+
+              <div className="flex gap-2 items-center">
+                <span className='text-xl'>{t('amount')}:</span>
+                <input defaultValue={1} type="number" className='pl-4 pr-2 py-2 w-[3.5rem] border' value={addCount} onChange={(e) => setAddCount(parseInt(e.target.value))}/>
+                <button onClick={() => addItemToCart()}
+                className='px-10 py-2 rounded bg-red-500 w-fit text-white hover:bg-red-700 text-xl font-semibold'>
+                  {t('buy')}
+                </button>
+                <button onClick={() => addItemToCart()}
+                className='px-10 py-2 rounded bg-blue-500 w-fit text-white hover:bg-blue-700 text-xl font-semibold'>
+                  {t('addToCart')}
+                </button>
+              </div>
 
               {(product.features_vi && product.features_en) && (
                 <div className="flex gap-6 justify-between w-full">
@@ -239,6 +316,20 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
                   ))}
             </div>
           </div>
+
+          {toastVisible && (
+            <CartItemToast
+              item={latestCartItem}
+              t={t}
+              toastRef={toastRef}
+              cartItems={cartItems}
+              toastVisible={toastVisible}
+              setToastVisible={setToastVisible}
+              selectedSize={selectedSize}
+            />
+          )}
+
+          <div className={`bg-filter-dark w-screen h-screen fixed inset-0 z-[40] ${toastVisible ? "" : "hidden"}`}></div>
 
           <BonusBanner t={t}/>
           <Widgets t={t}/>

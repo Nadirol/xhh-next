@@ -31,6 +31,11 @@ import phoneSmall from "./phone-small.svg"
 import mailSmall from "./mail-small.svg"
 import facebookSmall from "./facebook-small.svg"
 import filterIcon from "./filter.svg"
+import bagIcon2 from "./bag_2662503.svg"
+import bagIcon3 from "./bag_white.svg"
+import checkIcon from "./check.png"
+import binIcon from "./bin.png"
+import truckIcon from "./cash-on-delivery_5579878.png"
 
 import logoTextRed from "./logo-text-light.png"
 import logoTextWhite from "./logo-text-white.png"
@@ -58,9 +63,9 @@ import slider3 from "./slideweb3 (1).jpg"
 
 export { phoneIcon, mailIcon, locationIcon, facebookIcon, menuIcon, slider1, slider2, slider3,
 closeIcon, homeIcon, aboutIcon, planeIcon, arrowRightIcon, mediaIcon, facebookLogo,
-ukFlag, vietnamFlag, zaloLogo, messengerLogo, starIcon,
+ukFlag, vietnamFlag, zaloLogo, messengerLogo, starIcon, binIcon,
 whatsappIcon, windowImage, woodenFloorImage, tableChairImage,
-arrowUpIcon, officeImage, bagIcon,
+arrowUpIcon, officeImage, bagIcon, bagIcon2, bagIcon3, truckIcon,
 locationSmall, phoneSmall, mailSmall, facebookSmall, filterIcon, logoTextRed, logoTextWhite, logoRed,
 aboutImage1, aboutImage2, aboutImage3, aboutImage4, tableAndChairImage,
-woodenTileBg, tableBg, windowBg, shelfImage, newProduct1, newProduct2, chairImage, shopBackground }
+woodenTileBg, tableBg, windowBg, shelfImage, newProduct1, newProduct2, chairImage, shopBackground, checkIcon }

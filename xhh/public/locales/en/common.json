@@ -128,5 +128,34 @@
 
     "cancel": "Cancel",
 
-    "buy": "Buy"
+    "buy": "Buy",
+
+    "bag": "Bag",
+    "age": "Age",
+
+    "cart": "Cart",
+    "fullName": "Full name",
+    "addressDetailsLabel": "Address Details",
+    "addressDetailsPlaceholder": "Street name, building number",
+    "orderCart": "Order",
+    "amount": "Amount",
+
+    "addedToCart": "Item has been added to cart",
+
+    "fullNamePlaceholder": "Full name",
+    "useCoupon": "Use coupon",
+    "couponPlaceholder": "Enter coupon here",
+    "apply": "Apply",
+    "itemsTotal": "Items total",
+    "discountCheckout": "Discount",
+    "shippingFee": "Shipping fee",
+    "finalTotal" : "Final total",
+    "free": "Free",
+    "orderThroughPhoneCall": "Order through phone call",
+    "paymentAfter": "Payment after you receive the package",
+
+    "noItemsInCart": "You haven't added an item to cart",
+    "pleaseAddAnItem": "Please add items to proceed purchasing!",
+    "viewProducts": "View products",
+    "backToHomepage": "Back to homepage"
 }

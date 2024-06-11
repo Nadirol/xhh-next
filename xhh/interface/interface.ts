@@ -29,6 +29,17 @@ export interface IProduct {
     }[] | null
 }
 
+export interface ICartProduct {
+    id: number,
+    title_vi: string,
+    title_en: string,
+    category: string,
+    image_url: string,
+    slug: string,
+    price: number | null,
+    quantity: number
+}
+
 export interface IPriceSet {
     size: string,
     fullPrice: number,
@@ -73,4 +84,9 @@ export interface IBanner {
         image: any | null,
         link: string | null
     }
+}
+
+export interface ICoupon {
+    coupon: string,
+    discountPercentage: number
 }

@@ -3,8 +3,6 @@ import { Fira_Sans } from 'next/font/google'
 import Header from "../Header";
 import Footer from "../Footer";
 
-import Link from "next/link";
-import Breadcrumb from "../Breadcrumb";
 import { TFunction, i18n } from 'next-i18next';
 
 const fira = Fira_Sans({ subsets: ['latin','vietnamese'], weight: ["300","400","500","600","700"] });

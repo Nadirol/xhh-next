@@ -36,12 +36,12 @@ export default function ProductDetails({contentData} : {contentData: any}) {
   const [product, setProduct] = useState<IProduct>();
   const [relevantProducts, setRelevantProducts] = useState<IProduct[]>([]);
 
-  async function fetchRelevantData(slug: string | string[], category: string) {
+  async function fetchRelevantData(slug: string | string[]) {
     const { data, error } = await supabase
       .from('products')
       .select('*')
       .order('id', { ascending: false })
-      .eq('category', category)
+      .eq('isNew', true)
       .neq('slug', slug)
       .range(0, 3);
     if (error) {
@@ -65,7 +65,7 @@ export default function ProductDetails({contentData} : {contentData: any}) {
     };
 
     if (slug) {
-      fetchData().then((data: IProduct) => fetchRelevantData(slug, data.category));
+      fetchData().then(() => fetchRelevantData(slug));
       
     }
   }, [slug]);
