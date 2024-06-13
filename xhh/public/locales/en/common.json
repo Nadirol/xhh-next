@@ -140,6 +140,7 @@
     "orderCart": "Order",
     "amount": "Amount",
 
+    "addToCart": "Add to cart",
     "addedToCart": "Item has been added to cart",
 
     "fullNamePlaceholder": "Full name",
@@ -157,5 +158,11 @@
     "noItemsInCart": "You haven't added an item to cart",
     "pleaseAddAnItem": "Please add items to proceed purchasing!",
     "viewProducts": "View products",
-    "backToHomepage": "Back to homepage"
+    "backToHomepage": "Back to homepage",
+
+    "suggestedToYou": "Suggested to you",
+
+    "orderSuccessful": "Order is complete",
+    "weWillContact": "We will contact you to confirm the order as soon as possible",
+    "continueShopping": "Continue shopping"
 }

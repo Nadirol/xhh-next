@@ -19,6 +19,7 @@ import Widgets from "../../../components/Widgets";
 import { Lato } from 'next/font/google'
 import Link from "next/link";
 
+
 const lato = Lato({ subsets: ['latin'], weight: ["300","400","700"] })
 
 function onlyUnique(value:any, index: number, array: any[]) {

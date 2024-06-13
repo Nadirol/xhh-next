@@ -22,7 +22,7 @@ const Footer = ({ t }: { t: TFunction}) => {
                             <h5>{t('addressDetails')}</h5>
                         </div>
                         <div className="flex gap-2">
-                        <div className="w-6 aspect-square flex items-center justify-center">
+                            <div className="w-6 aspect-square flex items-center justify-center">
                                 <Image src={phoneSmall} alt="phone icon" />
                             </div>                            
                             <div className="flex flex-col">

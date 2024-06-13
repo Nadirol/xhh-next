@@ -9,11 +9,11 @@ import Link from 'next/link';
 import { PortableText } from "@portabletext/react";
 import { urlFor } from '../../lib/sanity';
 import { arrowUpIcon } from '../../public/assets';
-import { useSSR } from 'react-i18next';
 import { useRecoilState } from 'recoil';
 import { cartState } from '../../atoms/cartState';
 import { latestCartItemState } from '../../atoms/latestCartItemState';
 import CartItemToast from '../CartItemToast';
+import supabase from '../../supabase';
 
 function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -66,8 +66,6 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
     const [latestCartItem, setLatestCartItem] = useRecoilState(latestCartItemState);
     const [toastVisible, setToastVisible] = useState(false);
 
-    console.log(toastVisible)
-
     const toastRef = useRef(null);
 
     const hideToast = () => {
@@ -79,7 +77,7 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
     const addItemToCart = () => {
       if (!product.price && !product.price_set ) {
         return 
-      }
+      } 
 
       const productMainData: ICartProduct = {
         id: product.id,
@@ -88,7 +86,7 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
         category: product.category,
         image_url: product.image_url,
         slug: product.slug,
-        price: product.price_set ? product.price_set[selectedSize].price : product.price,
+        price: product.price_set ? product.price_set[selectedSize].price : (product.price ? product.price : 0),
         quantity: addCount
       }
 
@@ -104,12 +102,31 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
       
       window.dispatchEvent(new Event("storage"));
 
-      setToastVisible(true);
-
       // setTimeout(() => hideToast(), 5000);
     };
 
     const [addCount, setAddCount] = useState(1);
+
+    const [products, setProducts] = useState<IProduct[]>([]);
+
+    useEffect(() => {
+        async function fetchData() {
+          const { data, error } = await supabase
+            .from('products')
+            .select('*')
+            .eq('isNew', true)
+            .range(0, 8)
+            .order('title_vi', { ascending: false });
+          
+          if (error) {
+            console.error('Error fetching data:', error);
+          } else {
+            setProducts(data.reverse());
+          }
+        }
+    
+        fetchData();
+    }, []);
 
     return (
         <main className="pt-[2rem] relative flex gap-12 flex-col">
@@ -177,12 +194,14 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
 
               <div className="flex gap-2 items-center">
                 <span className='text-xl'>{t('amount')}:</span>
-                <input defaultValue={1} type="number" className='pl-4 pr-2 py-2 w-[3.5rem] border' value={addCount} onChange={(e) => setAddCount(parseInt(e.target.value))}/>
-                <button onClick={() => addItemToCart()}
+                <input type="number" className='pl-4 pr-2 py-2 w-[3.5rem] border' value={addCount} onChange={(e) => setAddCount(parseInt(e.target.value))}/>
+
+                <Link href={`/${i18n?.language}/cart`}  onClick={() => addItemToCart()}
                 className='px-10 py-2 rounded bg-red-500 w-fit text-white hover:bg-red-700 text-xl font-semibold'>
                   {t('buy')}
-                </button>
-                <button onClick={() => addItemToCart()}
+                </Link>
+
+                <button onClick={() =>{ addItemToCart(); setToastVisible(true)}}
                 className='px-10 py-2 rounded bg-blue-500 w-fit text-white hover:bg-blue-700 text-xl font-semibold'>
                   {t('addToCart')}
                 </button>
@@ -326,6 +345,7 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
               toastVisible={toastVisible}
               setToastVisible={setToastVisible}
               selectedSize={selectedSize}
+              products={products}
             />
           )}
 

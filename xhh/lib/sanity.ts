@@ -9,6 +9,7 @@ export const client = createClient({
     projectId,
     dataset,
     apiVersion,
+    token: "skS0eqtFobc7NEyQlQ3zlcOlX8MowoJMBAJZ1Vq8xaZV19Hfc4BcCeyBgNw3OTtapuXp0V32jKMENQ0eDuVGiYahDfMm8LC2AAgtUmSmBPlfqCF50aqfoSRIdcWoF7wgWqD6FDTRcyuDFrYxrUCVbtMqVMIsUz1KYmXCUOoUXUMlinEYhIAR",
     useCdn: true
 })
 

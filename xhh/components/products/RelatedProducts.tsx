@@ -1,9 +1,27 @@
 import { TFunction } from "next-i18next"
 import ProductCard from "../cards/ProductCard";
-import { IProduct } from "../../interface/interface";
+import { ICartProduct, IProduct } from "../../interface/interface";
 import { useEffect, useRef, useState } from "react";
 import supabase from "../../supabase";
 import MoveSliderButton from "../buttons/MoveSliderButton";
+import { useRecoilState } from "recoil";
+import { latestCartItemState } from "../../atoms/latestCartItemState";
+import { cartState } from "../../atoms/cartState";
+
+const useClickDetector = (refs: React.MutableRefObject<HTMLDivElement | null>[], func: () => void) => {
+  useEffect(() => {
+      const handleClickOutside = (event: any) => {
+          if (!refs.some(ref => ref.current?.contains(event.target))) {
+              func()
+          }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+  },[refs[0]])
+};
 
 const RelatedProducts = ({ t, product }: { t: TFunction, product: IProduct }) => {
     const [relatedProducts, setRelatedProducts] = useState<IProduct[]>([]);
@@ -30,7 +48,6 @@ const RelatedProducts = ({ t, product }: { t: TFunction, product: IProduct }) =>
       };
 
     const fetchRelatedProducts = async () => {
-
       async function fetchData() {
         const { data, error } = await supabase
           .from('products')
@@ -79,6 +96,51 @@ const RelatedProducts = ({ t, product }: { t: TFunction, product: IProduct }) =>
         });
     };
 
+    const [cartItems, setCartItems] = useRecoilState(cartState);
+
+    const [latestCartItem, setLatestCartItem] = useRecoilState(latestCartItemState);
+    const [toastVisible, setToastVisible] = useState(false);
+
+    const toastRef = useRef(null);
+
+    const hideToast = () => {
+      setToastVisible(false)
+    }
+  
+    useClickDetector([toastRef], hideToast)
+  
+    const addItemToCart = (product: IProduct) => {
+      if (!product.price && !product.price_set ) {
+        return 
+      }
+  
+      const productMainData: ICartProduct = {
+        id: product.id,
+        title_vi: product.title_vi,
+        title_en: product.title_en,
+        category: product.category,
+        image_url: product.image_url,
+        slug: product.slug,
+        price: product.price_set ? product.price_set[0].price : (product.price ? product.price : 0),
+        quantity: 1
+      }
+  
+      setLatestCartItem({...productMainData, quantity: 1});
+  
+      if (cartItems.findIndex((addedProduct) => addedProduct.slug === product.slug) === -1) {
+        setCartItems((prevState: ICartProduct[]) => [...prevState, {...productMainData, quantity: 1}]);
+      } else {
+        setCartItems((prevState) => prevState.map(item => {
+          return item.slug === product.slug ? {...item, quantity: item.quantity + 1} : {...item, quantity: 1}
+        }));
+      };
+      
+      window.dispatchEvent(new Event("storage"));
+  
+      setToastVisible(true);
+  
+    };
+
     return (
         <div className="w-container-large mx-auto flex gap-4 flex-col">
             <div className="flex items-center justify-between">
@@ -94,7 +156,7 @@ const RelatedProducts = ({ t, product }: { t: TFunction, product: IProduct }) =>
 
             <div className="flex gap-12 items-center overflow-x-scroll scrollbar-hide overscroll-x-contain pr-4" ref={sliderRef}>
                 {relatedProducts?.map((p, index) => (
-                    <ProductCard key={index} category={p.category} title={p.title_vi} image={p.image_url} slug={p.slug} price={p.price} price_set={p.price_set} t={t}/>
+                    <ProductCard key={index} product={product} addItemToCart={addItemToCart} t={t}/>
                   ))}
                 {fetchMoreVisible && (
                 <button className="hover:pl-2 transition-[padding] snap-start" onClick={handleLoadMore}>

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { i18n, useTranslation } from "next-i18next"
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -11,18 +13,15 @@ import { useRecoilState } from "recoil";
 import Header from "../../../components/Header";
 import Widgets from "../../../components/Widgets";
 import Footer from "../../../components/Footer";
-import { sendMessage } from "../../../lib/api";
 import axios from 'axios';
 import { NextSeo } from "next-seo";
 import { Lato } from "next/font/google";
-import { arrowRightIcon, arrowUpIcon, bagIcon2, bagIcon3, binIcon, closeIcon, homeIcon, logoRed, shopBackground, truckIcon } from "../../../public/assets";
+import { binIcon, logoRed, shopBackground, truckIcon } from "../../../public/assets";
 import { cartState } from "../../../atoms/cartState";
-import { ICartProduct, ICoupon, IProduct } from "../../../interface/interface";
+import { ICartProduct, ICoupon, IOrder, IProduct } from "../../../interface/interface";
 import supabase from "../../../supabase";
-
-const calculateTotalPrice = (price: number, quantity: number) => {
-  return price * quantity;
-};
+import router from "next/router";
+import { client } from "../../../lib/sanity";
 
 function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -48,11 +47,18 @@ interface City {
     Level: string;
   }
 
+  const generateOrderCode = () => {
+    const randomString = Math.random().toString(36).substring(2, 6);
+    const timestamp = Date.now().toString(36).substring(2, 6);
+    return `${randomString.toUpperCase()}${timestamp.toUpperCase()}`;
+  }
+
 export default function CartPage() {
     const { t } = useTranslation('common');
 
     const [fullNameValue, setFullNameValue] = useState('');
     const [phoneNumberValue, setPhoneNumberValue] = useState('');
+    const [phoneNumber2Value, setPhoneNumber2Value] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [messageValue, setMessageValue] = useState('');
 
@@ -68,6 +74,10 @@ export default function CartPage() {
   
     const handlePhoneNumberChange = (e: any) => {
       setPhoneNumberValue(e.target.value)
+    };
+
+    const handlePhoneNumber2Change = (e: any) => {
+      setPhoneNumber2Value(e.target.value)
     };
   
     const handleEmailChange = (e: any) => {
@@ -139,17 +149,45 @@ export default function CartPage() {
     const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault(); // prevent the default form submission
 
-      const message = {
-        fullName: fullNameValue,
+      const order: IOrder = {
+        _type: 'orderXHH',
+        code: generateOrderCode(),
+        username: fullNameValue,
         email: emailValue,
         phoneNumber: phoneNumberValue,
-        message: messageValue
+        phoneNumber2: phoneNumber2Value,
+        date: new Date(),
+        address: {
+          city: cityData.filter(c => c.Id === cityValue)[0].Name,
+          district: cityData.filter(c => c.Id === cityValue)[0].Districts.filter(c => c.Id === districtValue)[0].Name,
+          ward: cityData.filter(c => c.Id === cityValue)[0].Districts.filter(c => c.Id === districtValue)[0].Wards.filter(c => c.Id === wardValue)[0].Name,
+          details: addressDetailsValue
+        },
+        products: cartItems.map((item: ICartProduct) => {
+          return {
+            title: item.title_vi,
+            quantity: item.quantity
+          }
+        }),
+        total: (amount + shippingFee) * ((100 - appliedCoupon.discountPercentage) / 100),
+        note: messageValue,
+        isCompleted: false
       };
 
+        // const orderDocRef = await addDoc(orderColRef, order);
 
-      await sendMessage(message);
-      showPopUp()
+        // await sendOrder({...order, date: Timestamp.fromDate(new Date()).toDate().toLocaleString()});
+
+        client.create({...order, date: new Date()}).then((res) => {
+          console.log(`Order was created, document ID is ${res._id}`)
+        })
+
+        await router.push(`${i18n?.language}/confirmation`)
     };
+
+    const [cityData, setCityData] = useState([])
+
+    console.log(cityData.filter(c => c.Id === cityValue))
 
     useEffect(() => {
         const citis = document.getElementById("city");
@@ -160,6 +198,8 @@ export default function CartPage() {
           try {
             const response = await axios.get("https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json");
             const data = response.data;
+
+            setCityData(data)
     
             renderCity(data);
           } catch (error) {
@@ -269,6 +309,12 @@ export default function CartPage() {
     useEffect(() => {
       fetchRelevantData(cartItems.map((i) => i.slug))
     },[])
+
+    const [amount, setAmount] = useState(cartItems.map((item: ICartProduct) => item.price * item.quantity).reduce((partialSum: number, a: number) => partialSum + a, 0));
+
+    const updateAmount = () => {
+      setAmount(cartItems.map((item: ICartProduct) => item.price * item.quantity).reduce((partialSum: number, a: number) => partialSum + a, 0))
+    }
      
     return (
         <div>
@@ -292,7 +338,7 @@ export default function CartPage() {
                     <div className="relative z-10 w-container mx-auto pb-4 h-full flex items-end">
                       <div className="flex gap-2 text-white">
                           <Link href="/" className="hover:text-red-500 transition-all">
-                          {t('home').toUpperCase()}
+                            {t('home').toUpperCase()}
                           </Link>
                           <span className="pointer-events-none">/</span>
                           <div className="hover:text-red-500 transition-all">
@@ -310,85 +356,85 @@ export default function CartPage() {
 
                     {/* send message to email using formsubmit.co */}
                     <form className="mx-auto flex flex-col items-center gap-6" onSubmit={(e) => handleFormSubmit(e)}>
-                            <div className="flex gap-7 -md:flex-col w-full">
-                                <div className="flex gap-2 flex-col flex-[50%]">
-                                    <label className="text-neutral-800 font-medium text-base">{t('fullName')} <span className="text-red-500">*</span></label>
-                                    <input type="text" name="First Name" placeholder={t('fullNamePlaceholder')} required value={fullNameValue} onChange={(e) => handleFullNameChange(e)}
-                                    className="px-6 py-2 border placeholder:text-xs text-base w-full"/>
-                                </div>
-
-                                <div className="flex gap-2 flex-col flex-[50%]">
-                                        <label htmlFor="" className="text-neutral-800 font-medium text-base">{t('email')}</label>
-                                        <input type="email" name="Email" placeholder={t('emailPlaceholder')} required value={emailValue} 
-                                        onChange={(e) => handleEmailChange(e)} onInput={e => validate(e)} ref={emailInputRef}
-                                        className={`px-6 py-2 border
-                                        ${!emailValue ? "" : emailValid ? 'border-green-600' : 'border-red-500'} 
-                                        placeholder:text-xs text-base outline-none`} />
-                                </div>
+                        <div className="flex gap-7 -md:flex-col w-full">
+                            <div className="flex gap-2 flex-col flex-[50%]">
+                                <label className="text-neutral-800 font-medium text-base">{t('fullName')} <span className="text-red-500">*</span></label>
+                                <input type="text" name="First Name" placeholder={t('fullNamePlaceholder')} required value={fullNameValue} onChange={(e) => handleFullNameChange(e)}
+                                className="px-6 py-2 border placeholder:text-xs text-base w-full"/>
                             </div>
 
-                            <div className="flex gap-7 -md:flex-col w-full">
-                                <div className="flex gap-2 flex-col flex-[50%]">
-                                    <label htmlFor="" className="text-neutral-800 font-medium text-base">{t('phoneNumber')} <span className="text-red-500">*</span></label>
-                                    <input type="number" name="Phone Number" minLength={5} placeholder={t('phoneNumberPlaceholder')} required value={phoneNumberValue} 
-                                    onChange={(e) => handlePhoneNumberChange(e)}
-                                    onKeyDown={ e => ( e.key === 'e' || e.key === '.' ) && e.preventDefault() }
-                                    className="px-6 py-2 border placeholder:text-xs text-base"/>
-                                </div>
-
-                                <div className="flex gap-2 flex-col flex-[50%]">
-                                    <label htmlFor="" className="text-neutral-800 font-medium text-base">{t('phoneNumber')}</label>
-                                    <input type="number" name="Phone Number" minLength={5} placeholder={t('phoneNumberPlaceholder')} required value={phoneNumberValue} 
-                                    onChange={(e) => handlePhoneNumberChange(e)}
-                                    onKeyDown={ e => ( e.key === 'e' || e.key === '.' ) && e.preventDefault() }
-                                    className="px-6 py-2 border placeholder:text-xs text-base"/>
-                                </div>
+                            <div className="flex gap-2 flex-col flex-[50%]">
+                                    <label htmlFor="" className="text-neutral-800 font-medium text-base">{t('email')}</label>
+                                    <input type="email" name="Email" placeholder={t('emailPlaceholder')} value={emailValue} 
+                                    onChange={(e) => handleEmailChange(e)} onInput={e => validate(e)} ref={emailInputRef}
+                                    className={`px-6 py-2 border
+                                    ${!emailValue ? "" : emailValid ? 'border-green-600' : 'border-red-500'} 
+                                    placeholder:text-xs text-base outline-none`} />
                             </div>
+                        </div>
 
-                            <div className="flex gap-2 items-center">
-                                <select className="form-select form-select-sm border px-4 py-2" id="city" aria-label=".form-select-sm" 
-                                onChange={(e) => handleCityChange(e)}>
-                                    <option value={cityValue} selected>Chọn tỉnh thành</option>
-                                </select>
-
-                                <select className="form-select form-select-sm border px-4 py-2" id="district" aria-label=".form-select-sm"
-                                onChange={(e) => handleDistrictChange(e)}>
-                                    <option value={districtValue} selected>Chọn quận huyện</option>
-                                </select>
-
-                                <select className="form-select form-select-sm border px-4 py-2" id="ward" aria-label=".form-select-sm"
-                                onChange={(e) => handleWardChange(e)}>
-                                    <option value={wardValue} selected>Chọn phường xã</option>
-                                </select>
-                            </div>
-
-                            <div className="flex gap-2 flex-col w-full">
-                                <label className="text-neutral-800 font-medium text-base">{t('addressDetailsLabel')} <span className="text-red-500">*</span></label>
-                                <input type="text" name="First Name" placeholder={t('addressDetailsPlaceholder')} required value={addressDetailsValue} 
-                                onChange={(e) => handleAddressDetailsChange(e)}
+                        <div className="flex gap-7 -md:flex-col w-full">
+                            <div className="flex gap-2 flex-col flex-[50%]">
+                                <label htmlFor="" className="text-neutral-800 font-medium text-base">{t('phoneNumber')} <span className="text-red-500">*</span></label>
+                                <input type="number" name="Phone Number" minLength={5} placeholder={t('phoneNumberPlaceholder')} required value={phoneNumberValue} 
+                                onChange={(e) => handlePhoneNumberChange(e)}
+                                onKeyDown={ e => ( e.key === 'e' || e.key === '.' ) && e.preventDefault() }
                                 className="px-6 py-2 border placeholder:text-xs text-base"/>
                             </div>
 
-                            <div className="flex gap-2 flex-col w-full">
-                              <label htmlFor="message" className="text-neutral-800 font-medium text-base">{t('message')}</label>
-                              <textarea id="message" name="Message" placeholder={t('messagePlaceholder')} minLength={4} required rows={2} value={messageValue} onChange={(e) => handleMessageChange(e)}
-                                  className="px-6 py-3 border placeholder:text-xs text-base">
-                              </textarea>
+                            <div className="flex gap-2 flex-col flex-[50%]">
+                                <label htmlFor="" className="text-neutral-800 font-medium text-base">{t('phoneNumber2')}</label>
+                                <input type="number" name="Phone Number" minLength={5} placeholder={t('phoneNumber2Placeholder')} value={phoneNumber2Value} 
+                                onChange={(e) => handlePhoneNumber2Change(e)}
+                                onKeyDown={ e => ( e.key === 'e' || e.key === '.' ) && e.preventDefault() }
+                                className="px-6 py-2 border placeholder:text-xs text-base"/>
                             </div>
+                        </div>
 
-                            <div className="p-6 rounded border-2 border-blue-500 mr-auto flex gap-2 items-center">
-                              <input type="radio" id="payment-radio" checked/>
+                        <div className="flex gap-2 items-center">
+                            <select className="form-select form-select-sm border px-4 py-2" id="city" aria-label=".form-select-sm" 
+                            onChange={(e) => handleCityChange(e)} required>
+                                <option value={cityValue} selected>Chọn tỉnh thành</option>
+                            </select>
 
-                              <label htmlFor="payment-radio" className="">
-                                  {t('paymentAfter')}
-                              </label>
+                            <select className="form-select form-select-sm border px-4 py-2" id="district" aria-label=".form-select-sm"
+                            onChange={(e) => handleDistrictChange(e)} required>
+                                <option value={districtValue} selected>Chọn quận huyện</option>
+                            </select>
 
-                              <Image src={truckIcon} alt="" className="w-10"/>
-                            </div>
+                            <select className="form-select form-select-sm border px-4 py-2" id="ward" aria-label=".form-select-sm"
+                            onChange={(e) => handleWardChange(e)} required>
+                                <option value={wardValue} selected>Chọn phường xã</option>
+                            </select>
+                        </div>
 
-                            <input type="submit" value={t('orderCart')}
-                            className="bg-red-600 text-neutral-100 w-fit cursor-pointer
-                            font-medium text-xl px-12 py-2.5 mx-auto"/>
+                        <div className="flex gap-2 flex-col w-full">
+                            <label className="text-neutral-800 font-medium text-base">{t('addressDetailsLabel')} <span className="text-red-500">*</span></label>
+                            <input type="text" name="First Name" placeholder={t('addressDetailsPlaceholder')} required value={addressDetailsValue} 
+                            onChange={(e) => handleAddressDetailsChange(e)}
+                            className="px-6 py-2 border placeholder:text-xs text-base"/>
+                        </div>
+
+                        <div className="flex gap-2 flex-col w-full">
+                          <label htmlFor="message" className="text-neutral-800 font-medium text-base">{t('message')}</label>
+                          <textarea id="message" name="Message" placeholder={t('messagePlaceholder')} minLength={4} rows={2} value={messageValue} onChange={(e) => handleMessageChange(e)}
+                              className="px-6 py-3 border placeholder:text-xs text-base">
+                          </textarea>
+                        </div>
+
+                        <div className="p-6 rounded border-2 border-blue-500 mr-auto flex gap-2 items-center">
+                          <input type="radio" id="payment-radio" checked/>
+
+                          <label htmlFor="payment-radio" className="">
+                              {t('paymentAfter')}
+                          </label>
+
+                          <Image src={truckIcon} alt="" className="w-10"/>
+                        </div>
+
+                        <input type="submit" value={t('orderCart')}
+                        className="bg-red-600 text-neutral-100 w-fit cursor-pointer
+                        font-medium text-xl px-12 py-2.5 mx-auto"/>
                     </form>
 
                     <div className="flex gap-4 flex-col">
@@ -402,7 +448,7 @@ export default function CartPage() {
 
                         <div className="flex gap-4 flex-col">
                           {cartItems.map((item, index) => (
-                            <div className="flex justify-between items-start w-full">
+                            <div key={index} className="flex justify-between items-start w-full">
                               <div key={index} className="flex -md:gap-4 -md:flex-col -md:items-center gap-8">
                                   <div className="w-[3rem] md:w-[10rem] aspect-square flex justify-center items-center">
                                       <Image src={item.image_url} alt="wine bottle preview image" width={300} height={500} 
@@ -417,7 +463,7 @@ export default function CartPage() {
                                       <div className="w-full flex items-center justify-between">
                                           <div className="text-neutral-600 text-sm">
                                               <input type="number" value={item.quantity} className="pl-4 pr-2 py-2 w-[3.5rem] border"
-                                              onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}/>
+                                              onChange={(e) => {updateQuantity(item.id, parseInt(e.target.value)); updateAmount()}}/>
                                               <span className="text-neutral-700 font-semibold text-base">
                                                   {item.price && (
                                                       <span>
@@ -556,19 +602,19 @@ export default function CartPage() {
                     </div>
 
                     <div className="flex gap-5 items-center">
-                      <a href={`/${i18n?.language}/products`} className="text-xl border border-neutral-500 hover:border-red-500 hover:text-red-500 px-8 py-2 flex gap-2 items-center">
+                      <Link href={`/${i18n?.language}/products`} className="text-xl border border-neutral-500 hover:border-red-500 hover:text-red-500 px-8 py-2 flex gap-2 items-center">
                         <svg width="12" height="16" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="rotate-[270deg]">
                           <path className="fill-neutral-700" d="M15.8765 8.56867C15.8374 8.6091 15.791 8.64117 15.7399 8.66305C15.6888 8.68493 15.634 8.69619 15.5786 8.69619C15.5233 8.69619 15.4685 8.68493 15.4174 8.66305C15.3663 8.64117 15.3199 8.6091 15.2807 8.56867L8.42099 1.4851V19.5652C8.42099 19.6805 8.37663 19.7911 8.29767 19.8727C8.21871 19.9542 8.11162 20 7.99995 20C7.88829 20 7.78119 19.9542 7.70223 19.8727C7.62327 19.7911 7.57891 19.6805 7.57891 19.5652V1.4851L0.719156 8.56867C0.680038 8.60907 0.633597 8.64111 0.582486 8.66297C0.531375 8.68483 0.476594 8.69609 0.421272 8.69609C0.36595 8.69609 0.311169 8.68483 0.260058 8.66297C0.208947 8.64111 0.162506 8.60907 0.123387 8.56867C0.0842687 8.52828 0.0532381 8.48032 0.0320672 8.42754C0.0108963 8.37477 0 8.3182 0 8.26107C0 8.20394 0.0108963 8.14737 0.0320672 8.0946C0.0532381 8.04182 0.0842687 7.99386 0.123387 7.95347L7.70207 0.127514C7.74117 0.0870898 7.78761 0.0550214 7.83872 0.0331417C7.88983 0.0112619 7.94462 0 7.99995 0C8.05528 0 8.11007 0.0112619 8.16119 0.0331417C8.2123 0.0550214 8.25873 0.0870898 8.29784 0.127514L15.8765 7.95347C15.9157 7.99385 15.9467 8.0418 15.9679 8.09458C15.9891 8.14736 16 8.20393 16 8.26107C16 8.31821 15.9891 8.37478 15.9679 8.42756C15.9467 8.48034 15.9157 8.52829 15.8765 8.56867Z"/>
                         </svg>
 
                         {t('viewProducts')}
-                      </a>
-                      <a href="/" className="text-xl border border-neutral-500 hover:border-red-500 hover:text-red-500 px-8 py-2 flex gap-2 items-center">
+                      </Link>
+                      <Link href="/" className="text-xl border border-neutral-500 hover:border-red-500 hover:text-red-500 px-8 py-2 flex gap-2 items-center">
                         <svg width="21" height="17" viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M8.5 17V11H12.5V17H17.5V9H20.5L10.5 0L0.5 9H3.5V17H8.5Z" fill="#000000"/>
                         </svg>                        
                         {t('backToHomepage')}
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 )}

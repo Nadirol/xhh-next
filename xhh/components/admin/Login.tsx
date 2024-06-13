@@ -4,15 +4,14 @@ import Button from "@mui/material/Button";
 const Login = () => {
     const { data: session } = useSession();
 
-    if(session) {
+    if(!session) {
         return <>
-            <Button variant={'contained'} color={'error'} onClick={() => signOut()}>Sign out</Button>
+            <div className="flex gap-4 flex-col justify-center items-center h-[600px]">
+                <Button className="text-xl text-white bg-red-500 rounded px-12 py-4 hover:bg-red-700" onClick={() => signIn()}>Đăng nhập</Button>
+            </div>
         </>
     }
-    return <>
-        <h2>Please log in</h2> <br/>
-        <Button variant={'contained'} color={'success'} onClick={() => signIn()}>Sign in</Button>
-    </>
+    return 
 }
 
 export default Login;

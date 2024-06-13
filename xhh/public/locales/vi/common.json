@@ -43,6 +43,8 @@
     "lastNamePlaceholder": "Nhập tên của bạn",
     "phoneNumber": "Số Điện Thoại",
     "phoneNumberPlaceholder": "Nhập số điện thoại của bạn",
+    "phoneNumber2": "Điện Thoại 2",
+    "phoneNumber2Placeholder": "Số điện thoại dự phòng",
     "email": "Email",
     "emailPlaceholder": "Nhập email của bạn",
     "message": "Tin nhắn",
@@ -132,7 +134,7 @@
 
     "buy": "Mua",
 
-    "bag": "Cặp sách",
+    "bag": "Cặp sách/Túi",
     "age": "Độ tuổi",
 
     "cart": "Giỏ hàng",
@@ -142,6 +144,7 @@
     "orderCart": "Đặt hàng",
     "amount": "Số lượng",
 
+    "addToCart": "Thêm vào giỏ hàng",
     "addedToCart": "Sản phẩm đã được thêm vào giỏ hàng",
 
     "fullNamePlaceholder": "Tên đầy đủ",
@@ -161,5 +164,12 @@
     "noItemsInCart": "Bạn chưa chọn sản phẩm cho giỏ hàng",
     "pleaseAddAnItem": "Vui lòng chọn sản phẩm để tiếp tục mua hàng!",
     "viewProducts": "Xem sản phẩm",
-    "backToHomepage": "Quay về trang chủ"
+    "backToHomepage": "Quay về trang chủ",
+
+    "suggestedToYou": "Gợi ý cho bạn",
+
+    "orderSuccessful": "Đặt hàng thành công",
+    "weWillContact": "Chúng tôi sẽ liên hệ để xác nhận đơn hàng trong thời gian sớm nhất",
+    "continueShopping": "Tiếp tục mua hàng",
+    "needHelp": "Cần hỗ trợ?"
 }

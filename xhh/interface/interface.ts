@@ -36,7 +36,7 @@ export interface ICartProduct {
     category: string,
     image_url: string,
     slug: string,
-    price: number | null,
+    price: number,
     quantity: number
 }
 
@@ -89,4 +89,27 @@ export interface IBanner {
 export interface ICoupon {
     coupon: string,
     discountPercentage: number
+}
+
+export interface IOrder {
+    _type: "order",
+    code: string,
+    username: string,
+    email: string | null,
+    phoneNumber: string,
+    phoneNumber2: string | null,
+    date: Date,
+    address: {
+        city: string,
+        district: string,
+        ward: string,
+        details: string
+    },
+    products: {
+        title: string,
+        quantity: number
+    }[],
+    total: number,
+    note: string,
+    isCompleted: boolean
 }

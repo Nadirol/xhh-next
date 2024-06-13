@@ -1,21 +1,32 @@
-// @ts-nocheck
 
 import { TFunction, i18n } from "next-i18next"
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, MutableRefObject, SetStateAction, useEffect, useRef, useState } from "react";
 import supabase from "../../supabase";
-import { IProduct } from "../../interface/interface";
+import { ICartProduct, IProduct } from "../../interface/interface";
 import { Slide, SlideshowRef } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
+import CartItemToast from "../CartItemToast";
+import { bagIcon3 } from "../../public/assets";
 
 function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
+
+interface Props {
+  t: TFunction,
+  addItemToCart: (product: IProduct) => void,
+  latestCartItem: ICartProduct | undefined,
+  toastRef: MutableRefObject<null>,
+  cartItems: ICartProduct[],
+  toastVisible: boolean,
+  setToastVisible: Dispatch<SetStateAction<boolean>>
+  products: IProduct[]
 }
 
-const FeaturedItems = ({ t }: { t: TFunction}) => {
-    const [products, setProducts] = useState<IProduct[]>([]);
 
+const FeaturedItems = ({ t, addItemToCart, latestCartItem, toastRef, cartItems, toastVisible, setToastVisible, products }: Props) => {
     const responsiveSettings = [
       {
           breakpoint: 1000,
@@ -33,28 +44,8 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
       }
   ];
 
-    useEffect(() => {
-        async function fetchData() {
-          const { data, error } = await supabase
-            .from('products')
-            .select('*')
-            .eq('isNew', true)
-            .range(0, 11)
-            .order('title_vi', { ascending: false });
-          
-          if (error) {
-            console.error('Error fetching data:', error);
-          } else {
-            setProducts(data.reverse());
-          }
-        }
-    
-        fetchData();
-    }, []);
+    const slideRef = useRef<SlideshowRef>(null);
 
-
-    const slideRef = useRef<SlideshowRef>(null)
-    
     return (
             <div className="pt-[80px] pb-[35px] w-container-large mx-auto">
                 <h2 className="text-center text-[#444] text-[30px] font-bold pb-[22px] mb-[25px] relative
@@ -66,18 +57,19 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                   {products.length > 0 && (
                     <Slide indicators={false} transitionDuration={500} duration={1000} autoplay={false} ref={slideRef} slidesToScroll={1} slidesToShow={1} responsive={responsiveSettings}>
                       {products.map((i, index) => (
-                        <Link href={`/${i18n?.language}/products/${i.slug}`} key={index} className="overflow-visible py-4 mx-4">
+                        <div key={index} className="overflow-visible py-4 mx-4 [&:hover>div>.absolute]:block">
                           <div className="flex gap-2.5 flex-col justify-between w-product-card min-w-[280px] snap-start min-h-[422px]
-                          [&:hover>.absolute>img]:scale-[1.05] p-[15px] pb-[20px] hover:shadow-card transition-all duration-500 -md:mx-auto">
+                          p-[15px] pb-[20px] hover:shadow-card transition-all duration-500 -md:mx-auto relative ">
                             <div className="">
-                              <div className="overflow-hidden">
+                                <Link href={`/${i18n?.language}/products/${i.slug}`} className="overflow-hidden">
                                     <Image src={i.image_url} alt="curtain image" width={400} height={300} className="object-cover
                                     transition-[transform] duration-700 min-h-[280px] pointer-events-none"/>
-                                </div>
-                                < h4
+                                </Link>
+
+                                < Link href={`/${i18n?.language}/products/${i.slug}`}
                                 className="text-[#434343] mb-[5px] font-semibold hover:text-red-500 transition-all">
                                   {i.title_vi.toUpperCase()}
-                                  </h4>
+                                </Link>
                             </div>
 
                             <div className="w-full relative z-10 items-center
@@ -102,12 +94,31 @@ const FeaturedItems = ({ t }: { t: TFunction}) => {
                                     </div>
                                 </div>
                             </div>
+
+                            <button onClick={() => addItemToCart(i)} className="hidden absolute z-20 top-3 right-3 p-2 bg-red-400 rounded">
+                              <Image src={bagIcon3} alt="" className="w-5"/>
+                            </button>
                           </div>
-                        </Link>
+                        </div>
                       ))}
                     </Slide>
                   )}
                 </div>
+
+                {toastVisible && (
+                  <CartItemToast
+                    item={latestCartItem}
+                    t={t}
+                    toastRef={toastRef}
+                    cartItems={cartItems}
+                    toastVisible={toastVisible}
+                    setToastVisible={setToastVisible}
+                    selectedSize={0}
+                    products={products}
+                  />
+                )}
+
+                <div className={`bg-filter-dark w-screen h-screen fixed inset-0 z-[40] ${toastVisible ? "" : "hidden"}`}></div>
             </div>
     )
 };

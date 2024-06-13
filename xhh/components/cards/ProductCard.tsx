@@ -1,50 +1,60 @@
 import { TFunction, i18n } from "next-i18next";
 import Image from "next/image";
 import Link from "next/link";
-import { IPriceSet } from "../../interface/interface";
+import { IProduct } from "../../interface/interface";
+import { bagIcon3 } from "../../public/assets";
 
 function numberWithCommas(x: number) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-const ProductCard = ({ title, image, slug, price_set, price, t, category }
-    : { title: string, image: string, slug: string, price_set: IPriceSet[] | null, price:number | null, t: TFunction, category: string }) => {
+const ProductCard = ({ product, t, addItemToCart }
+    : { product: IProduct, t: TFunction, addItemToCart: (product: IProduct) => void }) => {
 
     return (
-        <Link href={`/${i18n?.language}/products/${slug}`} 
-            className="flex gap-2.5 flex-col justify-between w-product-card min-w-[300px] snap-start min-h-[422px] -md:mx-auto
-            [&:hover>.absolute>img]:scale-[1.05] p-[15px] pb-[20px] hover:shadow-card transition-all duration-500 bg-white">
+        <div className="overflow-visible py-4 mx-4 [&:hover>div>.absolute]:block">
+            <div className="flex gap-2.5 flex-col justify-between w-product-card min-w-[280px] snap-start min-h-[422px]
+            p-[15px] pb-[20px] hover:shadow-card transition-all duration-500 -md:mx-auto relative ">
             <div className="">
-                <div className="overflow-hidden">
-                    <Image src={image} alt="curtain image" width={400} height={400} className="object-cover
-                    transition-[transform] duration-700 min-h-[300px]"/>
-                </div>
-                <h3 className="text-[#434343] mb-[5px] font-semibold">{title.toUpperCase()}</h3>
+                <Link href={`/${i18n?.language}/products/${product.slug}`} className="overflow-hidden">
+                    <Image src={product.image_url} alt="curtain image" width={400} height={300} className="object-cover
+                    transition-[transform] duration-700 min-h-[280px] pointer-events-none"/>
+                </Link>
+
+                < Link href={`/${i18n?.language}/products/${product.slug}`}
+                className="text-[#434343] mb-[5px] font-semibold hover:text-red-500 transition-all">
+                    {product.title_vi.toUpperCase()}
+                </Link>
             </div>
 
             <div className="w-full relative z-10 items-center
             transition-[padding] duration-700">
                 <div className="w-full flex justify-between items-center">
-                    {price && (
+                    {product.price && (
                         <h3 className="text-xl text-red-500 font-bold">
-                            {numberWithCommas(price)} đ
+                            {numberWithCommas(product.price)} đ
                         </h3>
                     )}
 
-                    {price_set && (
+                    {product.price_set && (
                         <h3 className="text-xl text-red-500 font-bold">
-                            {numberWithCommas(price_set[0].price)} đ
+                            {numberWithCommas(product.price_set[0].price)} đ
                         </h3>
                     )}
 
-                    <div className={`${(price || price_set) ? "flex flex-col items-end" : "w-full flex justify-between items-center"}`}>
+                    <div className={`${(product.price || product.price_set) ? "flex flex-col items-end" : "w-full flex justify-between items-center"}`}>
                         <h5>
-                            {t(category)}
+                            {t(product.category)}
                         </h5>
                     </div>
                 </div>
             </div>
-        </Link>
+
+            <button onClick={() => addItemToCart(product)} className="hidden absolute z-20 top-3 right-3 p-2 bg-red-400 rounded">
+                <Image src={bagIcon3} alt="" className="w-5"/>
+            </button>
+            </div>
+        </div>
     )
 };
 

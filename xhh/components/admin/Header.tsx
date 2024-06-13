@@ -32,16 +32,10 @@ const Header = () => {
     null
   );
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -53,13 +47,15 @@ const Header = () => {
     <AppBar position="static" sx={{ marginBottom: "40px" }} className="bg-gray-200 py-5">
       <Container maxWidth="xl">
         <Toolbar disableGutters className="flex justify-between items-center">
-          <Link href="/">
-            <Image src={logoTextRed} alt="" className="w-[12rem]" />
-          </Link>
+          <div className="">
+            <Link href="/">
+              <Image src={logoTextRed} alt="" className="w-[12rem]" />
+            </Link>
+          </div>
 
           {(tabletCheck && session?.user) && (
-            <Box sx={{ paddingRight: 5, marginLeft: "auto" }}>
-              <Typography>Signed in as {session?.user?.name}</Typography>
+            <Box sx={{ paddingRight: 2, marginLeft: "auto" }}>
+              <Typography className="text-neutral-800">{session?.user?.name}</Typography>
             </Box>
           )}
           <Box sx={{ flexGrow: 0 }}>
