@@ -350,7 +350,7 @@ export default function CartPage() {
 
                 {cartItems.length > 0
                 ? (
-                  <main className="w-container-large mx-auto py-7 flex gap-8 justify-between">
+                  <main className="w-container-large mx-auto py-7 flex -md:flex-col gap-8 justify-between">
                     {/* iframe to prevent reloading */}
                     <iframe name="frame" className="hidden"></iframe>
 
@@ -391,7 +391,7 @@ export default function CartPage() {
                             </div>
                         </div>
 
-                        <div className="flex gap-2 items-center">
+                        <div className="flex gap-2 md:items-center -md:flex-col -md:w-full">
                             <select className="form-select form-select-sm border px-4 py-2" id="city" aria-label=".form-select-sm" 
                             onChange={(e) => handleCityChange(e)} required>
                                 <option value={cityValue} selected>Chọn tỉnh thành</option>
@@ -432,9 +432,9 @@ export default function CartPage() {
                           <Image src={truckIcon} alt="" className="w-10"/>
                         </div>
 
-                        <input type="submit" value={t('orderCart')}
+                        <input type="submit" value={t('orderCart')} id="submit_button"
                         className="bg-red-600 text-neutral-100 w-fit cursor-pointer
-                        font-medium text-xl px-12 py-2.5 mx-auto"/>
+                        font-medium text-xl px-12 py-2.5 mx-auto -md:hidden"/>
                     </form>
 
                     <div className="flex gap-4 flex-col">
@@ -460,7 +460,7 @@ export default function CartPage() {
                                           {item?.title_vi}
                                       </h2>
 
-                                      <div className="w-full flex items-center justify-between">
+                                      <div className="w-full flex -md:gap-4 -md:flex-col md:items-center justify-between">
                                           <div className="text-neutral-600 text-sm">
                                               <input type="number" value={item.quantity} className="pl-4 pr-2 py-2 w-[3.5rem] border"
                                               onChange={(e) => {updateQuantity(item.id, parseInt(e.target.value)); updateAmount()}}/>
@@ -486,7 +486,6 @@ export default function CartPage() {
                                 <Image src={binIcon} alt="" className="w-8"/>
                               </button>
                             </div>
-
                           ))}
                         </div>
 
@@ -566,6 +565,12 @@ export default function CartPage() {
                           </span>
                         </div>
                       </div>
+
+                      <label htmlFor="submit_button"
+                        className="bg-red-600 text-neutral-100 w-fit cursor-pointer
+                        font-medium text-xl px-12 py-2.5 mx-auto md:hidden">
+                            {t('orderCart')}
+                      </label>
 
                       <div className="flex justify-between items-center">
                         <h3 className="font-bold text-lg">{t('orderThroughPhoneCall')}</h3>
