@@ -26,6 +26,10 @@ export interface IProduct {
         fullPrice: number,
         price: number,
         discount: number
+    }[] | null,
+    color_set: {
+        color: string,
+        image: string
     }[] | null
 }
 

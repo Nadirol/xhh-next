@@ -103,6 +103,7 @@
     "single-table": "Bàn",
     "single-chair": "Ghế",
     "office-tool": "Bảng Từ",
+    "student-tool": "Đồ dùng học tập",
 
     "featuredProducts": "Sản phẩm bán chạy",
     "xhhProducts": "Sản phẩm",
@@ -171,5 +172,7 @@
     "orderSuccessful": "Đặt hàng thành công",
     "weWillContact": "Chúng tôi sẽ liên hệ để xác nhận đơn hàng trong thời gian sớm nhất",
     "continueShopping": "Tiếp tục mua hàng",
-    "needHelp": "Cần hỗ trợ?"
+    "needHelp": "Cần hỗ trợ?",
+
+    "color": "Màu sắc"
 }

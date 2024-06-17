@@ -99,6 +99,7 @@
     "single-table": "Table",
     "single-chair": "Chair",
     "office-tool": "Office tool",
+    "student-tool": "Student tool",
 
     "featuredProducts": "Featured Products",
     "xhhProducts": "Products",
@@ -164,5 +165,7 @@
 
     "orderSuccessful": "Order is complete",
     "weWillContact": "We will contact you to confirm the order as soon as possible",
-    "continueShopping": "Continue shopping"
+    "continueShopping": "Continue shopping",
+
+    "color": "Color"
 }

@@ -128,12 +128,15 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
         fetchData();
     }, []);
 
+    const [selectedColor, setSelectedColor] = useState(0);
+    const [activeColor, setActiveColor] = useState(0);
+
     return (
         <main className="pt-[2rem] relative flex gap-12 flex-col">
           <div className="w-container-large mx-auto flex gap-12 -md:flex-col">
             <div className="flex gap-12 flex-col">
               <div className="flex justify-center items-center md:min-w-[400px]">
-                <Image src={product.preview_images ? product.preview_images[activeImage] : product.image_url} alt="product image" 
+                <Image src={product.color_set ? product.color_set[activeColor].image : (product.preview_images ? product.preview_images[activeImage] : product.image_url)} alt="product image" 
                 width={400} height={400} className="w-full object-cover aspect-square"/>
               </div>
 
@@ -206,6 +209,21 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
                   {t('addToCart')}
                 </button>
               </div>
+
+              {product.color_set && (
+                <div className="flex gap-5 flex-wrap items-center">
+                  <span className='text-xl'>{t('color')}:</span>
+                  {product.color_set.map((s, index) => (
+                    <button key={index} onMouseEnter={() => setActiveColor(index)} onClick={() => setSelectedColor(index)} 
+                    onMouseLeave={() => selectedColor !== index && setActiveColor(selectedColor)}
+                    className={`px-4 py-2 border border-neutral-500 hover:border-red-500 hover:text-red-500 
+                    flex gap-2 items-center w-fit text-neutral-500 ${(selectedColor === index || activeColor === index) ? "text-red-500 border-red-500" : ""}`}>
+                      <Image width={30} height={30} src={s.image} alt="" />
+                      <span>{s.color}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {(product.features_vi && product.features_en) && (
                 <div className="flex gap-6 justify-between w-full">
