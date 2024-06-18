@@ -146,6 +146,8 @@ export default function CartPage() {
       return false
     };
 
+    const [orderData, setOrderData] = useState<IOrder>({})
+
     const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault(); // prevent the default form submission
 
@@ -182,7 +184,9 @@ export default function CartPage() {
           console.log(`Order was created, document ID is ${res._id}`)
         })
 
-        await router.push(`${i18n?.language}/confirmation`)
+        // await router.push(`${i18n?.language}/confirmation`)
+        setOrderData(order)
+        setConfirmVisible(true)
     };
 
     const [cityData, setCityData] = useState([])
@@ -315,7 +319,9 @@ export default function CartPage() {
     const updateAmount = () => {
       setAmount(cartItems.map((item: ICartProduct) => item.price * item.quantity).reduce((partialSum: number, a: number) => partialSum + a, 0))
     }
-     
+    
+    const [confirmVisible, setConfirmVisible] = useState(false);
+
     return (
         <div>
             <NextSeo
@@ -624,8 +630,6 @@ export default function CartPage() {
                   </div>
                 )}
 
-
-
                 <div className="py-12">
                   <h2 className="text-center text-[#444] text-[30px] font-bold pb-[22px] mb-[25px] relative
                       before:absolute before:right-1/2 before:bottom-0 before:h-[1px] before:w-8 before:bg-red-500 before:translate-x-1/2">
@@ -671,6 +675,38 @@ export default function CartPage() {
                         ))}
                   </div>
                 </div>
+                
+                {orderData.code && (
+                  <div className={`fixed right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2 ${confirmVisible ? "" : "hidden"} bg-white z-[50] 
+                  transition-all duration-200 flex gap-6 flex-col items-start -md:items-center rounded px-20 py-8 w-[700px]`}>
+                    <h3 className="text-2xl font-semibold text-center w-full">{t('confirmOrder')}</h3>
+
+                    <div className="text-semibold flex gap-4 flex-col">
+                      <span>{t('orderCode') + ": " + orderData.code}</span>
+                      <span>{t('fullName') + ": " + orderData.username}</span>
+                      <span>{t('phoneNumber') + ": " + orderData.phoneNumber}</span>
+                      <span>{t('phoneNumber2') + ": " + orderData.phoneNumber2}</span>
+                      <span>{t('address') + ": " + orderData.address?.details + ", " + orderData.address?.ward + ", " + orderData.address?.district + ", " + orderData.address?.city}</span>
+                      
+                      <div>{t('product') + ": "}
+                        <ul>
+                          {orderData.products.map((p, index) => (
+                            <li key={index}>
+                              {p.title + " x " + p.quantity} 
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <span>{t('total') + ": " + orderData.total}</span>
+                      <span>{t('note') + ": " + orderData.note}</span>
+                    </div>
+
+                  </div>
+                )}
+
+                <div className={`bg-filter-dark w-screen h-screen fixed inset-0 z-[40] ${confirmVisible ? "" : "hidden"}`}></div>
+
 
                 <Footer
                     t={t}
