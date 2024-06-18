@@ -216,7 +216,7 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
                   {product.color_set.map((s, index) => (
                     <button key={index} onMouseEnter={() => setActiveColor(index)} onClick={() => setSelectedColor(index)} 
                     onMouseLeave={() => selectedColor !== index && setActiveColor(selectedColor)}
-                    className={`px-4 py-2 border border-neutral-500 hover:border-red-500 hover:text-red-500 
+                    className={`px-4 py-2 border-2 text-semibold border-neutral-500 hover:border-red-500 hover:text-red-500 
                     flex gap-2 items-center w-fit text-neutral-500 ${(selectedColor === index || activeColor === index) ? "text-red-500 border-red-500" : ""}`}>
                       <Image width={30} height={30} src={s.image} alt="" />
                       <span>{s.color}</span>

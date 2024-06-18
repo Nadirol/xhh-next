@@ -58,7 +58,7 @@ import chairImage from "./XHH-GHS-02XH.png"
 import shopBackground from "./1 (1).webp"
 
 import slider1 from "./slideweb1.jpg"
-import slider2 from "./slideweb2.jpg"
+import slider2 from "./slide.jpg"
 import slider3 from "./slideweb3 (1).jpg"
 
 export { phoneIcon, mailIcon, locationIcon, facebookIcon, menuIcon, slider1, slider2, slider3,

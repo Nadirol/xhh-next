@@ -23,9 +23,9 @@ const Slider = () => {
                 <Link href={`/${i18n?.language}/products?category=table-and-chair`}>
                     <Image src={slider1} alt="" className="object-cover w-full pointer-events-none"/>
                 </Link>
-                <a href="https://www.facebook.com/XuanHoaHome/posts/pfbid0SABxHtDUNSPfPvaXVGydyDn6Qok3jChcbTy9wkXJYWFEkiGwQNSXkTM3VwwFhYxrl">
+                <Link href={`/${i18n?.language}/products/set-do-dung-hoc-tap-7-mon`}>
                     <Image src={slider2} alt="" className="object-cover w-full pointer-events-none"/>
-                </a>
+                </Link>
                 <Link href={`/${i18n?.language}/products/bang-tu-dan-tuong-xuan-hoa-home`}>
                     <Image src={slider3} alt="" className="object-cover w-full pointer-events-none"/>
                 </Link>
