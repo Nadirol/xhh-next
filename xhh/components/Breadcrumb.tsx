@@ -14,7 +14,7 @@ const Breadcrumb = ({ t, routes }: {t: TFunction, routes: route[]}) => {
       <ul className="flex items-center space-x-2 text-gray-500">
         {routes.map((route, index) => (
           <li key={index} className="flex items-center">
-            <Link href={route.path}>
+            <Link href={"/" + route.path}>
               <h4 className="hover:text-gray-700">{route.name}</h4>
             </Link>
             {index < routes.length - 1 && (

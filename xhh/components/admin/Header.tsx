@@ -41,7 +41,7 @@ const Header = () => {
   const tabletCheck = useMediaQuery("(min-width: 768px)");
 
   return (
-    <AppBar position="static" sx={{ marginBottom: "40px" }} className="bg-gray-200 py-5">
+    <AppBar position="static" className="bg-gray-200 py-5">
       <Container maxWidth="xl">
         <Toolbar disableGutters className="flex justify-between items-center">
           <div className="flex gap-8 items-center text-neutral-600 font-semibold">
@@ -52,6 +52,8 @@ const Header = () => {
             <Link href="/admin">Đơn hàng</Link>
 
             <Link href="/dashboard/banner">Banner</Link>
+
+            <Link href="/dashboard/blogs">Blog</Link>
           </div>
 
           {(tabletCheck && session?.user) && (

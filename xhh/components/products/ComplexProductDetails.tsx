@@ -132,8 +132,12 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
     const [activeColor, setActiveColor] = useState(0);
 
     return (
-        <main className="pt-[2rem] relative flex gap-12 flex-col">
-          <div className="w-container-large mx-auto flex gap-12 -md:flex-col">
+        <main className="pt-[2rem] relative flex gap-12 flex-col bg-slate-100">
+          <div className="w-container-large mx-auto">
+            <Breadcrumb t={t} routes={routes}/>
+          </div>
+
+          <div className="w-container-large mx-auto flex gap-12 -md:flex-col bg-white p-5">
             <div className="flex gap-12 flex-col">
               <div className="flex justify-center items-center md:min-w-[400px]">
                 <Image src={product.color_set ? product.color_set[activeColor].image : (product.preview_images ? product.preview_images[activeImage] : product.image_url)} alt="product image" 
@@ -153,9 +157,8 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
             </div>
 
             <div className="flex gap-8 flex-col">
-              <Breadcrumb t={t} routes={routes}/>
               <div className="flex gap-1 flex-col">
-                <h1 className="text-neutral-800 font-semibold text-[2rem] xl:text-[4rem] leading-tight">{product.title_vi}</h1>
+                <h1 className="text-neutral-800 font-semibold text-[1rem] xl:text-[2rem] leading-tight">{product.title_vi}</h1>
               </div>
 
               {product.price && (
@@ -185,7 +188,7 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
                   <div className="flex gap-2.5 items-center">
                     {product.price_set.map((p, index) => (
                       <button key={index} onClick={() => setSelectedSize(index)} 
-                      className={`px-4 py-2 border-2 border-neutral-800 hover:border-red-500 transition-all
+                      className={`px-4 py-2 border border-neutral-600 hover:border-red-500 transition-all
                       font-bold hover:text-red-500 ${selectedSize === index ? 'border-red-500 text-red-500' : ''}`}>
                         {p.size}
                       </button>
@@ -194,21 +197,6 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
 
                 </div>
               )}
-
-              <div className="flex gap-2 items-center">
-                <span className='text-xl'>{t('amount')}:</span>
-                <input type="number" className='pl-4 pr-2 py-2 w-[3.5rem] border' value={addCount} onChange={(e) => setAddCount(parseInt(e.target.value))}/>
-
-                <Link href={`/${i18n?.language}/cart`}  onClick={() => addItemToCart()}
-                className='px-10 py-2 rounded bg-red-500 w-fit text-white hover:bg-red-700 text-xl font-semibold'>
-                  {t('buy')}
-                </Link>
-
-                <button onClick={() =>{ addItemToCart(); setToastVisible(true)}}
-                className='px-10 py-2 rounded bg-blue-500 w-fit text-white hover:bg-blue-700 text-xl font-semibold'>
-                  {t('addToCart')}
-                </button>
-              </div>
 
               {product.color_set && (
                 <div className="flex gap-5 flex-wrap items-center">
@@ -244,11 +232,14 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
               )}
 
               {(product.description_vi && product.description_en) && (
-                <div className="flex gap-4 flex-col">
-                  <ul className="flex gap-4 flex-col list-disc list-inside">
+                <div className="flex gap-2 flex-col bg-zinc-100 p-5 w-[90%]">
+                  <ul className="flex gap-2 flex-col list-disc list-inside">
                     {(i18n?.language === "vi" ? product.description_vi : product.description_en).map((d, index) => (
-                      <li key={index} className="text-neutral-700 text-xl">{d}</li>
+                      <li key={index} className="text-neutral-700">{d}</li>
                     ))}
+                    {product.bonus && (
+                      <li className="text-neutral-700">{t('bonus')}: {product.bonus?.join(', ')}</li>
+                    )}
                   </ul>
                 </div>
               )}
@@ -272,20 +263,19 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
                 </div>
               )}
 
-              {product.bonus && (
-                <ul className="text-neutral-700 text-xl flex gap-2 list-disc list-inside">
-                  <li>{t('bonus')}: {product.bonus?.join(', ')}</li>
-                </ul>
-              )}
+              <div className="flex gap-2 items-center">
+                <span className='text-xl'>{t('amount')}:</span>
+                <input type="number" className='pl-4 pr-2 py-2 w-[3.5rem] border' value={addCount} onChange={(e) => setAddCount(parseInt(e.target.value))}/>
 
-              <div className="flex gap-2 flex-col">
-                <h3 className='text-red-700 text-xl font-medium'>{t('guarantee')}:</h3>
-                <ul className='list-disc ml-8 text-neutral-800 text-xl flex gap-4 flex-col'>
-                  <li>{t('guarantee1')}</li>
-                  <li>{t('guarantee2')}</li>
-                  <li>{t('guarantee3')}</li>
-                  <li>{t('guarantee4')}</li>
-                </ul>
+                <Link href={`/${i18n?.language}/cart`}  onClick={() => addItemToCart()}
+                className='px-10 py-2 rounded bg-red-500 w-fit text-white hover:bg-red-700 text-xl font-semibold'>
+                  {t('buy')}
+                </Link>
+
+                <button onClick={() =>{ addItemToCart(); setToastVisible(true)}}
+                className='px-10 py-2 rounded bg-blue-500 w-fit text-white hover:bg-blue-700 text-xl font-semibold'>
+                  {t('addToCart')}
+                </button>
               </div>
             </div>
           </div>
