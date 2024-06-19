@@ -177,5 +177,9 @@
     "color": "Màu sắc",
     "bankTransfer": "Chuyển khoản qua ngân hàng",
     "confirmOrder": "Xác nhận đơn hàng",
-    "orderCode": "Mã đơn hàng"
+    "orderCode": "Mã đơn hàng",
+
+    "checkout": "Thanh toán",
+    "complete": "Hoàn tất",
+    "confirm": "Xác nhận"
 }

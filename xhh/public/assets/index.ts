@@ -66,10 +66,12 @@ import slider3 from "./slideweb3 (1).jpg"
 import bannerScreenshot1 from "./Untitled.png"
 import bannerScreenshot2 from "./Annotation 2024-06-19 125914.png"
 
+import QRCode from "./z5553591078320_37e23ec16dd383d6ecd03b3762b45230.jpg"
+
 export { phoneIcon, mailIcon, locationIcon, facebookIcon, menuIcon, slider1, slider2, slider3,
 closeIcon, homeIcon, aboutIcon, planeIcon, arrowRightIcon, mediaIcon, facebookLogo,
 ukFlag, vietnamFlag, zaloLogo, messengerLogo, starIcon, binIcon, cardIcon, bannerScreenshot2,
-whatsappIcon, windowImage, woodenFloorImage, tableChairImage, downloadIcon,
+whatsappIcon, windowImage, woodenFloorImage, tableChairImage, downloadIcon, QRCode,
 arrowUpIcon, officeImage, bagIcon, bagIcon2, bagIcon3, truckIcon, bannerScreenshot1,
 locationSmall, phoneSmall, mailSmall, facebookSmall, filterIcon, logoTextRed, logoTextWhite, logoRed,
 aboutImage1, aboutImage2, aboutImage3, aboutImage4, tableAndChairImage,

@@ -170,5 +170,9 @@
     "color": "Color",
     "bankTransfer": "Bank transfer",
     "confirmOrder": "Confirm Order",
-    "orderCode": "Order code"
+    "orderCode": "Order code",
+
+    "checkout": "Check out",
+    "complete": "Complete",
+    "confirm": "Confirm"
 }
