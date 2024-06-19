@@ -448,10 +448,9 @@ export default function CartPage() {
                         <div className="flex gap-4 w-full">
                           <div className={`p-6 rounded border-2 border-blue-500 mr-auto flex gap-2 items-center flex-1
                             ${paymentMethod === t('paymentAfter') ? "border-blue-500" : "border-neutral-300"}`}  onClick={() => handlePaymentChange(t('paymentAfter'))}>
-                            <input type="radio" id="payment-radio"
-                            checked={paymentMethod === t('paymentAfter')} id="paymentAfter" value={t('paymentAfter')}/>
+                            <input type="radio" checked={paymentMethod === t('paymentAfter')} id="paymentAfter" value={t('paymentAfter')}/>
 
-                            <label htmlFor="payment-radio" className="">
+                            <label htmlFor="paymentAfter" className="">
                                 {t('paymentAfter')}
                             </label>
 
@@ -460,18 +459,15 @@ export default function CartPage() {
 
                           <div className={`p-6 rounded border-2 border-blue-500 mr-auto flex gap-2 items-center flex-1
                             ${paymentMethod === t('bankTransfer') ? "border-blue-500" : "border-neutral-300"}`} onClick={() => handlePaymentChange(t('bankTransfer'))}>
-                            <input type="radio" id="payment-radio"
-                            checked={paymentMethod === t('bankTransfer')} id="bankTransfer" value={t('bankTransfer')}/>
+                            <input type="radio" checked={paymentMethod === t('bankTransfer')} id="bankTransfer" value={t('bankTransfer')}/>
 
-                            <label htmlFor="payment-radio" className="">
+                            <label htmlFor="bankTransfer" className="">
                                 {t('bankTransfer')}
                             </label>
 
                             <Image src={cardIcon} alt="" className="w-10"/>
                           </div>
                         </div>
-
-
 
                         <input type="submit" value={t('orderCart')} id="submit_button"
                         className="bg-red-600 text-neutral-100 w-fit cursor-pointer
@@ -623,7 +619,7 @@ export default function CartPage() {
                     {/* pop up appears when successfully submit form */}
                     <div className={`fixed right-1/2 translate-x-1/2 px-8 py-4 z-30
                         bg-white dark:bg-semi-black transition-all duration-300 pointer-events-none 
-                            ${ popUpVisible ? 'bottom-12 opacity-100' : 'opacity-0 bottom-0'} shadow-card-bold`}>
+                          ${ popUpVisible ? 'bottom-12 opacity-100' : 'opacity-0 bottom-0'} shadow-card-bold`}>
                         <h5 className="text-neutral-800 font-semibold text-base leading-none z-30">
                         {t('popUpText')} 
                         </h5>
