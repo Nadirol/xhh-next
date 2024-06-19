@@ -16,7 +16,7 @@ import Footer from "../../../components/Footer";
 import axios from 'axios';
 import { NextSeo } from "next-seo";
 import { Lato } from "next/font/google";
-import { binIcon, logoRed, shopBackground, truckIcon } from "../../../public/assets";
+import { binIcon, cardIcon, logoRed, shopBackground, truckIcon } from "../../../public/assets";
 import { cartState } from "../../../atoms/cartState";
 import { ICartProduct, ICoupon, IOrder, IProduct } from "../../../interface/interface";
 import supabase from "../../../supabase";
@@ -171,6 +171,7 @@ export default function CartPage() {
             quantity: item.quantity
           }
         }),
+        paymentMethod: paymentMethod,
         total: (amount + shippingFee) * ((100 - appliedCoupon.discountPercentage) / 100),
         note: messageValue,
         isCompleted: false
@@ -180,18 +181,28 @@ export default function CartPage() {
 
         // await sendOrder({...order, date: Timestamp.fromDate(new Date()).toDate().toLocaleString()});
 
-        client.create({...order, date: new Date()}).then((res) => {
-          console.log(`Order was created, document ID is ${res._id}`)
-        })
-
         // await router.push(`${i18n?.language}/confirmation`)
         setOrderData(order)
         setConfirmVisible(true)
     };
 
-    const [cityData, setCityData] = useState([])
+    const handleCardPayment = (order: IOrder) => {
+      !cardPaymentVisible 
+      ? setCardPaymentVisible(true)
+      : handleConfirmation(order)
+    }
 
-    console.log(cityData.filter(c => c.Id === cityValue))
+    const handleConfirmation = async (order: IOrder) => {
+      client.create({...order, date: new Date()}).then((res) => {
+        console.log(`Order was created, document ID is ${res._id}`)
+      });
+
+      await router.push(`${i18n?.language}/confirmation`)
+    };
+
+    const [cardPaymentVisible, setCardPaymentVisible] = useState(false);
+
+    const [cityData, setCityData] = useState([])
 
     useEffect(() => {
         const citis = document.getElementById("city");
@@ -322,6 +333,12 @@ export default function CartPage() {
     
     const [confirmVisible, setConfirmVisible] = useState(false);
 
+    const [paymentMethod, setPaymentMethod] = useState(t('paymentAfter'));
+
+    const handlePaymentChange = (e: string) => {
+      setPaymentMethod(e);
+    };
+
     return (
         <div>
             <NextSeo
@@ -397,7 +414,7 @@ export default function CartPage() {
                             </div>
                         </div>
 
-                        <div className="flex gap-2 md:items-center -md:flex-col -md:w-full">
+                        <div className="flex gap-2 md:items-center -md:flex-col w-full">
                             <select className="form-select form-select-sm border px-4 py-2" id="city" aria-label=".form-select-sm" 
                             onChange={(e) => handleCityChange(e)} required>
                                 <option value={cityValue} selected>Chọn tỉnh thành</option>
@@ -428,15 +445,33 @@ export default function CartPage() {
                           </textarea>
                         </div>
 
-                        <div className="p-6 rounded border-2 border-blue-500 mr-auto flex gap-2 items-center">
-                          <input type="radio" id="payment-radio" checked/>
+                        <div className="flex gap-4 w-full">
+                          <div className={`p-6 rounded border-2 border-blue-500 mr-auto flex gap-2 items-center flex-1
+                            ${paymentMethod === t('paymentAfter') ? "border-blue-500" : "border-neutral-300"}`}  onClick={() => handlePaymentChange(t('paymentAfter'))}>
+                            <input type="radio" id="payment-radio"
+                            checked={paymentMethod === t('paymentAfter')} id="paymentAfter" value={t('paymentAfter')}/>
 
-                          <label htmlFor="payment-radio" className="">
-                              {t('paymentAfter')}
-                          </label>
+                            <label htmlFor="payment-radio" className="">
+                                {t('paymentAfter')}
+                            </label>
 
-                          <Image src={truckIcon} alt="" className="w-10"/>
+                            <Image src={truckIcon} alt="" className="w-10"/>
+                          </div>
+
+                          <div className={`p-6 rounded border-2 border-blue-500 mr-auto flex gap-2 items-center flex-1
+                            ${paymentMethod === t('bankTransfer') ? "border-blue-500" : "border-neutral-300"}`} onClick={() => handlePaymentChange(t('bankTransfer'))}>
+                            <input type="radio" id="payment-radio"
+                            checked={paymentMethod === t('bankTransfer')} id="bankTransfer" value={t('bankTransfer')}/>
+
+                            <label htmlFor="payment-radio" className="">
+                                {t('bankTransfer')}
+                            </label>
+
+                            <Image src={cardIcon} alt="" className="w-10"/>
+                          </div>
                         </div>
+
+
 
                         <input type="submit" value={t('orderCart')} id="submit_button"
                         className="bg-red-600 text-neutral-100 w-fit cursor-pointer
@@ -676,36 +711,309 @@ export default function CartPage() {
                   </div>
                 </div>
                 
-                {orderData.code && (
+                {(orderData.code && !cardPaymentVisible) && (
                   <div className={`fixed right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2 ${confirmVisible ? "" : "hidden"} bg-white z-[50] 
-                  transition-all duration-200 flex gap-6 flex-col items-start -md:items-center rounded px-20 py-8 w-[700px]`}>
+                  transition-all duration-200 flex gap-6 flex-col items-start -md:items-center rounded px-20 py-8`}>
                     <h3 className="text-2xl font-semibold text-center w-full">{t('confirmOrder')}</h3>
 
-                    <div className="text-semibold flex gap-4 flex-col">
-                      <span>{t('orderCode') + ": " + orderData.code}</span>
-                      <span>{t('fullName') + ": " + orderData.username}</span>
-                      <span>{t('phoneNumber') + ": " + orderData.phoneNumber}</span>
-                      <span>{t('phoneNumber2') + ": " + orderData.phoneNumber2}</span>
-                      <span>{t('address') + ": " + orderData.address?.details + ", " + orderData.address?.ward + ", " + orderData.address?.district + ", " + orderData.address?.city}</span>
-                      
-                      <div>{t('product') + ": "}
-                        <ul>
-                          {orderData.products.map((p, index) => (
-                            <li key={index}>
-                              {p.title + " x " + p.quantity} 
-                            </li>
-                          ))}
-                        </ul>
+                    <div className="flex gap-4">
+                      <div className="text-semibold flex gap-4 flex-col">
+                        <span>{t('orderCode') + ": "}
+                          <span className="font-bold">{orderData.code}</span>
+                        </span>
+
+                        <span>{t('fullName') + ": "}
+                          <span className="font-bold">{orderData.username}</span>
+                        </span>
+                        
+                        <span>{t('phoneNumber') + ": "}
+                          <span className="font-bold">{orderData.phoneNumber}</span>
+                        </span>
+
+                        {orderData.phoneNumber2 && (
+                          <span>{t('phoneNumber2') + ": " + orderData.phoneNumber2}
+                            <span className="font-bold">{orderData.phoneNumber2}</span>
+                          </span>
+                        )}
+
+                        <span>{t('address') + ": "}
+                          <span className="font-bold">
+                            {orderData.address?.details + ", " + orderData.address?.ward + ", " + orderData.address?.district + ", " + orderData.address?.city}
+                          </span>
+                        </span>
+
+                        <span>{t('finalTotal') + ": "}
+                          <span className="font-bold">{numberWithCommas(orderData.total) + "đ"}</span>
+                        </span>
+
+                        {orderData.note && (
+                          <span>{t('message') + ": " + orderData.note}</span>
+                        )}
                       </div>
 
-                      <span>{t('total') + ": " + orderData.total}</span>
-                      <span>{t('note') + ": " + orderData.note}</span>
+                      <div className="flex gap-4 flex-col">
+                        <div className="h-fit flex gap-4 flex-col">
+                          <div className="flex gap-4 flex-col">
+                            {cartItems.map((item, index) => (
+                              <div key={index} className="flex justify-between items-start w-full">
+                                <div key={index} className="flex -md:gap-4 -md:flex-col -md:items-center gap-8">
+                                    <div className="w-[3rem] md:w-[10rem] aspect-square flex justify-center items-center">
+                                        <Image src={item.image_url} alt="wine bottle preview image" width={300} height={500} 
+                                        className="object-cover w-auto h-full transition-all duration-300" loading="lazy"/>
+                                    </div>
+                                    <div className="flex gap-2 flex-col">
+                                        <h2 className="w-[150px] md:w-[250px] -md:mx-auto text-neutral-800 font-medium text-sm 
+                                        md:text-base tracking-wide -md:text-center">
+                                            {item?.title_vi}
+                                        </h2>
+
+                                        <div className="w-full flex -md:gap-4 -md:flex-col md:items-center justify-between">
+                                            <div className="text-neutral-600 text-sm">
+                                                <span className="px-4 py-2 w-[3.5rem] border">{item.quantity}</span>
+                                                <span className="text-neutral-700 font-semibold text-base">
+                                                    {item.price && (
+                                                        <span>
+                                                            {" x " + numberWithCommas(item.price)}
+                                                        </span>
+                                                    )}
+                                                </span>
+                                            </div>
+
+                                            {item.price && (
+                                              <span className="font-semibold text-red-500">
+                                                  {numberWithCommas(item.price * item?.quantity)}đ
+                                              </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button onClick={() => removeCartItem(item.id)}>
+                                  <Image src={binIcon} alt="" className="w-8"/>
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+
+                          {appliedCoupon.coupon && (
+                            <div className="w-full flex items-center justify-between">
+                              <span className="font-semibold">{appliedCoupon.coupon}</span>
+                              
+                              <div className="flex gap-4">
+                                <div className="px-4 py-2 bg-red-500 text-white font-semibold">
+                                  {t('off') + " " + appliedCoupon.discountPercentage + "%"}
+                                </div>
+
+                                <button className="" onClick={() => setAppliedCoupon({coupon: "", discountPercentage: 0})}>
+                                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 20L0 18L8 10L0 2L2 0L10 8L18 0L20 2L12 10L20 18L18 20L10 12L2 20Z" className="fill-neutral-700"/>
+                                  </svg>                       
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="bg-neutral-50 p-8 h-fit flex gap-4 flex-col">
+                          <div className="w-full flex items-center justify-between">
+                            {t('itemsTotal')}
+                            <span className="font-semibold">
+                              {numberWithCommas((cartItems.map((item: ICartProduct) => (item.price || 0) * item.quantity)
+                              .reduce((partialSum: number, a: number) => partialSum + a, 0)))}
+                              &nbsp;
+                              <span className="underline">đ</span>
+                            </span>
+                          </div>
+
+                          <div className="w-full flex items-center justify-between">
+                            {t('discountCheckout')}
+                            <span className="font-semibold">
+                                {appliedCoupon.discountPercentage}%
+                            </span>
+                          </div>
+
+                          <div className="w-full flex items-center justify-between">
+                            {t('shippingFee')}
+                            <span className="font-semibold">
+                                {shippingFee === 0 ? t('free') : shippingFee}
+                            </span>
+                          </div>
+
+                          <div className="w-full flex items-center justify-between">
+                            {t('finalTotal')}
+                            <span className="font-semibold text-red-500">
+                              {numberWithCommas((cartItems.map((item: ICartProduct) => (item.price || 0) * item.quantity)
+                              .reduce((partialSum: number, a: number) => partialSum + a, 0) + shippingFee) * (100 - appliedCoupon.discountPercentage) / 100)}
+                              &nbsp;
+                              <span className="underline">đ</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
+                    <div className="flex gap-8 items-center mx-auto">
+                      <button className="text-xl font-semibold text-neutral-600 px-8 py-2.5 rounded bg-gray-300" onClick={() => setConfirmVisible(false)}>{t('cancel')}</button>
+
+                      <button onClick={handleConfirmation} className="text-xl font-semibold text-white px-8 py-2.5 rounded bg-red-500 hover:bg-red-600">
+                        {orderData.paymentMethod === t("paymentAfter") ? t('confirm') : (cardPaymentVisible ? t('complete') : t('checkout'))}
+                      </button>
+                    </div>
                   </div>
                 )}
 
-                <div className={`bg-filter-dark w-screen h-screen fixed inset-0 z-[40] ${confirmVisible ? "" : "hidden"}`}></div>
+{(orderData.code && !cardPaymentVisible) && (
+                  <div className={`fixed right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2 ${confirmVisible ? "" : "hidden"} bg-white z-[50] 
+                  transition-all duration-200 flex gap-6 flex-col items-start -md:items-center rounded px-20 py-8`}>
+                    <h3 className="text-2xl font-semibold text-center w-full">{t('confirmOrder')}</h3>
+
+                    <div className="flex gap-4">
+                      <div className="text-semibold flex gap-4 flex-col">
+                        <span>{t('orderCode') + ": "}
+                          <span className="font-bold">{orderData.code}</span>
+                        </span>
+
+                        <span>{t('fullName') + ": "}
+                          <span className="font-bold">{orderData.username}</span>
+                        </span>
+                        
+                        <span>{t('phoneNumber') + ": "}
+                          <span className="font-bold">{orderData.phoneNumber}</span>
+                        </span>
+
+                        {orderData.phoneNumber2 && (
+                          <span>{t('phoneNumber2') + ": " + orderData.phoneNumber2}
+                            <span className="font-bold">{orderData.phoneNumber2}</span>
+                          </span>
+                        )}
+
+                        <span>{t('address') + ": "}
+                          <span className="font-bold">
+                            {orderData.address?.details + ", " + orderData.address?.ward + ", " + orderData.address?.district + ", " + orderData.address?.city}
+                          </span>
+                        </span>
+
+                        <span>{t('finalTotal') + ": "}
+                          <span className="font-bold">{numberWithCommas(orderData.total) + "đ"}</span>
+                        </span>
+
+                        {orderData.note && (
+                          <span>{t('message') + ": " + orderData.note}</span>
+                        )}
+                      </div>
+
+                      <div className="flex gap-4 flex-col">
+                        <div className="h-fit flex gap-4 flex-col">
+                          <div className="flex gap-4 flex-col">
+                            {cartItems.map((item, index) => (
+                              <div key={index} className="flex justify-between items-start w-full">
+                                <div key={index} className="flex -md:gap-4 -md:flex-col -md:items-center gap-8">
+                                    <div className="w-[3rem] md:w-[10rem] aspect-square flex justify-center items-center">
+                                        <Image src={item.image_url} alt="wine bottle preview image" width={300} height={500} 
+                                        className="object-cover w-auto h-full transition-all duration-300" loading="lazy"/>
+                                    </div>
+                                    <div className="flex gap-2 flex-col">
+                                        <h2 className="w-[150px] md:w-[250px] -md:mx-auto text-neutral-800 font-medium text-sm 
+                                        md:text-base tracking-wide -md:text-center">
+                                            {item?.title_vi}
+                                        </h2>
+
+                                        <div className="w-full flex -md:gap-4 -md:flex-col md:items-center justify-between">
+                                            <div className="text-neutral-600 text-sm">
+                                                <span className="px-4 py-2 w-[3.5rem] border">{item.quantity}</span>
+                                                <span className="text-neutral-700 font-semibold text-base">
+                                                    {item.price && (
+                                                        <span>
+                                                            {" x " + numberWithCommas(item.price)}
+                                                        </span>
+                                                    )}
+                                                </span>
+                                            </div>
+
+                                            {item.price && (
+                                              <span className="font-semibold text-red-500">
+                                                  {numberWithCommas(item.price * item?.quantity)}đ
+                                              </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button onClick={() => removeCartItem(item.id)}>
+                                  <Image src={binIcon} alt="" className="w-8"/>
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+
+                          {appliedCoupon.coupon && (
+                            <div className="w-full flex items-center justify-between">
+                              <span className="font-semibold">{appliedCoupon.coupon}</span>
+                              
+                              <div className="flex gap-4">
+                                <div className="px-4 py-2 bg-red-500 text-white font-semibold">
+                                  {t('off') + " " + appliedCoupon.discountPercentage + "%"}
+                                </div>
+
+                                <button className="" onClick={() => setAppliedCoupon({coupon: "", discountPercentage: 0})}>
+                                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 20L0 18L8 10L0 2L2 0L10 8L18 0L20 2L12 10L20 18L18 20L10 12L2 20Z" className="fill-neutral-700"/>
+                                  </svg>                       
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="bg-neutral-50 p-8 h-fit flex gap-4 flex-col">
+                          <div className="w-full flex items-center justify-between">
+                            {t('itemsTotal')}
+                            <span className="font-semibold">
+                              {numberWithCommas((cartItems.map((item: ICartProduct) => (item.price || 0) * item.quantity)
+                              .reduce((partialSum: number, a: number) => partialSum + a, 0)))}
+                              &nbsp;
+                              <span className="underline">đ</span>
+                            </span>
+                          </div>
+
+                          <div className="w-full flex items-center justify-between">
+                            {t('discountCheckout')}
+                            <span className="font-semibold">
+                                {appliedCoupon.discountPercentage}%
+                            </span>
+                          </div>
+
+                          <div className="w-full flex items-center justify-between">
+                            {t('shippingFee')}
+                            <span className="font-semibold">
+                                {shippingFee === 0 ? t('free') : shippingFee}
+                            </span>
+                          </div>
+
+                          <div className="w-full flex items-center justify-between">
+                            {t('finalTotal')}
+                            <span className="font-semibold text-red-500">
+                              {numberWithCommas((cartItems.map((item: ICartProduct) => (item.price || 0) * item.quantity)
+                              .reduce((partialSum: number, a: number) => partialSum + a, 0) + shippingFee) * (100 - appliedCoupon.discountPercentage) / 100)}
+                              &nbsp;
+                              <span className="underline">đ</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-8 items-center mx-auto">
+                      <button className="text-xl font-semibold text-neutral-600 px-8 py-2.5 rounded bg-gray-300" onClick={() => setConfirmVisible(false)}>{t('cancel')}</button>
+
+                      <button onClick={handleConfirmation} className="text-xl font-semibold text-white px-8 py-2.5 rounded bg-red-500 hover:bg-red-600">
+                        {orderData.paymentMethod === t("paymentAfter") ? t('confirm') : (cardPaymentVisible ? t('complete') : t('checkout'))}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                <div className={`bg-filter-dark w-screen h-screen fixed inset-0 z-[40] ${(confirmVisible || cardPaymentVisible) ? "" : "hidden"}`}></div>
 
 
                 <Footer

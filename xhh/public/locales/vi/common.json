@@ -174,5 +174,8 @@
     "continueShopping": "Tiếp tục mua hàng",
     "needHelp": "Cần hỗ trợ?",
 
-    "color": "Màu sắc"
+    "color": "Màu sắc",
+    "bankTransfer": "Chuyển khoản qua ngân hàng",
+    "confirmOrder": "Xác nhận đơn hàng",
+    "orderCode": "Mã đơn hàng"
 }

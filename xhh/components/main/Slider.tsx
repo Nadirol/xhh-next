@@ -14,22 +14,34 @@ const indicators = (index: number) =>
     </div>
     );
 
-const Slider = () => {
+const Slider = ({ sliderBanner }) => {
     const slideRef = useRef<SlideshowRef>(null)
 
     return (
         <div className="w-container mx-auto relative">
-            <Slide indicators={indicators} transitionDuration={500} duration={1000} autoplay={false} arrows={false} ref={slideRef}>
-                <Link href={`/${i18n?.language}/products?category=table-and-chair`}>
-                    <Image src={slider1} alt="" className="object-cover w-full pointer-events-none"/>
-                </Link>
-                <Link href={`/${i18n?.language}/products/set-do-dung-hoc-tap-7-mon`}>
-                    <Image src={slider2} alt="" className="object-cover w-full pointer-events-none"/>
-                </Link>
-                <Link href={`/${i18n?.language}/products/bang-tu-dan-tuong-xuan-hoa-home`}>
-                    <Image src={slider3} alt="" className="object-cover w-full pointer-events-none"/>
-                </Link>
-            </Slide>
+                {sliderBanner ? (
+                    <Slide indicators={indicators} transitionDuration={500} duration={1000} autoplay={false} arrows={false} ref={slideRef}>
+                        {sliderBanner.map((s, index) => (
+                            <Link key={index} href={s.link}>
+                                <Image src={s.image} alt="" className="object-cover w-full pointer-events-none"/>
+                            </Link>
+                        ))}
+                    </Slide>
+                )
+                : (
+                    <Slide indicators={indicators} transitionDuration={500} duration={1000} autoplay={false} arrows={false} ref={slideRef}>
+                        <Link href={`/${i18n?.language}/products?category=table-and-chair`}>
+                            <Image src={slider1} alt="" className="object-cover w-full pointer-events-none"/>
+                        </Link>
+                        <Link href={`/${i18n?.language}/products/set-do-dung-hoc-tap-7-mon`}>
+                            <Image src={slider2} alt="" className="object-cover w-full pointer-events-none"/>
+                        </Link>
+                        <Link href={`/${i18n?.language}/products/bang-tu-dan-tuong-xuan-hoa-home`}>
+                            <Image src={slider3} alt="" className="object-cover w-full pointer-events-none"/>
+                        </Link>
+                    </Slide>
+                )}
+
         </div>
 
     )

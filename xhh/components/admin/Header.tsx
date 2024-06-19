@@ -5,13 +5,10 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useMediaQuery } from "@mui/material";
 import { logoTextRed } from "../../public/assets";
@@ -47,10 +44,14 @@ const Header = () => {
     <AppBar position="static" sx={{ marginBottom: "40px" }} className="bg-gray-200 py-5">
       <Container maxWidth="xl">
         <Toolbar disableGutters className="flex justify-between items-center">
-          <div className="">
+          <div className="flex gap-8 items-center text-neutral-600 font-semibold">
             <Link href="/">
               <Image src={logoTextRed} alt="" className="w-[12rem]" />
             </Link>
+
+            <Link href="/admin">Đơn hàng</Link>
+
+            <Link href="/dashboard/banner">Banner</Link>
           </div>
 
           {(tabletCheck && session?.user) && (

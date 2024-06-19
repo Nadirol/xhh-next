@@ -2,6 +2,8 @@ import { useRef } from "react";
 import Header from "../../../components/admin/Header";
 import { IOrder } from "../../../interface/interface";
 import { DownloadTableExcel } from 'react-export-table-to-excel';
+import { downloadIcon } from "../../../public/assets";
+import Image from "next/image";
 
 function numberWithCommas(x: number) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -14,17 +16,21 @@ export default function DashboardPage({ data }: { data: IOrder[] }) {
         <div className="">
             <Header/>
 
-            <DownloadTableExcel
-                filename="Đơn Hàng Web XHH"
-                sheet="sheet1"
-                currentTableRef={tableRef.current}
-            >
+            <div className="w-[90%] mx-auto">
+                <DownloadTableExcel
+                    filename="Đơn Hàng Web XHH"
+                    sheet="sheet1"
+                    currentTableRef={tableRef.current}
+                >
 
-                <button> Xuất Excel </button>
+                    <button className="flex gap-2 bg-green-600 px-4 py-2 rounded text-semibold text-white ml-auto mb-4"> Xuất Excel 
+                        <Image src={downloadIcon} alt="" />
+                    </button>
 
-            </DownloadTableExcel>
+                </DownloadTableExcel>
+            </div>
 
-            <div className="w-full flex items-center">
+            <div className="w-[90%] flex items-center mx-auto ">
                 <table className="table table-striped mx-auto" ref={tableRef}>
                     <thead>
                         <tr className="">

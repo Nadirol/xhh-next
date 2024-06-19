@@ -12,8 +12,8 @@ const Banners = ({ t, banner }: { t: TFunction, banner: IBanner }) => {
                 <div className="bg-[#eee] relative flex-1 flex justify-between items-center">
                     <div className="-md:w-1/2 w-[60%] aspect-square mx-auto p-10">
                         {
-                            (banner?.banner1?.image && banner?.banner1?.link)
-                            ? <Image width={280} height={160} src={urlFor(banner?.banner1?.image).url()} className="m-auto" alt="" />
+                            (banner?.banner?.banner1.image && banner?.banner?.banner1.link)
+                            ? <Image width={280} height={160} src={urlFor(banner?.banner?.banner1?.image).url()} className="m-auto" alt="" />
                             : <Image src={chairImage} alt="" />
                         }
                     </div>
@@ -39,7 +39,7 @@ const Banners = ({ t, banner }: { t: TFunction, banner: IBanner }) => {
                         <div
                         className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0 overflow-hidden">
                             {t('buyNow')}
-                            <Link href={banner?.banner1?.link ? banner?.banner1?.link : `/${i18n?.language}/products/ghe-hoc-sinh-ghs-02xh`} className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-100%] transition-all duration-300 text-center">
+                            <Link href={banner?.banner?.banner1?.link ? banner?.banner?.banner1?.link : `/${i18n?.language}/products/ghe-hoc-sinh-ghs-02xh`} className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-100%] transition-all duration-300 text-center">
                                 {t('buyNow')}
                             </Link>
                         </div>
@@ -49,8 +49,8 @@ const Banners = ({ t, banner }: { t: TFunction, banner: IBanner }) => {
                 <div className="bg-[#eee] relative flex-1 flex items-center">
                     <div className="-md:w-1/3 -md:py-4 w-1/2 pl-4 py-auto py-2">
                         {
-                            (banner?.banner2?.image && banner?.banner2?.link)
-                            ? <Image width={280} height={280} src={urlFor(banner?.banner2?.image).url()} alt="" />
+                            (banner?.banner?.banner2?.image && banner?.banner?.banner2?.link)
+                            ? <Image width={280} height={280} src={urlFor(banner?.banner?.banner2?.image).url()} alt="" />
                             : <Image src={newProduct2} alt="" />
                         }                    
                     </div>
@@ -67,7 +67,7 @@ const Banners = ({ t, banner }: { t: TFunction, banner: IBanner }) => {
                         <div className="relative border-2 border-[#d3d3d3] px-[15px] leading-[30px] overflow-hidden [&:hover>.absolute]:translate-x-0 w-fit
                         bg-[#eee]">
                             {t('buyNow')}
-                            <Link href={banner?.banner2?.link ? banner?.banner2?.link : `/${i18n?.language}/products`} className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-110%] transition-all duration-300 text-center">
+                            <Link href={banner?.banner?.banner2?.link ? banner?.banner?.banner2?.link : `/${i18n?.language}/products`} className="absolute left-0 top-0 w-full h-full bg-red-500 text-white translate-x-[-110%] transition-all duration-300 text-center">
                                 {t('buyNow')}
                             </Link>
                         </div>
@@ -78,8 +78,8 @@ const Banners = ({ t, banner }: { t: TFunction, banner: IBanner }) => {
             <div className="w-full bg-[#eee] relative flex items-center">
                 <div className="-md:w-1/2 w-1/2">
                     {
-                        (banner?.banner3?.image && banner?.banner3?.link)
-                        ? <Image width={280} height={280} src={urlFor(banner?.banner3?.image).url()} alt="" />
+                        (banner?.banner?.banner3?.image && banner?.banner?.banner3?.link)
+                        ? <Image width={280} height={280} src={urlFor(banner?.banner?.banner3?.image).url()} alt="" />
                         : <Image src={newProduct1} alt="" />
                     }                
                 </div>

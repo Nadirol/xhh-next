@@ -167,5 +167,8 @@
     "weWillContact": "We will contact you to confirm the order as soon as possible",
     "continueShopping": "Continue shopping",
 
-    "color": "Color"
+    "color": "Color",
+    "bankTransfer": "Bank transfer",
+    "confirmOrder": "Confirm Order",
+    "orderCode": "Order code"
 }

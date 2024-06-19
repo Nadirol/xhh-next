@@ -33,7 +33,7 @@ async function getData() {
 }
 
 async function getBannerData() {
-  const query = `*[_type == "bannersXHH"]`;
+  const query = `*[_type == "bannerXHH"]`;
 
   const data = await client.fetch(query);
 
@@ -149,7 +149,7 @@ export default function Home({ data, bannerData }: { data: IPost[], bannerData: 
             setToastVisible={setToastVisible}
             products={products}
           />
-          <Slider/>
+          <Slider sliderBanner={bannerData[0].sliderBanner}/>
           <Products 
             t={t}
             addItemToCart={addItemToCart} 

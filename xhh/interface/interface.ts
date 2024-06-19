@@ -74,20 +74,26 @@ export interface IPost {
 }
 
 export interface IBanner {
-    title: string,
-    image: any,
-    banner1: {
-        image: any | null,
-        link: string | null
+    demonstration: any,
+    banner: {
+        banner1: {
+            image: any | null,
+            link: string | null
+        },
+        banner2: {
+            image: any | null,
+            link: string | null
+        },
+        banner3: {
+            image: any | null,
+            link: string | null
+        }
     },
-    banner2: {
-        image: any | null,
-        link: string | null
-    },
-    banner3: {
-        image: any | null,
-        link: string | null
-    }
+    demonstration2: any,
+    sliderBanner: {
+            image: any | null,
+            link: string | null
+    }[]
 }
 
 export interface ICoupon {
@@ -113,6 +119,7 @@ export interface IOrder {
         title: string,
         quantity: number
     }[],
+    paymentMethod: "paymentAfter" | "cardPayment",
     total: number,
     note: string,
     isCompleted: boolean

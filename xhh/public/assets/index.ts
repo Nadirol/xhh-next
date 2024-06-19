@@ -36,6 +36,8 @@ import bagIcon3 from "./bag_white.svg"
 import checkIcon from "./check.png"
 import binIcon from "./bin.png"
 import truckIcon from "./cash-on-delivery_5579878.png"
+import downloadIcon from "./icons8-download-24.png"
+import cardIcon from "./icons8-card-96.png"
 
 import logoTextRed from "./logo-text-light.png"
 import logoTextWhite from "./logo-text-white.png"
@@ -61,11 +63,14 @@ import slider1 from "./slideweb1.jpg"
 import slider2 from "./slide.jpg"
 import slider3 from "./slideweb3 (1).jpg"
 
+import bannerScreenshot1 from "./Untitled.png"
+import bannerScreenshot2 from "./Annotation 2024-06-19 125914.png"
+
 export { phoneIcon, mailIcon, locationIcon, facebookIcon, menuIcon, slider1, slider2, slider3,
 closeIcon, homeIcon, aboutIcon, planeIcon, arrowRightIcon, mediaIcon, facebookLogo,
-ukFlag, vietnamFlag, zaloLogo, messengerLogo, starIcon, binIcon,
-whatsappIcon, windowImage, woodenFloorImage, tableChairImage,
-arrowUpIcon, officeImage, bagIcon, bagIcon2, bagIcon3, truckIcon,
+ukFlag, vietnamFlag, zaloLogo, messengerLogo, starIcon, binIcon, cardIcon, bannerScreenshot2,
+whatsappIcon, windowImage, woodenFloorImage, tableChairImage, downloadIcon,
+arrowUpIcon, officeImage, bagIcon, bagIcon2, bagIcon3, truckIcon, bannerScreenshot1,
 locationSmall, phoneSmall, mailSmall, facebookSmall, filterIcon, logoTextRed, logoTextWhite, logoRed,
 aboutImage1, aboutImage2, aboutImage3, aboutImage4, tableAndChairImage,
 woodenTileBg, tableBg, windowBg, shelfImage, newProduct1, newProduct2, chairImage, shopBackground, checkIcon }
