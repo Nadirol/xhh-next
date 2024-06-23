@@ -336,7 +336,6 @@ export default function CartPage() {
 
     const handlePaymentChange = (e: string) => {
       setPaymentMethod(e);
-    };
 
     return (
         <div>
@@ -450,6 +449,7 @@ export default function CartPage() {
                             <input type="radio" checked={paymentMethod === t('paymentAfter')} id="paymentAfter" value={t('paymentAfter')}/>
 
                             <label htmlFor="paymentAfter" className="">
+
                                 {t('paymentAfter')}
                             </label>
 
@@ -989,11 +989,10 @@ export default function CartPage() {
                 <Footer
                     t={t}
                 />
-
             </div>
         </div>
     )
-}
+}}
 
 export async function getStaticProps({ locale }: { locale: string}) {
     return {
@@ -1004,4 +1003,4 @@ export async function getStaticProps({ locale }: { locale: string}) {
         // Will be passed to the page component as props
       },    
     }
-  }
+}

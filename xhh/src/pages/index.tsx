@@ -149,7 +149,7 @@ export default function Home({ data, bannerData }: { data: IPost[], bannerData: 
             setToastVisible={setToastVisible}
             products={products}
           />
-          <Slider sliderBanner={bannerData[0].sliderBanner}/>
+          <Slider sliderBanner={bannerData[0].slider}/>
           <Products 
             t={t}
             addItemToCart={addItemToCart} 

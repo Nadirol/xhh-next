@@ -1,10 +1,8 @@
 import { useState } from "react";
 import Header from "../../../components/admin/Header";
-import { chairImage, newProduct1, newProduct2 } from "../../../public/assets";
 import Image from "next/image";
 import { client, urlFor } from "../../../lib/sanity";
-import { IBanner, IPost } from "../../../interface/interface";
-import { useTranslation } from "next-i18next";
+import { IPost } from "../../../interface/interface";
 
 async function getData() {
     const query = `*[_type == "postXHH"] | order(_createdAt desc)`;
@@ -15,8 +13,6 @@ async function getData() {
 }
 
 export default function blogPage({ data }: { data: IPost[]}) {
-    const { t } = useTranslation('common');
-
     return (
         <div className="">
             <Header/>

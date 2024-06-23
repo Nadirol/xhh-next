@@ -74,25 +74,28 @@ export interface IPost {
 }
 
 export interface IBanner {
-    demonstration: any,
-    banner: {
-        banner1: {
-            image: any | null,
-            link: string | null
-        },
-        banner2: {
-            image: any | null,
-            link: string | null
-        },
-        banner3: {
-            image: any | null,
-            link: string | null
-        }
+    title: string,
+    banner1: {
+        image: any,
+        link: string
+        title: string,
+        category: string,
+        price: string
     },
-    demonstration2: any,
-    sliderBanner: {
-            image: any | null,
-            link: string | null
+    banner2: {
+        image: any
+        link: string
+        title: string,
+    },
+    banner3: {
+        image: any
+        link: string
+        text1: string,
+        text2: string,
+    }
+    slider: {
+        image: any
+        link: string
     }[]
 }
 
