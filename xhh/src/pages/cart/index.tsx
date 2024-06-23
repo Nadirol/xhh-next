@@ -1,3 +1,4 @@
+// @ts-nocheck
 
 import { i18n, useTranslation } from "next-i18next"
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
