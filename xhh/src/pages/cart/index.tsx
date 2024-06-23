@@ -1,4 +1,3 @@
-// @ts-nocheck
 
 import { i18n, useTranslation } from "next-i18next"
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
@@ -22,6 +21,7 @@ import { ICartProduct, ICoupon, IOrder, IProduct } from "../../../interface/inte
 import supabase from "../../../supabase";
 import router from "next/router";
 import { client } from "../../../lib/sanity";
+import Head from "next/head";
 
 function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -176,11 +176,6 @@ export default function CartPage() {
         isCompleted: false
       };
 
-        // const orderDocRef = await addDoc(orderColRef, order);
-
-        // await sendOrder({...order, date: Timestamp.fromDate(new Date()).toDate().toLocaleString()});
-
-        // await router.push(`${i18n?.language}/confirmation`)
         setOrderData(order)
         setConfirmVisible(true)
     };
@@ -204,57 +199,55 @@ export default function CartPage() {
     const [cityData, setCityData] = useState([])
 
     useEffect(() => {
-        const citis = document.getElementById("city");
-        const districts = document.getElementById("district");
-        const wards = document.getElementById("ward");
+      const fetchData = async () => {
+        try {
+          const response = await axios.get("https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json");
+          const data = response.data;
     
-        const fetchData = async () => {
-          try {
-            const response = await axios.get("https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json");
-            const data = response.data;
-
-            setCityData(data)
+          renderCity(data);
     
-            renderCity(data);
-          } catch (error) {
-            console.error("Error fetching data:", error);
+          setCityData(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+    
+      fetchData();
+    
+      const renderCity = (data: City[]): void => {
+        const citis = document.getElementById("city") as HTMLSelectElement | null;
+        const districts = document.getElementById("district") as HTMLSelectElement | null;
+        const wards = document.getElementById("ward") as HTMLSelectElement | null;
+    
+        if (citis && districts && wards) {
+          for (const x of data) {
+            citis.options[citis.options.length] = new Option(x.Name, x.Id);
           }
-        };
     
-        fetchData();
-    
-        const renderCity = (data: City[]): void => {
-            const citis = document.getElementById("city") as HTMLSelectElement;
-            const districts = document.getElementById("district") as HTMLSelectElement;
-            const wards = document.getElementById("ward") as HTMLSelectElement;
-          
-            for (const x of data) {
-              citis.options[citis.options.length] = new Option(x.Name, x.Id);
+          citis.onchange = function () {
+            districts.length = 1;
+            wards.length = 1;
+            if (this.value !== "") {
+              const result = data.filter((n) => n.Id === this.value);
+              for (const k of result[0].Districts) {
+                districts.options[districts.options.length] = new Option(k.Name, k.Id);
+              }
             }
-          
-            citis.onchange = function () {
-              districts.length = 1;
-              wards.length = 1;
-              if (this.value !== "") {
-                const result = data.filter((n) => n.Id === this.value);
-                for (const k of result[0].Districts) {
-                  districts.options[districts.options.length] = new Option(k.Name, k.Id);
-                }
-              }
-            };
-          
-            districts.onchange = function () {
-              wards.length = 1;
-              const dataCity = data.filter((n) => n.Id === citis.value);
-              if (this.value !== "") {
-                const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
-                for (const w of dataWards) {
-                  wards.options[wards.options.length] = new Option(w.Name, w.Id);
-                }
-              }
-            };
           };
-      }, []);
+    
+          districts.onchange = function () {
+            wards.length = 1;
+            const dataCity = data.filter((n) => n.Id === citis.value);
+            if (this.value !== "") {
+              const dataWards = dataCity[0].Districts.filter((n) => n.Id === this.value)[0].Wards;
+              for (const w of dataWards) {
+                wards.options[wards.options.length] = new Option(w.Name, w.Id);
+              }
+            }
+          };
+        }
+      };
+    }, []);
 
     const [cartItems, setCartItems] = useRecoilState(cartState);
     
@@ -336,6 +329,7 @@ export default function CartPage() {
 
     const handlePaymentChange = (e: string) => {
       setPaymentMethod(e);
+    }
 
     return (
         <div>
@@ -345,7 +339,6 @@ export default function CartPage() {
             />
 
             <div className={`${lato.className} flex flex-col overflow-hidden`}>
-
                 <Header
                     t={t}
                 />
@@ -850,7 +843,7 @@ export default function CartPage() {
                     <div className="flex gap-8 items-center mx-auto">
                       <button className="text-xl font-semibold text-neutral-600 px-8 py-2.5 rounded bg-gray-300" onClick={() => setConfirmVisible(false)}>{t('cancel')}</button>
 
-                      <button onClick={() => orderData.paymentMethod === t("paymentAfter") ? handleConfirmation(orderData) : handleCardPayment()} className="text-xl font-semibold text-white px-8 py-2.5 rounded bg-red-500 hover:bg-red-600">
+                      <button onClick={() => orderData.paymentMethod === t("paymentAfter") ? handleConfirmation(orderData) : handleCardPayment(orderData)} className="text-xl font-semibold text-white px-8 py-2.5 rounded bg-red-500 hover:bg-red-600">
                         {orderData.paymentMethod === t("paymentAfter") ? t('confirm') : (cardPaymentVisible ? t('complete') : t('checkout'))}
                       </button>
                     </div>
@@ -992,7 +985,7 @@ export default function CartPage() {
             </div>
         </div>
     )
-}}
+}
 
 export async function getStaticProps({ locale }: { locale: string}) {
     return {
