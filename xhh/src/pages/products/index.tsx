@@ -161,7 +161,7 @@ export default function Home() {
           t={t}
         />
 
-        {/* <main>
+        <main>
             <div className="w-full h-[300px] relative before:absolute before:left-0 before:top-0 before:w-full before:h-full before:bg-filter-dark before:z-10">
                 <Image src={shopBackground} alt="banner image" className="z-0 absolute translate-x-1/2 translate-y-1/2 bottom-1/2 right-1/2 object-cover h-full"/>
                 <h2 className="text-white absolute z-[11] translate-x-1/2 translate-y-1/2 bottom-1/2 right-1/2 text-[45px] font-bold">
@@ -212,7 +212,7 @@ export default function Home() {
             </div>
 
             <Widgets t={t}/>
-        </main> */}
+        </main>
 
         <Footer
           t={t}

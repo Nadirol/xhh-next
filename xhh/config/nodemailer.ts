@@ -13,6 +13,6 @@ export const transporter = nodemailer.createTransport({
 });
 
 export const mailOptions = {
-    from: `Xuan Hoa Home Website <${email}>`,
+    from: `Xuân Hoà Home Website <${email}>`,
     to: `${recipient}`
 }

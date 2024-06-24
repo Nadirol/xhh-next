@@ -30,7 +30,9 @@ export interface IProduct {
     color_set: {
         color: string,
         image: string
-    }[] | null
+    }[] | null,
+    quantity: number | null,
+    sale_price: number | null
 }
 
 export interface ICartProduct {
@@ -111,7 +113,7 @@ export interface IOrder {
     email: string | null,
     phoneNumber: string,
     phoneNumber2: string | null,
-    date: Date,
+    date: string,
     address: {
         city: string,
         district: string,

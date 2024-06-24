@@ -53,6 +53,8 @@ const Header = () => {
 
             <Link href="/dashboard/banner">Banner</Link>
 
+            <Link href="/dashboard/products">Sản phẩm</Link>
+
             <Link href="/dashboard/blogs">Blog</Link>
           </div>
 

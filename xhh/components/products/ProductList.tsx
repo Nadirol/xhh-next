@@ -44,8 +44,8 @@ const ProductList = ({ t, products, sortItems, sortOption }: { t: TFunction, pro
   
       const productMainData: ICartProduct = {
         id: product.id,
-        title_vi: product.title_vi,
-        title_en: product.title_en,
+        title_vi: product.title_vi + (product.price_set ? " " + product.price_set[0].size : "") + (product.color_set ? " " + product.color_set[0].color : ""),
+        title_en: product.title_en + (product.price_set ? " " + product.price_set[0].size : "") + (product.color_set ? " " + product.color_set[0].color : ""),
         category: product.category,
         image_url: product.image_url,
         slug: product.slug,

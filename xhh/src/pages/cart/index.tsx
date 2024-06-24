@@ -23,6 +23,7 @@ import supabase from "../../../supabase";
 import router from "next/router";
 import { client } from "../../../lib/sanity";
 import Head from "next/head";
+import { sendMessage, sendOrder } from "../../../lib/api";
 
 function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -190,9 +191,12 @@ export default function CartPage() {
     const handleConfirmation = async (order: IOrder) => {
       client.create({...order, date: new Date()}).then((res) => {
         console.log(`Order was created, document ID is ${res._id}`)
-      });
+        
+        sendOrder(order);
 
-      await router.push(`${i18n?.language}/confirmation`)
+        router.push(`${i18n?.language}/confirmation`);
+      }).catch((err) => console.log(err));
+
     };
 
     const [cardPaymentVisible, setCardPaymentVisible] = useState(false);
