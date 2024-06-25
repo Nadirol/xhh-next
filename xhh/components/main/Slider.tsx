@@ -7,6 +7,7 @@ import { slider1, slider2, slider3 } from "../../public/assets";
 import Image from "next/image";
 import Link from 'next/link';
 import { i18n } from 'next-i18next';
+import { urlFor } from '../../lib/sanity';
 
 const indicators = (index: number) => 
     (
@@ -15,7 +16,9 @@ const indicators = (index: number) =>
     );
 
 const Slider = ({ sliderBanner }) => {
-    const slideRef = useRef<SlideshowRef>(null)
+    const slideRef = useRef<SlideshowRef>(null);
+
+    console.log(sliderBanner)
 
     return (
         <div className="w-container mx-auto relative">
@@ -23,7 +26,7 @@ const Slider = ({ sliderBanner }) => {
                     <Slide indicators={indicators} transitionDuration={500} duration={1000} autoplay={false} arrows={false} ref={slideRef}>
                         {sliderBanner.map((s, index) => (
                             <Link key={index} href={s.link}>
-                                <Image src={s.image} alt="" className="object-cover w-full pointer-events-none"/>
+                                <Image src={urlFor(s.image).url()} width={1200} height={480} alt="" className="object-cover w-full pointer-events-none"/>
                             </Link>
                         ))}
                     </Slide>

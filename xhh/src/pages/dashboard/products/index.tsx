@@ -65,7 +65,7 @@ export default function ProductsPage() {
                                 <td className="px-4 py-2 border border-neutral-800">{numberWithCommas(p.price ||(p.price_set ? p.price_set[0].price : 0))}đ</td>
                                 <td className="px-4 py-2 border border-neutral-800">{p.quantity}</td>
                                 <td className="px-4 py-2 border border-neutral-800 underline text-blue-500 text-center">
-                                    <Link href={`/admin/products/${p.slug}`}>Xem</Link>
+                                    <Link href={`/dashboard/products/${p.slug}`}>Xem</Link>
                                 </td>
                             </tr>
                         ))}
