@@ -43,6 +43,7 @@ export default function ProductDetailPage() {
     const [categoryValue, setCategoryValue] = useState(product.category);
     const [mainImageValue, setMainImageValue] = useState<File | string>(product.image_url);
     const [sliderImageValue, setSliderImageValue] = useState(product.preview_images);
+    const [descriptionValue, setDescriptionValue] = useState(product.description_vi);
 
     // const editSlider = (index: number, file: File) => {
     //     setSliderImageValue((prevSlide) => {
@@ -76,7 +77,7 @@ export default function ProductDetailPage() {
 
                         <div className="flex gap-4 items-center">
                             <span>Loại hàng:</span>
-                            <input id="title" type="text" onChange={(e) => setCategoryValue(e.target.value)} 
+                            <input type="text" onChange={(e) => setCategoryValue(e.target.value)} 
                             value={t(categoryValue) || t(product.category)} className="px-4 py-2 border border-neutral-400 w-[30rem]"/>
                         </div>
 
@@ -129,6 +130,18 @@ export default function ProductDetailPage() {
 
                                     <input type="file" id="slider-image" className=""/>
 
+                            </div>
+                        </div>
+
+                        <div className="flex gap-4 items-center">
+                            <span>Mô tả:</span>
+                            
+                            <div className="">
+                                <input id="description" type="text" className="hidden" onChange={(e) => setDescriptionValue(e.target.value)}/>
+                                <label htmlFor="description">
+                                    <textarea  className="w-[50rem]" defaultValue={product.description_vi} value={descriptionValue} rows={6}>
+                                    </textarea>
+                                </label>
                             </div>
                         </div>
                     </div>
