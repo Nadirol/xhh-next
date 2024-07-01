@@ -3,6 +3,7 @@ export interface IProduct {
     title_vi: string,
     title_en: string,
     category: string,
+    category_vi: string | null,
     image_url: string,
     details_vi: string[] & JSON;
     details_en: string[] & JSON;
@@ -25,7 +26,8 @@ export interface IProduct {
         size: string,
         fullPrice: number,
         price: number,
-        discount: number
+        discount: number,
+        quantity: number
     }[] | null,
     color_set: {
         color: string,

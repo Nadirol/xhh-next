@@ -141,14 +141,14 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
             <div className="flex gap-12 flex-col">
               <div className="flex justify-center items-center md:min-w-[400px]">
                 <Image src={product.color_set ? product.color_set[activeColor].image : (product.preview_images ? product.preview_images[activeImage] : product.image_url)} alt="product image" 
-                width={400} height={400} className="w-full object-cover aspect-square"/>
+                width={630} height={630} className="w-full object-cover aspect-square"/>
               </div>
 
               {product.preview_images && (
                 <div className="flex justify-between">
                   {product.preview_images.map((image, index) => (
                     <Image key={index} src={image} alt="preview image" 
-                    width={100} height={100} className={`flex-[30%] aspect-square object-cover 
+                    width={210} height={210} className={`flex-[30%] aspect-square object-cover 
                     ${activeImage === index ? 'border-4' : ''} border-red-500`}
                     onMouseEnter={() => handleMouseEnterImage(index)}/>
                   ))}
@@ -264,16 +264,16 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
               )}
 
               <div className="flex gap-2 items-center">
-                <span className='text-xl'>{t('amount')}:</span>
+                <span className=''>{t('amount')}:</span>
                 <input type="number" className='pl-4 pr-2 py-2 w-[3.5rem] border' value={addCount} onChange={(e) => setAddCount(parseInt(e.target.value))}/>
 
                 <Link href={`/${i18n?.language}/cart`}  onClick={() => addItemToCart()}
-                className='px-10 py-2 rounded bg-red-500 w-fit text-white hover:bg-red-700 text-xl font-semibold'>
+                className='px-10 py-2 rounded bg-red-500 w-fit text-white hover:bg-red-700  font-semibold'>
                   {t('buy')}
                 </Link>
 
                 <button onClick={() =>{ addItemToCart(); setToastVisible(true)}}
-                className='px-10 py-2 rounded bg-blue-500 w-fit text-white hover:bg-blue-700 text-xl font-semibold'>
+                className='px-10 py-2 rounded bg-blue-500 w-fit text-white hover:bg-blue-700  font-semibold'>
                   {t('addToCart')}
                 </button>
               </div>

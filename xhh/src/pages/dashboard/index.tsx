@@ -38,8 +38,9 @@ export default function DashboardPage({ data }: { data: IOrder[] }) {
                             <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Tên người đặt</th>
                             <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Số điện thoại</th>
                             <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Địa chỉ</th>
-                            <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Sản phẩm</th>
+                            <th colSpan={3} className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Tên sản phẩm</th>
                             <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Tổng tiền</th>
+                            <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Thời gian đặt</th>
                             <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Ghi chú</th>
                             <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Email</th>
                         </tr>
@@ -52,8 +53,13 @@ export default function DashboardPage({ data }: { data: IOrder[] }) {
                                 <td className="px-4 py-2 border border-neutral-800">{order.username}</td>
                                 <td className="px-4 py-2 border border-neutral-800">{order.phoneNumber}</td>
                                 <td className="px-4 py-2 border border-neutral-800">{order.address.details}, {order.address.ward}, {order.address.district}, {order.address.city}</td>
-                                <td className="px-4 py-2 border border-neutral-800">{order.products.map((product) => product.title + "(" + product.quantity + ")").join(', ')}</td>
+
+                                <td className="px-4 py-2 border border-neutral-800">{order.products.map((product) => product.title).join('\n')}</td>
+                                <td className="px-4 py-2 border border-neutral-800">{order.products.map((product) => product.quantity).join('\n')}</td>
+                                <td className="px-4 py-2 border border-neutral-800">{order.products.map((product) => product.quantity).join('\n')}</td>
+
                                 <td className="px-4 py-2 border border-neutral-800">{numberWithCommas(order.total)}đ</td>
+                                <td className="px-4 py-2 border border-neutral-800">{new Date(order.date).toLocaleString()}</td>
                                 <td className="px-4 py-2 border border-neutral-800">{order.note}</td>
                                 <td className="px-4 py-2 border border-neutral-800">{order.email}</td>
                             </tr>

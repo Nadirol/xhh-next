@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { closeIcon, editIcon, imageIcon } from "../../../../../public/assets";
+import { closeIcon, editIcon, imageIcon, plusIcon } from "../../../../../public/assets";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 
 function numberWithCommas(x: number) {
@@ -31,7 +31,13 @@ export default function ProductDetailPage() {
           
           setProduct(data);
           setIsLoading(false);
-    
+
+          setTitleValue(data.title_vi)
+          setCategoryValue(data.category)
+          setSliderImageValue(data.preview_images)
+          setDescriptionValue(data.description_vi?.join('\n'))
+          setPriceSet(data.price_set)
+
           return data
         };
 
@@ -41,111 +47,251 @@ export default function ProductDetailPage() {
 
     const [titleValue, setTitleValue] = useState(product.title_vi);
     const [categoryValue, setCategoryValue] = useState(product.category);
-    const [mainImageValue, setMainImageValue] = useState<File | string>(product.image_url);
+    const [mainImageValue, setMainImageValue] = useState();
     const [sliderImageValue, setSliderImageValue] = useState(product.preview_images);
-    const [descriptionValue, setDescriptionValue] = useState(product.description_vi);
+    const [descriptionValue, setDescriptionValue] = useState(product.description_vi?.join('\n'));
 
-    // const editSlider = (index: number, file: File) => {
-    //     setSliderImageValue((prevSlide) => {
-    //         prevSlide[index] = file
+    const [specificValue, setSpecificValue] = useState({});
 
-    //         return prevSlide
-    //     })
-    // }
-    
+    const [priceSet, setPriceSet] = useState(product.price_set);
+        
     if (isLoading) {
         return <div className=""></div>
-      }
+    }
     
     if (!product) {
-    return <div>Product not found</div>;
+        return <div>Product not found</div>;
     }
 
     return (
-        <div className="">
+        <div className="bg-neutral-100">
             <Header/>
 
             <div className="w-[90%] mx-auto mt-16">
                 {product && (
-                <form>
-                    <div className="flex gap-4 flex-col">
-                        <div className="flex gap-4 items-center">
-                            <span>Tên sản phẩm:</span>
-                            <input id="title" type="text" onChange={(e) => setTitleValue(e.target.value)} 
-                            value={titleValue || product.title_vi} className="px-4 py-2 border border-neutral-400 w-[30rem]"/>
-                        </div>
+                    <form className="flex gap-10 flex-col">
+                        <div className="p-5 bg-white">
+                            <h3 className="text-2xl font-semibold mb-8">Thông tin cơ bản</h3>
 
-                        <div className="flex gap-4 items-center">
-                            <span>Loại hàng:</span>
-                            <input type="text" onChange={(e) => setCategoryValue(e.target.value)} 
-                            value={t(categoryValue) || t(product.category)} className="px-4 py-2 border border-neutral-400 w-[30rem]"/>
-                        </div>
+                            <div className="flex gap-4 flex-col ml-4">
+                                <div className="flex gap-4 items-center">
+                                    <span className="min-w-[8rem] text-end"><span className="text-red-500 mr-1">*</span>Tên sản phẩm</span>
+                                    <input id="title" type="text" onChange={(e) => setTitleValue(e.target.value)} 
+                                    value={titleValue || product.title_vi} className="px-4 py-2 border border-neutral-400 w-[30rem]"/>
+                                </div>
 
-                        <div className="flex gap-4 items-center">
-                            <span>Hình đại diện:</span>
-                            {(product.image_url) ? (
-                                <div className="relative [&:hover]:before:block [&:hover>.z-20]:block before:hidden before:absolute before:inset-0 
-                                before:w-full before:h-full before:z-[15] before:bg-filter-dark w-1/4">
-                                    <Image src={mainImageValue ? URL.createObjectURL(mainImageValue) : product.image_url} 
-                                    width={1000} height={800} alt="" className="w-full relative z-10"/>
+                                <div className="flex gap-4 items-center">
+                                    <span className="min-w-[8rem] text-end">Loại hàng</span>
+                                    <input type="text" onChange={(e) => setCategoryValue(e.target.value)} 
+                                    value={t(categoryValue) || t(product.category)} className="px-4 py-2 border border-neutral-400 w-[30rem]"/>
+                                </div>
 
-                                    <div className="absolute z-20 top-10 right-10 hidden">
-                                        <input type="file" name="postImage" id="post-image" className="hidden" 
-                                        onChange={(e) => e.target.files && setMainImageValue(e.target.files[0])}/>
-                                        <label htmlFor="post-image" className="w-full cursor-pointer">
-                                            <Image src={editIcon} alt="" className="w-5"/>
+                                <div className="flex gap-4 items-center">
+                                    <span className="min-w-[8rem] text-end"><span className="text-red-500 mr-1">*</span>Hình đại diện</span>
+                                    {(product.image_url) ? (
+                                        <div className="relative [&:hover]:before:block [&:hover>.z-20]:block before:hidden before:absolute before:inset-0 
+                                        before:w-full before:h-full before:z-[15] before:bg-filter-dark w-[16rem]">
+                                            <Image src={mainImageValue ? URL.createObjectURL(mainImageValue) : product.image_url} 
+                                            width={1000} height={800} alt="" className="w-full relative z-10"/>
+
+                                            <div className="absolute z-20 top-10 right-10 hidden">
+                                                <input type="file" name="postImage" id="post-image" className="hidden" 
+                                                onChange={(e) => e.target.files && setMainImageValue(e.target.files[0])}/>
+                                                <label htmlFor="post-image" className="w-full cursor-pointer">
+                                                    <Image src={editIcon} alt="" className="w-5"/>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="">
+                                            <input type="file" name="postImage" id="post-image" className="hidden"/>
+                                            <label htmlFor="post-image" className="w-full flex justify-between items-center border px-2 py-1">
+                                                Đăng hình ảnh
+                                                <Image src={imageIcon} alt="" className="w-5"/>
+                                            </label>
+                                        </div>
+                                    )
+                                    } 
+                                </div>
+
+                                <div className="flex gap-4 items-center">
+                                    <span className="min-w-[8rem] text-end"><span className="text-red-500 mr-1">*</span>Hình ảnh</span>
+                                    <div className="flex p-4 border flex-wrap items-center">
+                                        {sliderImageValue 
+                                            ? sliderImageValue.map((s, index) => (
+                                                <div key={index} className="relative [&:hover>.absolute]:block">
+                                                    <Image src={product.preview_images?.includes(s) ? s : URL.createObjectURL(s)} width={240} height={240} alt="" className="w-[12rem]"/>
+
+                                                    <input type="file" id="slider-image" className="hidden"/>
+                                                    <label htmlFor="slider-image" className="absolute hidden right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2 z-[20] cursor-pointer">
+                                                        <Image src={editIcon} alt="" className="w-8"/>
+                                                    </label>
+
+                                                    <div className="absolute z-[15] inset-0 w-full h-full bg-filter-dark hidden"></div>
+                                                </div>                                
+                                            ))
+                                            : product.preview_images?.map((s, index) => (
+                                                <div key={index} className="relative [&:hover>.absolute]:block">
+                                                    <Image src={s} width={240} height={240} alt="" className="w-[12rem]"/>
+
+                                                    <input type="file" id="slider-image" className="hidden"/>
+                                                    <label htmlFor="slider-image" className="absolute hidden right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2 z-[20] cursor-pointer">
+                                                        <Image src={editIcon} alt="" className="w-8" />
+                                                    </label>
+
+                                                    <div className="absolute z-[15] inset-0 w-full h-full bg-filter-dark hidden"></div>
+                                                </div> 
+                                            ))}
+
+                                            <input type="file" id="new-slider-image" className="hidden"/>
+                                            <label htmlFor="new-slider-image" className="px-10 cursor-pointer">
+                                                <Image src={plusIcon} alt="" />
+                                            </label>
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-4 items-center">
+                                    <span className="min-w-[8rem] text-end">Mô tả</span>
+                                    
+                                    <div className="">
+                                        <input id="description" type="text" className="hidden" onChange={(e) => setDescriptionValue(e.target.value)}/>
+                                        <label htmlFor="description">
+                                            <textarea  className="w-[50rem] p-2 border" defaultValue={product.description_vi?.join('\n')} value={descriptionValue} rows={8}>
+                                            </textarea>
                                         </label>
                                     </div>
                                 </div>
-                            ) : (
-                                <div className="">
-                                    <input type="file" name="postImage" id="post-image" className="hidden"/>
-                                    <label htmlFor="post-image" className="w-full flex justify-between items-center border px-2 py-1">
-                                        Đăng hình ảnh
-                                        <Image src={imageIcon} alt="" className="w-5"/>
-                                    </label>
+                            </div>
+                        </div>
+
+
+                        <div className="p-5 bg-white">
+                            <h3 className="text-2xl font-semibold mb-8">Thông tin chi tiết</h3>
+
+                            <div className="flex gap-10 flex-wrap">
+                                <div className="flex gap-4 flex-col ml-4">
+                                    <div className="flex gap-4 items-center">
+                                        <span className="min-w-[6rem]">Thương hiệu</span>
+                                        <input type="text" onChange={(e) => setSpecificValue((prevState) => { return {...prevState, "brand": e.target.value} })} 
+                                        value={product.specific_description_vi ? specificValue["brand"] : ""} 
+                                        className="px-4 py-2 border border-neutral-400 w-[24rem]"/>
+                                    </div>
                                 </div>
-                            )
-                            } 
-                        </div>
 
-                        <div className="flex gap-4 items-center">
-                            <span>Hình ảnh:</span>
-                            <div className="flex p-4 border flex-wrap items-center">
-                                {sliderImageValue 
-                                    ? sliderImageValue.map((s, index) => (
-                                        <div key={index} className="relative [&:hover>.absolute]:block">
-                                            <Image src={product.preview_images?.includes(s) ? s : URL.createObjectURL(s)} width={240} height={240} alt="" className="w-[12rem]"/>
+                                <div className="flex gap-4 flex-col ml-4">
+                                    <div className="flex gap-4 items-center">
+                                        <span className="min-w-[6rem]">Chất liệu</span>
+                                        <input type="text" onChange={(e) => setSpecificValue((prevState) => { return {...prevState, "material": e.target.value} })} 
+                                        value={product.specific_description_vi ? specificValue["material"] : ""} 
+                                        className="px-4 py-2 border border-neutral-400 w-[24rem]"/>
+                                    </div>
+                                </div>
 
-                                            <input type="file" id="slider-image" className=""/>
-                                        </div>                                
-                                    ))
-                                    : product.preview_images?.map((s, index) => (
-                                        <div key={index} className="relative [&:hover>.absolute]:block">
-                                            <Image src={s} width={240} height={240} alt="" className="w-[12rem]"/>
+                                <div className="flex gap-4 flex-col ml-4">
+                                    <div className="flex gap-4 items-center">
+                                        <span className="min-w-[6rem]">Màu sắc</span>
+                                        <input type="text" onChange={(e) => setSpecificValue((prevState) => { return {...prevState, "colors": e.target.value} })} 
+                                        value={product.specific_description_vi ? specificValue["colors"] : ""} 
+                                        className="px-4 py-2 border border-neutral-400 w-[24rem]"/>
+                                    </div>
+                                </div>
 
-                                            <input type="file" id="slider-image" className=""/>
-                                        </div> 
-                                    ))}
+                                <div className="flex gap-4 flex-col ml-4">
+                                    <div className="flex gap-4 items-center">
+                                        <span className="min-w-[6rem]">Kích thước</span>
+                                        <input type="text" onChange={(e) => setSpecificValue((prevState) => { return {...prevState, "size": e.target.value} })} 
+                                        value={product.specific_description_vi ? specificValue["size"] : ""} 
+                                        className="px-4 py-2 border border-neutral-400 w-[24rem]"/>
+                                    </div>
+                                </div>
 
-                                    <input type="file" id="slider-image" className=""/>
+                                <div className="flex gap-4 flex-col ml-4">
+                                    <div className="flex gap-4 items-center">
+                                        <span className="min-w-[6rem]">Độ tuổi</span>
+                                        <input type="text" onChange={(e) => setSpecificValue((prevState) => { return {...prevState, "age": e.target.value} })} 
+                                        value={product.specific_description_vi ? specificValue["age"] : ""} 
+                                        className="px-4 py-2 border border-neutral-400 w-[24rem]"/>
+                                    </div>
+                                </div>
 
+                                <div className="flex gap-4 flex-col ml-4">
+                                    <div className="flex gap-4 items-center">
+                                        <span className="min-w-[6rem]">Tặng kèm</span>
+                                        <input type="text" onChange={(e) => setSpecificValue((prevState) => { return {...prevState, "bonus": e.target.value} })} 
+                                        value={product.specific_description_vi ? specificValue["bonus"] : ""} 
+                                        className="px-4 py-2 border border-neutral-400 w-[24rem]"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="flex gap-4 items-center">
-                            <span>Mô tả:</span>
-                            
-                            <div className="">
-                                <input id="description" type="text" className="hidden" onChange={(e) => setDescriptionValue(e.target.value)}/>
-                                <label htmlFor="description">
-                                    <textarea  className="w-[50rem]" defaultValue={product.description_vi} value={descriptionValue} rows={6}>
-                                    </textarea>
-                                </label>
+                        <div className="p-5 bg-white">
+                            <h3 className="text-2xl font-semibold mb-8">Thông tin bán hàng</h3>
+
+                            <div className="flex gap-4 flex-col ml-4">
+                                <div className="flex gap-4 items-center">
+                                    <span className="min-w-[6rem] text-end">Giá</span>
+
+                                    <div className="border flex">
+                                        <span className="border-r h-full py-2.5 px-4 text-center bg-neutral-50">đ</span>
+                                        <input type="number" 
+                                        className="px-4 py-2 outline-0 w-[24rem]"/>
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-4 items-center">
+                                    <span className="min-w-[6rem] text-end">Kho hàng</span>
+
+                                    <div className="border flex">
+                                        <input type="number" 
+                                        className="px-4 py-2 outline-0 w-[24rem]"/>
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-4">
+                                    <span className="min-w-[6rem] text-end">Phân loại hàng</span>
+
+                                    <div className="flex gap-4 flex-col">
+                                        {(priceSet ? priceSet : product.price_set)?.map((s, index) => (
+                                            <div key={index} className="flex border">
+                                                <input type="text" id="set-name" className="border-r p-5 outline-0" value={s.size}
+                                                onChange={(e) => setPriceSet(prevState => [...prevState, prevState[index].size = e.target.value])}/>
+
+                                                <div className="border-r p-5">
+                                                    <input type="text" id="set-full-price"/>
+                                                    <label htmlFor="set-full-price">
+                                                        {s.fullPrice}
+                                                    </label>
+                                                </div>
+
+                                                <div className="border-r p-5">
+                                                    <input type="text" id="set-price"/>
+                                                    <label htmlFor="set-price">
+                                                        {s.price}
+                                                    </label>
+                                                </div>
+
+                                                <div className="border-r p-5">
+                                                    <input type="text" id="set-discount"/>
+                                                    <label htmlFor="set-discount">
+                                                        {s.discount}
+                                                    </label>
+                                                </div>
+
+                                                
+                                                <div className="p-5">
+                                                    <input type="text" id="set-quantity"/>
+                                                    <label htmlFor="set-quantity">
+                                                        {s.quantity}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
                 )}
             </div>
         </div>
