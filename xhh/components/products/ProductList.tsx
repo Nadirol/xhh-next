@@ -44,13 +44,14 @@ const ProductList = ({ t, products, sortItems, sortOption }: { t: TFunction, pro
   
       const productMainData: ICartProduct = {
         id: product.id,
-        title_vi: product.title_vi + (product.price_set ? " " + product.price_set[0].size : "") + (product.color_set ? " " + product.color_set[0].color : ""),
-        title_en: product.title_en + (product.price_set ? " " + product.price_set[0].size : "") + (product.color_set ? " " + product.color_set[0].color : ""),
+        title_vi: product.title_vi,
+        title_en: product.title_en,
         category: product.category,
         image_url: product.image_url,
         slug: product.slug,
         price: product.price_set ? product.price_set[0].price : (product.price ? product.price : 0),
-        quantity: 1
+        quantity: 1,
+        variation: (product.price_set ? " " + product.price_set[0].size : "") + (product.color_set ? " " + product.color_set[0].color : "")
       }
   
       setLatestCartItem({...productMainData, quantity: 1});

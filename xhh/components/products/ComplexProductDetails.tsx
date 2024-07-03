@@ -8,7 +8,7 @@ import Widgets from '../Widgets';
 import Link from 'next/link';
 import { PortableText } from "@portabletext/react";
 import { urlFor } from '../../lib/sanity';
-import { arrowUpIcon } from '../../public/assets';
+import { arrowRightIcon, arrowUpIcon } from '../../public/assets';
 import { useRecoilState } from 'recoil';
 import { cartState } from '../../atoms/cartState';
 import { latestCartItemState } from '../../atoms/latestCartItemState';
@@ -81,13 +81,14 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
 
       const productMainData: ICartProduct = {
         id: product.id,
-        title_vi: product.title_vi + (product.price_set ? " " + product.price_set[selectedSize].size : "") + (product.color_set ? " " + product.color_set[selectedColor].color : ""),
-        title_en: product.title_en + (product.price_set && product.price_set[selectedSize].size) + (product.color_set && product.color_set[selectedColor].color),
+        title_vi: product.title_vi,
+        title_en: product.title_en,
         category: product.category,
         image_url: product.image_url,
         slug: product.slug,
         price: product.price_set ? product.price_set[selectedSize].price : (product.price ? product.price : 0),
-        quantity: addCount
+        quantity: addCount,
+        variation: (product.price_set ? " " + product.price_set[selectedSize].size : "") + (product.color_set ? " " + product.color_set[selectedColor].color : "")
       }
 
       setLatestCartItem({...productMainData, quantity: addCount});
@@ -131,6 +132,54 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
     const [selectedColor, setSelectedColor] = useState(0);
     const [activeColor, setActiveColor] = useState(0);
 
+    const sliderRef = useRef<HTMLDivElement | null>(null);
+
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const [isScrollEnd, setIsScrollEnd] = useState(false);
+  
+    const handleScroll = () => {
+      if (sliderRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
+        setScrollPosition(scrollLeft);
+  
+        const isEnd = scrollLeft + clientWidth > scrollWidth - 50;
+  
+        setIsScrollEnd(isEnd);
+      }
+    };
+  
+    useEffect(() => {
+      if (sliderRef.current) {
+        sliderRef.current.addEventListener('scroll', handleScroll);
+      }
+  
+      const pos = sliderRef.current
+  
+      return () => {
+        if (pos) {
+          pos.removeEventListener('scroll', handleScroll);
+        }
+      };
+    }, []);
+
+    const prevSlide = () => {
+      sliderRef.current?.scrollBy({
+          top: 0,
+          left: -100,
+          behavior: "smooth",
+      });
+
+  }
+
+  const nextSlide = () => {
+      sliderRef.current?.scrollBy({
+      top: 0,
+      left: 100,
+      behavior: "smooth",
+      });
+
+  };
+
     return (
         <main className="pt-[2rem] relative flex gap-12 flex-col bg-slate-100">
           <div className="w-container-large mx-auto">
@@ -144,16 +193,29 @@ const ComplexProductDetails = ({ t, product, routes, relevantProducts, contentDa
                 width={630} height={630} className="w-full object-cover aspect-square"/>
               </div>
 
-              {product.preview_images && (
-                <div className="flex justify-between">
-                  {product.preview_images.map((image, index) => (
-                    <Image key={index} src={image} alt="preview image" 
-                    width={210} height={210} className={`flex-[30%] aspect-square object-cover 
-                    ${activeImage === index ? 'border-4' : ''} border-red-500`}
-                    onMouseEnter={() => handleMouseEnterImage(index)}/>
-                  ))}
-                </div>
-              )}
+              <div className="relative [&:hover>.absolute]:bg-filter-dark">
+                {product.preview_images && (
+                  <div className="flex justify-between overflow-x-scroll snap-x scrollbar-hide
+                  snap-mandatory overscroll-x-contain relative [&:hover>.absolute]:bg-filter-dark" ref={sliderRef}>
+                    {product.preview_images.map((image, index) => (
+                      <Image key={index} src={image} alt="preview image" 
+                      width={150} height={150} className={`flex-[20%] w-[1/3] aspect-square object-cover 
+                      ${activeImage === index ? 'border-4' : ''} border-red-500`}
+                      onMouseEnter={() => handleMouseEnterImage(index)}/>
+                    ))}
+                  </div>
+                )}
+
+                <button className={`h-full absolute top-0 right-0 z-10 flex items-center justify-center px-4 bg-filter-light transition-all
+                  `} onClick={nextSlide}>
+                    <Image src={arrowRightIcon} alt="" />
+                  </button>
+
+                  <button className={`h-full absolute top-0 left-0 z-10 flex items-center justify-center px-4 bg-filter-light transition-all
+                  `} onClick={prevSlide}>
+                    <Image src={arrowRightIcon} alt="" className='rotate-180'/>
+                  </button>
+              </div>
             </div>
 
             <div className="flex gap-8 flex-col">

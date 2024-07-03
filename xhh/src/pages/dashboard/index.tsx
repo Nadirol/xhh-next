@@ -38,7 +38,7 @@ export default function DashboardPage({ data }: { data: IOrder[] }) {
                             <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Tên người đặt</th>
                             <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Số điện thoại</th>
                             <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Địa chỉ</th>
-                            <th colSpan={3} className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Tên sản phẩm</th>
+                            <th colSpan={3} className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Sản phẩm <br /> <span className="text-xs">Tên, số lượng, phân loại</span></th>
                             <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Tổng tiền</th>
                             <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Thời gian đặt</th>
                             <th className="px-4 py-2 bg-red-500 text-white border border-neutral-100">Ghi chú</th>
@@ -56,7 +56,7 @@ export default function DashboardPage({ data }: { data: IOrder[] }) {
 
                                 <td className="px-4 py-2 border border-neutral-800">{order.products.map((product) => product.title).join('\n')}</td>
                                 <td className="px-4 py-2 border border-neutral-800">{order.products.map((product) => product.quantity).join('\n')}</td>
-                                <td className="px-4 py-2 border border-neutral-800">{order.products.map((product) => product.quantity).join('\n')}</td>
+                                <td className="px-4 py-2 border border-neutral-800">{order.products.map((product) => product.variation).join('\n')}</td>
 
                                 <td className="px-4 py-2 border border-neutral-800">{numberWithCommas(order.total)}đ</td>
                                 <td className="px-4 py-2 border border-neutral-800">{new Date(order.date).toLocaleString()}</td>

@@ -45,7 +45,8 @@ export interface ICartProduct {
     image_url: string,
     slug: string,
     price: number,
-    quantity: number
+    quantity: number,
+    variation: string | ""
 }
 
 export interface IPriceSet {
@@ -124,7 +125,8 @@ export interface IOrder {
     },
     products: {
         title: string,
-        quantity: number
+        quantity: number,
+        variation: string | ""
     }[],
     paymentMethod: "paymentAfter" | "cardPayment",
     total: number,

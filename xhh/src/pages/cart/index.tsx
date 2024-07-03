@@ -169,7 +169,8 @@ export default function CartPage() {
         products: cartItems.map((item: ICartProduct) => {
           return {
             title: item.title_vi,
-            quantity: item.quantity
+            quantity: item.quantity,
+            variation: item.variation
           }
         }),
         paymentMethod: paymentMethod,
