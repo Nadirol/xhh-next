@@ -47,23 +47,56 @@ export default function DashboardPage({ data }: { data: IOrder[] }) {
                     </thead>
 
                     <tbody>
-                        {data && data.map((order, index) => (
+                        {data && data.map((order, index) => order.products.length === 1 ? (
                             <tr key={index}>
                                 <td className="px-4 py-2 border border-neutral-800">{order.code}</td>
                                 <td className="px-4 py-2 border border-neutral-800">{order.username}</td>
                                 <td className="px-4 py-2 border border-neutral-800">{order.phoneNumber}</td>
                                 <td className="px-4 py-2 border border-neutral-800">{order.address.details}, {order.address.ward}, {order.address.district}, {order.address.city}</td>
 
-                                <td className="px-4 py-2 border border-neutral-800">{order.products.map((product) => product.title).join('\n')}</td>
-                                <td className="px-4 py-2 border border-neutral-800">{order.products.map((product) => product.quantity).join('\n')}</td>
-                                <td className="px-4 py-2 border border-neutral-800">{order.products.map((product) => product.variation).join('\n')}</td>
+                                <td className="px-4 py-2 border-b border-neutral-800">
+                                    {order.products.map((product) => product.title).join(', ')}
+                                </td>
+
+                                <td className="px-4 py-2 border border-neutral-800">
+                                    {order.products.map((product) => product.quantity).join(', ')}
+                                </td>
+
+                                <td className="px-4 py-2 border border-neutral-800">
+                                    {order.products.map((product) => product.variation).join(', ')}
+                                </td>
 
                                 <td className="px-4 py-2 border border-neutral-800">{numberWithCommas(order.total)}đ</td>
                                 <td className="px-4 py-2 border border-neutral-800">{new Date(order.date).toLocaleString()}</td>
                                 <td className="px-4 py-2 border border-neutral-800">{order.note}</td>
                                 <td className="px-4 py-2 border border-neutral-800">{order.email}</td>
                             </tr>
-                        ))}
+                        ) : order.products.map((p, index) => (
+                                <tr key={index}>
+                                    <td className="px-4 py-2 border border-neutral-800">{order.code}</td>
+                                    <td className="px-4 py-2 border border-neutral-800">{order.username}</td>
+                                    <td className="px-4 py-2 border border-neutral-800">{order.phoneNumber}</td>
+                                    <td className="px-4 py-2 border border-neutral-800">{order.address.details}, {order.address.ward}, {order.address.district}, {order.address.city}</td>
+
+                                    <td className="px-4 py-2 border-b border-neutral-800">
+                                        {p.title}
+                                    </td>
+
+                                    <td className="px-4 py-2 border border-neutral-800">
+                                        {p.quantity}
+                                    </td>
+
+                                    <td className="px-4 py-2 border border-neutral-800">
+                                        {p.variation}
+                                    </td>
+
+                                    <td className="px-4 py-2 border border-neutral-800">{numberWithCommas(order.total)}đ</td>
+                                    <td className="px-4 py-2 border border-neutral-800">{new Date(order.date).toLocaleString()}</td>
+                                    <td className="px-4 py-2 border border-neutral-800">{order.note}</td>
+                                    <td className="px-4 py-2 border border-neutral-800">{order.email}</td>
+                                </tr>
+                            ))
+                        )}
                     </tbody>
                 </table>
             </div>

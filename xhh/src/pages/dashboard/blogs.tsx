@@ -42,17 +42,27 @@ function toPlainText(blocks = []) {
 export default function BlogPage({ data }: { data: IPost[]}) {
     const [selectedPost, setSelectedPost] = useState(0);
 
-    const [titleValue, setTitleValue] = useState(data[selectedPost].title);
-    const [summaryValue, setSummaryValue] = useState(data[selectedPost].overview);
-    const [imageValue, setImageValue] = useState(data[selectedPost].image)
-    const [contentValue, setContentValue] = useState(toPlainText(data[selectedPost].content));
+    const [titleValue, setTitleValue] = useState(data[selectedPost]?.title || '');
+    const [summaryValue, setSummaryValue] = useState(data[selectedPost]?.overview || '');
+    const [imageValue, setImageValue] = useState(data[selectedPost]?.image || null)
+    const [contentValue, setContentValue] = useState(toPlainText(data[selectedPost]?.content) || null);
 
-    const handlePostChange = (index: number) => {
-        setSelectedPost(index);
-        setTitleValue(data[index].title);
-        setSummaryValue(data[index].overview);
-        setImageValue(data[index].image);
-        setContentValue(toPlainText(data[index].content));
+    const handlePostChange = (index: number | "new") => {
+        if (index === "new") {
+            setSelectedPost('new');
+
+            setTitleValue('');
+            setSummaryValue('');
+            setImageValue();
+            setContentValue('');
+        } else {
+            setSelectedPost(index);
+            setTitleValue(data[index].title);
+            setSummaryValue(data[index].overview);
+            setImageValue(data[index].image);
+            setContentValue(toPlainText(data[index].content));
+        }
+
     }
 
     return (
@@ -60,14 +70,18 @@ export default function BlogPage({ data }: { data: IPost[]}) {
             <Header/>
 
             <div className="w-[90%] mx-auto flex pt-4">
-                <div className="w-[30%] h-[87vh] border-r overflow-y-scroll">
-                    {data.map((p, index) => (
-                        <div onClick={() => handlePostChange(index)} key={index} className="flex gap-4 items-center pr-4 py-2 hover:bg-neutral-100 cursor-pointer">
-                            <Image src={urlFor(p.image).url()} width={80} height={80} alt="" />
-                            <span className="text-semibold text-sm line-clamp-1">{p.title}</span>
-                        </div>
-                    ))}
+                <div className="w-[30%] flex flex-col gap-2.5 items-end">
+                    <button onClick={() => handlePostChange('new')} className="mr-8 w-fit px-5 py-2 rounded border border-neutral-500 hover:bg-neutral-800 hover:text-white">Tạo mới +</button>
+                    <div className="h-[87vh] border-r overflow-y-scroll">
+                        {data.map((p, index) => (
+                            <div onClick={() => handlePostChange(index)} key={index} className="flex gap-4 items-center pr-4 py-2 hover:bg-neutral-100 cursor-pointer">
+                                <Image src={urlFor(p.image).url()} width={80} height={80} alt="" />
+                                <span className="text-semibold text-sm line-clamp-1">{p.title}</span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
+
 
                 <div className="w-full h-[87vh] overflow-y-scroll ">
                     <form className="flex gap-6 flex-col px-[10rem] pt-10 relative">

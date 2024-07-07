@@ -53,7 +53,35 @@ export default function ProductDetailPage() {
 
     const [specificValue, setSpecificValue] = useState({});
 
+    const [priceValue, setPriceValue] = useState(product.price);
+    const [quantityValue, setQuantityValue] = useState(product.quantity);
+
     const [priceSet, setPriceSet] = useState(product.price_set);
+
+    const [newPriceSet, setNewPriceSet] = useState({
+        size: '',
+        fullPrice: 0,
+        price: 0,
+        discount: 0,
+        quantity: 0
+    });
+
+    const addPriceSet = () => {
+        setPriceSet((prevState) => {
+            let updatedSet = [...prevState || []]
+            updatedSet?.unshift(newPriceSet);
+
+            return updatedSet
+        });
+
+        setNewPriceSet({
+            size: '',
+            fullPrice: 0,
+            price: 0,
+            discount: 0,
+            quantity: 0
+        })
+    }
         
     if (isLoading) {
         return <div className=""></div>
@@ -164,7 +192,6 @@ export default function ProductDetailPage() {
                             </div>
                         </div>
 
-
                         <div className="p-5 bg-white">
                             <h3 className="text-2xl font-semibold mb-8">Thông tin chi tiết</h3>
 
@@ -234,7 +261,7 @@ export default function ProductDetailPage() {
 
                                     <div className="border flex">
                                         <span className="border-r h-full py-2.5 px-4 text-center bg-neutral-50">đ</span>
-                                        <input type="number" 
+                                        <input type="number" value={priceValue || product.price} onChange={(e) => setPriceValue(e.target.value)}
                                         className="px-4 py-2 outline-0 w-[24rem]"/>
                                     </div>
                                 </div>
@@ -243,7 +270,7 @@ export default function ProductDetailPage() {
                                     <span className="min-w-[6rem] text-end">Kho hàng</span>
 
                                     <div className="border flex">
-                                        <input type="number" 
+                                        <input type="number" value={quantityValue || product.quantity} onChange={(e) => setPriceValue(e.target.value)}
                                         className="px-4 py-2 outline-0 w-[24rem]"/>
                                     </div>
                                 </div>
@@ -252,41 +279,79 @@ export default function ProductDetailPage() {
                                     <span className="min-w-[6rem] text-end">Phân loại hàng</span>
 
                                     <div className="flex gap-4 flex-col">
+                                        <div className="flex border text-center">
+                                            <div className="border-r p-5 outline-0 w-[15rem]">Phân loại</div>
+                                            <div className="border-r p-5 outline-0 w-[10rem]">Giá gốc</div>
+                                            <div className="border-r p-5 outline-0 w-[10rem]">Giá sau khi giảm</div>
+                                            <div className="border-r p-5 outline-0 w-[5rem]">Phần trăm giảm</div>
+                                            <div className="border-r p-5 outline-0 w-[5rem]">Số lượng</div>
+                                        </div>
+
                                         {(priceSet ? priceSet : product.price_set)?.map((s, index) => (
                                             <div key={index} className="flex border">
-                                                <input type="text" id="set-name" className="border-r p-5 outline-0" value={s.size}
+                                                <input type="text" id="set-name" className="border-r p-5 outline-neutral-500 w-[15rem]" value={s.size}
                                                 onChange={(e) => setPriceSet(prevState => [...prevState, prevState[index].size = e.target.value])}/>
 
-                                                <div className="border-r p-5">
-                                                    <input type="text" id="set-full-price"/>
-                                                    <label htmlFor="set-full-price">
-                                                        {s.fullPrice}
-                                                    </label>
-                                                </div>
+                                                <input type="text" id="set-full-price" className="border-r p-5 outline-neutral-500 w-[10rem]" value={s.fullPrice}
+                                                onChange={(e) => setPriceSet(prevState => [...prevState, prevState[index].fullPrice = e.target.value])}/>
 
-                                                <div className="border-r p-5">
-                                                    <input type="text" id="set-price"/>
-                                                    <label htmlFor="set-price">
-                                                        {s.price}
-                                                    </label>
-                                                </div>
+                                                <input type="text" id="set-price" className="border-r p-5 outline-neutral-500 w-[10rem]" value={s.price}
+                                                onChange={(e) => setPriceSet(prevState => [...prevState, prevState[index].price = e.target.value])}/>
 
-                                                <div className="border-r p-5">
-                                                    <input type="text" id="set-discount"/>
-                                                    <label htmlFor="set-discount">
-                                                        {s.discount}
-                                                    </label>
-                                                </div>
+                                                <input type="text" id="set-discount" className="border-r p-5 outline-neutral-500 w-[5rem]" value={s.discount}
+                                                onChange={(e) => setPriceSet(prevState => [...prevState, prevState[index].discount = e.target.value])}/>
 
                                                 
-                                                <div className="p-5">
-                                                    <input type="text" id="set-quantity"/>
-                                                    <label htmlFor="set-quantity">
-                                                        {s.quantity}
-                                                    </label>
-                                                </div>
+                                                <input type="text" id="set-quantity" className="border-r p-5 outline-neutral-500 w-[5rem]" value={s.quantity}
+                                                onChange={(e) => setPriceSet(prevState => [...prevState, prevState[index].quantity = e.target.value])}/>
                                             </div>
                                         ))}
+
+                                            <div className="mt-4 flex gap-8 items-center">
+                                                <div className="flex border">
+                                                    <input type="text" className="border-r p-5 outline-neutral-500 w-[15rem]"
+                                                    value={newPriceSet.size} onChange={(e) => setNewPriceSet((prevState) => {
+                                                        let updatedSet = {...prevState}
+
+                                                        updatedSet.size = e.target.value
+                                                        return updatedSet
+                                                    })}/>
+
+                                                    <input type="text" className="border-r p-5 outline-neutral-500 w-[10rem]"
+                                                    value={newPriceSet.fullPrice} onChange={(e) => setNewPriceSet((prevState) => {
+                                                        let updatedSet = {...prevState}
+
+                                                        updatedSet.fullPrice = e.target.value
+                                                        return updatedSet
+                                                    })}/>
+
+                                                    <input type="text" className="border-r p-5 outline-neutral-500 w-[10rem]"
+                                                    value={newPriceSet.price} onChange={(e) => setNewPriceSet((prevState) => {
+                                                        let updatedSet = {...prevState}
+
+                                                        updatedSet.price = e.target.value
+                                                        return updatedSet
+                                                    })}/>
+
+                                                    <input type="text" className="border-r p-5 outline-neutral-500 w-[5rem]"
+                                                    value={newPriceSet.discount} onChange={(e) => setNewPriceSet((prevState) => {
+                                                        let updatedSet = {...prevState}
+
+                                                        updatedSet.discount = e.target.value
+                                                        return updatedSet
+                                                    })}/>
+
+                                                    <input type="text" className="border-r p-5 outline-neutral-500 w-[5rem]"
+                                                    value={newPriceSet.quantity} onChange={(e) => setNewPriceSet((prevState) => {
+                                                        let updatedSet = {...prevState}
+
+                                                        updatedSet.quantity = e.target.value
+                                                        return updatedSet
+                                                    })}/>
+                                                </div>
+
+                                                <div onClick={addPriceSet} className="rounded border border-neutral-500 px-4 py-2 h-fit cursor-pointer">Thêm</div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
