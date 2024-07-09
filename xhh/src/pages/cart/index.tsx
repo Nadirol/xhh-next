@@ -197,7 +197,6 @@ export default function CartPage() {
 
         router.push(`${i18n?.language}/confirmation`);
       }).catch((err) => console.log(err));
-
     };
 
     const [cardPaymentVisible, setCardPaymentVisible] = useState(false);

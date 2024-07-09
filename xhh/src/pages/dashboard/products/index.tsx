@@ -43,7 +43,7 @@ export default function ProductsPage() {
             </div>
 
             <div className="w-[90%] mx-auto ">
-                <Link href="/admin/products/new" className="text-xl text-white bg-red-500 px-4 py-2 rounded">Đăng mới</Link>
+                <Link href="/dashboard/products/new" className="text-xl text-white bg-red-500 px-4 py-2 rounded">Đăng mới</Link>
                 <table className="table table-striped mx-auto" ref={tableRef}>
                     <thead>
                         <tr className="">

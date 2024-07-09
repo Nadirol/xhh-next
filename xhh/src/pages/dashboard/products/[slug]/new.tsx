@@ -17,34 +17,12 @@ function numberWithCommas(x: number) {
 
 var slugify = require('slugify')
 
-export default function ProductDetailPage() {
-    const router = useRouter();
-    const { slug } = router.query;    
-    const [product, setProduct] = useState<IProduct>({});
-
-    const [isLoading, setIsLoading] = useState(true)
-
+export default function NewProductPage() {
     const { t } = useTranslation('common');
 
     const [user, setUser] = useState({})
     
     useEffect(() => {
-        const fetchData = async () => {
-          const response = await fetch(`/api/product/${slug}`);
-          const data = await response.json();
-          
-          setProduct(data);
-          setIsLoading(false);
-
-          setTitleValue(data.title_vi)
-          setCategoryValue(data.category)
-          setSliderImageValue(data.preview_images)
-          setDescriptionValue(data.description_vi?.join('\n'))
-          setPriceSet(data.price_set)
-
-          return data
-        };
-
         const loginSB = async () => {
             const { data, error } = await supabase.auth.signInWithPassword({
                 email: 'khanhduycb1510@gmail.com',
@@ -58,24 +36,22 @@ export default function ProductDetailPage() {
             setUser(data)
         }
 
-        fetchData();
-
         loginSB()
     
     }, [slug]);
 
-    const [titleValue, setTitleValue] = useState(product.title_vi);
-    const [categoryValue, setCategoryValue] = useState(product.category);
+    const [titleValue, setTitleValue] = useState('');
+    const [categoryValue, setCategoryValue] = useState('');
     const [mainImageValue, setMainImageValue] = useState();
-    const [sliderImageValue, setSliderImageValue] = useState(product.preview_images);
-    const [descriptionValue, setDescriptionValue] = useState(product.description_vi?.join('\n'));
+    const [sliderImageValue, setSliderImageValue] = useState([]);
+    const [descriptionValue, setDescriptionValue] = useState('');
 
-    const [specificValue, setSpecificValue] = useState(product.specific_description_vi);
+    const [specificValue, setSpecificValue] = useState();
 
-    const [priceValue, setPriceValue] = useState(product.price);
-    const [quantityValue, setQuantityValue] = useState(product.quantity);
+    const [priceValue, setPriceValue] = useState();
+    const [quantityValue, setQuantityValue] = useState();
 
-    const [priceSet, setPriceSet] = useState(product.price_set);
+    const [priceSet, setPriceSet] = useState();
 
     const [newPriceSet, setNewPriceSet] = useState({
         size: '',
@@ -103,15 +79,6 @@ export default function ProductDetailPage() {
     };
 
     const handleReset = () => {
-        setTitleValue(product.title_vi);
-        setCategoryValue(product.category);
-        setMainImageValue(undefined);
-        setSliderImageValue(product.preview_images);
-        setDescriptionValue(product.description_vi?.join('\n'));
-        setSpecificValue(product.specific_description_vi);
-        setPriceValue(product.price);
-        setQuantityValue(product.quantity);
-        setPriceSet(product.price_set);
     };
 
     const handleSubmitForm = async (e) => {
@@ -159,21 +126,6 @@ export default function ProductDetailPage() {
             return updatedSet
         })
     };
-
-    const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false)
-
-    const handleDelete = () => {
-        setDeleteConfirmVisible(true)
-    };
-
-    const confirmDelete = async () => {
-        const response = await supabase
-        .from('products')
-        .delete()
-        .eq('slug', slug)
-
-        router.push(`/dashboard/products`)
-    }
         
     if (isLoading) {
         return <div className=""></div>
@@ -457,10 +409,6 @@ export default function ProductDetailPage() {
 
                         <div className="bg-neutral-50 fixed right-24 bottom-12 border-2 px-6 py-4 flex gap-5 
                         items-center justify-end">
-                            <button type="button" onClick={handleDelete} className="bg-neutral-300 px-4 py-2 font-semibold rounded text-white hover:bg-neutral-700">
-                                Xoá
-                            </button>
-
                             <button type="button" onClick={handleReset} className="bg-neutral-500 px-4 py-2 font-semibold rounded text-white hover:bg-neutral-700">
                                 Đặt lại
                             </button>

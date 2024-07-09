@@ -14,5 +14,5 @@ export const transporter = nodemailer.createTransport({
 
 export const mailOptions = {
     from: `MonteCarlo Website <${email}>`,
-    to: `${recipient}`
+    to: recipient
 }
