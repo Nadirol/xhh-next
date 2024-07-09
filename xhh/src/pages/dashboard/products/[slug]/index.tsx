@@ -263,7 +263,12 @@ export default function ProductDetailPage() {
                                                 </div> 
                                             ))}
 
-                                            <input type="file" id="new-slider-image" className="hidden"/>
+                                            <input type="file" id="new-slider-image" className="hidden"
+                                            onChange={(e) => e.target.files && setSliderImageValue((prevState) => {
+                                                let updatedSlider = [...prevState]
+                                                updatedSlider.push(e.target.files[0])
+                                                return updatedSlider
+                                            })}/>
                                             <label htmlFor="new-slider-image" className="px-10 cursor-pointer">
                                                 <Image src={plusIcon} alt="" />
                                             </label>

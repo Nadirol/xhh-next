@@ -13,7 +13,7 @@ export const authOptions: NextAuthOptions ={
                     response_type: 'code'
                 }
             }
-        }),
+        })
     ],
     secret: process.env.SECRET
 }

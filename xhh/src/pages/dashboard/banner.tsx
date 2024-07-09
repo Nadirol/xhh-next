@@ -242,8 +242,6 @@ export default function DashboardPage({ bannerData }: { bannerData: IBanner[]}) 
 
         const existingDocument = await client.getDocument('a549fcb5-d44c-446e-9f38-0ed4ee1b2f14');
 
-        console.log(existingDocument)
-
         const updatedDocument = {
             ...existingDocument,
             slider: [
