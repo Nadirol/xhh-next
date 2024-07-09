@@ -1,15 +1,15 @@
 // @ts-nocheck
 
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { IProduct } from "../../../../../interface/interface";
 import Header from "../../../../../components/admin/Header";
 import { useTranslation } from "react-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { closeIcon, editIcon, imageIcon, plusIcon } from "../../../../../public/assets";
+import { editIcon, imageIcon, plusIcon } from "../../../../../public/assets";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
+import supabase from "../../../../../supabase";
 
 function numberWithCommas(x: number) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -81,6 +81,30 @@ export default function ProductDetailPage() {
             discount: 0,
             quantity: 0
         })
+    };
+
+    const handleReset = () => {
+        setTitleValue(product.title_vi);
+        setCategoryValue(product.category);
+        setMainImageValue(undefined);
+        setSliderImageValue(product.preview_images);
+        setDescriptionValue(product.description_vi?.join('\n'));
+        setSpecificValue(product.specific_description_vi);
+        setPriceValue(product.price);
+        setQuantityValue(product.quantity);
+        setPriceSet(product.price_set);
+    };
+
+    const handleSubmitForm = async (e) => {
+        e.preventDefault();
+
+        const { data, error } = await supabase
+        .from('products')
+        .update({
+            title_vi: 'Bảng Từ Dán Tường Xuân Hoà home'
+        })
+        .eq('id', product.id)
+        .select()
     }
         
     if (isLoading) {
@@ -97,7 +121,7 @@ export default function ProductDetailPage() {
 
             <div className="w-[90%] mx-auto mt-16">
                 {product && (
-                    <form className="flex gap-10 flex-col">
+                    <form className="flex gap-10 flex-col" onSubmit={(e) => handleSubmitForm(e)}>
                         <div className="p-5 bg-white">
                             <h3 className="text-2xl font-semibold mb-8">Thông tin cơ bản</h3>
 
@@ -105,13 +129,13 @@ export default function ProductDetailPage() {
                                 <div className="flex gap-4 items-center">
                                     <span className="min-w-[8rem] text-end"><span className="text-red-500 mr-1">*</span>Tên sản phẩm</span>
                                     <input id="title" type="text" onChange={(e) => setTitleValue(e.target.value)} 
-                                    value={titleValue || product.title_vi} className="px-4 py-2 border border-neutral-400 w-[30rem]"/>
+                                    value={titleValue !== undefined ? titleValue : product.title_vi} className="px-4 py-2 border border-neutral-400 w-[30rem]"/>
                                 </div>
 
                                 <div className="flex gap-4 items-center">
                                     <span className="min-w-[8rem] text-end">Loại hàng</span>
                                     <input type="text" onChange={(e) => setCategoryValue(e.target.value)} 
-                                    value={t(categoryValue) || t(product.category)} className="px-4 py-2 border border-neutral-400 w-[30rem]"/>
+                                    value={categoryValue !== undefined ? t(categoryValue) : t(product.category)} className="px-4 py-2 border border-neutral-400 w-[30rem]"/>
                                 </div>
 
                                 <div className="flex gap-4 items-center">
@@ -355,6 +379,17 @@ export default function ProductDetailPage() {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div className="bg-neutral-50 fixed right-24 bottom-12 border-2 px-6 py-4 flex gap-5 
+                        items-center justify-end">
+                            <button type="button" onClick={handleReset} className="bg-neutral-500 px-4 py-2 font-semibold rounded text-white hover:bg-neutral-700">
+                                Đặt lại
+                            </button>
+
+                            <button type="submit" className="bg-red-500 px-4 py-2 font-semibold rounded text-white hover:bg-red-700">
+                                Lưu
+                            </button>
                         </div>
                     </form>
                 )}
