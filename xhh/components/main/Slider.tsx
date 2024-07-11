@@ -11,14 +11,12 @@ import { urlFor } from '../../lib/sanity';
 
 const indicators = (index: number) => 
     (
-    <div className={`[&.active]:bg-red-500 indicator w-2.5 h-2.5 bg-neutral-400 hover:bg-red-500 rounded-[100%] ${index === 0 ? '' : 'ml-2'}`}>
-    </div>
+        <div className={`[&.active]:bg-red-500 indicator w-2.5 h-2.5 bg-neutral-400 hover:bg-red-500 rounded-[100%] ${index === 0 ? '' : 'ml-2'}`}>
+        </div>
     );
 
 const Slider = ({ sliderBanner }) => {
     const slideRef = useRef<SlideshowRef>(null);
-
-    console.log(sliderBanner)
 
     return (
         <div className="w-container mx-auto relative">
